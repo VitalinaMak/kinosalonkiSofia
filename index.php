@@ -1,13 +1,13 @@
 <?php 
-    /*$servername = "";
-    $username = "";
-    $password = "";
+    $servername = "mariadb.rpkk.fi";
+    $username = "vitalina";
+    $password = "vitalina";
     $dbname = "";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);  //muodostetaan yhteys tietokantaan*/
+    $conn = new mysqli($servername, $username, $password, $dbname);  //muodostetaan yhteys tietokantaan
 
-    require_once 'config/db.php';
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);  //muodostetaan yhteys tietokantaan
+    /* require_once 'config/db.php';
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);  //muodostetaan yhteys tietokantaan*/
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
