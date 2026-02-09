@@ -1,8 +1,8 @@
 <?php 
     $servername = "mariadb.rpkk.fi";
-    $username = "vitalina";
-    $password = "vitalina";
-    $dbname = "";
+    $username = "sofia";
+    $password = "KinoS2026#?";
+    $dbname = "sofia";
 
     $conn = new mysqli($servername, $username, $password, $dbname);  //muodostetaan yhteys tietokantaan
 
