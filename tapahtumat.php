@@ -1,8 +1,8 @@
 <?php 
     $servername = "mariadb.rpkk.fi";
-    $username = "vitalina";
-    $password = "vitalina";
-    $dbname = "";
+    $username = "sofia";
+    $password = "KinoS2026#?";
+    $dbname = "sofia";
 
     $conn = new mysqli($servername, $username, $password, $dbname);  //muodostetaan yhteys tietokantaan
 
@@ -24,7 +24,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1></h1>
+    <div class="header">  //div for the header and navigation. For display we can use display:flex + justify-content: space-between
+        <h1>Kinosalonki Sofia</h1>
+        <!-- here goes login-button -->
+        
+    </div>
     <div class="main"></div>
 </body>
 </html>
