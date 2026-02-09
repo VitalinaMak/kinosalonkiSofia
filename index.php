@@ -26,5 +26,6 @@
 <body>
     <h1></h1>
     <div class="main"></div>
+    <script src="code.js"></script>
 </body>
 </html>
