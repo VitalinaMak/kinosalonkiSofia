@@ -21,14 +21,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>Tapahtumat</title>
 </head>
 <body>
-    <div class="header">  //div for the header and navigation. For display we can use display:flex + justify-content: space-between
+    <header> 
         <h1>Kinosalonki Sofia</h1>
-        <!-- here goes login-button -->
-        
-    </div>
+        <a href="login.php">Kirjaudu sisään</a>
+    </header>
     <div class="main"></div>
 </body>
 </html>
