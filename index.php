@@ -24,6 +24,10 @@
     <title>Document</title>
 </head>
 <body>
+    <header> 
+        <h1>Kinosalonki Sofia</h1>
+        <a href="login.php">Kirjaudu sisään</a>
+    </header>
     <h1></h1>
     <div class="main"></div>
     <script src="code.js"></script>
