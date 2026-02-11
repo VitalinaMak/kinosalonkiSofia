@@ -1,0 +1,25 @@
+header {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+.eventListActions {
+  width: 50%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+.eventList div {
+  width: 100%; /* надо будет добавить что-нибудь вроде display: grid для отображения дат в одной строке с заголовком, но наверно это уже завтра */
+}
+
+a.button {
+  padding: 1px 6px;
+  border: 1px outset buttonborder; /* пока не до конца поняла, как именно работают эти штуки. Чуть позже почитаю материал */
+  border-radius: 3px;
+  color: buttontext;
+  background-color: buttonface;
+  text-decoration: none;
+}
