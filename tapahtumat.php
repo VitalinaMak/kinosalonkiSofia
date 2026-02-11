@@ -6,7 +6,7 @@
 
     $conn = new mysqli($servername, $username, $password, $dbname);  //muodostetaan yhteys tietokantaan
 
-    /* require_once 'config/db.php';
+    /*require_once 'config/db.php';
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);  //muodostetaan yhteys tietokantaan*/
 
     if ($conn->connect_error) {
@@ -21,15 +21,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>Tapahtumat</title>
 </head>
 <body>
     <header> 
         <h1>Kinosalonki Sofia</h1>
         <a href="login.php">Kirjaudu sisään</a>
     </header>
-    <h1></h1>
     <div class="main"></div>
-    <script src="code.js"></script>
 </body>
 </html>
