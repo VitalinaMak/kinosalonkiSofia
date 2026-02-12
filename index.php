@@ -1,39 +1,9 @@
 <?php 
-    $servername = "mariadb.rpkk.fi";
-    $username = "sofia";
-    $password = "KinoS2026#?";
-    $dbname = "sofia";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);  //muodostetaan yhteys tietokantaan
-
-    /* require_once 'config/db.php';
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);  //muodostetaan yhteys tietokantaan*/
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $conn->set_charset("utf8mb4");  // asetetaan merkistö
+    $pageTitle = "Index";
+    include 'include/header.php'; 
 ?>
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- link to bootstrap for using CSS features (it is required for buttons design) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <title>Aloitussivu</title>
-</head>
-<body>
-    <header> 
-        <div class="otsikko">
-            <img src="kuvat/logot/logo_white.png" alt="logo" style="height: 30px">
-            <h1>Kinosalonki Sofia</h1>
-        </div>
-        <a href="login.php" class="btn btn-outline-primary">Kirjaudu sisään</a>
-    </header>
-    <h1></h1>
+
+    <h1>Why do we need an h1 here?</h1>
 
     <main> 
     <div class="about">
@@ -69,7 +39,7 @@
             </tbody>
         </table>
 
-        <!-- Это ведь и будет ссылка на страницу всех tapahtumat?
+        <!-- Это ведь и будет ссылка на страницу всех tapahtumat? --da
          цвета не окончательные, пока что я просто взяла предустановленные, потом по окружению будет понятно, какие лучше взять -->
         <a href="tapahtumat.php" class="btn btn-outline-danger">интерактивная(?) кнопка</a>  
         
@@ -78,9 +48,5 @@
     </div>    
 
     </main>
-    
-    <!-- link to bootstrap for using some extratools -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="code.js"></script>
-</body>
-</html>
+
+<?php include 'include/footer.php'; ?>
