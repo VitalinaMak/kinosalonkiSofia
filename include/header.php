@@ -17,4 +17,20 @@
             <h1>Kinosalonki Sofia</h1>
         </div>
         <a href="login.php" class="btn btn-outline-primary">Kirjaudu sisään</a>
+
+        <!-- DELETE THIS LATER; navigation to all our php files, thought might be useful-->
+        <nav>
+            <ul>
+                <li><a href="addEvent.php">addEvent</a></li>
+                <li><a href="bookEvent.php">bookEvent</a></li>
+                <li><a href="editEvent.php">editEvent</a></li>
+                <li><a href="index.php">index</a></li>
+                <li><a href="login.php">login</a></li>
+                <li><a href="login.php">login</a></li>
+                <li><a href="signup.php">signup</a></li>
+                <li><a href="tapahtumat.php">Tapahtumat</a></li>
+
+            </ul>
+        </nav> 
+            
     </header>
