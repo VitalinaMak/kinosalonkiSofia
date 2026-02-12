@@ -37,3 +37,13 @@ a.button {
   background-color: buttonface;
   text-decoration: none;
 }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(219, 204, 204);
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
