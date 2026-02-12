@@ -20,13 +20,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link to bootstrap for using CSS features (it is required for buttons design) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Aloitussivu</title>
 </head>
 <body>
     <header> 
-        <h1>Kinosalonki Sofia</h1>
-        <a href="login.php">Kirjaudu sisään</a>
+        <div class="otsikko">
+            <img src="kuvat/logot/logo_white.png" alt="logo" style="height: 30px">
+            <h1>Kinosalonki Sofia</h1>
+        </div>
+        <a href="login.php" class="btn btn-outline-primary">Kirjaudu sisään</a>
     </header>
     <h1></h1>
 
@@ -64,28 +69,18 @@
             </tbody>
         </table>
 
-        <button > блин кароч тут надо чтоб кнопка была интерактивная надо делать, смотри коммент в коде </button>  
+        <!-- Это ведь и будет ссылка на страницу всех tapahtumat?
+         цвета не окончательные, пока что я просто взяла предустановленные, потом по окружению будет понятно, какие лучше взять -->
+        <a href="tapahtumat.php" class="btn btn-outline-danger">интерактивная(?) кнопка</a>  
         
-        <!-- 
-        href ссылочка на страницу всех tapahtumat, 
-        <a href="https://google.com" class="button">Kaikki tapahtumat</a>
-        
-        и в css эту ссылочку задизайтерить как кнопочку, ИЛИ скопировать КАК НА ТОМ САЙТЕ КНОПОЧЕК ЕСТЬ ИМБАА
-        
-        a.button {
-            padding: 1px 6px;
-            border: 1px outset buttonborder;
-            border-radius: 3px;
-            color: buttontext;
-            background-color: buttonface;
-            text-decoration: none;
-        }
-        --> 
+        <!-- твой код с css я пока скопировала в css-файл, но не до ссылок на него пока не сделано -->
     
     </div>    
 
     </main>
     
+    <!-- link to bootstrap for using some extratools -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="code.js"></script>
 </body>
 </html>

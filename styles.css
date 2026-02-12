@@ -3,6 +3,20 @@ header {
   flex-flow: row;
   justify-content: space-between;
 }
+header a {
+  align-self: center;
+  margin-right: 7px;
+}
+
+.otsikko {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+.otsikko img,
+.otsikko h1 {
+  align-self: center;
+}
 
 .eventListActions {
   width: 50%;

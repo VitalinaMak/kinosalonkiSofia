@@ -20,24 +20,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link to bootstrap for using CSS features -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Tapahtumat</title>
 </head>
 <body>
     <header> 
-        <h1>Kinosalonki Sofia</h1>
-        <a href="login.php">Kirjaudu sisään</a>
+        <div class="otsikko">
+            <img src="kuvat/logot/logo_white.png" alt="logo" style="height: 30px">
+            <h1>Kinosalonki Sofia</h1>
+        </div>
+        <a href="login.php" class="btn btn-outline-primary">Kirjaudu sisään</a>
     </header>
     <div class="main">
         <h1>Tapahtumat</h1>
         <!-- line with all of the actions for the list -->
         <div class="eventListActions">
-            <button>Suodata</button>
+            <button class="btn btn-outline-info">Suodata</button>
             <form action="tapahtumat.php" method="GET"> <!-- search field. When the info is sent, it pass it with URL to the php-function in tapahtumat.php file -->
                 <input type="text" name="search" placeholder="Etsi tapahtumaa">
                 <button type="submit">Etsi</button>
             </form>
-            <button>Järjestää</button>
+            <button class="btn btn-outline-info">Järjestää</button>
         </div> 
         <div class="eventList">
             <!-- list of events (no photos yet, I'll add them a little later) -->
@@ -52,5 +57,7 @@
             ?>
         </div>
     </div>
+    <!-- link to bootstrap for using some extratools -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
