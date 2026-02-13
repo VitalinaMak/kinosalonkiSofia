@@ -18,33 +18,28 @@
         
     <div class="upcomingEvents">
         
-        <p> Tapahtumat tänään, 11 helmikuuta 2026:</p>
+        <?php 
+          $date = date('d.m.Y');  //gets current date
+          echo "<p> Tapahtumat tänään, $date:</p>"
+        ?>
         <table>
             <tbody>
-              <tr>
-                <td>10.10</td>
-                <td>Elokuva1</td>
-                <td>5 paikkaa jäljellä</td>
-              </tr>
-              <tr>
-                <td>12.00</td>
-                <td>Elokuva2</td>
-                <td>loppuunmyyty</td>
-              </tr>
-              <tr>
-                <td>18.00</td>
-                <td>Tapahtuma</td>
-                <td>loppuunmyyty</td>
-              </tr>
+              <?php
+              /* printing out the date, time and the name of event (test) */
+                $sql = "SELECT event_date, event_name FROM events;";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                    echo "<tr><td>".$row['event_date']."</td><td>".$row['event_name']."</td></tr>";
+                  }
+                }
+              ?>
             </tbody>
         </table>
 
-        <!-- Это ведь и будет ссылка на страницу всех tapahtumat? --da
-         цвета не окончательные, пока что я просто взяла предустановленные, потом по окружению будет понятно, какие лучше взять -->
+        <!-- цвета не окончательные, пока что я просто взяла предустановленные, потом по окружению будет понятно, какие лучше взять -->
         <a href="tapahtumat.php" class="btn btn-outline-danger">интерактивная(?) кнопка</a>  
         
-        <!-- твой код с css я пока скопировала в css-файл, но не до ссылок на него пока не сделано -->
-    
     </div>    
 
     </main>

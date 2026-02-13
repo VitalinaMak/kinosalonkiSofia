@@ -19,18 +19,19 @@
         <a href="login.php" class="btn btn-outline-primary">Kirjaudu sisään</a>
 
         <!-- DELETE THIS LATER; navigation to all our php files, thought might be useful-->
-        <nav>
-            <ul>
-                <li><a href="addEvent.php">addEvent</a></li>
-                <li><a href="bookEvent.php">bookEvent</a></li>
-                <li><a href="editEvent.php">editEvent</a></li>
-                <li><a href="index.php">index</a></li>
-                <li><a href="login.php">login</a></li>
-                <li><a href="login.php">login</a></li>
-                <li><a href="signup.php">signup</a></li>
-                <li><a href="tapahtumat.php">Tapahtumat</a></li>
-
-            </ul>
+        <!-- OK. I made them into a drop-down list so they wouldn't interfere with the formatting -->
+        <nav class="temporaryNavigation">
+            <button class="navButton">List of pages</button>
+            <div class="linksToPages">
+                <a href="addEvent.php">addEvent</a>
+                <a href="bookEvent.php">bookEvent</a>
+                <a href="editEvent.php">editEvent</a>
+                <a href="index.php">index</a>
+                <a href="login.php">login</a>
+                <a href="login.php">login</a>
+                <a href="signup.php">signup</a>
+                <a href="tapahtumat.php">Tapahtumat</a>
+            </div>
         </nav> 
             
     </header>
