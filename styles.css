@@ -12,9 +12,12 @@ header a {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  align-items: center;
 }
 .otsikko img,
-.otsikko h1 {
+.otsikko h2 {
+  align-self: center;
+  margin: 0px;
   align-self: center;
 }
 
@@ -61,6 +64,17 @@ header a {
   background-color: #3e8e41;
 }
 /* LINKS TO PAGES IN HEADER - END */
+
+.eventsToday {
+  margin-bottom: 5px;
+}
+.eventsToday tr {
+  border: solid black 1px;
+  border-radius: 10px;
+}
+.eventsToday td {
+  padding: 7px;
+}
 
 .eventListActions {
   width: 50%;

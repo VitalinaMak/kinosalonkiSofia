@@ -17,20 +17,20 @@
     </div>
         
     <div class="upcomingEvents">
-        
         <?php 
-          $date = date('d.m.Y');  //gets current date
-          echo "<p> Tapahtumat tänään, $date:</p>"
+          $date = date('d. F Y');  //gets current date
+          echo "<h3> Tapahtumat tänään, $date:</h3>";
+          $date = date('Y-m-d');   //different date format for using in sql-query
         ?>
-        <table>
+        <table class="eventsToday">
             <tbody>
               <?php
               /* printing out the date, time and the name of event (test) */
-                $sql = "SELECT event_date, event_name FROM events;";
+                $sql = "SELECT HOUR(event_date) AS event_hour, MINUTE(event_date) AS event_minute, event_name, location, max_visitors FROM events WHERE DATE(event_date) = '$date';";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                   while ($row = $result->fetch_assoc()) {
-                    echo "<tr><td>".$row['event_date']."</td><td>".$row['event_name']."</td></tr>";
+                    echo "<tr><td>".$row['event_hour'].":".$row['event_minute']."</td><td style='font-weight: bold'>".$row['event_name']."</td><td>".$row['location']."</td><td>".$row['max_visitors']." paikkaa jäljellä</td></tr>";  //now it gets only max number of places for the event
                   }
                 }
               ?>
@@ -38,8 +38,7 @@
         </table>
 
         <!-- цвета не окончательные, пока что я просто взяла предустановленные, потом по окружению будет понятно, какие лучше взять -->
-        <a href="tapahtumat.php" class="btn btn-outline-danger">интерактивная(?) кнопка</a>  
-        
+        <a href="tapahtumat.php" class="btn btn-outline-danger">Katso kaikki tapahtumat</a>  
     </div>    
 
     </main>
