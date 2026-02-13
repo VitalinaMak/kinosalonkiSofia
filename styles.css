@@ -65,6 +65,40 @@ header a {
 }
 /* LINKS TO PAGES IN HEADER - END */
 
+/* OPTION 1: grid layout */
+.frontpageContainer {
+  display: grid;
+  grid-template-areas:
+    "about about"
+    "eventList otherEvents";
+  grid-template-rows: 1fr auto;
+  height: 90%;
+}
+
+.about {
+  grid-area: about;
+  width: 100%;
+}
+
+.upcomingEvents {
+  grid-area: eventList;
+}
+
+main a {
+  grid-area: otherEvents;
+  display: block;
+  align-self: center;
+}
+
+/* OPTION 2: flex layout
+.upcomingEvents {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+} */
+
+/* a list of current events on the main page */
 .eventsToday {
   margin-bottom: 5px;
 }
@@ -72,10 +106,14 @@ header a {
   border: solid black 1px;
   border-radius: 10px;
 }
+.eventsToday tr :hover {
+  cursor: pointer;
+}
 .eventsToday td {
   padding: 7px;
 }
 
+/* a list of events on the page Tapahtumat */
 .eventListActions {
   width: 50%;
   display: flex;
