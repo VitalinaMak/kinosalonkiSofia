@@ -5,18 +5,23 @@
     <h1>Kirjaudu sisään:</h1>
 
     
-    <form>
-    <!-- maybe remove the div's ? idk -->
+    <form class="login">
         <div>
-            <label for="enter_your_email">Sähköpostiosoite:</label>
-            <input type="email" id="enter_your_email" name="enter_your_email" required><br><br>
+            <!-- <label for="enter_your_email">Sähköpostiosoite:</label> -->
+            <input type="email" id="email-input" name="email" placeholder="Sähköpostiosoite" required>
         </div>
         <div>
-            <label for="salasana">Salasana:</label>
-            <input type="password" id="salasana" name="salasana" required><br><br>
+            <!-- <label for="salasana">Salasana:</label> -->
+            <input type="password" id="password-input" name="password" placeholder="Salasana" required>
+        </div>
+        <div>
+            <!-- <label for="salasana">Salasana:</label> -->
+            <input type="password" id="repeat-password-input" name="repeat-password" placeholder="Toista salasana" required>
         </div>
         <button type="submit">Submit</button>
     </form>
+
+    
 
 
     
