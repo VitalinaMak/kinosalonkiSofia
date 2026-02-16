@@ -26,10 +26,10 @@
               <tbody>
                 <?php
                 /* printing out the date, time and the name of event (test) */
-                  $sql = "SELECT id, HOUR(event_date) AS event_hour, MINUTE(event_date) AS event_minute, event_name, location, max_visitors FROM events WHERE DATE(event_date) = '$date';";
+                  $sql = "SELECT id, HOUR(event_time) AS event_hour, DATE_FORMAT(event_time, '%i') AS event_minute, event_name, location, max_visitors FROM events WHERE event_date = '$date';";  //DATE_FORMAT(event_time, '%i') returns minutes in 2-digits format
                   $result = $conn->query($sql);
                   if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
+                    while ($row = $result->fetch_assoc()) {  //$row here is an associative array that contains one row of the table at a time
                       echo "<tr onclick=\"window.location='bookEvent.php?id=" . $row['id'] . "'\"><td>".$row['event_hour'].":".$row['event_minute']."</td><td style='font-weight: bold'>".$row['event_name']."</td><td>".$row['location']."</td><td>".$row['max_visitors']." paikkaa jäljellä</td></tr>";  //now it gets only max number of places for the event
                     }
                   }

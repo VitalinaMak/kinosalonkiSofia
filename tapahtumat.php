@@ -12,12 +12,20 @@
                 <input type="text" name="search" placeholder="Etsi tapahtumaa">
                 <button type="submit" class="btn btn-outline-danger">Etsi</button>
             </form>
-            <button class="btn btn-outline-info">Järjestää</button>
+            <div class="eventSorting">  <!-- button for sorting events -->
+                <button class="btn btn-outline-info">Järjestää</button>
+                <div class="sortingOptions">
+                    <button>Tapahtuman nimi (A-Z)</button>
+                    <button>Tapahtuman nimi (Z-A)</button>
+                    <button>Päivämäärä (nouseva)</button>  <!-- this one is used by default -->
+                    <button>Päivämäärä (laskeva)</button>
+                </div>
+            </div>
         </div> 
+
         <div class="eventList">
-            <!-- list of events (no photos yet, I'll add them a little later) -->
             <?php 
-                $sql = "SELECT event_name, DATE_FORMAT(DATE(event_date), '%d.%m.%Y') AS event_date, HOUR(event_date) AS event_hour, MINUTE(event_date) AS event_minute, event_image, description, location, event_type, max_visitors FROM events;";
+                $sql = "SELECT event_name, DATE_FORMAT(DATE(event_date), '%d.%m.%Y') AS event_date, HOUR(event_time) AS event_hour, DATE_FORMAT(event_time, '%i') AS event_minute, event_image, description, location, event_type, max_visitors FROM events ORDER BY event_date, event_time;";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {

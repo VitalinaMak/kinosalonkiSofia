@@ -113,7 +113,7 @@ main a {
   padding: 7px;
 }
 
-/* a list of events on the page Tapahtumat */
+/* a list of actions for events on the page Tapahtumat */
 .eventListActions {
   width: 50%;
   display: flex;
@@ -124,6 +124,43 @@ main a {
   height: 100%;
 }
 
+/* dropdown for the sorting button */
+.eventSorting {
+  position: relative;
+  display: inline-block;
+}
+.eventSorting button {
+  width: 158px;
+}
+.eventSorting:hover button {
+  border-radius: 0%;
+}
+/* dropdown content (hidden by default) */
+.sortingOptions {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  z-index: 1;
+}
+/* buttons inside dropdown */
+.sortingOptions button {
+  background-color: #ffffff;
+  color: #384a50;
+  border: rgb(13, 202, 240) solid 1px;
+  padding: 7px 10px;
+  text-decoration: none;
+  display: block;
+}
+/* Show the dropdown menu on hover */
+.eventSorting:hover .sortingOptions {
+  display: block;
+}
+.sortingOptions button:hover {
+  background-color: rgb(13, 202, 240);
+  color: black;
+}
+
+/* a list of events on the page Tapahtumat */
 .eventList div {
   width: 100%;
   display: grid;

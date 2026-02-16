@@ -28,7 +28,6 @@
                 <a href="editEvent.php">editEvent</a>
                 <a href="index.php">index</a>
                 <a href="login.php">login</a>
-                <a href="login.php">login</a>
                 <a href="signup.php">signup</a>
                 <a href="tapahtumat.php">Tapahtumat</a>
             </div>
