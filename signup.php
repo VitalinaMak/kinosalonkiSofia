@@ -5,7 +5,7 @@
     <h1>Rekisteröidy</h1>
     <div class="signnup_page">
 
-        <form class="signnup">
+        <form class="signnup form">
             <div>
                 <label for="name-input">
                     <!-- код картинки изUI_icons -->
