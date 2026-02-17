@@ -124,14 +124,17 @@ main a {
   height: 100%;
 }
 
-/* dropdown for the sorting button */
+/* dropdown for the sorting buttons */
 .eventSorting {
   position: relative;
   display: inline-block;
 }
+/* the same width for all of the buttons */
+.eventSorting a,
 .eventSorting button {
   width: 158px;
 }
+/* on hover borders of the first button are no more rounded */
 .eventSorting:hover button {
   border-radius: 0%;
 }
@@ -142,8 +145,8 @@ main a {
   min-width: 160px;
   z-index: 1;
 }
-/* buttons inside dropdown */
-.sortingOptions button {
+/* button-styled <a>-elements inside the dropdown */
+.sortingOptions a {
   background-color: #ffffff;
   color: #384a50;
   border: rgb(13, 202, 240) solid 1px;
@@ -155,7 +158,7 @@ main a {
 .eventSorting:hover .sortingOptions {
   display: block;
 }
-.sortingOptions button:hover {
+.sortingOptions a:hover {
   background-color: rgb(13, 202, 240);
   color: black;
 }
