@@ -2,8 +2,11 @@
     $pageTitle = "SignUp";
     include 'include/header.php'; 
 ?>
-    <h1>Rekisteröidy</h1>
-    <div class="signnup_page">
+<main class="signnup_page">
+
+    <div class="wrapper">
+
+        <h1>Rekisteröidy</h1>
 
         <form class="signnup">
             <div>
@@ -32,11 +35,12 @@
                 <input type="password" id="repeat-password-input" name="repeat-password" placeholder="Toista salasana" required>
             </div>
             <button type="submit">Submit</button>
+
+            <p>Aready have an account? <a href="login.php">Log in</a> </p>
         </form>
 
-        <p>Aready have an account? <a href="login.php">Log in</a> </p>
-
     </div>
-    
+
+</main>   
 <?php include 'include/footer.php'; ?>
 

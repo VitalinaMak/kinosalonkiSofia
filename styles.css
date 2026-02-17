@@ -1,3 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/*
+:root {
+  /* google abt this bro*/
+}
+*/
+
+* {
+  font-family: Poppins, sans-serif;
+}
+
+body {
+  /* padding по периметру чтоб элементы не были впритык к концам экрана:
+  Top & Bottom: 0, Left & Right: 20px */
+  padding: 0 10px;
+
+  /* Ensuring the padding doesn't make the page wider than the screen */
+  box-sizing: border-box;
+}
+
 header {
   display: flex;
   flex-flow: row;
@@ -194,7 +215,7 @@ main a {
 }
 
 a.button {
-  /* Оно нам точно нужно? Сейчас ни у одного <а>-элемента нет класса "button" */
+  /* Оно нам точно нужно? Сейчас ни у одного <а>-элемента нет класса "button" */ /* oй*/
   padding: 1px 6px;
   border: 1px outset buttonborder;
   border-radius: 3px;
@@ -220,21 +241,41 @@ a.button {
   margin-bottom: 4px;
 }
 
-/* FONT poppins from google */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-/* FONT set on ALL php BUT DOESNT WORK WHYY*/
-php {
-  font-family: Poppins, sans-serif;
-}
-
-/* Styling the forms*/
-.signnup_page .login_page {
+/* Styling the forms doesnt work*/
+.signnup,
+.login {
   margin: 2;
   padding: 2;
   text-align: center;
-  background-image: url(kuvat\city1.avif);
+  overflow: hidden;
+
+  /*
   background-size: cover;
   background-position: right;
+  overflow: scroll;
+  */
+}
+
+.login_page,
+.signnup_page {
+  min-height: 100vh;
+  background-image: url(kuvat/ks1.avif);
+  background-size: cover;
+  background-position: left;
+  object-fit: cover;
   overflow: hidden;
 }
+
+.wrapper {
+  background-color: rgb(166, 209, 209);
+  height: 100vh;
+}
+
+/* Target the wrapper divs inside the addEvent form */
+/*
+.form div {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+*/
