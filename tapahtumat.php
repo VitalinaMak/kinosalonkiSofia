@@ -54,6 +54,30 @@
                     $search = $_GET['search'];
                     /* query to retrive all information from events and count rows for every event in bookings to get the amount of booked tickets + search function that retrieves all rows that contain the content of the $search */
                     $sql = "SELECT events.event_name, events.event_date, DATE_FORMAT(events.event_date, '%d.%m.%Y') AS event_formatted_date, HOUR(events.event_time) AS event_hour, DATE_FORMAT(events.event_time, '%i') AS event_minute, events.event_image, events.description, events.location, events.event_type, events.max_visitors, COUNT(bookings.id) AS booked_places FROM events LEFT JOIN bookings ON events.id = bookings.event_id WHERE events.event_name LIKE '%$search%' GROUP BY events.id ORDER BY events.$order, events.event_time;";
+
+                    /* Prepared statement. I'll just leave it here for now, it has a mistake somewhere */
+                    /* $stmt = $conn->prepare("
+                            SELECT events.event_name,
+                                events.event_name, 
+                                events.event_date, 
+                                DATE_FORMAT(events.event_date, '%d.%m.%Y') AS event_formatted_date, 
+                                HOUR(events.event_time) AS event_hour, 
+                                DATE_FORMAT(events.event_time, '%i') AS event_minute, 
+                                events.event_image, 
+                                events.description, 
+                                events.location, 
+                                events.event_type, 
+                                events.max_visitors, 
+                                COUNT(bookings.id) AS booked_places
+                            FROM events LEFT JOIN bookings ON events.id = bookings.event_id 
+                            WHERE event_name LIKE :search
+                            ORDER BY $order, event_time;
+                        "); 
+                        
+                        $stmt->execute([
+                            ':search' => "%$search%"
+                        ]); */                                                        
+                                                                            
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
