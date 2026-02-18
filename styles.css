@@ -19,6 +19,7 @@
 
 * {
   font-family: Poppins, sans-serif;
+  box-sizing: border-box; /* the borders and paddings are considered as part of the element for with and height defining */
 }
 
 main {
@@ -79,6 +80,13 @@ footer p {
 }
 
 /*----------------------------------------------------------------------------*/
+
+/* some space between headers and the edge of the body */
+h1 {
+  padding-left: 5px;
+  padding-top: 5px;
+  margin: 5px 0px 10px 0px;
+}
 
 .eventList div {
   background-color: var(--2-color);
@@ -183,13 +191,35 @@ main a {
 
 /* a list of actions for events on the page Tapahtumat */
 .eventListActions {
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-flow: row;
   justify-content: space-between;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+.eventListActions form {
+  display: flex;
+  flex-flow: row nowrap;
+}
+/* submit-button for search field. Now it's not in use */
+.eventListActions form button {
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
 }
 .eventListActions input {
   height: 100%;
+  display: inline-block;
+  /* border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px; */
+}
+.eventListActions button {
+  background-color: #ffffff2f;
+}
+
+.searchAndSort {
+  display: flex;
+  flex-flow: row nowrap;
 }
 
 /* dropdown for the sorting button */
@@ -197,9 +227,14 @@ main a {
   position: relative;
   display: inline-block;
 }
+/* the same size for all of the options */
+.eventSorting a,
 .eventSorting button {
-  width: 158px;
+  width: 140px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
 }
+/* whren the first button is hovered, it's borders are no longer rounded so it looks the same way as the others buttons in a list */
 .eventSorting:hover button {
   border-radius: 0%;
 }
@@ -211,7 +246,7 @@ main a {
   z-index: 1;
 }
 /* buttons inside dropdown */
-.sortingOptions button {
+.sortingOptions a {
   background-color: #ffffff;
   color: #384a50;
   border: rgb(13, 202, 240) solid 1px;
@@ -223,21 +258,27 @@ main a {
 .eventSorting:hover .sortingOptions {
   display: block;
 }
-.sortingOptions button:hover {
+.sortingOptions a:hover {
   background-color: rgb(13, 202, 240);
   color: black;
 }
 
 /* a list of events on the page Tapahtumat */
+.eventList {
+  max-width: 100%;
+  justify-content: center;
+}
 .eventList div {
-  width: 100%;
+  width: 99%;
   display: grid;
   grid-template-areas:
     "header header date"
     "image description description";
   grid-template-columns: auto 1fr;
   padding: 10px;
-  margin: 10px;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 .eventList div .event_header {
   grid-area: header;
