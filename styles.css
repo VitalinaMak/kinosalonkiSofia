@@ -9,11 +9,11 @@
   --red: #d32402;
   --beige: rgb(255, 248, 234);
 
-  /* CSS HEX */
+  /* CSS HEX 
   --atomic-tangerine: #ff6b35ff;
   --peach-glow: #f7c59fff;
   --steel-azure: #004e89ff;
-  --baltic-blue: #1a659eff;
+  --baltic-blue: #1a659eff; */
 }
 
 * {
@@ -309,6 +309,8 @@ a.button {
 }
 
 /*---------------------- HERE LOGIN SIGNUP PAGES START ----------------------*/
+/* - - - CAREFUL WITH CHANGING height: 50px;*/
+
 /* MAINs for signup and login aka the sea*/
 .login_page,
 .signup_page {
@@ -365,4 +367,65 @@ a.button {
   justify-content: center; /* 11:22 timestamp video*/
 }
 
-/*---------------------- LOGIN SIGNUP PAGES END ----------------------*/
+.signup label,
+.login label {
+  flex-shrink: 0;
+  height: 50px;
+  width: 50px;
+  background-color: var(--red);
+  fill: var(--orange);
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  justify-content: center; /*OOO THIS YES*/
+  align-items: center;
+}
+
+.signup input,
+.login input {
+  box-sizing: border-box; /* for consistent size */
+  flex-grow: 1; /* to have responsive resizing of the element */
+  min-width: 0; /* to have responsive resizing of the element */
+  height: 50px;
+  padding: 1em;
+  /* font: inherit; */
+  border-radius: 10px 0 0 10px;
+  border: 2px solid var(--red);
+  border-left: none; /* ? */
+  background-color: var(--red);
+  transition: 150ms ease;
+}
+
+.signup input:hover,
+.login input:hover {
+  border-color: var(--orange); /* 13:55 timestamp video*/
+}
+
+.signup input:focus,
+.login input:focus {
+  outline: none;
+  border-color: var(--base-color); /* same as text color DO*/
+
+}
+
+/* 14:38 - 15:48 timestamp wtf*/
+/*
+.signup div:has,
+.login div:has {
+}
+*/
+
+.signup button,
+.login button {
+  margin-top: 10px;
+  border: none;
+  border-radius: 1000px;
+  padding: 0.85em 4em; /* em refers to the font size of the element */
+  background-color: var(--red); /* color change?*/
+  /* 16:03 */
+
+
+}
+
+
+
+/*---------------------- LOGIN SIGNUP PAGES END ----------------------*
