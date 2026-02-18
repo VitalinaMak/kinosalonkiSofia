@@ -72,9 +72,6 @@ header a {
 }
 
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
   width: 100%;
   background-color: rgb(219, 204, 204);
   color: rgb(0, 0, 0);
@@ -182,13 +179,23 @@ main a {
 
 /* a list of actions for events on the page Tapahtumat */
 .eventListActions {
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-flow: row;
   justify-content: space-between;
 }
+.eventListActions form {
+  display: flex;
+  flex-flow: row nowrap;
+}
 .eventListActions input {
   height: 100%;
+  display: inline-block;
+}
+
+.searchAndSort {
+  display: flex;
+  flex-flow: row nowrap;
 }
 
 /* dropdown for the sorting button */
