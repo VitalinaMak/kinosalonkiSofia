@@ -1,10 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-/*
 :root {
-  /* google abt this bro*/
+  --base-color: #34342e;
+  --base-color: #384a50;
+  --base-color: #b4dbdeff;
+  --base-color: #e78a1f;
+  --base-color: #d32402;
+
+  /* CSS HEX */
+  --atomic-tangerine: #ff6b35ff;
+  --peach-glow: #f7c59fff;
+  --beige: #efefd0ff;
+  --steel-azure: #004e89ff;
+  --baltic-blue: #1a659eff;
 }
-*/
 
 * {
   font-family: Poppins, sans-serif;
@@ -27,6 +36,23 @@ header {
 header a {
   align-self: center;
   margin-right: 7px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(219, 204, 204);
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+.footer a {
+  display: block;
+}
+.footer p {
+  margin-top: 5px;
+  margin-bottom: 4px;
 }
 
 .otsikko {
@@ -145,17 +171,14 @@ main a {
   height: 100%;
 }
 
-/* dropdown for the sorting buttons */
+/* dropdown for the sorting button */
 .eventSorting {
   position: relative;
   display: inline-block;
 }
-/* the same width for all of the buttons */
-.eventSorting a,
 .eventSorting button {
   width: 158px;
 }
-/* on hover borders of the first button are no more rounded */
 .eventSorting:hover button {
   border-radius: 0%;
 }
@@ -166,8 +189,8 @@ main a {
   min-width: 160px;
   z-index: 1;
 }
-/* button-styled <a>-elements inside the dropdown */
-.sortingOptions a {
+/* buttons inside dropdown */
+.sortingOptions button {
   background-color: #ffffff;
   color: #384a50;
   border: rgb(13, 202, 240) solid 1px;
@@ -179,7 +202,7 @@ main a {
 .eventSorting:hover .sortingOptions {
   display: block;
 }
-.sortingOptions a:hover {
+.sortingOptions button:hover {
   background-color: rgb(13, 202, 240);
   color: black;
 }
@@ -222,23 +245,6 @@ a.button {
   color: buttontext;
   background-color: buttonface;
   text-decoration: none;
-}
-
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: rgb(219, 204, 204);
-  color: rgb(0, 0, 0);
-  text-align: center;
-}
-.footer a {
-  display: block;
-}
-.footer p {
-  margin-top: 5px;
-  margin-bottom: 4px;
 }
 
 /* Styling the forms doesnt work*/
