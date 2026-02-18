@@ -2,7 +2,6 @@
     $pageTitle = "Tapahtumat";
     include 'include/header.php'; 
 ?>
-
     <main class="tapahtumat_page">
         <h1>Tapahtumat</h1>
         <!-- line with all of the actions for the list -->

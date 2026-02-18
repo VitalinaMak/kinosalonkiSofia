@@ -3,9 +3,9 @@
     include 'include/header.php'; 
 ?>
 
-    <h1>Why do we need an h1 here?</h1>
 
-    <main class="frontpageContainer"> 
+<main class="index_page"> 
+      <h1>Why do we need an h1 here?</h1>
       <div class="about">
           <!-- Pictures and "history" here -->
           

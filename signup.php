@@ -2,7 +2,7 @@
     $pageTitle = "SignUp";
     include 'include/header.php'; 
 ?>
-<main class="signnup_page">
+<main class="signup_page">
 
     <div class="wrapper">
 

@@ -24,7 +24,7 @@
 
 main {
   /* padding по периметру чтоб элементы не были впритык к концам экрана:
-  Top & Bottom: 0, Left & Right: 20px */
+  Top & Bottom: 0, Left & Right: 5px */
   padding: 0 5px;
   /* Ensuring the padding doesn't make the page wider than the screen */
   box-sizing: border-box;
@@ -142,7 +142,7 @@ h1 {
 /* LINKS TO PAGES IN HEADER - END */
 
 /* OPTION 1: grid layout */
-.frontpageContainer {
+.index_page {
   display: grid;
   grid-template-areas:
     "about about"
@@ -325,7 +325,7 @@ a.button {
 }
 
 .login_page,
-.signnup_page {
+.signup_page {
   min-height: 100vh;
   background-image: url(kuvat/ks1.avif);
   background-size: cover;
