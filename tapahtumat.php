@@ -11,7 +11,7 @@
                     <!-- search field. When the info is sent, it pass it in URL -->
                 <form action="" method="GET"> 
                     <input type="text" value="<?php if(isset($_GET['search'])){echo $_GET['search'];} ?>" name="search" placeholder="Etsi tapahtumaa">
-                    <button type="submit" class="btn btn-outline-danger">Etsi</button>
+                    <!-- <button type="submit" class="btn btn-outline-danger">Etsi</button> --> 
                 </form>
                 <!-- button for sorting events. Contains a dropdown menu with sorting options -->
                 <div class="eventSorting">  
