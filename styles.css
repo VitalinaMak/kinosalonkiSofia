@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-  --header-color: #1d1d1cff;
+  --head-foot: #1d1d1cff;
   --base-color: #34342e;
   --1-color: #384a50;
   --2-color: #a6d1d1;
@@ -30,20 +30,11 @@ main {
   background-color: var(--beige);
 }
 
-.eventList div {
-  background-color: var(--2-color);
-  color: var(--1-color);
-}
-
-.eventList h3 {
-  color: var(--base-color);
-}
-
 header {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  background-color: var(--header-color);
+  background-color: var(--head-foot);
   color: white;
   height: min-content;
 }
@@ -71,21 +62,31 @@ header a {
   align-self: center;
 }
 
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
+footer {
   width: 100%;
-  background-color: rgb(219, 204, 204);
-  color: rgb(0, 0, 0);
+  background-color: var(--head-foot);
+  color: white;
   text-align: center;
+  margin-top: auto;
+  padding: 7px;
 }
-.footer a {
+footer a {
   display: block;
 }
-.footer p {
+footer p {
   margin-top: 5px;
   margin-bottom: 4px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+.eventList div {
+  background-color: var(--2-color);
+  color: var(--1-color);
+}
+
+.eventList h3 {
+  color: var(--base-color);
 }
 
 /* LINKS TO PAGES IN HEADER - START. Will be deleted later */
