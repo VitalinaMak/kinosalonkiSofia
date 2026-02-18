@@ -3,7 +3,7 @@
     include 'include/header.php'; 
 ?>
 
-    <main class="tapahtumat.php">
+    <main class="tapahtumat_page">
         <h1>Tapahtumat</h1>
         <!-- line with all of the actions for the list -->
         <div class="eventListActions">
@@ -86,7 +86,7 @@
                 
             ?>
         </div>
-    </div>
+</main>
     
 <?php include 'include/footer.php'; ?>
 
