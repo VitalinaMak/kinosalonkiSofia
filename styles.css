@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap');
 
 :root {
   --head-foot: #1d1d1cff;
@@ -58,12 +59,15 @@ header a {
   justify-content: space-between;
   align-items: center;
 }
-
 .otsikko img,
 .otsikko h2 {
   align-self: center;
   margin: 0px;
   align-self: center;
+
+  font-family: MonteCarlo, sans-serif;
+  font-size: 100;
+  vertical-align: auto;
 }
 
 footer {
@@ -318,9 +322,11 @@ a.button {
 /* MAINs for signup and login aka the sea*/
 .login_page,
 .signup_page {
+  
   min-height: 100vh;
   background-image: url(kuvat/cinema_seats.jpg);
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
   object-fit: cover;
   overflow: hidden;
@@ -328,28 +334,33 @@ a.button {
   margin: 0px;
   padding: 0px;
   text-align: center;
+
 }
 
 .wrapper {
   box-sizing: border-box; /* = all borders and paddings will be created inwards!*/
   background-color: var(--cinema-whiteish);
-  height: 100vh;
+  height: 60vh;
   /*width: 40% wide with with a midwith of 600px*/
   width: max(40%, 600px);
   padding: 10px;
-  border-radius: 0 20px 20px 0; /* 0 20px 20px 0 */
+  border-radius: 20px;
+  margin: auto;
+  align-self:center;
 
   /*center the content using flexbox:*/
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /*OOO THIS YES*/
+  justify-content: center;
 }
 
 .signup h1,
 .login h1 {
   text-transform: uppercase;
+  font-family: Poppins, serif; 
   font: 2rem; /* 2 times the initial font size */
+  font-weight: 525; /*repeats later!*/
 }
 
 /* signup login FORMS settings */
@@ -361,6 +372,7 @@ a.button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: auto;
   gap: 10px;
 }
 
@@ -368,7 +380,7 @@ a.button {
 .login > div {
   width: 100%;
   display: flex;
-  justify-content: center; /* 11:22 timestamp video*/
+  justify-content: center; 
 }
 
 .signup label,
@@ -430,12 +442,12 @@ a.button {
   margin-top: 10px;
   border: none;
   border-radius: 10px;
-  padding: 0.85em 4em; /* em refers to the font size of the element */
-  background-color: var(--cinema-red2); /* color change?*/
+  padding: 0.85em 4em; /* em refers to the font size of the element; 4 times */
+  background-color: var(--darkblue); /* color change?*/
   width: 75%;
   color: var(--cinema-whiteish);
   /* 16:03 */
-
+  font-weight: 500;
 
 }
 
