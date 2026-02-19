@@ -27,6 +27,7 @@
 }
 
 main {
+  width: 100%;
   /* padding по периметру чтоб элементы не были впритык к концам экрана:
   Top & Bottom: 0, Left & Right: 5px */
   padding: 0 5px;
@@ -149,13 +150,31 @@ h1 {
 /* LINKS TO PAGES IN HEADER - END */
 
 /* OPTION 1: grid layout */
-.index_page {
+/* .index_page {
   display: grid;
   grid-template-areas:
     "about about"
     "eventList otherEvents";
   grid-template-rows: 1fr auto;
   height: 90%;
+  width: 100%;
+} */
+
+/* OPTION 2: flex layout*/
+.upcomingEvents {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.photos {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.photos img {
+  width: 33%;
 }
 
 .about {
@@ -164,26 +183,23 @@ h1 {
 }
 
 .upcomingEvents {
-  grid-area: eventList;
-}
-
-main a {
-  grid-area: otherEvents;
-  display: block;
-  align-self: center;
-}
-
-/* OPTION 2: flex layout
-.upcomingEvents {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
-} */
+  justify-content: space-around;
+  padding: 15px;
+}
+
+main a {
+  display: block;
+  margin: auto;
+}
 
 /* a list of current events on the main page */
 .eventsToday {
   margin-bottom: 5px;
+  margin: auto;
 }
 .eventsToday tr {
   border: solid black 1px;
