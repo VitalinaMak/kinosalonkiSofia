@@ -9,11 +9,16 @@
   --red: #d32402;
   --beige: rgb(255, 248, 234);
 
-  /* CSS HEX 
-  --atomic-tangerine: #ff6b35ff;
-  --peach-glow: #f7c59fff;
-  --steel-azure: #004e89ff;
-  --baltic-blue: #1a659eff; */
+
+
+  /* From the cinema_seats.jpg */
+  --molten-lava: #7E1605ff;
+  --oxidized-iron: #A52108ff;
+  --flag-red: #C23322ff;
+  --dark-coffee: #322317ff;
+  --porcelain: #F8F7F3ff;
+  --beige2: rgb(246, 243, 213);
+  --pale-slate: #B7C2CBff;
 }
 
 * {
@@ -328,7 +333,7 @@ a.button {
 
 .wrapper {
   box-sizing: border-box; /* = all borders and paddings will be created inwards!*/
-  background-color: var(--base-color);
+  background-color: var(--beige2);
   height: 100vh;
   /*width: 40% wide with with a midwith of 600px*/
   width: max(40%, 600px);
