@@ -7,21 +7,20 @@
   --lightblue: #a6d1d1;
   --orange: #e78a1f;
   --red: #d32402;
-  --beige: rgb(255, 248, 234);
-
-
+  --beige: rgb(246, 243, 215);
+  /* --beige: rgb(255, 248, 234); */
 
   /* From the cinema_seats.jpg */
-  --molten-lava: #7E1605ff;
-  --oxidized-iron: #A52108ff;
-  --flag-red: #C23322ff;
-  --dark-coffee: #322317ff;
-  --porcelain: #F8F7F3ff;
-  --beige2: rgb(246, 243, 213);
-  --pale-slate: #B7C2CBff;
+  --cinema-red1: #7E1605ff;
+  --cinema-red2: #A52108ff;
+  --cinema-red3: #C23322ff;
+  --cinema-pink: #DC3545;
+  --cinema-brown: #322317ff;
+  --cinema-whiteish: #F8F7F3ff;
+  --cinema-grey: #B7C2CBff;
 }
-
 * {
+
   font-family: Poppins, sans-serif;
   box-sizing: border-box; /* the borders and paddings are considered as part of the element for with and height defining */
 }
@@ -333,14 +332,14 @@ a.button {
 
 .wrapper {
   box-sizing: border-box; /* = all borders and paddings will be created inwards!*/
-  background-color: var(--beige2);
+  background-color: var(--cinema-whiteish);
   height: 100vh;
   /*width: 40% wide with with a midwith of 600px*/
   width: max(40%, 600px);
   padding: 10px;
   border-radius: 0 20px 20px 0; /* 0 20px 20px 0 */
 
-  /*center the content usinf flexbox:*/
+  /*center the content using flexbox:*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -377,8 +376,8 @@ a.button {
   flex-shrink: 0;
   height: 50px;
   width: 50px;
-  background-color: var(--red);
-  fill: var(--orange);
+  background-color: var(--cinema-red2);
+   /* fill: var(--cinema-red2); */
   border-radius: 10px 0 0 10px;
   display: flex;
   justify-content: center; /*OOO THIS YES*/
@@ -393,39 +392,48 @@ a.button {
   height: 50px;
   padding: 1em;
   /* font: inherit; */
-  border-radius: 10px 0 0 10px;
-  border: 2px solid var(--red);
+  border-radius: 0 10px 10px 0;
+  border: 3px solid var(--cinema-red2);
   border-left: none; /* ? */
-  background-color: var(--red);
+  background-color: var(--cinema-whiteish);
   transition: 150ms ease;
 }
 
 .signup input:hover,
 .login input:hover {
-  border-color: var(--orange); /* 13:55 timestamp video*/
+  border-color: var(--cinema-pink); 
 }
+.signup div:has(input:hover) label,
+.login div:has(input:hover) label {
+  background-color: var(--cinema-pink);
+}
+
 
 .signup input:focus,
 .login input:focus {
   outline: none;
-  border-color: var(--base-color); /* same as text color DO*/
+  border-color: var(--cinema-red1); /* same as text color DO*/
 
 }
-
-/* 14:38 - 15:48 timestamp wtf*/
-/*
-.signup div:has,
-.login div:has {
+.signup div:has(input:focus) label,
+.login div:has(input:focus) label {
+  background-color: var(--cinema-red1);
 }
-*/
+
+.signup input::placeholder,
+.login input::placeholder {
+  color: var(--cinema-pink);
+}
 
 .signup button,
 .login button {
   margin-top: 10px;
   border: none;
-  border-radius: 1000px;
+  border-radius: 10px;
   padding: 0.85em 4em; /* em refers to the font size of the element */
-  background-color: var(--red); /* color change?*/
+  background-color: var(--cinema-red2); /* color change?*/
+  width: 75%;
+  color: var(--cinema-whiteish);
   /* 16:03 */
 
 
