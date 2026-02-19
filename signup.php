@@ -6,9 +6,10 @@
 
     <div class="wrapper">
 
-        <h1>Rekisteröidy</h1>
+        <form class="signup">
 
-        <form class="signnup">
+            <h1>Rekisteröidy SU</h1>
+
             <div>
                 <label for="name-input">
                     <!-- код картинки изUI_icons -->
@@ -34,7 +35,7 @@
                 </label>
                 <input type="password" id="repeat-password-input" name="repeat-password" placeholder="Toista salasana" required>
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit" class="btn btn-outline-danger">Submit</button>
 
             <p>Aready have an account? <a href="login.php">Log in</a> </p>
         </form>
