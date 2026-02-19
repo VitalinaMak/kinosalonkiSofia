@@ -346,7 +346,7 @@ a.button {
   font: 2rem; /* 2 times the initial font size */
 }
 
-/* THE SIGNUP AND LOGIN FORMS*/
+/* signup login FORMS settings */
 .signup,
 .login {
   width: min(400px, 100%);
