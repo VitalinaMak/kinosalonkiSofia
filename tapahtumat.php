@@ -9,20 +9,21 @@
         <div class="eventListActions">
 
             <div class="searchAndSort">
-                    <!-- search field. When the info is sent, it pass it in URL -->
+                <!-- search field. When the info is sent, it pass it in URL -->
                 <form action="" method="GET"> 
                     <input type="text" value="<?php if(isset($_GET['search'])){echo $_GET['search'];} ?>" name="search" placeholder="Etsi tapahtumaa">
-                    <!-- <button type="submit" class="btn btn-outline-danger">Etsi</button> --> 
+                    <button type="submit" class="btn btn-outline-danger">Etsi</button>
                 </form>
                 <!-- button for sorting events. Contains a dropdown menu with sorting options -->
                 <div class="eventSorting">  
                     <button class="btn btn-outline-info">Järjestää</button>
                     <div class="sortingOptions">
-                        <a href="?sort=nimiaz">Tapahtuman nimi (A-Z)</a>
-                        <a href="?sort=nimiza">Tapahtuman nimi (Z-A)</a>
-                        <a href="?sort=pvmnouseva">Päivämäärä (nouseva)</a>  <!-- this one is used by default -->
-                        <a href="?sort=pvmlaskeva">Päivämäärä (laskeva)</a>
+                        <a href="?sort=nimiaz&search=<?php echo urlencode($_GET['search'] ?? ''); ?>">Tapahtuman nimi (A-Z)</a>
+                        <a href="?sort=nimiza&search=<?php echo urlencode($_GET['search'] ?? ''); ?>">Tapahtuman nimi (Z-A)</a>
+                        <a href="?sort=pvmnouseva&search=<?php echo urlencode($_GET['search'] ?? ''); ?>">Päivämäärä (nouseva)</a>  <!-- this one is used by default -->
+                        <a href="?sort=pvmlaskeva&search=<?php echo urlencode($_GET['search'] ?? ''); ?>">Päivämäärä (laskeva)</a>
                     </div>
+
                 </div>
             </div>
             
@@ -33,22 +34,6 @@
                     
                 </div>
             </div>
-            <!-- search field. When the info is sent, it pass it in URL -->
-            <form action="" method="GET"> 
-                <input type="text" value="<?php if(isset($_GET['search'])){echo $_GET['search'];} ?>" name="search" placeholder="Etsi tapahtumaa">
-                <button type="submit" class="btn btn-outline-danger">Etsi</button>
-            </form>
-            <!-- button for sorting events. Contains a dropdown menu with sorting options -->
-            <div class="eventSorting">  
-                <button class="btn btn-outline-info">Järjestää</button>
-                <div class="sortingOptions">
-                    <a href="?sort=nimiaz&search=<?php echo urlencode($_GET['search'] ?? ''); ?>">Tapahtuman nimi (A-Z)</a>
-                    <a href="?sort=nimiza&search=<?php echo urlencode($_GET['search'] ?? ''); ?>">Tapahtuman nimi (Z-A)</a>
-                    <a href="?sort=pvmnouseva&search=<?php echo urlencode($_GET['search'] ?? ''); ?>">Päivämäärä (nouseva)</a>  <!-- this one is used by default -->
-                    <a href="?sort=pvmlaskeva&search=<?php echo urlencode($_GET['search'] ?? ''); ?>">Päivämäärä (laskeva)</a>
-                </div>
-            </div>
-        </div> 
 
         <div class="eventList">
             <?php
@@ -78,13 +63,13 @@
                 }
 
                 if (isset($_GET['search']) && trim($_GET['search']) === '') {  //in case user sends a blank field in input
-                if (isset($_GET['sort'])) {
-                    header("Location: tapahtumat.php?sort=" . urlencode($_GET['sort']));  //if sorting is used, save it and reload the page
-                } else {
-                    header("Location: tapahtumat.php");  //if no sorting is used, just reload the page
+                    if (isset($_GET['sort'])) {
+                        header("Location: tapahtumat.php?sort=" . urlencode($_GET['sort']));  //if sorting is used, save it and reload the page
+                    } else {
+                        header("Location: tapahtumat.php");  //if no sorting is used, just reload the page
+                    }
+                    exit;
                 }
-                exit;
-            }
 
                 /* base sql-query */
                 $sql = "
