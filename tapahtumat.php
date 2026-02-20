@@ -33,61 +33,115 @@
                     
                 </div>
             </div>
+            <!-- search field. When the info is sent, it pass it in URL -->
+            <form action="" method="GET"> 
+                <input type="text" value="<?php if(isset($_GET['search'])){echo $_GET['search'];} ?>" name="search" placeholder="Etsi tapahtumaa">
+                <button type="submit" class="btn btn-outline-danger">Etsi</button>
+            </form>
+            <!-- button for sorting events. Contains a dropdown menu with sorting options -->
+            <div class="eventSorting">  
+                <button class="btn btn-outline-info">Järjestää</button>
+                <div class="sortingOptions">
+                    <a href="?sort=nimiaz&search=<?php echo urlencode($_GET['search'] ?? ''); ?>">Tapahtuman nimi (A-Z)</a>
+                    <a href="?sort=nimiza&search=<?php echo urlencode($_GET['search'] ?? ''); ?>">Tapahtuman nimi (Z-A)</a>
+                    <a href="?sort=pvmnouseva&search=<?php echo urlencode($_GET['search'] ?? ''); ?>">Päivämäärä (nouseva)</a>  <!-- this one is used by default -->
+                    <a href="?sort=pvmlaskeva&search=<?php echo urlencode($_GET['search'] ?? ''); ?>">Päivämäärä (laskeva)</a>
+                </div>
+            </div>
         </div> 
 
         <div class="eventList">
             <?php
-                $order = 'event_date, ASC';  //variable for sorting data. For default sorts by date starting from earlier events 
-                if (isset($_GET['sort']) && $_GET['sort'] == 'nimiaz') {
-                    $order = "event_name ASC";  //sorts by name in alphabetical order
-                } else if (isset($_GET['sort']) && $_GET['sort'] == 'nimiza') {
-                    $order = "event_name DESC";  //sorts by name in reversed order
-                } else if (isset($_GET['sort']) && $_GET['sort'] == 'pvmlaskeva') {
-                    $order = "event_date DESC";  //sorts by date starting from later events
-                } else {  
-                    $order = "event_date ASC";  //default sorting by date
+                $search = '';  //variable for searching
+                $order = 'events.event_date ASC';  //variable for sorting data. For default sorts by date starting from earlier events 
+                
+                /* sorting */
+                if (isset($_GET['sort'])) {
+                    switch ($_GET['sort']) {
+                        case 'nimiaz':
+                            $order = "events.event_name ASC";
+                            break;
+                        case 'nimiza':
+                            $order = "events.event_name DESC";
+                            break;
+                        case 'pvmlaskeva':
+                            $order = "events.event_date DESC";
+                            break;
+                        default:
+                            $order = 'events.event_date ASC';
+                    }
                 }
             
-                /* if the input in search field is empty, reload the page (it is made to avoid redudant info in URL) */
-                if (isset($_GET['search']) && trim($_GET['search']) === '') {
-                    header("Location: tapahtumat.php");
-                    exit;
+                /* searching */
+                if (isset($_GET['search']) && trim($_GET['search']) !== '') {
+                    $search = "%" . trim($_GET['search']) . "%";
                 }
 
-                if (isset($_GET['search']) && trim($_GET['search']) != "") {  //if the searchfield is set some value, query will search it
-                    $search = $_GET['search'];
-                    /* query to retrive all information from events and count rows for every event in bookings to get the amount of booked tickets + search function that retrieves all rows that contain the content of the $search */
-                    $sql = "SELECT events.event_name, events.event_date, DATE_FORMAT(events.event_date, '%d.%m.%Y') AS event_formatted_date, HOUR(events.event_time) AS event_hour, DATE_FORMAT(events.event_time, '%i') AS event_minute, events.event_image, events.description, events.location, events.event_type, events.max_visitors, COUNT(bookings.id) AS booked_places FROM events LEFT JOIN bookings ON events.id = bookings.event_id WHERE events.event_name LIKE '%$search%' GROUP BY events.id ORDER BY events.$order, events.event_time;";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            if (empty($row["kuva"])) {
-                                $kuvaPath = "noImage.png";  //if there's no image uploaded, the default image is used
-                            } else {
-                            $kuvaPath = $row["kuva"];  //a variable for the image's name
-                            }
-                            /* count the amount of tickets left */
-                            $placesLeft = $row['max_visitors'] - $row['booked_places'];
-                            echo "<div><h3 class='event_header'>".$row['event_name']."</h3><h3 class='event_date'>".$row['event_formatted_date']." klo ".$row['event_hour'].".".$row['event_minute']."</h3><img src='kuvat/tapahtumaKuvat/".$kuvaPath."' alt='".$row['event_name']."'/><p>".$row['description']."<br>Paikkoja jäljellä: ".$placesLeft.".</p></div>";
-                        }
-                    }
-                } else {  //if no searching is used, retrieve all data from the table
-                    $sql = "SELECT events.event_name, events.event_date, DATE_FORMAT(events.event_date, '%d.%m.%Y') AS event_formatted_date, HOUR(events.event_time) AS event_hour, DATE_FORMAT(events.event_time, '%i') AS event_minute, events.event_image, events.description, events.location, events.event_type, events.max_visitors, COUNT(bookings.id) AS booked_places FROM events LEFT JOIN bookings ON events.id = bookings.event_id GROUP BY events.id ORDER BY $order, event_time;";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            if (empty($row["kuva"])) {
-                                $kuvaPath = "noImage.png";  //if there's no image uploaded, the default image is used
-                            } else {
-                                $kuvaPath = $row["kuva"];  //a variable for the image's name
-                            }
-                            /* count the amount of tickets left */
-                            $placesLeft = $row['max_visitors'] - $row['booked_places'];
-                            echo "<div><h3 class='event_header'>".$row['event_name']."</h3><h3 class='event_date'>".$row['event_formatted_date']." klo ".$row['event_hour'].".".$row['event_minute']."</h3><img src='kuvat/tapahtumaKuvat/".$kuvaPath."' alt='".$row['event_name']."'/><p>".$row['description']."<br>Paikkoja jäljellä: ".$placesLeft.".</p></div>";
-                        }
-                    }
+                if (isset($_GET['search']) && trim($_GET['search']) === '') {  //in case user sends a blank field in input
+                if (isset($_GET['sort'])) {
+                    header("Location: tapahtumat.php?sort=" . urlencode($_GET['sort']));  //if sorting is used, save it and reload the page
+                } else {
+                    header("Location: tapahtumat.php");  //if no sorting is used, just reload the page
+                }
+                exit;
+            }
+
+                /* base sql-query */
+                $sql = "
+                    SELECT 
+                        events.event_name, 
+                        events.event_date, 
+                        DATE_FORMAT(events.event_date, '%d.%m.%Y') AS event_formatted_date, 
+                        HOUR(events.event_time) AS event_hour, 
+                        DATE_FORMAT(events.event_time, '%i') AS event_minute, 
+                        events.event_image, 
+                        events.description, 
+                        events.location, 
+                        events.event_type, 
+                        events.max_visitors, 
+                        COUNT(bookings.id) AS booked_places
+                    FROM events 
+                    LEFT JOIN bookings ON events.id = bookings.event_id
+                ";
+                                        
+                $params = [];
+                $types = "";
+                
+                /* WHERE is added only if searching */
+                if ($search !== '') {
+                    $sql .= " WHERE events.event_name LIKE ?";
+                    $params[] = $search;
+                    $types .= "s";
                 }
                 
+                $sql .= " GROUP BY events.id ORDER BY $order, events.event_time";
+
+                /* prepared statement */
+                $stmt = $conn->prepare($sql);
+
+                if (!empty($params)) {
+                    $stmt->bind_param($types, ...$params);
+                }
+
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                /* output */
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+
+                        $kuvaPath = empty($row["event_image"]) ? "noImage.png" : $row["event_image"];  //if the event doesn't have image, use the default image
+                        $placesLeft = $row['max_visitors'] - $row['booked_places'];  //amount of seats left, calculated from the max. amount of seats (stated in the table) and amount of bookings made for the event 
+
+                        echo "<div>
+                                <h3 class='event_header'>{$row['event_name']}</h3>
+                                <h3 class='event_date'>{$row['event_formatted_date']} klo {$row['event_hour']}.{$row['event_minute']}</h3>
+                                <img src='kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>
+                                <p>{$row['description']}<br>Paikkoja jäljellä: {$placesLeft}.</p>
+                            </div>";
+                    }
+                }
+
             ?>
         </div>
 </main>
