@@ -3,25 +3,26 @@
     include 'include/header.php'; 
 ?>
 
-    <h1>Why do we need an h1 here?</h1>
 
-    <main class="frontpageContainer"> 
+<main class="index_page"> 
       <div class="about">
           <!-- Pictures and "history" here -->
           
-          <p> Replace this paragraph with img property </p>
-          <!-- <img src="url" alt="alternatetext"> -->
+          <div class="photos">
+            <img src="kuvat/interior.jpg" alt="kinosalonki sisällä">
+            <img src="kuvat/building.jpg" alt="piha">
+            <img src="kuvat/posters.webp" alt="kuvat">
+          </div>
           
-          <p> Kinosalonki Sofia established 2019, history bla bla bla Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
-          </p>    
+          <p>Vuonna 1844 Sofia Lybecker perustui köyhille tytöille ja orpolapsille tarkoitettu Lybeckerin tyttökoulu hänen äitinsä perintörahoilla. Koulu toimi aluksi ilman omaa tilaa, mutta vuonna 1859 Sofian sisko Helene Bergbom ja hänen miehensä Carl Gustaf lahjoittivat koululle omistamansa talon nykyiseltä Reiponkadulta. Koulu toimi tässä talossa seuraavat 125 vuotta. Entistä koulurakennusta kutsutaan nykyään Sofian taloksi ja siinä toimii Kinosalonki Sofia. Me jatkamme Sofian talon kasvatustyötä yhteisöpedagogisissa kulttuurihankkeissamme sekä järjestämällä ja tukemalla elokuva- ja mediakasvatusta.</p>    
       </div>
           
+      <?php 
+        $date = date('d. F Y');  //gets current date
+        echo "<h3> Tapahtumat tänään, $date:</h3>";
+        $date = date('Y-m-d');   //different date format for using in sql-query
+      ?>
       <div class="upcomingEvents">
-          <?php 
-            $date = date('d. F Y');  //gets current date
-            echo "<h3> Tapahtumat tänään, $date:</h3>";
-            $date = date('Y-m-d');   //different date format for using in sql-query
-          ?>
           <table class="eventsToday">
               <tbody>
                 <?php
@@ -36,7 +37,6 @@
                 ?>
               </tbody>
           </table>
-          <!-- цвета не окончательные, пока что я просто взяла предустановленные, потом по окружению будет понятно, какие лучше взять -->
           <a href="tapahtumat.php" class="btn btn-outline-danger">Katso kaikki tapahtumat</a>  
         </div>   
     </main>

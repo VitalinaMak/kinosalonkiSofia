@@ -2,10 +2,10 @@
     $pageTitle = "EditEvent";
     include 'include/header.php'; 
 ?>
-    <div class="main">
+    <main class="editEvent_page">
         <h1> Edit event</h1>
 
-    </div>
-
+        
+    </main>
 <?php include 'include/footer.php'; ?>
 

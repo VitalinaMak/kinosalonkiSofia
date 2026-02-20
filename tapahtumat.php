@@ -2,11 +2,29 @@
     $pageTitle = "Tapahtumat";
     include 'include/header.php'; 
 ?>
-
-    <main class="tapahtumat.php">
+    <main class="tapahtumat_page">
         <h1>Tapahtumat</h1>
         <!-- line with all of the actions for the list -->
         <div class="eventListActions">
+
+            <div class="searchAndSort">
+                    <!-- search field. When the info is sent, it pass it in URL -->
+                <form action="" method="GET"> 
+                    <input type="text" value="<?php if(isset($_GET['search'])){echo $_GET['search'];} ?>" name="search" placeholder="Etsi tapahtumaa">
+                    <!-- <button type="submit" class="btn btn-outline-danger">Etsi</button> --> 
+                </form>
+                <!-- button for sorting events. Contains a dropdown menu with sorting options -->
+                <div class="eventSorting">  
+                    <button class="btn btn-outline-info">Järjestää</button>
+                    <div class="sortingOptions">
+                        <a href="?sort=nimiaz">Tapahtuman nimi (A-Z)</a>
+                        <a href="?sort=nimiza">Tapahtuman nimi (Z-A)</a>
+                        <a href="?sort=pvmnouseva">Päivämäärä (nouseva)</a>  <!-- this one is used by default -->
+                        <a href="?sort=pvmlaskeva">Päivämäärä (laskeva)</a>
+                    </div>
+                </div>
+            </div>
+            
             <!-- button for filtering events. Contains a dropdown menu with sorting options -->
             <div class="eventFiltering">
                 <button class="btn btn-outline-info">Suodata</button>
@@ -125,7 +143,7 @@
 
             ?>
         </div>
-    </div>
+</main>
     
 <?php include 'include/footer.php'; ?>
 

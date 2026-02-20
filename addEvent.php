@@ -3,7 +3,7 @@
     include 'include/header.php'; 
 ?>
 
-<div class="addEvent_page">
+<main class="addEvent_page">
     <h1>Uusi tapahtuma</h1>
 
         <form class="addEvent form">
@@ -34,7 +34,7 @@
             <button type="submit">Submit</button>
         </form>
 
-</div>
+</main>
 
 <?php include 'include/footer.php'; ?>
 
