@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap");
+
+:root {
+  --head-foot: #1d1d1cff;
+  --base-color: #34342e;
+  --darkblue: #384a50;
+  --lightblue: #a6d1d1;
+  --orange: #e78a1f;
+  --red: #d32402;
+  --beige: rgb(246, 243, 215);
+
+  /* From the cinema_seats.jpg */
+  --cinema-red1: #7e1605ff;
+  --cinema-red2: #a52108ff;
+  --cinema-red3: #c23322ff;
+  --cinema-pink: #dc3545;
+  --cinema-brown: #322317ff;
+  --cinema-whiteish: #f8f7f3ff;
+  --cinema-grey: #b7c2cbff;
+}
+
+* {
+  font-family: Poppins, sans-serif;
+  box-sizing: border-box; /* the borders and paddings are considered as part of the element for with and height defining */
+}
+
+main {
+  width: 100%;
+  /* padding по периметру чтоб элементы не были впритык к концам экрана:
+  Top & Bottom: 0, Left & Right: 5px */
+  padding: 0 5px;
+  /* Ensuring the padding doesn't make the page wider than the screen */
+  box-sizing: border-box;
+  background-color: var(--beige);
+}
+
+header {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  background-color: var(--head-foot);
+  color: white;
+  height: min-content;
+}
+header a {
+  align-self: center;
+  margin-right: 7px;
+}
+
+.otsikko img {
+  padding: 0px 10px;
+  height: 50px;
+}
+
+.otsikko {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.otsikko img,
+.otsikko h2 {
+  align-self: center;
+  margin: 0px;
+  align-self: center;
+
+  font-family: MonteCarlo, sans-serif;
+  font-size: 100;
+  vertical-align: auto;
+}
+
+footer {
+  width: 100%;
+  background-color: var(--head-foot);
+  color: white;
+  text-align: center;
+  margin-top: auto;
+  padding: 7px;
+}
+footer a {
+  display: block;
+}
+footer p {
+  margin-top: 5px;
+  margin-bottom: 4px;
+}
+
+/* some space between headers and the edge of the body */
+h1 {
+  padding-left: 5px;
+  padding-top: 5px;
+  margin: 5px 0px 10px 0px;
+}
+main a {
+  display: block;
+  margin: auto;
+}
+/* LINKS TO PAGES IN HEADER - START. Will be deleted later */
+/* Dropdown Button */
+.navButton {
+  background-color: #303030;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+/* The container <div> - needed to position the dropdown content */
+.temporaryNavigation {
+  position: relative;
+  display: inline-block;
+}
+/* Dropdown Content (Hidden by Default) */
+.linksToPages {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+/* Links inside the dropdown */
+.linksToPages a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+/* Change color of dropdown links on hover */
+.linksToPages a:hover {
+  background-color: #ddd;
+}
+/* Show the dropdown menu on hover */
+.temporaryNavigation:hover .linksToPages {
+  display: block;
+}
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.linksToPages:hover .navButton {
+  background-color: #3e8e41;
+}
+/* LINKS TO PAGES IN HEADER - END */
+
+a.button {
+  /* Оно нам точно нужно? Сейчас ни у одного <а>-элемента нет класса "button" */ /* oй*/
+  padding: 1px 6px;
+  border: 1px outset buttonborder;
+  border-radius: 3px;
+  color: buttontext;
+  background-color: buttonface;
+  text-decoration: none;
+}
+/*----------------------------------------------------------------------------*/

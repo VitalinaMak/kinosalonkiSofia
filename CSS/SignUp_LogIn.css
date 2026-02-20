@@ -1,0 +1,129 @@
+/* - - - HERE LOGIN SIGNUP PAGES START - - - */
+/* CAREFUL WITH CHANGING height: 50px;*/
+
+/* MAINs for signup and login aka the sea*/
+.login_page,
+.signup_page {
+  min-height: 100vh;
+  background-image: url(kuvat/cinema_seats.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: cover;
+  overflow: hidden;
+
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+
+.wrapper {
+  box-sizing: border-box; /* = all borders and paddings will be created inwards!*/
+  background-color: var(--cinema-whiteish);
+  height: 60vh;
+  /*width: 40% wide with with a midwith of 600px*/
+  width: max(40%, 600px);
+  padding: 10px;
+  border-radius: 20px;
+  margin: auto;
+  align-self: center;
+
+  /*center the content using flexbox:*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup h1,
+.login h1 {
+  text-transform: uppercase;
+  font-family: Poppins, serif;
+  font: 2rem; /* 2 times the initial font size */
+  font-weight: 525; /*repeats later!*/
+}
+
+/* signup login FORMS settings */
+.signup,
+.login {
+  width: min(400px, 100%);
+  margin-top: 20px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  gap: 10px;
+}
+
+.signup > div,
+.login > div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.signup label,
+.login label {
+  flex-shrink: 0;
+  height: 50px;
+  width: 50px;
+  background-color: var(--cinema-red2);
+  /* fill: var(--cinema-red2); */
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  justify-content: center; /*OOO THIS YES*/
+  align-items: center;
+}
+
+.signup input,
+.login input {
+  box-sizing: border-box; /* for consistent size */
+  flex-grow: 1; /* to have responsive resizing of the element */
+  min-width: 0; /* to have responsive resizing of the element */
+  height: 50px;
+  padding: 1em;
+  /* font: inherit; */
+  border-radius: 0 10px 10px 0;
+  border: 3px solid var(--cinema-red2);
+  border-left: none; /* ? */
+  background-color: var(--cinema-whiteish);
+  transition: 150ms ease;
+}
+
+.signup input:hover,
+.login input:hover {
+  border-color: var(--cinema-pink);
+}
+.signup div:has(input:hover) label,
+.login div:has(input:hover) label {
+  background-color: var(--cinema-pink);
+}
+
+.signup input:focus,
+.login input:focus {
+  outline: none;
+  border-color: var(--cinema-red1); /* same as text color DO*/
+}
+.signup div:has(input:focus) label,
+.login div:has(input:focus) label {
+  background-color: var(--cinema-red1);
+}
+
+.signup input::placeholder,
+.login input::placeholder {
+  color: var(--cinema-pink);
+}
+
+.signup button,
+.login button {
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  padding: 0.85em 4em; /* em refers to the font size of the element; 4 times */
+  background-color: var(--darkblue); /* color change?*/
+  width: 75%;
+  color: var(--cinema-whiteish);
+  /* 16:03 */
+  font-weight: 500;
+}

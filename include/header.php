@@ -1,4 +1,3 @@
-<!-- Server connections ARE IN configuration.php -->
 <?php require_once 'include/configuration.php'; ?>
 
 <!DOCTYPE html>
@@ -6,9 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- link to bootstrap for using CSS features (it is required for buttons design) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet" href="CSS/global.css">
+    <!-- CSS variable for php -->
+    <?php if (isset($extraCSS)): ?>
+        <link rel="stylesheet" href="<?php echo $extraCSS; ?>">
+    <?php endif; ?>
+
 </head>
 <body>
     <header> 

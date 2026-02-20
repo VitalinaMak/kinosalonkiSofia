@@ -1,0 +1,117 @@
+.eventList div {
+  background-color: var(--lightblue);
+  color: var(--darkblue);
+}
+
+.eventList h3 {
+  color: var(--base-color);
+}
+/* a list of actions for events on the page Tapahtumat */
+.eventListActions {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+.eventListActions form {
+  display: flex;
+  flex-flow: row nowrap;
+}
+/* submit-button for search field. Now it's not in use */
+.eventListActions form button {
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
+.eventListActions input {
+  height: 100%;
+  display: inline-block;
+  /* border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px; */
+}
+.eventListActions button {
+  background-color: #ffffff2f;
+}
+
+.searchAndSort {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+/* dropdown for the sorting button */
+.eventSorting {
+  position: relative;
+  display: inline-block;
+}
+/* the same size for all of the options */
+.eventSorting a,
+.eventSorting button {
+  width: 140px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
+/* whren the first button is hovered, it's borders are no longer rounded so it looks the same way as the others buttons in a list */
+.eventSorting:hover button {
+  border-radius: 0%;
+}
+/* dropdown content (hidden by default) */
+.sortingOptions {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  z-index: 1;
+}
+/* buttons inside dropdown */
+.sortingOptions a {
+  background-color: #ffffff;
+  color: #384a50;
+  border: rgb(13, 202, 240) solid 1px;
+  padding: 7px 10px;
+  text-decoration: none;
+  display: block;
+}
+/* Show the dropdown menu on hover */
+.eventSorting:hover .sortingOptions {
+  display: block;
+}
+.sortingOptions a:hover {
+  background-color: rgb(13, 202, 240);
+  color: black;
+}
+
+/* a list of events on the page Tapahtumat */
+.eventList {
+  max-width: 100%;
+  justify-content: center;
+}
+.eventList div {
+  width: 99%;
+  display: grid;
+  grid-template-areas:
+    "header header date"
+    "image description description";
+  grid-template-columns: auto 1fr;
+  padding: 10px;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.eventList div .event_header {
+  grid-area: header;
+}
+.eventList div .event_date {
+  grid-area: date;
+}
+.eventList div img {
+  display: inline-block;
+  grid-area: image;
+  width: 125px;
+  padding: 5px;
+  margin: auto;
+  align-self: center;
+}
+.eventList div p {
+  grid-area: description;
+  margin-bottom: 0px;
+}
