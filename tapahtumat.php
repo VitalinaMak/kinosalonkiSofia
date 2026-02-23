@@ -2,6 +2,7 @@
     $pageTitle = "Tapahtumat";
     include 'include/header.php'; 
 ?>
+<<<<<<< HEAD
 
 <main class="tapahtumat.php">
     <h1>Tapahtumat</h1>
