@@ -4,6 +4,21 @@
     include 'include/header.php'; 
 ?>
 
+<!-- handling empty search field here, because it throws an error if there's any output before header() -->
+<?php
+    if (isset($_GET['search']) && trim($_GET['search']) === '') {
+        $params = [];  //array for key-value pairs, that will store all of the parameters (such as sort or filtering options)
+        if (isset($_GET['sort'])) {
+            $params['sort'] = $_GET['sort'];  //if sorting is used, save it's value to the array
+        }
+        if (isset($_GET['type'])) {
+            $params['type'] = $_GET['type'];  //if filtering by event type is used, save it's value to the array
+        }
+        $query = http_build_query($params);  //http-query with all used parameters
+        header("Location: tapahtumat.php" . ($query ? "?$query" : ""));  //if query is not empty, add it to the URL and reload the page
+    }
+?>
+
 <main class="tapahtumat.php">
     <h1>Tapahtumat</h1>
     <!-- line with all of the actions for the list -->
@@ -17,7 +32,7 @@
                         <input type="hidden" name="<?= htmlspecialchars($key) ?>" value="<?= htmlspecialchars($value) ?>">  <!-- resends the parameters to the URL -->
                     <?php endif; ?>
                 <?php endforeach; ?>
-                <button type="submit" class="btn btn-outline-danger">Etsi</button>
+                <!-- <button type="submit" class="btn btn-outline-danger">Etsi</button> -->  <!-- seems like we don't realy need submit-button here, but don't delete it for now -->
             </form>
 
             <!-- button for sorting events. Contains a dropdown menu with sorting options -->
@@ -55,6 +70,7 @@
                 <a href="<?php echo ($query ? "?$query" : "?")?>type=1">Elokuvaesitys</a>
                 <a href="<?php echo ($query ? "?$query" : "?")?>type=2">Tapahtumat rajatulla osallistujamäärällä</a>
                 <a href="<?php echo ($query ? "?$query" : "?")?>type=3">Tapahtumat, joissa ei ole osallistujamäärän rajoitusta</a> 
+                <a href="<?php echo ($query ? "?".substr($query, 0, -1) : "")?>">Poista suodatin</a>
             </div>
         </div>
     </div> 
@@ -88,17 +104,7 @@
                 $search = "%" . trim($_GET['search']) . "%";
             }
 
-            if (isset($_GET['search']) && trim($_GET['search']) === '') {  //in case user sends a blank field in input
-                $params = [];  //array for key-value pairs, that will store all of the parameters (such as sort or filtering options)
-                if (isset($_GET['sort'])) {
-                    $params['sort'] = $_GET['sort'];  //if sorting is used, save it's value to the array
-                }
-                if (isset($_GET['type'])) {
-                    $params['type'] = $_GET['type'];  //if filtering by event type is used, save it's value to the array
-                }
-                $query = http_build_query($params);  //http-query with all used parameters
-                header("Location: tapahtumat.php" . ($query ? "?$query" : ""));  //if query is not empty, add it to the URL and reload the page
-            }
+            
 
             /* filtering by event type */
             if (isset($_GET['type'])) {

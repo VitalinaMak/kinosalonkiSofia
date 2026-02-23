@@ -40,30 +40,35 @@
 }
 
 /* dropdown for the sorting button */
-.eventSorting {
+.eventSorting,
+.eventFiltering {
   position: relative;
   display: inline-block;
 }
 /* the same size for all of the options */
 .eventSorting a,
-.eventSorting button {
+.eventSorting button,
+.eventFiltering a,
+.eventFiltering button {
   width: 140px;
   border-bottom-left-radius: 0px;
   border-top-left-radius: 0px;
 }
 /* whren the first button is hovered, it's borders are no longer rounded so it looks the same way as the others buttons in a list */
-.eventSorting:hover button {
+.eventSorting:hover button .eventFiltering:hover button {
   border-radius: 0%;
 }
 /* dropdown content (hidden by default) */
-.sortingOptions {
+.sortingOptions,
+.filteringOptions {
   display: none;
   position: absolute;
   min-width: 160px;
   z-index: 1;
 }
 /* buttons inside dropdown */
-.sortingOptions a {
+.sortingOptions a,
+.filteringOptions a {
   background-color: #ffffff;
   color: #384a50;
   border: rgb(13, 202, 240) solid 1px;
@@ -72,10 +77,12 @@
   display: block;
 }
 /* Show the dropdown menu on hover */
-.eventSorting:hover .sortingOptions {
+.eventSorting:hover .sortingOptions,
+.eventFiltering:hover .filteringOptions {
   display: block;
 }
-.sortingOptions a:hover {
+.sortingOptions a:hover,
+.filteringOptions a:hover {
   background-color: rgb(13, 202, 240);
   color: black;
 }
