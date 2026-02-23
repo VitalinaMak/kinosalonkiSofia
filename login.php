@@ -1,5 +1,6 @@
 <?php 
     $pageTitle = "Login";
+    $extraCSS = "CSS/SignUp_LogIn.css";
     include 'include/header.php'; 
 ?>
 <main class="login_page">

@@ -1,5 +1,6 @@
 <?php 
     $pageTitle = "Index";
+    $extraCSS = "CSS/index.css";
     include 'include/header.php'; 
 ?>
 

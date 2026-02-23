@@ -1,8 +1,8 @@
 <?php 
     $pageTitle = "Tapahtumat";
+    $extraCSS = "CSS/tapahtumat.css";
     include 'include/header.php'; 
 ?>
-<<<<<<< HEAD
 
 <main class="tapahtumat.php">
     <h1>Tapahtumat</h1>
