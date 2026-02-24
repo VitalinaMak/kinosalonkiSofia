@@ -34,6 +34,8 @@
                     while ($row = $result->fetch_assoc()) {  //$row here is an associative array that contains one row of the table at a time
                       echo "<tr onclick=\"window.location='bookEvent.php?id=" . $row['id'] . "'\"><td>".$row['event_hour'].":".$row['event_minute']."</td><td style='font-weight: bold'>".$row['event_name']."</td><td>".$row['location']."</td><td>".$row['max_visitors']." paikkaa jäljellä</td></tr>";  //now it gets only max number of places for the event
                     }
+                  } else {
+                    echo "<p class='nothingFound'>Tapahtumia ei löytynyt</p>";
                   }
                 ?>
               </tbody>

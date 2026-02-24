@@ -4,8 +4,8 @@
     include 'include/header.php'; 
 ?>
 
-<!-- handling empty search field here, because it throws an error if there's any output before header() -->
 <?php
+    /* handling empty search field here, because it throws an error if there's any output before header() */
     if (isset($_GET['search']) && trim($_GET['search']) === '') {
         $params = [];  //array for key-value pairs, that will store all of the parameters (such as sort or filtering options)
         if (isset($_GET['sort'])) {
@@ -70,7 +70,7 @@
                 <a href="<?php echo ($query ? "?$query" : "?")?>type=1">Elokuvaesitys</a>
                 <a href="<?php echo ($query ? "?$query" : "?")?>type=2">Tapahtumat rajatulla osallistujamäärällä</a>
                 <a href="<?php echo ($query ? "?$query" : "?")?>type=3">Tapahtumat, joissa ei ole osallistujamäärän rajoitusta</a> 
-                <a href="<?php echo ($query ? "?".substr($query, 0, -1) : "")?>">Poista suodatin</a>
+                <a href="<?php echo ($query ? "?".substr($query, 0, -1) : "")?>" id="removeFilterButton">Poista suodatin</a>
             </div>
         </div>
     </div> 
@@ -187,12 +187,12 @@
                         </div>";
                 }
             } else {
-                echo "<p class=nothingFound>Tapahtumia ei löytynyt</p>";
+                echo "<p class='nothingFound'>Tapahtumia ei löytynyt</p>";
             }
 
         ?>
     </div>
-</div>
+</main>
     
 <?php include 'include/footer.php'; ?>
 
