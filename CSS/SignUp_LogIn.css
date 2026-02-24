@@ -2,10 +2,10 @@
 /* CAREFUL WITH CHANGING height: 50px;*/
 
 /* MAINs for signup and login aka the sea*/
-.login_page,
-.signup_page {
+
+main {
   min-height: 100vh;
-  background-image: url(kuvat/cinema_seats.jpg);
+  background-image: url("../kuvat/cinema_seats.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -19,13 +19,14 @@
 
 .wrapper {
   box-sizing: border-box; /* = all borders and paddings will be created inwards!*/
-  background-color: var(--cinema-whiteish);
+  background-color: var(--cinema-whiteish-tr);
   height: 60vh;
   /*width: 40% wide with with a midwith of 600px*/
   width: max(40%, 600px);
-  padding: 10px;
   border-radius: 20px;
+  border: var(--cinema-whiteish) solid 2px;
   margin: auto;
+  margin-top: 5%;
   align-self: center;
 
   /*center the content using flexbox:*/
@@ -35,8 +36,7 @@
   justify-content: center;
 }
 
-.signup h1,
-.login h1 {
+form h1 {
   text-transform: uppercase;
   font-family: Poppins, serif;
   font: 2rem; /* 2 times the initial font size */
@@ -44,8 +44,7 @@
 }
 
 /* signup login FORMS settings */
-.signup,
-.login {
+form {
   width: min(400px, 100%);
   margin-top: 20px;
   margin-bottom: 50px;
@@ -56,15 +55,13 @@
   gap: 10px;
 }
 
-.signup > div,
-.login > div {
+form > div {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.signup label,
-.login label {
+form label {
   flex-shrink: 0;
   height: 50px;
   width: 50px;
@@ -76,8 +73,7 @@
   align-items: center;
 }
 
-.signup input,
-.login input {
+form input {
   box-sizing: border-box; /* for consistent size */
   flex-grow: 1; /* to have responsive resizing of the element */
   min-width: 0; /* to have responsive resizing of the element */
@@ -91,32 +87,28 @@
   transition: 150ms ease;
 }
 
-.signup input:hover,
-.login input:hover {
+form input:hover {
   border-color: var(--cinema-pink);
 }
-.signup div:has(input:hover) label,
-.login div:has(input:hover) label {
+
+form div:has(input:hover) label {
   background-color: var(--cinema-pink);
 }
 
-.signup input:focus,
-.login input:focus {
+form input:focus {
   outline: none;
-  border-color: var(--cinema-red1); /* same as text color DO*/
+  border-color: var(--cinema-red1);
 }
-.signup div:has(input:focus) label,
-.login div:has(input:focus) label {
+
+form div:has(input:focus) label {
   background-color: var(--cinema-red1);
 }
 
-.signup input::placeholder,
-.login input::placeholder {
+form input::placeholder {
   color: var(--cinema-pink);
 }
 
-.signup button,
-.login button {
+form button {
   margin-top: 10px;
   border: none;
   border-radius: 10px;
@@ -126,4 +118,19 @@
   color: var(--cinema-whiteish);
   /* 16:03 */
   font-weight: 500;
+  transition: 150ms ease;
+}
+
+form button:hover {
+  background-color: var(--cinema-pink);
+}
+
+p a {
+  color: var(--cinema-red2);
+  font-weight: bold;
+  margin-top: 18px;
+  display: inline;
+}
+p a:hover {
+  color: var(--cinema-pink);
 }

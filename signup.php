@@ -9,7 +9,7 @@
 
         <form class="signup">
 
-            <h1>Rekisteröidy SU</h1>
+            <h1>Rekisteröidy</h1>
 
             <div>
                 <label for="name-input">
@@ -36,7 +36,7 @@
                 </label>
                 <input type="password" id="repeat-password-input" name="repeat-password" placeholder="Toista salasana" required>
             </div>
-            <button type="submit" class="btn btn-outline-danger">Submit</button>
+            <button type="submit" class="">Submit</button>
 
             <p>Aready have an account? <a href="login.php">Log in</a> </p>
         </form>

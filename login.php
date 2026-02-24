@@ -9,7 +9,7 @@
         
         <form class="login">
 
-            <h1>Kirjaudu sisään L</h1>
+            <h1>Kirjaudu sisään</h1>
 
             <div>
                 <label for="email-input">
@@ -29,7 +29,7 @@
                 </label>
                 <input type="password" id="repeat-password-input" name="repeat-password" placeholder="Toista salasana" required>
             </div>
-            <button type="submit" class="btn btn-outline-danger">Submit</button>
+            <button type="submit" class="">Submit</button>
             
             <p>Don't have an account? <a href="signup.php">Sign up</a> </p>
         </form>

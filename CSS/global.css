@@ -13,10 +13,12 @@
   /* From the cinema_seats.jpg */
   --cinema-red1: #7e1605ff;
   --cinema-red2: #a52108ff;
-  --cinema-red3: #c23322ff;
+  --cinema-red2-tr: rgba(165, 34, 8, 0.2);
   --cinema-pink: #dc3545;
   --cinema-brown: #322317ff;
   --cinema-whiteish: #f8f7f3ff;
+  --cinema-whiteish-tr: rgba(248, 247, 243, 0.804);
+  --cinema-whiteish-trtr: rgba(248, 247, 243);
   --cinema-grey: #b7c2cbff;
 }
 
@@ -86,12 +88,6 @@ footer p {
   margin-bottom: 4px;
 }
 
-/* some space between headers and the edge of the body */
-h1 {
-  padding-left: 5px;
-  padding-top: 5px;
-  margin: 5px 0px 10px 0px;
-}
 main a {
   display: block;
   margin: auto;
