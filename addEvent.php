@@ -1,12 +1,13 @@
 <?php 
     $pageTitle = "AddEvent";
+    $extraCSS = "CSS/add_edit_event.css";
     include 'include/header.php'; 
 ?>
 
 <main class="addEvent_page">
-    <h1>Uusi tapahtuma</h1>
-
+    <div class="wrapper">
         <form class="addEvent form">
+            <h1>Uusi tapahtuma</h1>
             <div> <!-- Название -->
                 <label for=""></label> 
                 <input type="text" id="" name="" placeholder="Nimi" required minlength="2">
@@ -45,6 +46,7 @@
             </div>
             <button type="submit">Submit</button>
         </form>
+    </div>
 
 </main>
 
