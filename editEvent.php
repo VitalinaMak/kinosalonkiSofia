@@ -3,9 +3,10 @@
     include 'include/header.php'; 
 ?>
 <main class="editEvent_page">
-    <h1> Edit event</h1>
-
-    <form class="addEvent form">
+    <div class="wrapper">
+    
+        <form class="editEvent">
+        <h1> Edit event</h1>
         <?php
             if (!isset($_POST['nimi'])) {
 
@@ -57,6 +58,7 @@
             }
             ?>
     </form>
+</div>
     
 </main>
 <?php include 'include/footer.php'; ?>

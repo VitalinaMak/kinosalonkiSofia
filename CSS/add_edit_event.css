@@ -1,0 +1,74 @@
+main {
+  min-height: 100vh;
+  background-image: url("../kuvat/shtukaturka.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.wrapper {
+  box-sizing: border-box;
+  background-color: var(--cinema-whiteish-tr);
+  height: 100vh;
+  width: max(40%, 600px); /*40% wide with with a midwith of 600px*/
+  border: var(--cinema-whiteish-tr) solid 2px;
+  border-radius: 0 20px 20px 0;
+}
+
+form h1 {
+  text-transform: uppercase;
+  font-family: Poppins, serif;
+  /* font-variant: small-caps; */
+  font: 2rem; /* 2 times the initial font size */
+  font-weight: 525;
+}
+
+form {
+  width: min(400px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  gap: 10px;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box; /* for consistent size */
+  flex-grow: 1; /* to have responsive resizing of the element */
+  min-width: 0; /* to have responsive resizing of the element */
+  height: 50px;
+  padding: 1em;
+
+  border-radius: 10px;
+  border: 3px solid var(--base-color);
+  background-color: var(--cinema-whiteish);
+  transition: 150ms ease;
+}
+
+textarea {
+  width: 100%;
+  min-height: 100px;
+  field-sizing: content;
+  box-sizing: border-box; /* for consistent size */
+  flex-grow: 1; /* to have responsive resizing of the element */
+  min-width: 0; /* to have responsive resizing of the element */
+  height: 50px;
+  padding: 1em;
+  overflow: visible;
+
+  border-radius: 10px;
+  border: 3px solid var(--base-color);
+  background-color: var(--cinema-whiteish);
+  transition: 150ms ease;
+  z-index: 1;
+}
+
+/* form label {
+} */
+
+/* form button {
+} */
+
+/* hover stuff */
