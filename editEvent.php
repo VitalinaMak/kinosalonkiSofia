@@ -2,62 +2,124 @@
     $pageTitle = "EditEvent";
     include 'include/header.php'; 
 ?>
-<main class="editEvent_page">
+<main class="editEvent">
     <h1> Edit event</h1>
 
-    <form class="addEvent form">
+    <form action="editEvent.php" method="post"  enctype="multipart/form-data" class="editEvent">
         <?php
-            if (!isset($_POST['nimi'])) {
-
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST'):
                 $ehto = (int)$_GET['id'];  //get id from the URL
                 $sql = "SELECT * FROM events WHERE id = $ehto";  //search for the event with that id in the DB
                 $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<input type='hidden' name='id' value='".$row['id']."/>";  //id (it doesn't have to be changed, but we need it for the sql-query later)
-                        echo "<div> <!-- Название -->
-                            <label for=""></label> 
-                            <input type='text' id='name-input' name='name' value='".$row['event-name']."' required minlength="2">
-                            </div>"
-                        echo "<div> <!-- Фото -->
-                            <label for='eventPicture-input'> Lataa tapahtuman kuva! </label> <br>
-                            <input type='file' id='eventPicture-input' name='eventPicture' value='".$row['event-image']."'>
-                            </div>"
-                        echo "<div> <!-- Описание -->
-                            <label for='description-input'></label> 
-                            <textarea type='text' id='description-input' name='description' value='".$row['description']." required></textarea>
-                            </div>"
-                        echo "<div> <!-- Place -->
-                            <label for='adress-input'></label> 
-                            <input type='text' id='adress-input' name='adress' value='".$row['location']." autocomplete='street-address' required>
-                            </div>"
-                        echo "<div> <!-- Date -->
-                            <label for="date-input"></label>
-                            <input type="date" id="date-input" name="date" required>
-                            </div>"
+                if ($result->num_rows > 0):
+                    while ($row = $result->fetch_assoc()):
+                    $eventType = $row['event_type']; ?>
+                        <input type="hidden" name="id" value="<?=$row['id'];?>" />  <!-- id (id doesn't have to be changed, it's here only to save it's value) -->
+                        <div> <!-- Название -->
+                        <label for="name-input"></label> 
+                        <input type="text" id="name-input" name="name" value="<?=htmlspecialchars($row['event_name']);?>" required minlength="2">
+                        </div>
+                        <div> <!-- Фото -->
+                        <label for="eventPicture-input"> Lataa tapahtuman kuva! </label> <br>
+                        <input type="file" id="eventPicture-input" name="eventPicture" value="<?=htmlspecialchars($row['event_image']);?>">
+                        </div>
+                        <div> <!-- Описание -->
+                        <label for="description-input"></label> 
+                        <textarea type="text" id="description-input" name="description" required><?=htmlspecialchars($row['description']);?></textarea>
+                        </div>
+                        <div> <!-- Place -->
+                        <label for="adress-input"></label> 
+                        <input type="text" id="adress-input" name="adress" value="<?=htmlspecialchars($row['location']);?>" autocomplete="street-address" required>
+                        </div>
+                        <div> <!-- Date -->
+                        <label for="date-input"></label>
+                        <input type="date" id="date-input" name="date" value="<?=$row['event_date'];?>" required>
+                        </div>
                         <div> <!-- Time -->
                         <label for="time-input"></label>
-                        <input type="time" id="time-input" name="time" required>
+                        <input type="time" id="time-input" name="time" value="<?=$row['event_time'];?>"required>
                         </div>
                         <div> <!-- Type -->
                         <label for="eventType-input"></label> 
-                        <select id="eventType-input" name="select" required>
-                        <option value="option1">Elokuvaesitys</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
+                        <select id="eventType-input" name="eventType" required>
+                        <option value="option1" <?= $eventType == 'option1' ? 'selected' : '' ?>>Elokuvaesitys</option>
+                        <option value="option2" <?= $eventType == 'option2' ? 'selected' : '' ?>>Tapahtuma, jossa on rajattu osalisujamäärä</option>
+                        <option value="option3" <?= $eventType == 'option3' ? 'selected' : '' ?>>Tapahtuma, jossa on rajaton osalisujamäärä</option>
                         </select>
                         </div>
                         <div> <!-- Места -->
                         <label for="maxplaces-input">Max. osallistujamäärä: </label> <br>
-                        <input type="text" id="maxplaces-input" name="maxplaces" placeholder="24" required>
+                        <input type="text" id="maxplaces-input" name="maxplaces" value="<?=htmlspecialchars($row['max_visitors']);?>" required>
                         </div>
-                        <button type="submit">Submit</button>
-                    }
-                }
-            }
-            ?>
+                        <button type="submit">Lähetä</button>
+                    <?php endwhile ?>
+                <?php endif ?>
+            <?php endif ?>
     </form>
-    
+
+    <?php 
+        $params = [];
+        $types = "";
+            
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            if (!isset($_POST['id'])) {
+                die("Missing ID");
+            }
+                
+            /* prepared statement to prevent sql injection */
+            $stmt = $conn->prepare("UPDATE events SET event_name=?, event_type=?, event_date=?, event_time=?, event_image=?, description=?, location=?, max_visitors=? WHERE id=?;");
+        
+            if (!$stmt) {
+                die("Prepare failed: " . $conn->error);
+            }
+
+            $types = "sisssssii"; // i = int, s = string (must match order!)
+            
+            /* picture handling */
+            $uploadFileName = ""; // default if no file uploaded
+            if (!empty($_FILES['eventPicture']['name'])) {
+                $uploadDir = "uploads/"; // folder where files are saved
+                $uploadFileName = basename($_FILES['eventPicture']['name']); // only the file name
+                /* $uploadPath = $uploadDir . $uploadFileName; // full path to save the file
+
+                move_uploaded_file($_FILES['eventPicture']['tmp_name'], $uploadPath); */
+            }
+
+            /* parameters for prepared statement */
+            $params = [
+                $_POST['name'],
+                (int)$_POST['eventType'],
+                $_POST['date'],
+                $_POST['time'],
+                $uploadFileName,
+                $_POST['description'],
+                $_POST['adress'],
+                (int)$_POST['maxplaces'],
+                (int)$_POST['id']
+            ];
+
+            /* convert to references */
+            $tmp = [];
+            foreach ($params as $key => $value) {
+                $tmp[$key] = &$params[$key];
+            }
+                
+            if (!$stmt->bind_param($types, ...$tmp)) {
+                die("Bind param failed: " . $stmt->error);
+            }
+            
+            echo var_dump($stmt);
+
+             if ($stmt->execute()) {
+                echo "<h1>Success!</h1>";
+                header("Location: index.php");
+            } else {
+                echo "<h1>Error: " . $stmt->error . "</h1>";
+            } 
+        }
+    ?>
+
 </main>
 <?php include 'include/footer.php'; ?>
 
