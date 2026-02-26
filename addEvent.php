@@ -11,8 +11,8 @@
             
             <div class="column1">
                 <div> <!-- Название -->
-                    <label for=""></label> 
-                    <input type="text" id="" name="" placeholder="Nimi" required minlength="2">
+                    <label for="name-input"></label> 
+                    <input type="text" id="name-input" name="name" placeholder="Nimi" required>
                 </div>
                 <div> <!-- Фото -->
                     <label for="eventPicture-input"> Lataa tapahtuman kuva! </label> <br>
