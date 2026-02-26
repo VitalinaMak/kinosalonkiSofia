@@ -12,7 +12,8 @@ main {
   box-sizing: border-box;
   background-color: var(--cinema-whiteish-tr);
   height: 100vh;
-  width: max(40%, 600px); /*40% wide with with a midwith of 600px*/
+  /* width: 100%; */
+  width: max(40%, 600px);
   border: var(--cinema-whiteish-tr) solid 2px;
   border-radius: 0 20px 20px 0;
 }
