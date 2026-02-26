@@ -14,6 +14,8 @@
         <?php if ($_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
             <form action="addEvent.php" method="post"  enctype="multipart/form-data" class="addEvent form">
                 <h1>Uusi tapahtuma</h1>
+
+                <div class="column1">
                 <div> <!-- Название -->
                     <label for="name"></label> 
                     <input type="text" id="name" name="name" placeholder="Nimi" required minlength="2">
@@ -26,6 +28,21 @@
                     <label for="description-input"></label> 
                     <textarea type="text" id="description-input" name="description" placeholder="Kuvaus" required></textarea>
                 </div>
+                <div> <!-- Type -->
+                    <label for="eventType-input"></label> 
+                    <select id="eventType-input" name="eventType" required>
+                    <option value="1">Elokuvaesitys</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    </select>
+                </div>
+                </div>
+                <div class="column2">
+                <div> <!-- Места -->
+                    <label for="maxplaces-input">Max. osallistujamäärä: </label> <br>
+                    <input type="text" id="maxplaces-input" name="maxplaces" placeholder="24" required>
+                </div>
+
                 <div> <!-- Place -->
                     <label for="adress-input"></label> 
                     <input type="text" id="adress-input" name="adress" placeholder="Adress" autocomplete="street-address" required>
@@ -38,19 +55,8 @@
                     <label for="time-input"></label>
                     <input type="time" id="time-input" name="time" required>
                 </div>
-                <div> <!-- Type -->
-                    <label for="eventType-input"></label> 
-                    <select id="eventType-input" name="eventType" required>
-                    <option value="1">Elokuvaesitys</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                    </select>
-                </div>
-                <div> <!-- Места -->
-                    <label for="maxplaces-input">Max. osallistujamäärä: </label> <br>
-                    <input type="text" id="maxplaces-input" name="maxplaces" placeholder="24" required>
-                </div>
                 <button type="submit">Lisää tapahtuma</button>
+                </div>
             </form>
         <?php endif ?>
     </div>
