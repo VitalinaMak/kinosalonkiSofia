@@ -114,7 +114,7 @@
 
                 if ($stmt->execute()) {
                     echo "<h1>Success!</h1>";
-                    header("Location: index.php");
+                    header("Location: tapahtumat.php");
                 } else {
                     echo "<h1>Error: " . $stmt->error . "</h1>";
                 } 
