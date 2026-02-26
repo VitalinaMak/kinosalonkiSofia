@@ -34,7 +34,6 @@ main {
   justify-content: center;
 }
 
-/* 60PX ВВЕРЗУ ВНИЗУ ОТ ФОРМЫ */
 form {
   width: min(400px, 100%);
   margin: auto;
