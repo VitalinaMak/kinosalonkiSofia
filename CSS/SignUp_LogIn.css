@@ -18,7 +18,7 @@ main {
 .wrapper {
   box-sizing: border-box;
   background-color: var(--cinema-whiteish-tr);
-  height: 60vh;
+  min-height: 60vh;
   /*width: 40% wide with with a midwith of 600px*/
   width: max(40%, 600px);
   border-radius: 20px;
@@ -34,20 +34,22 @@ main {
   justify-content: center;
 }
 
+/* 60PX ВВЕРЗУ ВНИЗУ ОТ ФОРМЫ */
+form {
+  width: min(400px, 100%);
+  margin: auto;
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
 form h1 {
   text-transform: uppercase;
   font-family: Poppins, serif;
   font: 2rem; /* 2 times the initial font size */
   font-weight: 525; /*repeats later!*/
-}
-
-form {
-  width: min(400px, 100%);
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
 }
 
 form > div {
