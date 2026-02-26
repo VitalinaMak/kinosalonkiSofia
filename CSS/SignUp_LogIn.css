@@ -111,9 +111,8 @@ form button {
   background-color: var(--darkblue); /* color change?*/
   width: 75%;
   color: var(--cinema-whiteish);
-  /* 16:03 */
   font-weight: 500;
-  transition: 150ms ease;
+  transition: var(--transition);
 }
 
 form button:hover {

@@ -13,12 +13,15 @@ main {
   box-sizing: border-box;
   background-color: var(--cinema-whiteish-tr);
   min-height: 100vh;
-  width: max(40%, 600px);
+  /* width: max(40%, 600px); */
+  width: 80vh;
 
   border: var(--cinema-whiteish-tr) solid 2px;
-  border-radius: 0 20px 20px 0;
+  /* border-radius: 0 20px 20px 0; */
+  border-radius: 20px;
 
-  padding: 10px;
+  padding: 20px;
+  margin: auto;
 }
 
 h1 {
@@ -28,14 +31,29 @@ h1 {
   font: 2rem; /* 2 times the initial font size */
   font-weight: 525;
   margin: 0;
+  flex-basis: 100%; /* Forces the heading to take the full width row */
 }
 
 form {
-  width: min(500px, 100%);
+  /* width: min(500px, 100%); */
+  width: min(900px, 100%);
   display: flex;
-  flex-direction: column;
-  align-content: space-around;
-  gap: 10px;
+  /* align-content: space-around; */
+  flex-direction: row; /* Align children (columns) horizontally */
+  flex-wrap: wrap; /* Allows wrapping on small screens (mobile friendly) */
+  gap: 10px; /* Space between column 1 and column 2 */
+  align-items: stretch;
+  margin: auto;
+}
+
+.column1,
+.column2 {
+  flex: 1; /* Each column takes up equal space */
+  /* min-width: 280px; */
+  display: flex;
+  grid-column-end: auto;
+  flex-direction: column; /* Stack inputs vertically inside the column */
+  gap: 10px; /* Space between input fields */
 }
 
 input,
@@ -50,16 +68,32 @@ select {
   height: 50px;
   padding: 1em;
 
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   border: 3px solid var(--base-color);
   background-color: var(--cinema-whiteish);
-  transition: 150ms ease;
+  transition: var(--transition);
 }
 
-/* Specific overrides for textarea */
+/* - Specific overrides - */
+input[type="file"],
+select {
+  min-height: fit-content;
+}
 textarea {
   min-height: 100px;
   resize: vertical; /* Better alternative to field-sizing for browser support */
+}
+
+form button {
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  padding: 0.85em 4em; /* em refers to the font size of the element; 4 times */
+  background-color: var(--red); /* color change?*/
+  width: 100%;
+  color: var(--cinema-whiteish);
+  font-weight: 500;
+  transition: var(--transition);
 }
 
 /*

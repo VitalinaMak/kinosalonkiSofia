@@ -22,8 +22,8 @@
   --cinema-grey: #b7c2cbff;
 
   /* self-explanatory */
-  --border-radius-std: 10px;
-  --transition-speed: 150ms ease;
+  --border-radius: 10px;
+  --transition: 150ms ease;
 }
 
 * {
@@ -35,7 +35,7 @@ main {
   width: 100%;
   /* padding по периметру чтоб элементы не были впритык к концам экрана:
   Top & Bottom: 0, Left & Right: 5px */
-  padding: 0 5px;
+  /* padding: 0 5px; */
   /* Ensuring the padding doesn't make the page wider than the screen */
   /* box-sizing: border-box; */
   background-color: var(--beige);
@@ -98,7 +98,6 @@ main a {
 }
 
 /* - - - START SCROLLBAR CUSTOMIZATION - - - */
-
 ::-webkit-scrollbar {
   width: 10px;
 }

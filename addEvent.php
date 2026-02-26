@@ -26,7 +26,7 @@
                 </div>
                 <div> <!-- Описание -->
                     <label for="description-input"></label> 
-                    <textarea type="text" id="description-input" name="description" placeholder="Kuvaus" required></textarea>
+                    <textarea id="description-input" name="description" placeholder="Kuvaus" required></textarea>
                 </div>
                 <div> <!-- Type -->
                     <label for="eventType-input"></label> 
@@ -55,8 +55,8 @@
                     <label for="time-input"></label>
                     <input type="time" id="time-input" name="time" required>
                 </div>
-                <button type="submit">Lisää tapahtuma</button>
-                </div>
+            </div>
+            <button type="submit">Lisää tapahtuma</button>
             </form>
         <?php endif ?>
     </div>
