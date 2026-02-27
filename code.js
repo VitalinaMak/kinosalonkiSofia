@@ -1,1 +1,1 @@
-// Hiiiiiii
+"use strict;";

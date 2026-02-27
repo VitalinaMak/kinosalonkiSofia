@@ -20,7 +20,9 @@
 <body>
     <header> 
         <div class="otsikko">
-            <img src="kuvat/logot/logo_black.png" alt="logo">
+            <a href="index.php" class="logo-link">
+                <img src="kuvat/logot/logo_black.png" alt="logo" class="logo">
+            </a>
             <h2>Kinosalonki Sofia</h2>
         </div>
         <a href="login.php" class="btn btn-outline-primary">Kirjaudu sisään</a>

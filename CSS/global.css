@@ -98,23 +98,22 @@ main a {
 }
 
 /* - - - START SCROLLBAR CUSTOMIZATION - - - */
-::-webkit-scrollbar {
-  width: 10px;
+/* ::-webkit-scrollbar {
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--head-foot);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--head-foot);
-  /* border-radius: 2px; */
+  background: var(--cinema-whiteish);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  /* background: #555; */
-  background: var(--base-color);
-}
+  background: var(--cinema-whiteish-tr);
+} */
 /* - - - END SCROLLBAR CUSTOMIZATION - - - */
 
 /* LINKS TO PAGES IN HEADER - START. Will be deleted later */
