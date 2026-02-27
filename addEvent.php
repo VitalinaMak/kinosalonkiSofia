@@ -14,59 +14,63 @@
         <?php if ($_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
             <form action="addEvent.php" method="post"  enctype="multipart/form-data" class="addEvent form">
                 <h1>Uusi tapahtuma</h1>
+                    <div class="name-age group"> 
+                        <div> <!-- Название -->
+                            <label for="name-input"></label> 
+                            <input type="text" id="name-input" name="name" placeholder="Tapahtuman nimi" required>
+                        </div>
+                        <div> <!-- Age limit -->
+                            <label for="ageLimit-input"></label> 
+                            <select id="ageLimit-input" name="ageLimit">
+                                <option value="Ei luokiteltu">Ei luokiteltu</option>
+                                <option value="S">S</option>
+                                <option value="K7">K7</option>
+                                <option value="K12">K12</option>
+                                <option value="K16">K16</option>
+                                <option value="K18">K18</option>
+                            </select>
+                        </div>
+                    </div>
 
-                <div class="column1">
-                    <div> <!-- Название -->
-                        <label for="name-input"></label> 
-                        <input type="text" id="name-input" name="name" placeholder="Tapahtuman nimi" required>
-                    </div>
-                    <div> <!-- Фото -->
-                        <label for="eventPicture-input"> Lataa tapahtuman kuva! </label> <br>
-                        <input type="file" id="eventPicture-input" name="eventPicture">
-                    </div>
                     <div> <!-- Описание -->
                         <label for="description-input"></label> 
                         <textarea id="description-input" name="description" placeholder="Kuvaus" required></textarea>
                     </div>
-                    <div> <!-- Type -->
-                        <label for="eventType-input"></label> 
-                        <select id="eventType-input" name="eventType" required>
-                            <option value="1">Elokuvaesitys</option>
-                            <option value="2">Tapahtuma, jossa on rajattu osalisujamäärä</option>
-                            <option value="3">Tapahtuma, jossa on rajaton osalisujamäärä</option>
-                        </select>
+
+                    <div> <!-- Фото -->
+                        <label for="eventPicture-input"> Lataa tapahtuman kuva! </label> 
+                        <input type="file" id="eventPicture-input" name="eventPicture">
                     </div>
-                </div>
-                <div class="column2">
-                    <div> <!-- Места -->
-                        <label for="maxplaces-input">Max. osallistujamäärä: </label> <br>
-                        <input type="text" id="maxplaces-input" name="maxplaces" placeholder="24" required>
+
+                    <div class="type-place group"> 
+                        <div> <!-- Type -->
+                            <label for="eventType-input"></label> 
+                            <select id="eventType-input" name="eventType" required>
+                                <option value="1">Elokuvaesitys</option>
+                                <option value="2">Tapahtuma, jossa on rajattu osalisujamäärä</option>
+                                <option value="3">Tapahtuma, jossa on rajaton osalisujamäärä</option>
+                            </select>
+                        </div>
+                        <div> <!-- Места -->
+                            <label for="maxplaces-input"> </label> 
+                            <input type="number" id="maxplaces-input" name="maxplaces" min="1" placeholder=" Max. osallistujamäärä: 24" required>
+                        </div>
                     </div>
-                    
-                    <div> <!-- Place -->
+
+                    <div> <!-- Adress -->
                         <label for="adress-input"></label> 
                         <input type="text" id="adress-input" name="adress" placeholder="Adress" autocomplete="street-address" required>
                     </div>
-                    <div> <!-- Date -->
-                        <label for="date-input"></label>
-                        <input type="date" id="date-input" name="date" required>
+                    <div class="date-time group">
+                        <div> <!-- Date -->
+                            <label for="date-input"></label>
+                            <input type="date" id="date-input" name="date" required>
+                        </div>
+                        <div> <!-- Time -->
+                            <label for="time-input"></label>
+                            <input type="time" id="time-input" name="time" required>
+                        </div>
                     </div>
-                    <div> <!-- Time -->
-                        <label for="time-input"></label>
-                        <input type="time" id="time-input" name="time" required>
-                    </div>
-                    <div> <!-- Age limit -->
-                        <label for="ageLimit-input"></label> 
-                        <select id="ageLimit-input" name="ageLimit">
-                            <option value="Ei luokiteltu">Ei luokiteltu</option>
-                            <option value="S">S</option>
-                            <option value="K7">K7</option>
-                            <option value="K12">K12</option>
-                            <option value="K16">K16</option>
-                            <option value="K18">K18</option>
-                        </select>
-                    </div>
-                </div>
                 <button type="submit">Lisää tapahtuma</button>
             </form>
         <?php endif ?>

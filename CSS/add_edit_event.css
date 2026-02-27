@@ -1,6 +1,6 @@
 /* равный размерб поширеб посередине columns */
 main {
-  min-height: 100vh;
+  min-height: 100%;
   background-image: url("../kuvat/shtukaturka.jpg");
 
   background-size: cover;
@@ -12,13 +12,10 @@ main {
 .wrapper {
   box-sizing: border-box;
   background-color: var(--cinema-whiteish-tr);
-  min-height: 100vh;
-  /* width: max(40%, 600px); */
-  width: 80vh;
-
+  min-height: 100%;
+  width: 77%;
   border: var(--cinema-whiteish-tr) solid 2px;
-  /* border-radius: 0 20px 20px 0; */
-  border-radius: 20px;
+  border-radius: 40px;
 
   padding: 20px;
   margin: auto;
@@ -35,38 +32,55 @@ h1 {
 }
 
 form {
-  /* width: min(500px, 100%); */
   width: min(900px, 100%);
   display: flex;
-  /* align-content: space-around; */
-  flex-direction: row; /* Align children (columns) horizontally */
+  flex-direction: column;
   flex-wrap: wrap; /* Allows wrapping on small screens (mobile friendly) */
   gap: 10px; /* Space between column 1 and column 2 */
   align-items: stretch;
   margin: auto;
 }
 
-.column1,
-.column2 {
-  flex: 1; /* Each column takes up equal space */
-  /* min-width: 280px; */
+.group {
   display: flex;
-  grid-column-end: auto;
-  flex-direction: column; /* Stack inputs vertically inside the column */
-  gap: 10px; /* Space between input fields */
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+.group > div {
+  /* display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap; */
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: flex-end; /* Keeps inputs aligned at the bottom */
+  flex: 1 1 200px; /* Grow, shrink, and a reasonable base width */
+}
+
+/* БЛЯТЬ НЕ РАБОТАЕТ НАДО ЧТОБЫ ОНО БЫЛО 70.30 Ф НЕ 50.50  */
+.name-age:first-child,
+.type-place:first-child {
+  flex: 7 1 70%;
+}
+.name-age:last-child,
+.type-place:last-child {
+  flex: 3 1 30%;
 }
 
 input,
 textarea,
 select {
   width: 100%;
-  box-sizing: border-box; /* for consistent size */
-  /* to have responsive resizing of the element */
+  box-sizing: border-box;
   flex-grow: 1;
   min-width: 0;
 
   height: 50px;
   padding: 1em;
+
+  font-family: inherit;
 
   border-radius: var(--border-radius);
   border: 3px solid var(--base-color);
@@ -75,25 +89,31 @@ select {
 }
 
 /* - Specific overrides - */
-input[type="file"],
-select {
+input[type="file"] {
   min-height: fit-content;
 }
+select {
+  min-height: fit-content;
+  padding: 0;
+  padding-left: 1em;
+}
 textarea {
+  height: auto;
   min-height: 100px;
   resize: vertical; /* Better alternative to field-sizing for browser support */
 }
 
 form button {
-  margin-top: 10px;
+  width: 100%;
+  margin: 20px 0;
+  padding: 0.85em 4em; /* em refers to the font size of the element; 4 times */
   border: none;
   border-radius: 10px;
-  padding: 0.85em 4em; /* em refers to the font size of the element; 4 times */
-  background-color: var(--red); /* color change?*/
-  width: 100%;
-  color: var(--cinema-whiteish);
   font-weight: 500;
+  color: var(--cinema-whiteish);
+  background-color: var(--red); /* color change?*/
   transition: var(--transition);
+  cursor: pointer;
 }
 
 /*
