@@ -59,7 +59,8 @@ form {
   flex: 1 1 200px; /* Grow, shrink, and a reasonable base width */
 }
 
-/* БЛЯТЬ НЕ РАБОТАЕТ НАДО ЧТОБЫ ОНО БЫЛО 70.30 Ф НЕ 50.50  */
+/* указано 70% 30% но отображается 50-50; 
+  работает, но как. промахнулись, но где.  */
 .name-age:first-child,
 .type-place:first-child {
   flex: 7 1 70%;
