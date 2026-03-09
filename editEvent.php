@@ -32,7 +32,7 @@
                                     <label for="description-input"></label> 
                                     <textarea type="text" id="description-input" name="description" required><?=htmlspecialchars($row['description']);?></textarea>
                                 </div>
-                                <div> <!-- Type -->
+                                <div class="dropdown"> <!-- Type -->
                                     <label for="eventType-input"></label> 
                                     <select id="eventType-input" name="eventType" required>
                                         <option value="option1" <?= $eventType == 'option1' ? 'selected' : '' ?>>Elokuvaesitys</option>
@@ -58,7 +58,7 @@
                                     <label for="time-input"></label>
                                     <input type="time" id="time-input" name="time" value="<?=$row['event_time'];?>"required>
                                 </div>
-                                <div> <!-- Age limit -->
+                                <div class="dropdown"> <!-- Age limit -->
                                     <label for="ageLimit-input"></label> 
                                     <select id="ageLimit-input" name="ageLimit">
                                         <option value="Ei luokiteltu" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>Ei luokiteltu</option>
