@@ -6,6 +6,9 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="code.js"></script>
+    <script src="JavaScript/code.js"></script>
+    <?php if (isset($extraJS)): ?>
+        <script src="<?php echo $extraJS; ?>"></script>
+    <?php endif; ?>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <?php 
     $pageTitle = "AddEvent";
     $extraCSS = "CSS/add_edit_event.css";
+    $extraJS = "JavaScript/addEvent.js";
     include 'include/header.php'; 
 ?>
 
@@ -12,7 +13,7 @@
 <main class="addEvent_page">
     <div class="wrapper">
         <?php if ($_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
-            <form action="addEvent.php" method="post"  enctype="multipart/form-data" class="addEvent form">
+            <form action="addEvent.php" method="post" enctype="multipart/form-data" class="addEvent form" id="addEventForm">
                 <h1>Uusi tapahtuma</h1>
                     <div class="name-age group"> 
                         <div> <!-- Название -->
@@ -40,6 +41,7 @@
                     <div> <!-- Фото -->
                         <label for="eventPicture-input"> Lataa tapahtuman kuva! </label> 
                         <input type="file" id="eventPicture-input" name="eventPicture">
+                        <img id="preview" style="display:none; width:50%;"> <!-- preview -->
                     </div>
 
                     <div class="type-place group"> 
@@ -98,8 +100,10 @@
             elseif ($_FILES["eventPicture"]["error"] === UPLOAD_ERR_OK) {
         
                 $target_dir = "kuvat/tapahtumaKuvat/";  //defines the folder where the file will be saved
-                $target_file = $target_dir . basename($_FILES["eventPicture"]["name"]);  //removes any directory path and keeps only the file name
+                $target_file = basename($_FILES["eventPicture"]["name"]);  //removes any directory path and keeps only the file name
                 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));  //retrieves the file extention (.png/.jpg etc) and converts it to lowercase
+
+                $newFileName = round(microtime(true)) . "." . $imageFileType;  //gives the file a new name created from the timestamp and extension from the old name
 
                 /* check for mistakes */
                 $check = getimagesize($_FILES["eventPicture"]["tmp_name"]);
@@ -115,8 +119,9 @@
                 }
 
                 if ($uploadOk === 1) {
-                    if (move_uploaded_file($_FILES["eventPicture"]["tmp_name"], $target_file)) {
-                        $uploadFileName = basename($_FILES["eventPicture"]["name"]);  //if everything is OK, give the variable the name of the picture
+                    if (move_uploaded_file($_FILES["eventPicture"]["tmp_name"], $target_dir . $newFileName)) {  //add file to the project folder
+                        $uploadFileName = $newFileName;  //if everything is OK, give the variable new name of the picture
+                        echo "<img src='$targetdir.$newFileName' alt='Uploaded Image'>";
                     } else {
                         $uploadOk = 0;
                         echo "Error uploading file.";

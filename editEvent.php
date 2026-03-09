@@ -16,7 +16,11 @@
                     if ($result->num_rows > 0):
                         while ($row = $result->fetch_assoc()):
                         $eventType = $row['event_type']; 
-                        $ageLimit = $row['age_limit']; ?>
+                        $ageLimit = $row['age_limit']; 
+                        $picture = "noImage.png";
+                        if ($row['event_image'] !== "") {
+                            $picture = $row['event_image'];
+                        } ?>
                             <input type="hidden" name="id" value="<?=$row['id'];?>" />  <!-- id (id doesn't have to be changed, it's here only to save it's value) -->
                             <!-- - - - HTML - - - -->
                             <div class="column1">
@@ -26,7 +30,10 @@
                                 </div>
                                 <div> <!-- Фото -->
                                     <label for="eventPicture-input"> Lataa tapahtuman kuva! </label> <br>
-                                    <input type="file" id="eventPicture-input" name="eventPicture" value="<?=htmlspecialchars($row['event_image']);?>">
+                                    <div class="fileInputField">
+                                        <?= "<img src='kuvat/tapahtumaKuvat/".$picture."' alt='Uploaded Image'>"; ?>
+                                        <input type="file" class="eventPictureInput" id="eventPicture-input" name="eventPicture" value="<?=htmlspecialchars($row['event_image']);?>">
+                                    </div>
                                 </div>
                                 <div> <!-- Описание -->
                                     <label for="description-input"></label> 
