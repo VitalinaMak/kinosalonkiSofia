@@ -20,7 +20,7 @@
                             <label for="name-input"></label> 
                             <input type="text" id="name-input" name="name" placeholder="Tapahtuman nimi" required>
                         </div>
-                        <div> <!-- Age limit -->
+                        <div class="dropdown"> <!-- Age limit -->
                             <label for="ageLimit-input"></label> 
                             <select id="ageLimit-input" name="ageLimit">
                                 <option value="Ei luokiteltu">Ei luokiteltu</option>
@@ -44,7 +44,7 @@
                         <img id="preview" style="display:none; width:50%;"> <!-- preview -->
                     </div>
 
-                    <div class="type-place group"> 
+                    <div class="type-place group dropdown"> 
                         <div> <!-- Type -->
                             <label for="eventType-input"></label> 
                             <select id="eventType-input" name="eventType" required>
