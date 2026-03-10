@@ -17,11 +17,12 @@ main {
 .wrapper {
   box-sizing: border-box;
   background-color: var(--cinema-whiteish-tr);
-  min-height: 60vh;
-  /*width: 40% wide with with a midwith of 600px*/
-  width: max(40%, 600px);
+  min-height: 60%;
+  width: max(40%, 600px); /* width: 40% wide with with a midwith of 600px */
+
   border-radius: 20px;
-  border: var(--cinema-whiteish) solid 2px;
+  box-shadow: inset 0 0 50px 20px var(--cinema-whiteish);
+
   margin: auto;
   margin-top: 5%;
   align-self: center;
@@ -84,7 +85,6 @@ form input {
 form input:hover {
   border-color: var(--cinema-pink);
 }
-
 form div:has(input:hover) label {
   background-color: var(--cinema-pink);
 }
@@ -93,7 +93,6 @@ form input:focus {
   outline: none;
   border-color: var(--cinema-red1);
 }
-
 form div:has(input:focus) label {
   background-color: var(--cinema-red1);
 }
@@ -102,20 +101,9 @@ form input::placeholder {
   color: var(--cinema-pink);
 }
 
-form button {
-  margin-top: 10px;
-  border: none;
-  border-radius: 10px;
-  padding: 0.85em 4em; /* em refers to the font size of the element; 4 times */
-  background-color: var(--darkblue);
+form button /* overrides */ {
   width: 75%;
-  color: var(--cinema-whiteish);
-  font-weight: 500;
-  transition: var(--transition);
-}
-
-form button:hover {
-  background-color: var(--cinema-pink);
+  margin-top: 10px;
 }
 
 p a {
