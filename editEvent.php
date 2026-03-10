@@ -29,7 +29,7 @@
                                     <input type="text" id="name-input" name="name" value="<?=htmlspecialchars($row['event_name']);?>" required minlength="2">
                                 </div>
                                 <div> <!-- Фото -->
-                                    <label for="eventPicture-input"> Lataa tapahtuman kuva! </label> <br>
+                                    <label for="eventPicture-input"> Tapahtuman kuva </label> <br>
                                     <div class="fileInputField">
                                         <?= "<img src='kuvat/tapahtumaKuvat/".$picture."' alt='Uploaded Image'>"; ?>
                                         <input type="file" class="eventPictureInput" id="eventPicture-input" name="eventPicture" value="<?=htmlspecialchars($row['event_image']);?>">

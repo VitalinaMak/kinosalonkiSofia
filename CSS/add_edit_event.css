@@ -94,14 +94,16 @@ select,
 
 input:hover,
 textarea:hover,
-select:hover {
+select:hover,
+.fileInputField:hover {
   border-color: var(--lightblue);
   transition: var(--transition);
 }
 
 input:focus,
 textarea:focus,
-select:focus {
+select:focus,
+.fileInputField:focus {
   outline: none;
   border-color: var(--cinema-pink);
   transition: var(--transition);
@@ -143,17 +145,27 @@ form button:hover {
   background-color: var(--cinema-pink);
 }
 
-/* div for the image and file input */
+/* div for image input */
 .fileInputField {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column;
   height: fit-content;
+  padding: 0px;
 }
 .fileInputField input {
   width: 50%;
 }
 .fileInputField img {
   width: 40%;
+  padding: 16px;
+  padding-top: 0px;
+}
+.fileInputField label {
+  width: 100%;
+  padding: 16px;
+}
+.fileInputField label:hover {
+  cursor: pointer;
 }
 /* file input */
 .eventPictureInput {

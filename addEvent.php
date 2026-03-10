@@ -39,9 +39,11 @@
                     </div>
 
                     <div> <!-- Фото -->
-                        <label for="eventPicture-input"> Lataa tapahtuman kuva! </label> 
-                        <input type="file" id="eventPicture-input" name="eventPicture">
-                        <img id="preview" style="display:none; width:50%;"> <!-- preview -->
+                        <div class="fileInputField">
+                            <label for="eventPicture-input"> Tapahtuman kuva </label> 
+                            <input type="file" id="eventPicture-input" name="eventPicture" hidden>
+                            <img id="preview" style="display:none; width:50%;"> <!-- preview -->
+                        </div>
                     </div>
 
                     <div class="type-place group dropdown"> 
