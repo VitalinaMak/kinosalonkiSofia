@@ -97,25 +97,6 @@ main a {
   margin: auto;
 }
 
-/* - - - START SCROLLBAR CUSTOMIZATION - - - */
-/* ::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--head-foot);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--cinema-whiteish);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--cinema-whiteish-tr);
-} */
-/* - - - END SCROLLBAR CUSTOMIZATION - - - */
-
 /* LINKS TO PAGES IN HEADER - START. Will be deleted later */
 /* Dropdown Button */
 .navButton {
@@ -160,13 +141,31 @@ main a {
 }
 /* LINKS TO PAGES IN HEADER - END */
 
-a.button {
-  /* Оно нам точно нужно? Сейчас ни у одного <а>-элемента нет класса "button" */ /* oй*/
+/* a.button {
   padding: 1px 6px;
   border: 1px outset buttonborder;
   border-radius: 3px;
   color: buttontext;
   background-color: buttonface;
   text-decoration: none;
-}
+} */
+
 /*----------------------------------------------------------------------------*/
+
+/* - - - START GLOBAL form BUTTON SETTINGS - - - */
+form button /* overrides */ {
+  padding: 0.85em 4em;
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+  background-color: var(--darkblue);
+  color: var(--cinema-whiteish);
+  transition: var(--transition);
+}
+
+form button:hover {
+  cursor: pointer;
+  background-color: var(--cinema-pink);
+}
+
+/* - - - END GLOBAL BUTTON SETTINGS - - - */
