@@ -35,6 +35,7 @@
                 <a href="addEvent.php">addEvent</a>
                 <a href="bookEvent.php">bookEvent</a>
                 <a href="editEvent.php">editEvent</a>
+                <a href="http://localhost/kinosalonkisofia/editEvent.php?id=8">editTHEevent</a>
                 <a href="index.php">index</a>
                 <a href="login.php">login</a>
                 <a href="signup.php">signup</a>

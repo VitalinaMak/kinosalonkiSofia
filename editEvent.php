@@ -23,10 +23,27 @@
                         } ?>
                             <input type="hidden" name="id" value="<?=$row['id'];?>" />  <!-- id (id doesn't have to be changed, it's here only to save it's value) -->
                             <!-- - - - HTML - - - -->
-                            <div class="column1">
-                                <div> <!-- Название -->
-                                    <label for="name-input"></label> 
-                                    <input type="text" id="name-input" name="name" value="<?=htmlspecialchars($row['event_name']);?>" required minlength="2">
+                                <div class="name-age group"> 
+                                    <div> <!-- Название -->
+                                        <label for="name-input"></label> 
+                                        <input type="text" id="name-input" name="name" value="<?=htmlspecialchars($row['event_name']);?>" required minlength="2">
+                                    </div>
+                                    <div class="dropdown"> <!-- Age limit -->
+                                        <label for="ageLimit-input"></label> 
+                                        <select id="ageLimit-input" name="ageLimit">
+                                            <option value="Ei luokiteltu" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>Ei luokiteltu</option>
+                                            <option value="S" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>S</option>
+                                            <option value="K7" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K7</option>
+                                            <option value="K12" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K12</option>
+                                            <option value="K16" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K16</option>
+                                            <option value="K18" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K18</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div> <!-- Описание -->
+                                    <label for="description-input"></label> 
+                                    <textarea type="text" id="description-input" name="description" required><?=htmlspecialchars($row['description']);?></textarea>
                                 </div>
                                 <div> <!-- Фото -->
                                     <label for="eventPicture-input"> Tapahtuman kuva </label> <br>
@@ -35,47 +52,37 @@
                                         <input type="file" class="eventPictureInput" id="eventPicture-input" name="eventPicture" value="<?=htmlspecialchars($row['event_image']);?>">
                                     </div>
                                 </div>
-                                <div> <!-- Описание -->
-                                    <label for="description-input"></label> 
-                                    <textarea type="text" id="description-input" name="description" required><?=htmlspecialchars($row['description']);?></textarea>
+
+                                <div class="type-place group dropdown"> 
+                                    <div class="dropdown"> <!-- Type -->
+                                        <label for="eventType-input"></label> 
+                                        <select id="eventType-input" name="eventType" required>
+                                            <option value="option1" <?= $eventType == 'option1' ? 'selected' : '' ?>>Elokuvaesitys</option>
+                                            <option value="option2" <?= $eventType == 'option2' ? 'selected' : '' ?>>Tapahtuma, jossa on rajattu osalisujamäärä</option>
+                                            <option value="option3" <?= $eventType == 'option3' ? 'selected' : '' ?>>Tapahtuma, jossa on rajaton osalisujamäärä</option>
+                                        </select>
+                                    </div>
+                                    <div> <!-- Place -->
+                                        <label for="maxplaces-input">Max. osallistujamäärä: </label> <br>
+                                        <input type="text" id="maxplaces-input" name="maxplaces" value="<?=htmlspecialchars($row['max_visitors']);?>" required>
+                                    </div>
                                 </div>
-                                <div class="dropdown"> <!-- Type -->
-                                    <label for="eventType-input"></label> 
-                                    <select id="eventType-input" name="eventType" required>
-                                        <option value="option1" <?= $eventType == 'option1' ? 'selected' : '' ?>>Elokuvaesitys</option>
-                                        <option value="option2" <?= $eventType == 'option2' ? 'selected' : '' ?>>Tapahtuma, jossa on rajattu osalisujamäärä</option>
-                                        <option value="option3" <?= $eventType == 'option3' ? 'selected' : '' ?>>Tapahtuma, jossa on rajaton osalisujamäärä</option>
-                                    </select>
-                                </div>
-                                <div> <!-- Места -->
-                                    <label for="maxplaces-input">Max. osallistujamäärä: </label> <br>
-                                    <input type="text" id="maxplaces-input" name="maxplaces" value="<?=htmlspecialchars($row['max_visitors']);?>" required>
-                                </div>
-                            </div>
-                            <div class="column2">
-                                <div> <!-- Place -->
+
+                                <div> <!-- Adress -->
                                     <label for="adress-input"></label> 
                                     <input type="text" id="adress-input" name="adress" value="<?=htmlspecialchars($row['location']);?>" autocomplete="street-address" required>
                                 </div>
-                                <div> <!-- Date -->
-                                    <label for="date-input"></label>
-                                    <input type="date" id="date-input" name="date" value="<?=$row['event_date'];?>" required>
+                                <div class="date-time group">
+                                    <div> <!-- Date -->
+                                        <label for="date-input"></label>
+                                        <input type="date" id="date-input" name="date" value="<?=$row['event_date'];?>" required>
+                                    </div>
+                                    <div> <!-- Time -->
+                                        <label for="time-input"></label>
+                                        <input type="time" id="time-input" name="time" value="<?=$row['event_time'];?>"required>
+                                    </div>
                                 </div>
-                                <div> <!-- Time -->
-                                    <label for="time-input"></label>
-                                    <input type="time" id="time-input" name="time" value="<?=$row['event_time'];?>"required>
-                                </div>
-                                <div class="dropdown"> <!-- Age limit -->
-                                    <label for="ageLimit-input"></label> 
-                                    <select id="ageLimit-input" name="ageLimit">
-                                        <option value="Ei luokiteltu" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>Ei luokiteltu</option>
-                                        <option value="S" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>S</option>
-                                        <option value="K7" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K7</option>
-                                        <option value="K12" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K12</option>
-                                        <option value="K16" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K16</option>
-                                        <option value="K18" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K18</option>
-                                    </select>
-                                </div>
+
                                 <button type="submit">Lähetä</button>
                             </div>
                             
