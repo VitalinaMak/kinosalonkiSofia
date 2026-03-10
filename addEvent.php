@@ -40,9 +40,10 @@
 
                     <div> <!-- Фото -->
                         <div class="fileInputField">
-                            <label for="eventPicture-input"> Tapahtuman kuva </label> 
-                            <input type="file" id="eventPicture-input" name="eventPicture" hidden>
-                            <img id="preview" style="display:none; width:50%;"> <!-- preview -->
+                            <label for="eventPicture-input"> Tapahtuman kuva 
+                                <input type="file" id="eventPicture-input" name="eventPicture" hidden>
+                                <img id="preview" style="display:none; width:50%;"> <!-- preview -->
+                            </label> 
                         </div>
                     </div>
 

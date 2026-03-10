@@ -52,9 +52,6 @@ form {
 }
 
 .group > div {
-  /* display: flex;
-  align-items: flex-end;
-  flex-wrap: wrap; */
   display: flex;
   /* flex-direction: column; */
   justify-content: flex-end; /* Keeps inputs aligned at the bottom */
@@ -74,18 +71,22 @@ form {
 
 input,
 textarea,
-select,
-.fileInputField {
+select {
+  height: 50px;
   width: 100%;
   box-sizing: border-box;
   flex-grow: 1;
   min-width: 0;
 
-  height: 50px;
   padding: 1em;
 
   font-family: inherit;
+}
 
+input,
+textarea,
+select,
+.fileInputField {
   border-radius: var(--border-radius);
   border: 3px solid var(--base-color);
   background-color: var(--cinema-whiteish);
@@ -147,17 +148,14 @@ form button:hover {
 
 /* div for image input */
 .fileInputField {
-  display: flex;
-  flex-flow: column;
-  height: fit-content;
+  display: block;
+  height: max-content;
   padding: 0px;
 }
-.fileInputField input {
-  width: 50%;
-}
 .fileInputField img {
-  width: 40%;
-  padding: 16px;
+  display: block;
+  height: 220px;
+  margin-top: 16px;
   padding-top: 0px;
 }
 .fileInputField label {
@@ -166,12 +164,4 @@ form button:hover {
 }
 .fileInputField label:hover {
   cursor: pointer;
-}
-/* file input */
-.eventPictureInput {
-  border: 0px;
-}
-
-/*
-select {
 }

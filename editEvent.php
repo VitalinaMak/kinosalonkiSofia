@@ -1,6 +1,7 @@
 <?php 
     $pageTitle = "EditEvent";
     $extraCSS = "CSS/add_edit_event.css";
+    $extraJS = "JavaScript/addEvent.js";
     include 'include/header.php'; 
 ?>
 <main class="editEvent_page">
@@ -23,68 +24,68 @@
                         } ?>
                             <input type="hidden" name="id" value="<?=$row['id'];?>" />  <!-- id (id doesn't have to be changed, it's here only to save it's value) -->
                             <!-- - - - HTML - - - -->
-                                <div class="name-age group"> 
-                                    <div> <!-- Название -->
-                                        <label for="name-input"></label> 
-                                        <input type="text" id="name-input" name="name" value="<?=htmlspecialchars($row['event_name']);?>" required minlength="2">
-                                    </div>
-                                    <div class="dropdown"> <!-- Age limit -->
-                                        <label for="ageLimit-input"></label> 
-                                        <select id="ageLimit-input" name="ageLimit">
-                                            <option value="Ei luokiteltu" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>Ei luokiteltu</option>
-                                            <option value="S" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>S</option>
-                                            <option value="K7" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K7</option>
-                                            <option value="K12" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K12</option>
-                                            <option value="K16" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K16</option>
-                                            <option value="K18" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K18</option>
-                                        </select>
-                                    </div>
+                            <div class="name-age group"> 
+                                <div> <!-- Название -->
+                                    <label for="name-input"></label> 
+                                    <input type="text" id="name-input" name="name" value="<?=htmlspecialchars($row['event_name']);?>" required minlength="2">
                                 </div>
-
-                                <div> <!-- Описание -->
-                                    <label for="description-input"></label> 
-                                    <textarea type="text" id="description-input" name="description" required><?=htmlspecialchars($row['description']);?></textarea>
+                                <div class="dropdown"> <!-- Age limit -->
+                                    <label for="ageLimit-input"></label> 
+                                    <select id="ageLimit-input" name="ageLimit">
+                                        <option value="Ei luokiteltu" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>Ei luokiteltu</option>
+                                        <option value="S" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>S</option>
+                                        <option value="K7" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K7</option>
+                                        <option value="K12" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K12</option>
+                                        <option value="K16" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K16</option>
+                                        <option value="K18" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K18</option>
+                                    </select>
                                 </div>
-                                <div> <!-- Фото -->
-                                    <label for="eventPicture-input"> Tapahtuman kuva </label> <br>
-                                    <div class="fileInputField">
-                                        <?= "<img src='kuvat/tapahtumaKuvat/".$picture."' alt='Uploaded Image'>"; ?>
-                                        <input type="file" class="eventPictureInput" id="eventPicture-input" name="eventPicture" value="<?=htmlspecialchars($row['event_image']);?>">
-                                    </div>
-                                </div>
-
-                                <div class="type-place group dropdown"> 
-                                    <div class="dropdown"> <!-- Type -->
-                                        <label for="eventType-input"></label> 
-                                        <select id="eventType-input" name="eventType" required>
-                                            <option value="option1" <?= $eventType == 'option1' ? 'selected' : '' ?>>Elokuvaesitys</option>
-                                            <option value="option2" <?= $eventType == 'option2' ? 'selected' : '' ?>>Tapahtuma, jossa on rajattu osalisujamäärä</option>
-                                            <option value="option3" <?= $eventType == 'option3' ? 'selected' : '' ?>>Tapahtuma, jossa on rajaton osalisujamäärä</option>
-                                        </select>
-                                    </div>
-                                    <div> <!-- Place -->
-                                        <label for="maxplaces-input">Max. osallistujamäärä: </label> <br>
-                                        <input type="text" id="maxplaces-input" name="maxplaces" value="<?=htmlspecialchars($row['max_visitors']);?>" required>
-                                    </div>
-                                </div>
-
-                                <div> <!-- Adress -->
-                                    <label for="adress-input"></label> 
-                                    <input type="text" id="adress-input" name="adress" value="<?=htmlspecialchars($row['location']);?>" autocomplete="street-address" required>
-                                </div>
-                                <div class="date-time group">
-                                    <div> <!-- Date -->
-                                        <label for="date-input"></label>
-                                        <input type="date" id="date-input" name="date" value="<?=$row['event_date'];?>" required>
-                                    </div>
-                                    <div> <!-- Time -->
-                                        <label for="time-input"></label>
-                                        <input type="time" id="time-input" name="time" value="<?=$row['event_time'];?>"required>
-                                    </div>
-                                </div>
-
-                                <button type="submit">Lähetä</button>
                             </div>
+
+                            <div> <!-- Описание -->
+                                <label for="description-input"></label> 
+                                <textarea type="text" id="description-input" name="description" required><?=htmlspecialchars($row['description']);?></textarea>
+                            </div>
+                            
+                            <div class="fileInputField"> <!-- Фото -->
+                                <label for="eventPicture-input"> Tapahtuman kuva 
+                                    <input type="file" id="eventPicture-input" name="eventPicture" hidden>  <!-- input-field for the image. It's accessed through the label but it cannot contain information about the previous image-->
+                                    <input type="hidden" name="current_image" value="<?= htmlspecialchars($row['event_image']); ?>">  <!-- ..so here is another input -->
+                                    <?= "<img id='preview' src='kuvat/tapahtumaKuvat/".$picture."' alt='Uploaded Image'>"; ?>
+                                </label>
+                            </div>
+
+                            <div class="type-place group dropdown"> 
+                                <div class="dropdown"> <!-- Type -->
+                                    <label for="eventType-input"></label> 
+                                    <select id="eventType-input" name="eventType" required>
+                                        <option value="option1" <?= $eventType == 'option1' ? 'selected' : '' ?>>Elokuvaesitys</option>
+                                        <option value="option2" <?= $eventType == 'option2' ? 'selected' : '' ?>>Tapahtuma, jossa on rajattu osalisujamäärä</option>
+                                        <option value="option3" <?= $eventType == 'option3' ? 'selected' : '' ?>>Tapahtuma, jossa on rajaton osalisujamäärä</option>
+                                    </select>
+                                </div>
+                                <div> <!-- Place -->
+                                    <label for="maxplaces-input">Max. osallistujamäärä: </label> <br>
+                                    <input type="number" id="maxplaces-input" name="maxplaces" value="<?=htmlspecialchars($row['max_visitors']);?>" required>
+                                </div>
+                            </div>
+
+                            <div> <!-- Adress -->
+                                <label for="adress-input"></label> 
+                                <input type="text" id="adress-input" name="adress" value="<?=htmlspecialchars($row['location']);?>" autocomplete="street-address" required>
+                            </div>
+                            <div class="date-time group">
+                                <div> <!-- Date -->
+                                    <label for="date-input"></label>
+                                    <input type="date" id="date-input" name="date" value="<?=$row['event_date'];?>" required>
+                                </div>
+                                <div> <!-- Time -->
+                                    <label for="time-input"></label>
+                                    <input type="time" id="time-input" name="time" value="<?=$row['event_time'];?>"required>
+                                </div>
+                            </div>
+
+                            <button type="submit">Lähetä</button>
                             
                             <!-- - - - END - - - -->
                         <?php endwhile ?>
@@ -111,14 +112,21 @@
 
                 $types = "sissssssii"; // i = int, s = string (must match order!)
                 
-                /* picture handling */
-                $uploadFileName = ""; // default if no file uploaded
+                /* picture handling -- old version */
+                /* $uploadFileName = ""; // default if no file uploaded
                 if (!empty($_FILES['eventPicture']['name'])) {
                     $uploadDir = "uploads/"; // folder where files are saved
                     $uploadFileName = basename($_FILES['eventPicture']['name']); // only the file name
-                    /* $uploadPath = $uploadDir . $uploadFileName; // full path to save the file
+                     $uploadPath = $uploadDir . $uploadFileName; // full path to save the file
 
-                    move_uploaded_file($_FILES['eventPicture']['tmp_name'], $uploadPath); */
+                    move_uploaded_file($_FILES['eventPicture']['tmp_name'], $uploadPath); 
+                } */
+                $currentImage = $_POST['current_image'];
+                if (!empty($_FILES['eventPicture']['name'])) {
+                    $newImage = $_FILES['eventPicture']['name'];
+                    move_uploaded_file($_FILES['eventPicture']['tmp_name'], "kuvat/tapahtumaKuvat/".$newImage);
+                } else {
+                    $newImage = $currentImage;
                 }
 
                 /* parameters for prepared statement */
@@ -127,7 +135,7 @@
                     (int)$_POST['eventType'],
                     $_POST['date'],
                     $_POST['time'],
-                    $uploadFileName,
+                    $newImage,
                     $_POST['description'],
                     $_POST['ageLimit'],
                     $_POST['adress'],
