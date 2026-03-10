@@ -20,6 +20,7 @@ main {
 
   padding: 20px;
   margin: auto;
+  transition: var(--transition);
 }
 
 h1 {
@@ -136,6 +137,10 @@ form button {
   background-color: var(--darkblue);
   transition: var(--transition);
   cursor: pointer;
+}
+
+form button:hover {
+  background-color: var(--cinema-pink);
 }
 
 /* div for the image and file input */
