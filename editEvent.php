@@ -51,7 +51,9 @@
                                 <label for="eventPicture-input"> Tapahtuman kuva 
                                     <input type="file" id="eventPicture-input" name="eventPicture" hidden>  <!-- input-field for the image. It's accessed through the label but it cannot contain information about the previous image-->
                                     <input type="hidden" name="current_image" value="<?= htmlspecialchars($row['event_image']); ?>">  <!-- ..so here is another input -->
+                                    <input type="hidden" name="original_image" value="<?= htmlspecialchars($row['event_image']); ?>"> <!-- and one more hidden input in case the user changes the previous one -->
                                     <?= "<img id='preview' src='kuvat/tapahtumaKuvat/".$picture."' alt='Uploaded Image'>"; ?>
+                                    <a href="javascript:void(0)" onclick="removeImage()" style="padding: 5px;">Poistaa kuvaa</a>
                                 </label>
                             </div>
 
@@ -59,9 +61,9 @@
                                 <div class="dropdown"> <!-- Type -->
                                     <label for="eventType-input"></label> 
                                     <select id="eventType-input" name="eventType" required>
-                                        <option value="option1" <?= $eventType == 'option1' ? 'selected' : '' ?>>Elokuvaesitys</option>
-                                        <option value="option2" <?= $eventType == 'option2' ? 'selected' : '' ?>>Tapahtuma, jossa on rajattu osalisujamäärä</option>
-                                        <option value="option3" <?= $eventType == 'option3' ? 'selected' : '' ?>>Tapahtuma, jossa on rajaton osalisujamäärä</option>
+                                        <option value="1" <?= $eventType == 'option1' ? 'selected' : '' ?>>Elokuvaesitys</option>
+                                        <option value="2" <?= $eventType == 'option2' ? 'selected' : '' ?>>Tapahtuma, jossa on rajattu osalisujamäärä</option>
+                                        <option value="3" <?= $eventType == 'option3' ? 'selected' : '' ?>>Tapahtuma, jossa on rajaton osalisujamäärä</option>
                                     </select>
                                 </div>
                                 <div> <!-- Place -->
@@ -113,51 +115,82 @@
                 $types = "sissssssii"; // i = int, s = string (must match order!)
                 
                 /* picture handling - START */
-                $uploadOk = 1;  //status control variable
 
-                $currentImage = $_POST['current_image'];  //get the name of the old image (it get's it from the hidden file input)
-                
+                $uploadFolder = "kuvat/tapahtumaKuvat/";
+                $allowedTypes = ['jpg','jpeg','png','gif','webp'];
+
+                $currentImage = isset($_POST['current_image']) ? basename($_POST['current_image']) : "";  //the value of the previous image from the hidden input. If it's empty, leave it empty, othervise save the name of the file
+                $newImage = $currentImage;  //content of this variable will be saved into database
+                $uploadOk = 1;  //variable to check for mistakes
+
+                /* USER UPLOADED NEW IMAGE */
                 if (!empty($_FILES['eventPicture']['name'])) {
-                    /* if the image is changed and the previous image was anything else than default, delete it from the project folder */
-                    if (basename($currentImage) != "noImage.png" && !empty($currentImage)) {
-                        if (file_exists("kuvat/tapahtumaKuvat/".basename($currentImage))) {
-                            unlink("kuvat/tapahtumaKuvat/".$currentImage);
+
+                    /* delete previous image */
+                    if (!empty($currentImage) && $currentImage !== "noImage.png") {
+                        $oldPath = $uploadFolder . $currentImage;
+
+                        if (file_exists($oldPath)) {
+                            unlink($oldPath);
                         }
                     }
-                    $target_file = basename($_FILES["eventPicture"]["name"]);  //removes any directory path and keeps only the file name
 
-                    /* check for mistakes */
-                    $check = getimagesize($_FILES["eventPicture"]["tmp_name"]);
+                    /* validate upload */
+                    if ($_FILES['eventPicture']['error'] !== UPLOAD_ERR_OK) {
+                        $uploadOk = 0;
+                        echo "Upload error.";
+                    }
 
+                    $check = getimagesize($_FILES['eventPicture']['tmp_name']);
                     if ($check === false) {
                         $uploadOk = 0;
                         echo "File is not an image.";
                     }
 
-                    /* if (file_exists($target_file)) {
-                        $uploadOk = 0;
-                        echo "File already exists.";
-                    } */
-                    
-                    if ($uploadOk === 1) {
-                        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));  //gets the extension of the new uploaded image
-                        $newFileName = round(microtime(true)) . "." . $imageFileType;  //gives the file a new name created from the timestamp and extension from the old name 
+                    $imageFileType = strtolower(pathinfo($_FILES["eventPicture"]["name"], PATHINFO_EXTENSION));
 
-                        if (move_uploaded_file($_FILES['eventPicture']['tmp_name'], "kuvat/tapahtumaKuvat/".$newFileName)) {  //saves it to the project folder
-                            $newImage = $newFileName;  //save the name of the new image to the variable to send it later to DB 
+                    if (!in_array($imageFileType, $allowedTypes)) {
+                        $uploadOk = 0;
+                        echo "Invalid file type.";
+                    }
+
+                    /* save file */
+                    if ($uploadOk === 1) {
+
+                        $newFileName = round(microtime(true)) . "." . $imageFileType;  //can use uniqid('', true) instead of round(microtime(true)), so it will be 100% unique, but it looks messy and I'm not sure if it's really necessary
+                        $targetPath = $uploadFolder . $newFileName;
+
+                        if (move_uploaded_file($_FILES['eventPicture']['tmp_name'], $targetPath)) {
+                            $newImage = $newFileName;
                         } else {
-                            $uploadOk = 0;
-                            echo "Error moving file.";
+                            echo "Error moving uploaded file.";
                             $newImage = $currentImage;
                         }
-                    } else {
-                        echo "Error uploading file.";
-                        $newImage = $currentImage;
                     }
-                } else {
-                    $newImage = $currentImage;  //if the image didn't change, use the name of old one
+                }
+
+                /* USER REMOVED IMAGE */
+                elseif ($currentImage === "noImage.png") {
+
+                    $originalImage = basename($_POST['original_image']);
+
+                    if (!empty($originalImage) && $originalImage !== "noImage.png") {
+
+                        $oldPath = $uploadFolder . $originalImage;
+
+                        if (file_exists($oldPath)) {
+                            unlink($oldPath);
+                        }
+                    }
+
+                    $newImage = "";
+                }
+                /* NO CHANGE */
+                else {
+                    $newImage = $currentImage;
                 }
                 /* picture handling - END */
+
 
                 /* parameters for prepared statement */
                 $params = [

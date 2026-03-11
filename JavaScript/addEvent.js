@@ -17,3 +17,13 @@ fileInput.addEventListener("change", function () {
         reader.readAsDataURL(file);
     }
 });
+
+function removeImage() {
+    const currentImage = document.getElementsByName("current_image")[0];
+
+    fileInput.value = '';  //clear the field for file input
+    preview.src = "kuvat/tapahtumaKuvat/noImage.png";
+    if (currentImage) {
+        currentImage.value = "noImage.png";
+    }
+}
