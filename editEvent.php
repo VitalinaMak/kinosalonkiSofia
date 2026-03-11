@@ -112,22 +112,52 @@
 
                 $types = "sissssssii"; // i = int, s = string (must match order!)
                 
-                /* picture handling -- old version */
-                /* $uploadFileName = ""; // default if no file uploaded
-                if (!empty($_FILES['eventPicture']['name'])) {
-                    $uploadDir = "uploads/"; // folder where files are saved
-                    $uploadFileName = basename($_FILES['eventPicture']['name']); // only the file name
-                     $uploadPath = $uploadDir . $uploadFileName; // full path to save the file
+                /* picture handling - START */
+                $uploadOk = 1;  //status control variable
 
-                    move_uploaded_file($_FILES['eventPicture']['tmp_name'], $uploadPath); 
-                } */
-                $currentImage = $_POST['current_image'];
+                $currentImage = $_POST['current_image'];  //get the name of the old image (it get's it from the hidden file input)
+                
                 if (!empty($_FILES['eventPicture']['name'])) {
-                    $newImage = $_FILES['eventPicture']['name'];
-                    move_uploaded_file($_FILES['eventPicture']['tmp_name'], "kuvat/tapahtumaKuvat/".$newImage);
+                    /* if the image is changed and the previous image was anything else than default, delete it from the project folder */
+                    if (basename($currentImage) != "noImage.png" && !empty($currentImage)) {
+                        if (file_exists("kuvat/tapahtumaKuvat/".basename($currentImage))) {
+                            unlink("kuvat/tapahtumaKuvat/".$currentImage);
+                        }
+                    }
+                    $target_file = basename($_FILES["eventPicture"]["name"]);  //removes any directory path and keeps only the file name
+
+                    /* check for mistakes */
+                    $check = getimagesize($_FILES["eventPicture"]["tmp_name"]);
+
+                    if ($check === false) {
+                        $uploadOk = 0;
+                        echo "File is not an image.";
+                    }
+
+                    /* if (file_exists($target_file)) {
+                        $uploadOk = 0;
+                        echo "File already exists.";
+                    } */
+                    
+                    if ($uploadOk === 1) {
+                        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));  //gets the extension of the new uploaded image
+                        $newFileName = round(microtime(true)) . "." . $imageFileType;  //gives the file a new name created from the timestamp and extension from the old name 
+
+                        if (move_uploaded_file($_FILES['eventPicture']['tmp_name'], "kuvat/tapahtumaKuvat/".$newFileName)) {  //saves it to the project folder
+                            $newImage = $newFileName;  //save the name of the new image to the variable to send it later to DB 
+                        } else {
+                            $uploadOk = 0;
+                            echo "Error moving file.";
+                            $newImage = $currentImage;
+                        }
+                    } else {
+                        echo "Error uploading file.";
+                        $newImage = $currentImage;
+                    }
                 } else {
-                    $newImage = $currentImage;
+                    $newImage = $currentImage;  //if the image didn't change, use the name of old one
                 }
+                /* picture handling - END */
 
                 /* parameters for prepared statement */
                 $params = [
