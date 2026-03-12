@@ -20,10 +20,12 @@ fileInput.addEventListener("change", function () {
 
 function removeImage() {
     const currentImage = document.getElementsByName("current_image")[0];
+    const removeFlag = document.getElementsByName("remove_image")[0];
 
     fileInput.value = '';  //clear the field for file input
-    preview.src = "kuvat/tapahtumaKuvat/noImage.png";
-    if (currentImage) {
-        currentImage.value = "noImage.png";
-    }
+    
+    preview.src = "kuvat/tapahtumaKuvat/noImage.png";  //change the image in preview to the default one
+
+    if (removeFlag) removeFlag.value = "1";
+    console.log("the link is pressed");
 }

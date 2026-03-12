@@ -50,10 +50,11 @@
                             <div class="fileInputField"> <!-- Фото -->
                                 <label for="eventPicture-input"> Tapahtuman kuva 
                                     <input type="file" id="eventPicture-input" name="eventPicture" hidden>  <!-- input-field for the image. It's accessed through the label but it cannot contain information about the previous image-->
-                                    <input type="hidden" name="current_image" value="<?= htmlspecialchars($row['event_image']); ?>">  <!-- ..so here is another input -->
-                                    <input type="hidden" name="original_image" value="<?= htmlspecialchars($row['event_image']); ?>"> <!-- and one more hidden input in case the user changes the previous one -->
+                                    <input type="hidden" name="current_image" value="<?= htmlspecialchars($row['event_image']); ?>">  <!-- ..so here is another input (basicaly it keeps track of what the user currently sees) -->
+                                    <input type="hidden" name="original_image" value="<?= htmlspecialchars($row['event_image']); ?>"> <!-- and one more hidden input to store the original image from the database -->
+                                    <input type="hidden" name="remove_image" value="0">  <!-- a flag that signals if the user clicked “remove image”  -->
                                     <?= "<img id='preview' src='kuvat/tapahtumaKuvat/".$picture."' alt='Uploaded Image'>"; ?>
-                                    <a href="javascript:void(0)" onclick="removeImage()" style="padding: 5px;">Poistaa kuvaa</a>
+                                    <a href="javascript:void(0)" onclick="removeImage()" style="padding: 5px;">Poistaa kuvaa</a>  <!-- a link to remove the picture -->
                                 </label>
                             </div>
 
@@ -131,7 +132,9 @@
                         $oldPath = $uploadFolder . $currentImage;
 
                         if (file_exists($oldPath)) {
-                            unlink($oldPath);
+                            if ($currentImage !== "noImage.png") {  //check one more time that it's not the default image, I don't trust this code anymore
+                                unlink($oldPath);
+                            }
                         }
                     }
 
@@ -170,7 +173,7 @@
                 }
 
                 /* USER REMOVED IMAGE */
-                elseif ($currentImage === "noImage.png") {
+                elseif (isset($_POST['remove_image']) && $_POST['remove_image'] === "1") {
 
                     $originalImage = basename($_POST['original_image']);
 
@@ -179,15 +182,17 @@
                         $oldPath = $uploadFolder . $originalImage;
 
                         if (file_exists($oldPath)) {
-                            unlink($oldPath);
+                            if ($originalImage !== "noImage.png") {  //once again check if the program SURE it's not the default picture it's going to delete
+                                unlink($oldPath);
+                            }
                         }
                     }
 
-                    $newImage = "";
+                    $newImage = "";  //leaves image-field empty (the default picture should never be passed to the datebase)
                 }
                 /* NO CHANGE */
                 else {
-                    $newImage = $currentImage;
+                    $newImage = $currentImage;  // keeps current image as is
                 }
                 /* picture handling - END */
 
