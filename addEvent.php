@@ -1,7 +1,7 @@
 <?php 
     $pageTitle = "AddEvent";
     $extraCSS = "CSS/add_edit_event.css";
-    $extraJS = "JavaScript/addEvent.js";
+    $extraJS = "JavaScript/add_edit_event.js";
     include 'include/header.php'; 
 ?>
 
@@ -41,8 +41,10 @@
                     <div> <!-- Фото -->
                         <div class="fileInputField">
                             <label for="eventPicture-input"> Tapahtuman kuva 
-                                <input type="file" id="eventPicture-input" name="eventPicture" hidden>
+                                <input type="file" id="eventPicture-input" name="eventPicture" hidden>  <!-- an actual file input, but it's hidden -->
+                                <input type="hidden" name="remove_image" value="0">  <!-- a flag that signals if the user clicked “remove image”  -->
                                 <img id="preview" style="display:none; width:50%;"> <!-- preview -->
+                                <a href="javascript:void(0)" onclick="removeImage()">Poistaa kuvaa</a>  <!-- a link to remove the picture -->
                             </label> 
                         </div>
                     </div>
@@ -95,8 +97,8 @@
         
         if (isset($_FILES["eventPicture"])) {
             
-            if ($_FILES["eventPicture"]["error"] === UPLOAD_ERR_NO_FILE) {
-                // if no file uploaded, leave the string for the file name empty
+            if (($_FILES["eventPicture"]["error"] === UPLOAD_ERR_NO_FILE) || (isset($_POST['remove_image']) && $_POST['remove_image'] === "1")) {
+                // if no file uploaded or user deleted it, leave the string for the file name empty
                 $uploadFileName = "";
             }
 

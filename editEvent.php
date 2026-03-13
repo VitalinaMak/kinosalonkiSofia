@@ -1,7 +1,7 @@
 <?php 
     $pageTitle = "EditEvent";
     $extraCSS = "CSS/add_edit_event.css";
-    $extraJS = "JavaScript/addEvent.js";
+    $extraJS = "JavaScript/add_edit_event.js";
     include 'include/header.php'; 
 ?>
 <main class="editEvent_page">
