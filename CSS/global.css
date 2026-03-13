@@ -9,8 +9,9 @@
   --blue: #4fa1a1;
   --lightblue: #a6d1d1;
   --orange: #e78a1f;
-  --red: #d32402;
+  /* --red: #d32402; */
   --beige: rgb(246, 243, 215);
+  --pinkish: #fdf2f2;
 
   /* From the cinema_seats.jpg */
   --cinema-red1: #7e1605ff;
@@ -20,7 +21,7 @@
   --cinema-whiteish: #f8f7f3ff;
   --cinema-whiteish-tr: rgba(248, 247, 243, 0.804);
   --cinema-whiteish-trtr: rgba(248, 247, 243, 0.4);
-  --cinema-grey: #b7c2cbff;
+  /* --cinema-grey: #b7c2cbff; */
 
   /* self-explanatory */
   --border-radius: 10px;
@@ -39,7 +40,7 @@ main {
   /* padding: 0 5px; */
   /* Ensuring the padding doesn't make the page wider than the screen */
   /* box-sizing: border-box; */
-  background-color: var(--beige);
+  background-color: var(--cinema-whiteish);
 }
 
 header {
@@ -173,7 +174,7 @@ form button:hover,
 
 /* - - - START GLOBAL LINKASBUTTON SETTINGS - - - */
 .button {
-  padding: 0.85em 4em;
+  padding: 0.5em 1em;
   font-weight: 500;
   text-decoration: none;
   border: none;

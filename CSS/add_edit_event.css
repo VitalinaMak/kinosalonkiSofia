@@ -110,6 +110,17 @@ select:focus,
   transition: var(--transition);
 }
 
+/* IF THE REQUIRED FIELS IS EMPTY
+i think it's very badly supported in browsers */
+
+/* input:user-invalid,
+textarea:user-invalid,
+select:user-invalid,
+.fileInputField:user-invalid {
+  border: 2px solid var(--cinema-pink);
+  background-color: var(--pinkish);
+} */
+
 /* - Specific overrides - */
 input[type="file"] {
   min-height: fit-content;

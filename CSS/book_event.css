@@ -1,4 +1,22 @@
-/* - - - START SEATS SETTINGS - - - */
+/* - - - START TABLE / SEATS SETTINGS - - - */
+table {
+  border: 2px solid var(--base-color); /* Outer border */
+  border-collapse: collapse; /* Ensures no double borders */
+}
+
+caption /* = the näytto */ {
+  caption-side: top; /* Places caption above the table */
+  color: var(--cinema-whiteish);
+  text-align: center;
+  padding: 0;
+  background-color: var(--base-color);
+}
+
+th,
+td {
+  border: none; /* No inner borders */
+}
+
 td {
   width: 60px;
   height: 60px;
@@ -9,7 +27,6 @@ td {
     no-repeat center;
   background-color: #2ecc71; /* Default: Free (Green) */
   cursor: pointer;
-  transform: rotate(180deg);
 }
 
 /* Booked state */
@@ -25,7 +42,7 @@ td.selected {
 
 /* - - - END SEATS SETTINGS - - - */
 
-td,
+/* td,
 tr {
   border: 2px solid;
-}
+} */
