@@ -1,0 +1,31 @@
+/* - - - START SEATS SETTINGS - - - */
+td {
+  width: 60px;
+  height: 60px;
+  /* This "masks" the cell into the shape of your seat */
+  mask: url("../UI_icons/chair_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg")
+    no-repeat center;
+  -webkit-mask: url("../UI_icons/chair_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg")
+    no-repeat center;
+  background-color: #2ecc71; /* Default: Free (Green) */
+  cursor: pointer;
+  transform: rotate(180deg);
+}
+
+/* Booked state */
+td.booked {
+  background-color: #e74c3c; /* Red */
+  cursor: not-allowed;
+}
+
+/* Selected state */
+td.selected {
+  background-color: #3498db; /* Blue */
+}
+
+/* - - - END SEATS SETTINGS - - - */
+
+td,
+tr {
+  border: 2px solid;
+}
