@@ -6,6 +6,7 @@
   --head-foot: #1d1d1cff;
   --base-color: #34342e;
   --darkblue: #384a50;
+  --blue: #4fa1a1;
   --lightblue: #a6d1d1;
   --orange: #e78a1f;
   --red: #d32402;
@@ -163,9 +164,26 @@ form button /* overrides */ {
   transition: var(--transition);
 }
 
-form button:hover {
+form button:hover,
+.button:hover {
   cursor: pointer;
   background-color: var(--cinema-pink);
 }
-
 /* - - - END GLOBAL BUTTON SETTINGS - - - */
+
+/* - - - START GLOBAL LINKASBUTTON SETTINGS - - - */
+.button {
+  padding: 0.85em 4em;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--darkblue);
+  color: var(--cinema-whiteish);
+  transition: var(--transition);
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: var(--cinema-pink);
+}

@@ -19,7 +19,9 @@ fileInput.addEventListener("change", function () {
 });
 
 function removeImage() {
-    const currentImage = document.getElementsByName("current_image")[0];
+    if (document.getElementsByName("current_image")[0]) {
+        const currentImage = document.getElementsByName("current_image")[0];  //this element exists only in editEvent
+    }
     const removeFlag = document.getElementsByName("remove_image")[0];
 
     fileInput.value = '';  //clear the field for file input

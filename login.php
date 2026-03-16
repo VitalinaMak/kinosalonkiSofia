@@ -1,4 +1,6 @@
 <?php 
+    session_start();  //don't write anithing above it, it has to be the first line in php-code
+
     $pageTitle = "Login";
     $extraCSS = "CSS/SignUp_LogIn.css";
     include 'include/header.php'; 
@@ -7,7 +9,7 @@
 
     <div class="wrapper">
         
-        <form class="login">
+        <form class="login" method="POST" action="" id="login">
 
             <h1>Kirjaudu sisään</h1>
 
@@ -33,6 +35,29 @@
             
             <p>Don't have an account? <a href="signup.php">Sign up</a> </p>
         </form>
+
+        <?php 
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                
+                $query = $conn->prepare("SELECT * FROM teachers WHERE username = ?");
+                $query->bind_param('s', $_POST['tunnus']);
+                $query->execute();
+                $result = $query->get_result();
+                $user = $result->fetch_object();
+                if ($user && password_verify($_POST['salasana'], $user->password_hash)) {
+                    $_SESSION['user_id'] = $user->id;
+                    header("Location: kategoriat.php");
+                    /* echo "<h2>Se toimii</h2>"; */
+                    exit();
+                } else {
+                    $error .= 'Käyttäjätunnus tai salasana on virheellinen';
+                }
+            }
+        ?>
+
+        <?php if ($error): ?>
+            <p style="color:red"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
 
     </div>    
 </main>
