@@ -1,4 +1,49 @@
 <?php 
+    session_start();  //don't write anithing above it, it has to be the first line in php-code
+
+    require_once 'include/configuration.php';  //connection to database
+
+    $error = '';  //variable for error display
+
+    /* form handling */
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        /* check if the entered passwords match */
+        $password = $_POST['password'];
+        $passwordRepeat = $_POST['repeat-password'];
+        if ($password !== $passwordRepeat) {
+            echo "Salasanat eivät täsmää!!";
+            exit;
+        }
+
+        $username = trim($_POST['name']);
+        $email = trim($_POST['email']);
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        // Check if email already exists
+        $checkEmailStmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
+        $checkEmailStmt->bind_param("s", $email);
+        $checkEmailStmt->execute();
+        $checkEmailStmt->store_result();
+
+        if ($checkEmailStmt->num_rows > 0) {
+            echo "Sähköposti on jo käytössä.";
+        } else {
+            // Prepare and bind parameters to sql-query
+            $stmt = $conn->prepare("INSERT INTO users (email, username, password_hash) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $email, $username, $hashedPassword);
+
+            if ($stmt->execute()) {
+                //echo "Account created successfully";
+                header("Location: account.php");
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+        }
+
+        /* $checkEmailStmt->close(); */
+    }
+
     $pageTitle = "SignUp";
     $extraCSS = "CSS/SignUp_LogIn.css";
     include 'include/header.php'; 
@@ -7,7 +52,7 @@
 
     <div class="wrapper">
 
-        <form class="signup">
+        <form class="signup" method="POST" action="">
 
             <h1>Rekisteröidy</h1>
 
@@ -39,6 +84,14 @@
 
             <p>Aready have an account? <a href="login.php">Log in</a> </p>
         </form>
+
+        <?php 
+            
+        ?>
+
+        <?php if ($error): ?>
+            <p style="color:red"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
 
     </div>
 
