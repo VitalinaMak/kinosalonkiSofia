@@ -1,12 +1,33 @@
 <?php 
+    session_start();
+
+    /* if the user is not registered, kick them out of here */
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: login.php");
+        exit();
+    }
+
+    $userID = ($_SESSION['user_id']);  // registered user's id
+
     $pageTitle = "Account";
     $extraCSS = "CSS/account.css";
     $extraJS = "JavaScript/account.js";
     include 'include/header.php'; 
+
+    /* retrieve all information about the user from the database */
+    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->bind_param("s", $userID);
+    $stmt->execute();
+    
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+    $name = $user['username'];
+    $email = $user['email'];
 ?>
 <main class="account_page">
     
-    <h1> Hei, [users_name]</h1>
+    <h1> Hei, <?= $name ?></h1>
 
     <div class="wrapper"></div>
 
