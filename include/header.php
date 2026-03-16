@@ -25,7 +25,7 @@
             </a>
             <h2>Kinosalonki Sofia</h2>
         </div>
-        <a href="login.php" class="btn btn-outline-primary">Kirjaudu sisään</a>
+        <a href="login.php" class="button">Kirjaudu sisään</a>
 
         <!-- DELETE THIS LATER; navigation to all our php files, thought might be useful-->
         <!-- OK. I made them into a drop-down list so they wouldn't interfere with the formatting -->
@@ -39,6 +39,7 @@
                 <a href="index.php">index</a>
                 <a href="login.php">login</a>
                 <a href="signup.php">signup</a>
+                <a href="account.php">ACCOUNT</a>
                 <a href="tapahtumat.php">Tapahtumat</a>
             </div>
         </nav> 

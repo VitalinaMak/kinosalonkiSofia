@@ -1,0 +1,25 @@
+.wrapper {
+  box-sizing: border-box;
+  min-height: 100%;
+  width: 100%;
+  padding: 20px;
+}
+
+/* .wrapper > div {
+  padding: 10px;
+} */
+
+/* Когда поле нельзя редактировать */
+input[readonly] {
+  background-color: #f0f0f0; /* Серый фон */
+  border-color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Когда поле открыто для редактирования (после нажатия кнопки) */
+input:not([readonly]) {
+  background-color: var(--cinema-whiteish);
+  border-color: var(--blue);
+  cursor: text;
+}
