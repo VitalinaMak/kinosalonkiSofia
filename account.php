@@ -1,7 +1,7 @@
-<?php 
-    session_start();
+<?php
+    require_once 'include/configuration.php';  //connection to database and session start
 
-    /* if the user is not registered, kick them out of here */
+    /* if the user is not registered, kick them out of here to the login page*/
     if (!isset($_SESSION['user_id'])) {
         header("Location: login.php");
         exit();

@@ -1,7 +1,6 @@
-<?php 
-    session_start();  //don't write anithing above it, it has to be the first line in php-code
+<?php
 
-    require_once 'include/configuration.php';  //connection to database
+    require_once 'include/configuration.php';  //connection to database and session start
 
     $error = '';  //variable for error display
 

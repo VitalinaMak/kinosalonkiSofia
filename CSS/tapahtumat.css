@@ -1,6 +1,25 @@
-.eventList div {
+.eventList .eventInfo {
   background-color: var(--lightblue);
   color: var(--darkblue);
+}
+
+.adminTools a {
+  color: var(--cinema-whiteish);
+  transition: var(--transition);
+}
+.adminTools > :first-child,
+.adminTools > :first-child:focus {
+  background-color: var(--darkblue);
+}
+.adminTools > :last-child,
+.adminTools > :last-child:focus {
+  background-color: var(--base-color);
+}
+.adminTools > :first-child:hover {
+  background-color: var(--orange);
+}
+.adminTools > :last-child:hover {
+  background-color: var(--cinema-pink);
 }
 
 .eventList h3 {
@@ -27,8 +46,6 @@
 .eventListActions input {
   height: 100%;
   display: inline-block;
-  /* border-bottom-right-radius: 0px;
-  border-top-right-radius: 0px; */
 }
 .eventListActions button {
   background-color: #ffffff2f;
@@ -127,28 +144,43 @@
 
 /* a list of events on the page Tapahtumat */
 .eventList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   max-width: 100%;
   justify-content: center;
+  margin-top: 13px;
+  margin-bottom: 13px;
 }
-.eventList div {
+/* event field (contains information about event and edit/delete -tools for admin) */
+.event {
   width: 99%;
+  min-height: 180px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-content: space-around;
+  align-items: stretch;
+  margin: auto;
+  gap: 2px;
+}
+/* div with all information about event */
+.eventInfo {
+  flex-grow: 1;
+  max-width: 95%;
   display: grid;
   grid-template-areas:
     "header header date"
     "image description description";
   grid-template-columns: auto 1fr;
   padding: 10px;
-  margin: auto;
-  margin-bottom: 10px;
-  margin-top: 10px;
 }
-.eventList div .event_header {
+.eventInfo .event_header {
   grid-area: header;
 }
-.eventList div .event_date {
+.eventInfo .event_date {
   grid-area: date;
 }
-.eventList div img {
+.eventInfo img {
   display: inline-block;
   grid-area: image;
   width: 125px;
@@ -156,7 +188,24 @@
   margin: auto;
   align-self: center;
 }
-.eventList div p {
+.eventInfo p {
   grid-area: description;
   margin-bottom: 0px;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+/* div with links to edit and delete event (it's visible only for admin) */
+.adminTools {
+  display: flex;
+  flex-direction: column;
+  min-width: 50px;
+  /* height: 100%; */
+  gap: 2px;
+}
+.adminTools a {
+  flex: 1;
+  text-decoration: none;
+  text-align: center;
+  /*   height: 45%; */
+  width: 100%;
 }

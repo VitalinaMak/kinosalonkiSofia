@@ -25,7 +25,7 @@
             </a>
             <h2>Kinosalonki Sofia</h2>
         </div>
-        <a href="login.php" class="button">Kirjaudu sisään</a>
+        <?= !isset($_SESSION['user_id']) ? "<a href='login.php' class='button'>Kirjaudu sisään</a>" : "<a href='account.php' class='button'>Oma tili</a>" ?>
 
         <!-- DELETE THIS LATER; navigation to all our php files, thought might be useful-->
         <!-- OK. I made them into a drop-down list so they wouldn't interfere with the formatting -->
