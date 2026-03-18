@@ -12,17 +12,27 @@
   justify-content: space-around;
   padding: 15px;
 }
+
+.about {
+  width: 100%;
+}
+
 .photos {
-  /* margin-top: 10px; */
+  margin-top: 10px;
   margin-bottom: 10px;
   width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 5px;
 }
 .photos img {
-  width: 33%;
+  width: 32%;
+  height: auto;
 }
-.about {
-  grid-area: about;
-  width: 100%;
+
+.about p {
+  padding: 10px;
 }
 /* a list of current events on the main page */
 .eventsToday {

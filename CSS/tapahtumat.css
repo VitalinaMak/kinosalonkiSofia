@@ -29,7 +29,7 @@
 .eventListActions {
   width: 100%;
   display: flex;
-  flex-flow: row;
+  flex-flow: row wrap;
   justify-content: space-between;
   padding-left: 6px;
   padding-right: 6px;
@@ -166,7 +166,7 @@
 /* div with all information about event */
 .eventInfo {
   flex-grow: 1;
-  max-width: 95%;
+  /* max-width: 95%; */
   display: grid;
   grid-template-areas:
     "header header date"
