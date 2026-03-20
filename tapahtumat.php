@@ -1,4 +1,35 @@
 <?php 
+
+    require_once 'include/configuration.php';  //connection to database and session start
+
+    /* check if the user is admin */
+    $isAdmin = false;
+    if (isset($_SESSION['user_id']) && $_SESSION['user_id']==1) {  //admin's account shouldn't be deleted, so it's id always remains 1
+        $isAdmin = true;
+    }
+
+    /* delete event (one more thing that has to be placed before any output) */
+    if (isset($_GET['id'])) {
+        $stmt = $conn->prepare("DELETE FROM events WHERE id = ?;");
+        $id = (int) $_GET['id'];
+        $stmt->bind_param("i", $id);
+        if ($stmt->execute()) {
+            $query = $_GET;
+            unset($query['id']);  //remove id from the URL
+
+            $queryString = http_build_query($query);  //save the rest of the URL (sorting, filtering, searching if applied) and build a new URL from it
+
+            $url = "tapahtumat.php";
+
+            if (!empty($queryString)) {
+                $url .= "?" . $queryString;
+            }
+
+            header("Location: $url");  //redirect to the same page
+            exit();
+        }
+    }
+
     $pageTitle = "Tapahtumat";
     $extraCSS = "CSS/tapahtumat.css";
     include 'include/header.php'; 
@@ -123,6 +154,7 @@
             /* base sql-query */
             $sql = "
                 SELECT 
+                    events.id,
                     events.event_name, 
                     events.event_date, 
                     DATE_FORMAT(events.event_date, '%d.%m.%Y') AS event_formatted_date, 
@@ -130,6 +162,7 @@
                     DATE_FORMAT(events.event_time, '%i') AS event_minute, 
                     events.event_image, 
                     events.description, 
+                    events.age_limit,
                     events.location, 
                     events.event_type, 
                     events.max_visitors, 
@@ -178,18 +211,27 @@
 
                     $kuvaPath = empty($row["event_image"]) ? "noImage.png" : $row["event_image"];  //if the event doesn't have image, use the default image
                     $placesLeft = $row['max_visitors'] - $row['booked_places'];  //amount of seats left, calculated from the max. amount of seats (stated in the table) and amount of bookings made for the event 
+                    $ageLimit = ($row['age_limit']=="Ei luokiteltu") ? "" : "(".$row['age_limit'].")";  //age limit. If it's defined, it appears in parenthesis after the name of the event
 
-                    echo "<div>
-                            <h3 class='event_header'>{$row['event_name']}</h3>
-                            <h3 class='event_date'>{$row['event_formatted_date']} klo {$row['event_hour']}.{$row['event_minute']}</h3>
-                            <img src='kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>
-                            <p>{$row['description']}<br>Paikkoja jäljellä: {$placesLeft}.</p>
-                        </div>";
+                    echo "<div class='event' onclick='window.location.href=\""."bookEvent.php?id=".$row['id']."\"'>
+                            <div class='eventInfo'>
+                                <h3 class='event_header'>{$row['event_name']} {$ageLimit}</h3>
+                                <h3 class='event_date'>{$row['event_formatted_date']} klo {$row['event_hour']}.{$row['event_minute']}</h3>
+                                <img src='kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>
+                                <p>{$row['description']}<br>Paikkoja jäljellä: {$placesLeft}.</p>
+                            </div>"
+                            . ($isAdmin   /* if the user is admin, add div with links for editing and deleting. Else just close the div */
+                                ? "<div class='adminTools'>  
+                                        <a href='editEvent.php?id=".$row['id']."'>Edit</a>
+                                        <a href='tapahtumat.php?id=".$row['id']."'>Delete</a>
+                                </div></div>" 
+                                : "</div>");
                 }
             } else {
                 echo "<p class='nothingFound'>Tapahtumia ei löytynyt</p>";
             }
 
+            
         ?>
     </div>
 </main>
