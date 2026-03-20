@@ -36,12 +36,12 @@
             <form class="profile" id="profile" method="post" action="account.php"  enctype="multipart/form-data">
                 <div>
                     <label for="name-input">Nimi</label>
-                    <input type="text" id="name-input" name="name" value="[users_name]" readonly required>
+                    <input type="text" id="name-input" name="name" value=<?=$name?> readonly required>
                 </div>
 
                 <div>
                     <label for="email-input">Sähköposti</label>
-                    <input type="email" id="email-input" name="email" value="[users_email]" readonly required>
+                    <input type="email" id="email-input" name="email" value=<?=$email?> readonly required>
                 </div>
 
                 <div>

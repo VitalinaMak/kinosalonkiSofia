@@ -173,6 +173,7 @@
     "image description description";
   grid-template-columns: auto 1fr;
   padding: 10px;
+  transition: var(--transition);
 }
 .eventInfo .event_header {
   grid-area: header;
@@ -193,6 +194,10 @@
   margin-bottom: 0px;
   overflow-wrap: break-word;
   hyphens: auto;
+}
+.eventInfo:hover {
+  cursor: pointer;
+  background-color: var(--lighterblue);
 }
 /* div with links to edit and delete event (it's visible only for admin) */
 .adminTools {

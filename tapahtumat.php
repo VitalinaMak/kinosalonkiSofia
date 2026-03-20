@@ -162,6 +162,7 @@
                     DATE_FORMAT(events.event_time, '%i') AS event_minute, 
                     events.event_image, 
                     events.description, 
+                    events.age_limit,
                     events.location, 
                     events.event_type, 
                     events.max_visitors, 
@@ -210,10 +211,11 @@
 
                     $kuvaPath = empty($row["event_image"]) ? "noImage.png" : $row["event_image"];  //if the event doesn't have image, use the default image
                     $placesLeft = $row['max_visitors'] - $row['booked_places'];  //amount of seats left, calculated from the max. amount of seats (stated in the table) and amount of bookings made for the event 
+                    $ageLimit = ($row['age_limit']=="Ei luokiteltu") ? "" : "(".$row['age_limit'].")";  //age limit. If it's defined, it appears in parenthesis after the name of the event
 
-                    echo "<div class='event'>
+                    echo "<div class='event' onclick='window.location.href=\""."bookEvent.php?id=".$row['id']."\"'>
                             <div class='eventInfo'>
-                                <h3 class='event_header'>{$row['event_name']}</h3>
+                                <h3 class='event_header'>{$row['event_name']} {$ageLimit}</h3>
                                 <h3 class='event_date'>{$row['event_formatted_date']} klo {$row['event_hour']}.{$row['event_minute']}</h3>
                                 <img src='kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>
                                 <p>{$row['description']}<br>Paikkoja jäljellä: {$placesLeft}.</p>
