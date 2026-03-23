@@ -110,10 +110,40 @@
                 
 
                 <p id="message"></p>
+                <a id="backToEvents" href="tapahtumat.php" style="display: none;">Takaisin tapahtuma-sivulle</a>
             </div>
         </div>
 
         <p>Huom! Yhdellä tunnuksella voi varata enintään 2 paikkaa. Mikäli haluat varata useampia paikkoja, olethan yhteydessä yhdistykseen, jonka kautta se on mahdollista.</p>  <!-- paste here phone number or email, idk, on therir webpage they say they don't accept reservations via email, phone or social media -->
+        <button onclick="revealTheForm()">Varaa enemmän paikkoja</button>
+
+        <form class="morePlaces" method="POST" action="" id="login" style="display: none">
+
+            <h2>Täytä lomake</h2>
+
+            <div>
+                <label for="name-input"></label>
+                <input type="text" id="name-input" name="name" placeholder="Etunimi ja sukuninmi" required>
+            </div>
+            <div>
+                <label for="email-input">Sähköposti:</label>
+                <input type="email" id="email-input" name="email" placeholder="Sähköpostiosoite" required> <!-- may do autofill for email and maybe name, but it requires one more sql-query to retrive it from DB... -->
+            </div>
+            <div>
+                <label for="phone-input"></label>
+                <input type="tel" id="phone-input" name="password" placeholder="Puhelinnumero" required>
+            </div>
+            <div>
+                <label for="places-input">Paikkojen määrä</label>
+                <input type="number" id="places-input" name="places" required>
+            </div>
+            <div>
+                <label for="comment-input">Kommentti</label>
+                <textarea type="comment" id="comment-input" name="comment"></textarea>
+            </div>
+            <button type="submit" class="">Lähettää</button>
+            
+        </form>
 
     </div>
 

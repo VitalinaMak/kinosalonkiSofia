@@ -23,3 +23,13 @@ input:not([readonly]) {
   border-color: var(--blue);
   cursor: text;
 }
+
+/* main {
+  background-image: url("../kuvat/option1Blue.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: cover;
+  overflow: hidden;
+}
+ */

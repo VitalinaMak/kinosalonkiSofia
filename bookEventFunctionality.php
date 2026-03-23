@@ -26,8 +26,14 @@
 
     /* show booking status */
     if ($success) {
-        echo "Varaus onnistui! Kiitos varauksestasi.";
+        echo json_encode([
+            "success" => true,
+            "message" => "Varaus onnistui! Kiitos varauksestasi."
+        ]);
     } else {
-        echo "Virhe varauksessa.";
+        echo json_encode([
+            "success" => false,
+            "message" => "Virhe varauksessa."
+        ]);
     }
 ?>
