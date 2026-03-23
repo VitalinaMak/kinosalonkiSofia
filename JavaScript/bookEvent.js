@@ -74,15 +74,15 @@ window.selection = function(i) {
         selectedSeats = selectedSeats.filter(id => id !== i);
         seatID.style.backgroundColor = "";
     } else {
-        // if more than 3 seats are selected, remove the selection of the first selected seat
-        if (selectedSeats.length >= 3) {
+        // if more than 2 seats are selected, remove the selection of the first selected seat
+        if (selectedSeats.length >= 2) {
             let unselectID = selectedSeats.shift(); //remove the first element of the array and saves it to the variable
             let unselectSeat = document.getElementById(unselectID);  //get the element by it's id
             unselectSeat.style.backgroundColor = "";  //remove selection
         }
-        // if user already booked some seats before, restrict booking more than 3 seats in total
-        if (userAlreadyBooked >= 3 || (userAlreadyBooked + selectedSeats.length) >= 3) {
-            alert("On mahdollista varata enintään 3 paikkaa. Lisää paikkoja voi varata ottamalla yhteyttä yritykseen. Omat varaukset voi muokata oma tili -sivulla.");
+        // if user already booked some seats before, restrict booking more than 2 seats in total
+        if (userAlreadyBooked >= 2 || (userAlreadyBooked + selectedSeats.length) >= 2) {
+            alert("On mahdollista varata enintään 2 paikkaa. Lisää paikkoja voi varata ottamalla yhteyttä yritykseen. Omat varaukset voi muokata oma tili -sivulla.");
             return;
         }
         /* if everything is OK, add seat's id to array and change it's style to selected */
