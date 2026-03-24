@@ -51,7 +51,7 @@
                 </label>
                 <input type="password" id="password-input" name="password" placeholder="Salasana" value="testi2" required>
             </div>
-            <!-- usually there's no need in repeating password to log in, so I removed that -->
+
             <button type="submit" class="">Submit</button>
             
             <p>Don't have an account? <a href="signup.php">Sign up</a> </p>
