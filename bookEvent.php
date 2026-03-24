@@ -38,14 +38,14 @@
     $bookings[] = $row['seat_number']; 
 
     if ($row['user_id'] == $user) {
-        $userAlreadyBooked += 1;
+        $userAlreadyBooked += 1;  //if the user's id is found in the table bookings for this event, add 1 to counter
     }
 }
 ?>
 
 <script>
     const bookedSeats = <?= json_encode($bookings) ?>;  //send the array with booked seats to JavaScript
-    const userAlreadyBooked = <?= json_encode($userAlreadyBooked) ?>;  //send to JS amount of bookings user already did for this event
+    let userAlreadyBooked = Number(<?= json_encode($userAlreadyBooked) ?>);  //send to JS amount of bookings user already did for this event
 </script>
 
 <main class="bookEvent_page">
@@ -94,9 +94,9 @@
                     </tr>
                 </tbody></table>
             <?php elseif ($eventType == '2'): ?>
-                <p>Paikkoja jäljellä: <?=$maxVisitors-$bookedSeatsAmount?></p>  <!-- if event type is 2 (limited amount of places), show the amount of places left -->
+                <p>Paikkoja jäljellä: <span id="placesLeft"><?=$maxVisitors - $bookedSeatsAmount?></span></p>  <!-- if event type is 2 (limited amount of places), show the amount of places left -->
             <?php else: ?>
-                <p>Ilmoittautuneiden määrä: <?=$bookedSeatsAmount?></p>  <!-- if event type is 3 (unlimited amount of places), show the total number of participants-->
+                <p>Ilmoittautuneiden määrä: <span id="bookedCount"><?=$bookedSeatsAmount?></span></p>  <!-- if event type is 3 (unlimited amount of places), show the total number of participants-->
             <?php endif; ?>
 
             <div class="bookingInfo">
@@ -104,10 +104,9 @@
                 <form id="bookingForm" onsubmit="return validateForm()">
                     <input type="hidden" id="checkLogin" name="checkLogin" value="<?php echo ($user) ? 1 : 0; ?>">  <!-- an input to check if the user logged in -->
                     <input type="hidden" id="selectedSeatsInput" name="seats">  <!-- an input to store the ID's of selected seats -->
+                    <input type="hidden" id="typeOfEvent" name="typeOfEvent" value="<?=$eventType?>">  <!-- an input to store event's type -->
                     <input type="submit" name="submit" value="Vahvista varaus">
                 </form>
-
-                
 
                 <p id="message"></p>
                 <a id="backToEvents" href="tapahtumat.php" style="display: none;">Takaisin tapahtuma-sivulle</a>
@@ -148,5 +147,6 @@
     </div>
 
 </main>  
+
 <?php include 'include/footer.php'; ?>
 
