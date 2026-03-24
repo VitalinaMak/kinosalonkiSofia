@@ -13,6 +13,10 @@
   --beige: rgb(246, 243, 215);
   --pinkish: #fdf2f2;
 
+  --event1: rgb(132, 200, 107);
+  --event2: #e78a1f;
+  --event3: rgb(116, 186, 186);
+
   /* From the cinema_seats.jpg */
   --cinema-red1: #7e1605ff;
   --cinema-red2: #a52108ff;
@@ -65,7 +69,13 @@ main {
   /* box-sizing: border-box; */
   background-color: var(--cinema-whiteish);
 }
-/* some default values to override any browser settings - END? */
+
+h1 {
+  text-transform: uppercase;
+  font-family: Poppins, serif;
+  font: 2rem;
+  font-weight: 525;
+}
 
 header {
   display: flex;

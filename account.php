@@ -62,18 +62,21 @@
                     <button type="button" id="edit-btn" onclick="toggleEdit()">Muokkaa</button>
                     <button type="submit" id="save-btn" style="display: none;">Tallenna</button>
                 </div>
+                
+                <button class="deleteaccount" type="button" id="deleteaccount-btn">Delete Account</button>
             </form>
 
-            <button class="deleteaccount" type="button" id="deleteaccount-btn">Delete Account</button>
         </div>
 
         <div class="reservations info">
 
                 <h1> Varauksesi </h1>
                 
-                <div class="reservations">
-                    <p>Tapahtuma_XYZ, time date</p>
-                    <p>places 10, 11</p>
+                <div class="reserved">
+                    <div class="details">
+                        <p>Tapahtuma_XYZ, time date</p>
+                        <p>places 10, 11</p>
+                    </div>
                     <div class="edit">
                         <!-- REDACT THE LINKS TO CORRECT ONES -->
                         <!-- REDACT THE LINKS TO CORRECT ONES -->
@@ -83,9 +86,11 @@
                     </div>
                 </div>
 
-                <div class="reservations">
-                    <p>Tapahtuma_QWE, time date</p>
-                    <p>places 22, 24</p>
+                <div class="reserved">
+                    <div class="details">
+                        <p>Tapahtuma_QWE, time date</p>
+                        <p>places 22, 24</p>
+                    </div>
                     <div class="edit">
                         <!-- REDACT THE LINKS TO CORRECT ONES -->
                         <!-- REDACT THE LINKS TO CORRECT ONES -->
