@@ -10,7 +10,6 @@
   --lighterblue: rgb(116, 186, 186);
   --lightblue: #a6d1d1;
   --orange: #e78a1f;
-  /* --red: #d32402; */
   --beige: rgb(246, 243, 215);
   --pinkish: #fdf2f2;
 
@@ -27,6 +26,7 @@
   /* self-explanatory */
   --border-radius: 10px;
   --transition: 200ms ease;
+  --form-label-width: 50px;
 }
 
 /* some default values to override any browser settings - START */
@@ -179,7 +179,7 @@ main a {
 /*----------------------------------------------------------------------------*/
 
 /* - - - START GLOBAL form BUTTON SETTINGS - - - */
-form button /* overrides */ {
+button {
   padding: 0.85em 4em;
   border: none;
   border-radius: 10px;
@@ -189,14 +189,14 @@ form button /* overrides */ {
   transition: var(--transition);
 }
 
-form button:hover,
+button:hover,
 .button:hover {
   cursor: pointer;
   background-color: var(--cinema-pink);
 }
 /* - - - END GLOBAL BUTTON SETTINGS - - - */
 
-/* - - - START GLOBAL LINKASBUTTON SETTINGS - - - */
+/* - - - START GLOBAL LINK-AS-BUTTON SETTINGS - - - */
 .button {
   padding: 0.5em 1em;
   font-weight: 500;
