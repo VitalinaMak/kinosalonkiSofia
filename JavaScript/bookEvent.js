@@ -47,10 +47,13 @@ document.addEventListener("DOMContentLoaded", function () {
             })
         })
         /* get respond from php */
-        .then(res => res.text())
+        .then(res => res.json())
         .then(data => {
             console.log(data);
-            document.getElementById("message").innerText = data;
+            document.getElementById("message").innerText = data.message;
+            if (data.success) {
+                document.getElementById("backToEvents").style.display = "block";  // show button if success
+            }
         });
     });
 });
@@ -103,4 +106,9 @@ function validateForm() {
         return false;
     }
     return true;
+}
+
+function revealTheForm() {
+    let form = document.getElementsByClassName("morePlaces")[0];
+    form.style.display = "block";
 }
