@@ -12,6 +12,20 @@
   left: 0;
   /* right: 0; stretch horisontally */
 }
+
+/* Toggle buttons through JS */
+/* input[readonly] {
+  background-color: #f0f0f0; 
+  border-color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+input:not([readonly]) {
+  background-color: var(--cinema-whiteish);
+  border-color: var(--blue);
+  cursor: text;
+} */
+
 /* - - - /BUTTONS - - - */
 
 .wrapper {
@@ -52,8 +66,6 @@
   position: relative;
   /* - /donottouch - */
   background-color: var(--cinema-whiteish-tr);
-
-  box-shadow: inset 0 0 50px 20px var(--cinema-whiteish);
 }
 
 .reservations {
@@ -74,22 +86,44 @@
 
   background-color: var(--cinema-whiteish);
 }
+/* - - - - - - /FLOATIES - - - - - - */
 
-/* .reserved p {
-} */
+/* - - - RESERVED EVENT RECTANGLE FLOATIE - - - */
 
-/* JS shii */
-/* input[readonly] {
-  background-color: #f0f0f0; 
-  border-color: #ccc;
-  cursor: not-allowed;
-  box-shadow: none;
+/* Row 1: The Paragraph Container */
+.r1 {
+  display: flex;
+  justify-content: space-between; /* Pushes time to left, place to right */
+  width: 100%;
+  font-weight: 500;
+  margin-bottom: 4px; /* Tiny gap before the movie title */
 }
-input:not([readonly]) {
-  background-color: var(--cinema-whiteish);
-  border-color: var(--blue);
-  cursor: text;
-} */
+
+/* Row 2: The Movie Title */
+.eventname {
+  display: block;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.4; /* Helps with multi-line alignment */
+}
+data.age {
+  display: inline-block;
+  margin-left: 8px;
+  background-color: var(--darkblue);
+  color: white;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+/* Row 3: Icon and Address */
+.icon-adress.r3 {
+  gap: 8px;
+  margin-top: 8px;
+  color: var(--base-color);
+}
+/* - - - /RESERVED EVENT RECTANGLE FLOATIE - - - */
 
 /* - - - - - - FORM - - - - - - */
 form {
@@ -103,7 +137,6 @@ form {
 form > div {
   width: 100%;
   display: flex;
-  /* justify-content: center; */
 }
 
 form label {
@@ -113,7 +146,7 @@ form label {
   background-color: var(--lighterblue);
   border-radius: 10px 0 0 10px;
   display: flex;
-  justify-content: center; /*OOO THIS YES*/
+  justify-content: center;
   align-items: center;
 }
 
