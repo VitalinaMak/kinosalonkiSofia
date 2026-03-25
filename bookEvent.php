@@ -23,6 +23,7 @@
 
     $eventType = $event['event_type'];  //type of event
     $maxVisitors = $event['max_visitors'];  //max. amount of visitors for that event
+    $eventName = $event['event_name'];  //event's name
 
     /* retrieve information about booked seats for that event */
     $stmt = $conn->prepare("SELECT user_id, event_id, seat_number FROM bookings WHERE event_id = ?");
@@ -116,7 +117,7 @@
         <p>Huom! Yhdellä tunnuksella voi varata enintään 2 paikkaa. Mikäli haluat varata useampia paikkoja, olethan yhteydessä yhdistykseen, jonka kautta se on mahdollista.</p>  <!-- paste here phone number or email, idk, on therir webpage they say they don't accept reservations via email, phone or social media -->
         <button onclick="revealTheForm()">Varaa enemmän paikkoja</button>
 
-        <form class="morePlaces" method="POST" action="" id="login" style="display: none">
+        <form class="morePlaces" method="POST" action="" id="morePlaces" style="display: none">
 
             <h2>Täytä lomake</h2>
 
@@ -129,17 +130,18 @@
                 <input type="email" id="email-input" name="email" placeholder="Sähköpostiosoite" required> <!-- may do autofill for email and maybe name, but it requires one more sql-query to retrive it from DB... -->
             </div>
             <div>
-                <label for="phone-input"></label>
-                <input type="tel" id="phone-input" name="password" placeholder="Puhelinnumero" required>
+                <label for="phone-input">Puhelinnumero</label>
+                <input type="tel" id="phone-input" name="phone" placeholder="Puhelinnumero" required>
             </div>
             <div>
                 <label for="places-input">Paikkojen määrä</label>
                 <input type="number" id="places-input" name="places" required>
             </div>
             <div>
-                <label for="comment-input">Kommentti</label>
-                <textarea type="comment" id="comment-input" name="comment"></textarea>
+                <label for="comment-input">Lisähuomautukset</label>
+                <textarea type="comment" id="comment-input" name="comment" placeholder="Lisähuomautukset"></textarea>
             </div>
+            <input type="hidden" name="eventName" value="<?php echo htmlspecialchars($eventName); ?>">  <!-- pass the name of event as well -->
             <button type="submit" class="">Lähettää</button>
             
         </form>

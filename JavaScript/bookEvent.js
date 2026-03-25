@@ -164,3 +164,22 @@ function revealTheForm() {
     let form = document.getElementsByClassName("morePlaces")[0];
     form.style.display = "block";
 }
+
+document.getElementById("morePlaces").addEventListener("submit", function(e) {
+    e.preventDefault();  // stops page reload
+
+    let formData = new FormData(this);  // collects all form inputs automatically
+
+    fetch("moreBookings.php", {  // sends the data to php using POST
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())  // gets response from the php and converts it into text
+    .then(data => {
+        console.log(data);  //print all the data into console
+        alert("Viesti lähetetty."); // if access, show the message
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+});
