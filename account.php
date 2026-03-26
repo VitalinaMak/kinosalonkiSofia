@@ -129,6 +129,8 @@
                 </div>
             </div>
                 
+            <div class="none-reserved">
+                <p>Sinulla ei ole aktiivisia varauksia. <a href="tapahtumat.php">Katso ohjelmisto</a> </p>
             </div>
 
         </div>

@@ -82,6 +82,10 @@ input:not([readonly]) {
   padding: 20px;
   border-radius: 10px;
   background-color: var(--cinema-whiteish);
+
+  /* Shadow. OPTIONAL */
+  /* box-shadow: offset-x offset-y   blur-radius spread-radius   color inset; */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
 .details {
@@ -97,7 +101,6 @@ input:not([readonly]) {
 }
 
 /* <!-- ROW 1 --> */
-
 .time-place {
   display: flex;
   justify-content: space-between;
@@ -146,8 +149,29 @@ input:not([readonly]) {
 .cancel {
   background-color: var(--cinema-pinkish);
 }
-
 /* - - - - - - /RESERVED EVENT RECTANGLE FLOATIE  - - - - - - */
+
+/* - - -  NONE-RESERVED RECTANGLE FLOATIE - - - */
+.none-reserved {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--cinema-whiteish);
+}
+.none-reserved p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.none-reserved p a {
+  color: var(--lighterblue);
+  font-weight: bold;
+  margin-top: 18px;
+  display: inline;
+}
+.none-reserved p a:hover {
+  color: var(--cinema-pink);
+}
+/* - - -  /NONE-RESERVED RECTANGLE FLOATIE - - - */
 
 /* - - - FOR SCREENS SMALLER THEN 800px - - - */
 @media (max-width: 800px) {
