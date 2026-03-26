@@ -103,22 +103,20 @@ input:not([readonly]) {
   justify-content: space-between;
   width: 100%;
   font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
 
 /* <!-- ROW 2 --> */
 .eventname {
   display: block;
   font-weight: 650;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   line-height: 1.6; /* Helps with multi-line alignment */
   margin-bottom: 4px;
 }
 .age {
   display: inline-block;
-
-  /* margin-left: 8px; */
-  /* margin-bottom: 4px; */
+  margin-bottom: 4px;
   background-color: var(--dark-teal);
   color: white;
   padding: 0 6px;
