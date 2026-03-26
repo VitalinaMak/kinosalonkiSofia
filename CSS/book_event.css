@@ -65,4 +65,13 @@ td.selected {
 
 .backToEvents {
   display: none;
+  text-decoration: none;
+  /* copied from buttons in global */
+  padding: 0.85em 4em;
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+  background-color: var(--darkblue);
+  color: var(--cinema-whiteish);
+  transition: var(--transition);
 }

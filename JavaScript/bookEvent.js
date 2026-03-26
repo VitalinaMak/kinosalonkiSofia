@@ -104,16 +104,6 @@ window.selection = function(i) {
         selectedSeats = selectedSeats.filter(id => id !== i);
         seatID.style.backgroundColor = "";
     } else {
-        // if more than 2 seats are selected, remove the selection of the first selected seat
-       /*  if (selectedSeats.length >= 2) {
-            let unselectID = selectedSeats.shift(); //remove the first element of the array and save it to the variable
-            let unselectSeat = document.getElementById(unselectID);  //get the element by it's id
-            unselectSeat.style.backgroundColor = "";  //remove selection
-        } */
-        /* if (userAlreadyBooked >= 2 || (userAlreadyBooked + selectedSeats.length) >= 2) {
-            alert("On mahdollista varata enintään 2 paikkaa. Lisää paikkoja voi varata täyttämällä lomakkeen. Omat varaukset voi muokata oma tili -sivulla.");
-            return;
-            } */
            
         // if user already booked some seats before, restrict booking more than 2 seats in total
         if (exceedsLimit(1)) {

@@ -64,7 +64,7 @@
                         </div>
                         <div> <!-- Места -->
                             <label for="maxplaces-input"> </label> 
-                            <input type="number" id="maxplaces-input" name="maxplaces" min="1" placeholder="Max. osallistujamäärä" required>
+                            <input type="number" id="maxplaces-input" name="maxplaces" placeholder="Max. osallistujamäärä" required>
                         </div>
                     </div>
 
@@ -149,7 +149,7 @@
         if ((int)$_POST['eventType'] === 1) {
             $maxplaces = 24;  //if event type is movie, max. amount of places is always 24
         } else if ((int)$_POST['eventType'] === 3) {
-            $maxplaces = 1;  //for the 3rd type of event (event with unlimited visitors) the default value is 1, the it will be handled differently in the event list
+            $maxplaces = "";  //leave the input field empty for the 3rd type of event
         } else {
             $maxplaces = (int)$_POST['maxplaces'];
         }
