@@ -23,6 +23,7 @@
 
     $eventType = $event['event_type'];  //type of event
     $maxVisitors = $event['max_visitors'];  //max. amount of visitors for that event
+    $eventName = $event['event_name'];  //event's name
 
     /* retrieve information about booked seats for that event */
     $stmt = $conn->prepare("SELECT user_id, event_id, seat_number FROM bookings WHERE event_id = ?");
@@ -38,14 +39,14 @@
     $bookings[] = $row['seat_number']; 
 
     if ($row['user_id'] == $user) {
-        $userAlreadyBooked += 1;
+        $userAlreadyBooked += 1;  //if the user's id is found in the table bookings for this event, add 1 to counter
     }
 }
 ?>
 
 <script>
     const bookedSeats = <?= json_encode($bookings) ?>;  //send the array with booked seats to JavaScript
-    const userAlreadyBooked = <?= json_encode($userAlreadyBooked) ?>;  //send to JS amount of bookings user already did for this event
+    let userAlreadyBooked = Number(<?= json_encode($userAlreadyBooked) ?>);  //send to JS amount of bookings user already did for this event
 </script>
 
 <main class="bookEvent_page">
@@ -94,9 +95,9 @@
                     </tr>
                 </tbody></table>
             <?php elseif ($eventType == '2'): ?>
-                <p>Paikkoja jäljellä: <?=$maxVisitors-$bookedSeatsAmount?></p>  <!-- if event type is 2 (limited amount of places), show the amount of places left -->
+                <p>Paikkoja jäljellä: <span id="placesLeft"><?=$maxVisitors - $bookedSeatsAmount?></span></p>  <!-- if event type is 2 (limited amount of places), show the amount of places left -->
             <?php else: ?>
-                <p>Ilmoittautuneiden määrä: <?=$bookedSeatsAmount?></p>  <!-- if event type is 3 (unlimited amount of places), show the total number of participants-->
+                <p>Ilmoittautuneiden määrä: <span id="bookedCount"><?=$bookedSeatsAmount?></span></p>  <!-- if event type is 3 (unlimited amount of places), show the total number of participants-->
             <?php endif; ?>
 
             <div class="bookingInfo">
@@ -104,20 +105,19 @@
                 <form id="bookingForm" onsubmit="return validateForm()">
                     <input type="hidden" id="checkLogin" name="checkLogin" value="<?php echo ($user) ? 1 : 0; ?>">  <!-- an input to check if the user logged in -->
                     <input type="hidden" id="selectedSeatsInput" name="seats">  <!-- an input to store the ID's of selected seats -->
+                    <input type="hidden" id="typeOfEvent" name="typeOfEvent" value="<?=$eventType?>">  <!-- an input to store event's type -->
                     <input type="submit" name="submit" value="Vahvista varaus">
                 </form>
 
-                
-
                 <p id="message"></p>
-                <a id="backToEvents" href="tapahtumat.php" style="display: none;">Takaisin tapahtuma-sivulle</a>
+                <a id="backToEvents" href="tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
             </div>
         </div>
 
         <p>Huom! Yhdellä tunnuksella voi varata enintään 2 paikkaa. Mikäli haluat varata useampia paikkoja, olethan yhteydessä yhdistykseen, jonka kautta se on mahdollista.</p>  <!-- paste here phone number or email, idk, on therir webpage they say they don't accept reservations via email, phone or social media -->
         <button onclick="revealTheForm()">Varaa enemmän paikkoja</button>
 
-        <form class="morePlaces" method="POST" action="" id="login" style="display: none">
+        <form class="morePlaces" method="POST" action="" id="morePlaces" style="display: none">
 
             <h2>Täytä lomake</h2>
 
@@ -130,23 +130,27 @@
                 <input type="email" id="email-input" name="email" placeholder="Sähköpostiosoite" required> <!-- may do autofill for email and maybe name, but it requires one more sql-query to retrive it from DB... -->
             </div>
             <div>
-                <label for="phone-input"></label>
-                <input type="tel" id="phone-input" name="password" placeholder="Puhelinnumero" required>
+                <label for="phone-input">Puhelinnumero</label>
+                <input type="tel" id="phone-input" name="phone" placeholder="Puhelinnumero" required>
             </div>
             <div>
                 <label for="places-input">Paikkojen määrä</label>
                 <input type="number" id="places-input" name="places" required>
             </div>
             <div>
-                <label for="comment-input">Kommentti</label>
-                <textarea type="comment" id="comment-input" name="comment"></textarea>
+                <label for="comment-input">Lisähuomautukset</label>
+                <textarea type="comment" id="comment-input" name="comment" placeholder="Lisähuomautukset"></textarea>
             </div>
+            <input type="hidden" name="eventName" value="<?php echo htmlspecialchars($eventName); ?>">  <!-- pass the name of event as well -->
             <button type="submit" class="">Lähettää</button>
             
         </form>
 
+        <a id="backToEvents2" href="tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
+
     </div>
 
 </main>  
+
 <?php include 'include/footer.php'; ?>
 

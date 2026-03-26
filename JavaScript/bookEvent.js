@@ -3,19 +3,24 @@ console.log("JS loaded");
 let selectedSeats = [];  //array for IDs of selected seats
 let checkLogin = 0;  //variable to check if the user is logged in
 let showBooking;  //variable to show booked seats
+let eventType = 1;  //variable for event type
+let limitAlertShown = false;  //flag to check if the allert was already shown
 
+/* function start only when all elements on the page are loaded */
 document.addEventListener("DOMContentLoaded", function () {
     
-    const checkLoginElement = document.getElementById("checkLogin");
+    eventType = document.getElementById("typeOfEvent").value;  //get the type of event from the hidden input
+
+    const checkLoginElement = document.getElementById("checkLogin");  //get information about user's logging in
 
     if (checkLoginElement) {
         checkLogin = checkLoginElement.value;
     } 
 
-    showBooking = document.getElementById("showSelectedSeats");  
+    showBooking = document.getElementById("showSelectedSeats");  //<p>-element that stores message about seats selecting
 
-    if (selectedSeats.length == 0) {
-        showBooking.innerText = "Valitse paikat istuinkartasta.";  //default message if no seats is chosen yet
+    if (selectedSeats.length == 0 && eventType == 1) {
+        showBooking.innerText = "Valitse paikat istuinkartasta.";  //default message if no seat is chosen yet
     }
 
     /* prevent too early form submitting */
@@ -31,6 +36,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* handle form submitting */
     document.getElementById("bookingForm").addEventListener("submit", function(e) {
+
+        if (!validateForm()) {  //manually call the function to validate input
+            e.preventDefault();
+            return;
+        }
+
         e.preventDefault(); //  stops page reload
 
         const seats = document.getElementById("selectedSeatsInput").value;
@@ -52,8 +63,24 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(data);
             document.getElementById("message").innerText = data.message;
             if (data.success) {
-                document.getElementById("backToEvents").style.display = "block";  // show button if success
+                userAlreadyBooked += selectedSeats.length;  //update the variable with amount of booked seats
+                selectedSeats = [];
+                /* change the information about seats left or total amount of participants (depends on the event type) */
+                const placesLeft = document.getElementById("placesLeft");
+                const bookedCount = document.getElementById("bookedCount");
+                if (placesLeft) {
+                    placesLeft.innerText = data.placesLeft;
+                }
+                if (bookedCount) {
+                    bookedCount.innerText = data.bookedSeatsCount;
+                }
+            } else {
+                if (data.message == "Voit varata enintään 2 paikkaa.") {
+                    alert("Voit varata enintään 2 paikkaa.");
+
+                }
             }
+            document.getElementById("backToEvents").style.display = "block";  // show the button
         });
     });
 });
@@ -72,43 +99,97 @@ window.selection = function(i) {
         return;
     }
 
-    if (selectedSeats.includes(i)) {
-        // if the seat is already selected → unselect
+    if (selectedSeats.includes(i) && eventType == 1) {
+        // if the seat is already selected → unselect. Only for event type 1
         selectedSeats = selectedSeats.filter(id => id !== i);
         seatID.style.backgroundColor = "";
     } else {
         // if more than 2 seats are selected, remove the selection of the first selected seat
-        if (selectedSeats.length >= 2) {
-            let unselectID = selectedSeats.shift(); //remove the first element of the array and saves it to the variable
+       /*  if (selectedSeats.length >= 2) {
+            let unselectID = selectedSeats.shift(); //remove the first element of the array and save it to the variable
             let unselectSeat = document.getElementById(unselectID);  //get the element by it's id
             unselectSeat.style.backgroundColor = "";  //remove selection
-        }
+        } */
+        /* if (userAlreadyBooked >= 2 || (userAlreadyBooked + selectedSeats.length) >= 2) {
+            alert("On mahdollista varata enintään 2 paikkaa. Lisää paikkoja voi varata täyttämällä lomakkeen. Omat varaukset voi muokata oma tili -sivulla.");
+            return;
+            } */
+           
         // if user already booked some seats before, restrict booking more than 2 seats in total
-        if (userAlreadyBooked >= 2 || (userAlreadyBooked + selectedSeats.length) >= 2) {
-            alert("On mahdollista varata enintään 2 paikkaa. Lisää paikkoja voi varata ottamalla yhteyttä yritykseen. Omat varaukset voi muokata oma tili -sivulla.");
+        if (exceedsLimit(1)) {
+            if (!limitAlertShown) {
+                alert("On mahdollista varata enintään 2 paikkaa. Lisää paikkoja voi varata täyttämällä lomakkeen. Omat varaukset voi muokata oma tili -sivulla.");
+                limitAlertShown = true;
+            }
             return;
         }
+        limitAlertShown = false;
+
         /* if everything is OK, add seat's id to array and change it's style to selected */
         selectedSeats.push(i);
         seatID.style.backgroundColor = "black";
     }
-    console.log(selectedSeats); // debug
+    console.log(selectedSeats); // debugging. This line can be deleted later
 
     document.getElementById("selectedSeatsInput").value = selectedSeats.join(",");  //sends information about the selected seats to the hidden input for later php-handling
     showBooking.innerText = "Valitut paikat: " + selectedSeats.toString();  //show the numbers of selected seats on the page
 }
 
 
-/* check if at least one seat is selected */
+/* validate input on submition */
 function validateForm() {
-    if (selectedSeats.length === 0) {
+    if (checkLogin == "0") {
+        alert("Kirjaudu sisään paikan varamiselle!");  //once again check if the user is logged in, because the first check doesn't work for 2nd and 3rd types of events
+        return false;
+    }
+    if (selectedSeats.length === 0 && eventType == 1) {  //check if at least one seat is selected. Only for event type 1!
         alert("Valitse vähintään yksi paikka!");
         return false;
     }
+    // if user already booked some seats before, restrict booking more than 2 seats in total (check once again for 2nd and 3rd type of events)
+    /* if (exceedsLimit()) {
+        alert("On mahdollista varata enintään 2 paikkaa. Lisää paikkoja voi varata täyttämällä lomakkeen. Omat varaukset voi muokata oma tili -sivulla.");
+        return false;
+    } */
     return true;
 }
 
+/* check if the amount of booked places exeeds allowed number */
+function exceedsLimit(newSeatsCount = 0) {
+    return (userAlreadyBooked + selectedSeats.length + newSeatsCount) > 2;
+}
+
+/* show the form for booking more seats */
 function revealTheForm() {
     let form = document.getElementsByClassName("morePlaces")[0];
     form.style.display = "block";
 }
+
+/* send all data from the form to admin's email */
+document.getElementById("morePlaces").addEventListener("submit", function(e) {
+    e.preventDefault();  // stops page reload
+
+    let formData = new FormData(this);  // collects all form inputs automatically
+
+    fetch("moreBookings.php", {  // sends the data to php using POST
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())  // gets response from the php and converts it into text
+    .then(data => {
+        console.log("Server response: ", data);  // print all the data into console
+        if (data.status === "success") {
+            console.log("Email content:", data.debug);  //show the content of sent email in console
+            alert(data.message);  // if access, show the message "Viesti lähetetty"
+        } else {
+            console.error("Server error:", data);
+            alert("Virhe lähetyksessä");
+        }
+        document.getElementById("backToEvents2").style.display = "block";  // show the button (it's the same as before, only id is changed)
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Yhteysvirhe (palvelin ei vastaa)");
+        document.getElementById("backToEvents2").style.display = "block";  // show the button
+    });
+});
