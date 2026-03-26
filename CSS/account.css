@@ -4,7 +4,6 @@
   width: 50%;
   margin: auto;
 }
-
 #deleteaccount-btn {
   padding: 0.85em 1.15em;
   position: absolute;
@@ -53,7 +52,7 @@ input:not([readonly]) {
 .info {
   /* - donottouch - */
   box-sizing: border-box;
-  flex: 1 1 300px; /* Grow, shrink, and a reasonable base width */
+  flex: 1 1 300px;
   padding: 20px;
   /* - /donottouch - */
 }
@@ -71,59 +70,105 @@ input:not([readonly]) {
 .reservations {
   flex: 2 1 300px; /* - donottouch - */
 }
-/* - - - - - - /FLOATIES - - - - - - */
-
 .reservations h1 {
   color: var(--cinema-whiteish);
   margin: 0;
 }
-
-.reserved {
-  margin: 20px;
-  padding: 20px;
-
-  border-radius: 10px;
-
-  background-color: var(--cinema-whiteish);
-}
 /* - - - - - - /FLOATIES - - - - - - */
 
-/* - - - RESERVED EVENT RECTANGLE FLOATIE - - - */
+/* - - -  - - - RESERVED EVENT RECTANGLE FLOATIE - - - - - - */
+.reserved {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--cinema-whiteish);
+}
 
-/* Row 1: The Paragraph Container */
-.r1 {
+.details {
   display: flex;
-  justify-content: space-between; /* Pushes time to left, place to right */
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.details [class]:not(.age) {
+  /* The space (.parent [class]) means “any descendant of .parent that has a class”. */
+  margin: 0;
+}
+
+/* <!-- ROW 1 --> */
+
+.time-place {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   font-weight: 500;
-  margin-bottom: 4px; /* Tiny gap before the movie title */
+  font-size: 1.25rem;
 }
 
-/* Row 2: The Movie Title */
+/* <!-- ROW 2 --> */
 .eventname {
   display: block;
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 1.4; /* Helps with multi-line alignment */
+  font-weight: 650;
+  font-size: 1.7rem;
+  line-height: 1.6; /* Helps with multi-line alignment */
+  margin-bottom: 4px;
 }
-data.age {
+.age {
   display: inline-block;
-  margin-left: 8px;
-  background-color: var(--darkblue);
+
+  /* margin-left: 8px; */
+  /* margin-bottom: 4px; */
+  background-color: var(--dark-teal);
   color: white;
   padding: 0 6px;
   border-radius: 4px;
   font-size: 1rem;
-  vertical-align: middle;
+  /* vertical-align: middle; */
+  box-sizing: border-box;
 }
 
-/* Row 3: Icon and Address */
-.icon-adress.r3 {
+/* <!-- ROW 3 --> */
+.icon-adress {
   gap: 8px;
-  margin-top: 8px;
   color: var(--base-color);
 }
-/* - - - /RESERVED EVENT RECTANGLE FLOATIE - - - */
+
+/* LINK MUOKKA/PERUUTA LINKBUTTONS */
+.change {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.change .button {
+  flex: 1 1 200px;
+}
+
+.cancel {
+  background-color: var(--cinema-pinkish);
+}
+
+/* - - - - - - /RESERVED EVENT RECTANGLE FLOATIE  - - - - - - */
+
+/* - - - FOR SCREENS SMALLER THEN 800px - - - */
+@media (max-width: 800px) {
+  .wrapper {
+    flex-direction: column-reverse;
+  }
+
+  .profile,
+  .reservations {
+    width: 100%;
+    min-width: 100%;
+    flex: 1 1 auto;
+  }
+
+  .profile {
+    /* Optional: Remove relative positioning or adjust height if needed */
+    height: auto;
+  }
+}
 
 /* - - - - - - FORM - - - - - - */
 form {

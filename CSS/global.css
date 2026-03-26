@@ -9,19 +9,25 @@
   --blue: #4fa1a1;
   --lighterblue: rgb(116, 186, 186);
   --lightblue: #a6d1d1;
-  --orange: #e78a1f;
-  --beige: rgb(246, 243, 215);
+  /* --orange: #e78a1f; taken as event2 */
+  /* --beige: rgb(246, 243, 215); ugly */
   --pinkish: #fdf2f2;
+
+  /* CSS HEX */
+  --dark-teal: #1a424eff;
+  --teal: #40778bff;
 
   --event1: rgb(132, 200, 107);
   --event2: #e78a1f;
   --event3: rgb(116, 186, 186);
 
-  /* From the cinema_seats.jpg */
+  /* cinema_seats.jpg */
   --cinema-red1: #7e1605ff;
   --cinema-red2: #a52108ff;
   --cinema-pink: #dc3545;
+  --cinema-pinkish: #ff384c;
   --cinema-brown: #322317ff;
+  /* --cinema-uu: rgb(181, 167, 145); */
   --cinema-whiteish: #f8f7f3ff;
   --cinema-whiteish-tr: rgba(248, 247, 243, 0.804);
   --cinema-whiteish-trtr: rgba(248, 247, 243, 0.4);
@@ -188,7 +194,7 @@ main a {
 
 /*----------------------------------------------------------------------------*/
 
-/* - - - START GLOBAL form BUTTON SETTINGS - - - */
+/* - - - GLOBAL form BUTTON SETTINGS - - - */
 button {
   padding: 0.85em 4em;
   border: none;
@@ -198,28 +204,21 @@ button {
   color: var(--cinema-whiteish);
   transition: var(--transition);
 }
-
+/* - - - /GLOBAL BUTTON SETTINGS - - - */
 button:hover,
 .button:hover {
   cursor: pointer;
   background-color: var(--cinema-pink);
 }
-/* - - - END GLOBAL BUTTON SETTINGS - - - */
-
-/* - - - START GLOBAL LINK-AS-BUTTON SETTINGS - - - */
+/* - - - GLOBAL LINK-AS-BUTTON SETTINGS - - - */
 .button {
   padding: 0.5em 1em;
   font-weight: 500;
   text-decoration: none;
   border: none;
   border-radius: 10px;
-  background-color: var(--darkblue);
   color: var(--cinema-whiteish);
+  background-color: var(--darkblue);
   transition: var(--transition);
 }
-
-.button:hover {
-  cursor: pointer;
-  background-color: var(--cinema-pink);
-}
-/* - - - END GLOBAL LINK-AS-BUTTON SETTINGS - - - */
+/* - - - /GLOBAL LINK-AS-BUTTON SETTINGS - - - */
