@@ -110,7 +110,7 @@
                 </form>
 
                 <p id="message"></p>
-                <a id="backToEvents" href="tapahtumat.php" style="display: none;">Takaisin tapahtuma-sivulle</a>
+                <a id="backToEvents" href="tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
             </div>
         </div>
 
@@ -145,6 +145,8 @@
             <button type="submit" class="">Lähettää</button>
             
         </form>
+
+        <a id="backToEvents2" href="tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
 
     </div>
 

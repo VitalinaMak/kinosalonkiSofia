@@ -44,11 +44,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p><strong>Varattavien paikkojen määrä:</strong> $places</p>
             <p><strong>Lisähuomautukset:</strong> $comment</p>
         ";
+        /* alternative email content (in plain-text form) in case the client doesn't support HTML */
+        $mail->AltBody = "
+        Asiakkaan nimi: $name
+        Sähköposti: $email
+        Puhelinnumero: $phone
+        Tapahtuma: $eventName
+        Paikat: $places
+        Lisähuomautukset: $comment
+        ";
 
         // Send email
         /* $mail->send(); */  // currently disabled due to the missing app password
-        echo "OK";  //for debugging copy and paste all elements above into echo to see the content of the message
-       /*  echo $email->body; */
+        echo json_encode([
+            "status" => "success",
+            "message" => "Viesti lähetetty",
+            "debug" => [
+                "name" => $name,
+                "email" => $email,
+                "phone" => $phone,
+                "places" => $places,
+                "eventName" => $eventName,
+                "comment" => $comment,
+                "body" => $mail->Body
+            ]
+        ]);
 
     } catch (Exception $e) {
         echo "Viestin lähettäminen epäonnistui. Virhe: {$mail->ErrorInfo}";

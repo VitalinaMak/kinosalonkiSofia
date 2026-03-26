@@ -165,6 +165,7 @@ function revealTheForm() {
     form.style.display = "block";
 }
 
+/* send all data from the form to admin's email */
 document.getElementById("morePlaces").addEventListener("submit", function(e) {
     e.preventDefault();  // stops page reload
 
@@ -174,12 +175,21 @@ document.getElementById("morePlaces").addEventListener("submit", function(e) {
         method: "POST",
         body: formData
     })
-    .then(response => response.text())  // gets response from the php and converts it into text
+    .then(response => response.json())  // gets response from the php and converts it into text
     .then(data => {
-        console.log(data);  //print all the data into console
-        alert("Viesti lähetetty."); // if access, show the message
+        console.log("Server response: ", data);  // print all the data into console
+        if (data.status === "success") {
+            console.log("Email content:", data.debug);  //show the content of sent email in console
+            alert(data.message);  // if access, show the message "Viesti lähetetty"
+        } else {
+            console.error("Server error:", data);
+            alert("Virhe lähetyksessä");
+        }
+        document.getElementById("backToEvents2").style.display = "block";  // show the button (it's the same as before, only id is changed)
     })
     .catch(error => {
         console.error("Error:", error);
+        alert("Yhteysvirhe (palvelin ei vastaa)");
+        document.getElementById("backToEvents2").style.display = "block";  // show the button
     });
 });
