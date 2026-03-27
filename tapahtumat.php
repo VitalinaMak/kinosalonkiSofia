@@ -210,7 +210,7 @@
                 while ($row = $result->fetch_assoc()) {
 
                     $kuvaPath = empty($row["event_image"]) ? "noImage.png" : $row["event_image"];  //if the event doesn't have image, use the default image
-                    $placesNumber = ($row['max_visitors'] != 0) ? "Paikkoja jäljellä: ".($row['max_visitors'] - $row['booked_places']) : "Osallistujien määrä: ".$row['booked_places'];  //amount of seats left (for 1st and 2nd types of event), calculated from the max. amount of seats (stated in the table) and amount of bookings made for the event. For the 3rd type of event (max. amount of seats = 0 by default) show amount of participants
+                    $placesNumber = !(is_null($row['max_visitors'])) ? "Paikkoja jäljellä: ".($row['max_visitors'] - $row['booked_places']) : "Osallistujien määrä: ".$row['booked_places'];  //amount of seats left (for 1st and 2nd types of event), calculated from the max. amount of seats (stated in the table) and amount of bookings made for the event. For the 3rd type of event (max. amount of seats = 0 by default) show amount of participants
                     $ageLimit = ($row['age_limit']=="Ei luokiteltu") ? "" : "(".$row['age_limit'].")";  //age limit. If it's defined, it appears in parenthesis after the name of the event
 
                     echo "<div class='event' onclick='window.location.href=\""."bookEvent.php?id=".$row['id']."\"'>
