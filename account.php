@@ -63,8 +63,26 @@
                     <button type="submit" id="save-btn" style="display: none;">Tallenna</button>
                 </div>
 
-                <button class="deleteaccount" type="button" id="deleteaccount-btn">Delete Account</button>
             </form>
+            
+            <h3>Ilmoitusasetukset</h3>
+
+            <div class="actions">
+                <div class="checkboxes">
+                    <input type="checkbox" id="notify-tapahtumat" name="notify_tapahtumat" checked>
+                    <label for="notify-tapahtumat">Lähetä sähköpostia uusista elokuvista</label>
+                </div>
+
+                <div class="checkboxes">
+                    <input type="checkbox" id="notify-reservations" name="notify_reservations" checked>
+                    <label for="notify-reservations">Lähetä varausmuistutuksia</label>
+                </div>
+            </div>
+            
+            <div class="account-actions">
+                <a class="button logout" href="index.php">Kirjaudu ulos</a>
+                <button class="deleteaccount" type="button" id="deleteaccount-btn">Poista tili</button>
+            </div>
 
         </div>
 
