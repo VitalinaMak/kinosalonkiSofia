@@ -5,6 +5,7 @@
   /* main palette */
   --head-foot: #1d1d1cff;
   --base-color: #34342e;
+  --base-color-inactive: #3f3f3d;
   --darkblue: #384a50;
   --blue: #4fa1a1;
   --lighterblue: rgb(116, 186, 186);
@@ -13,7 +14,7 @@
   /* --beige: rgb(246, 243, 215); ugly */
   --pinkish: #fdf2f2;
 
-  /* CSS HEX */
+  /* blue curtains */
   --dark-teal: #1a424eff;
   --teal: #40778bff;
 
@@ -25,7 +26,7 @@
   --cinema-red1: #7e1605ff;
   --cinema-red2: #a52108ff;
   --cinema-pink: #dc3545;
-  --cinema-pinkish: #ff384c;
+  --cinema-danger: #fe5061;
   --cinema-brown: #322317ff;
   /* --cinema-uu: rgb(181, 167, 145); */
   --cinema-whiteish: #f8f7f3ff;

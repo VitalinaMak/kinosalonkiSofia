@@ -175,6 +175,17 @@ form button /* overrides */ {
 .fileInputField label:hover {
   cursor: pointer;
 }
+/* make reedonly input look unclickable */
+input[readonly] {
+  border: var(--base-color-inactive);
+}
+input[readonly]:hover {
+  cursor: not-allowed;
+  border: 3px solid var(--base-color);
+}
+input[readonly]:focus {
+  border: 3px solid var(--base-color);
+}
 /* - - - end div for image input - - - */
 
 /* PHONE */

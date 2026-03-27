@@ -64,7 +64,7 @@
                         </div>
                         <div> <!-- Места -->
                             <label for="maxplaces-input"> </label> 
-                            <input type="number" id="maxplaces-input" name="maxplaces" placeholder="Max. osallistujamäärä" required>
+                            <input type="number" id="maxplaces-input" name="maxplaces" placeholder="Max. osallistujamäärä: 24" required>
                         </div>
                     </div>
 

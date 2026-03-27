@@ -1,17 +1,3 @@
-/* - - - BUTTONS additions/overrides from global - - - */
-#edit-btn,
-#save-btn {
-  width: 50%;
-  margin: auto;
-}
-#deleteaccount-btn {
-  padding: 0.85em 1.15em;
-  position: absolute;
-  bottom: 0; /* Pin to bottom */
-  left: 0;
-  /* right: 0; stretch horisontally */
-}
-
 /* Toggle buttons through JS */
 /* input[readonly] {
   background-color: #f0f0f0; 
@@ -61,10 +47,13 @@ input:not([readonly]) {
   /* - donottouch - */
   min-width: 30%;
   flex-shrink: 0;
-  background-color: var(--cinema-whiteish);
-  position: relative;
-  /* - /donottouch - */
   background-color: var(--cinema-whiteish-tr);
+  /* - /donottouch - */
+  height: 100%; /* Занимаем всю высоту обертки */
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .reservations {
@@ -76,12 +65,38 @@ input:not([readonly]) {
 }
 /* - - - - - - /FLOATIES - - - - - - */
 
-/* - - -  - - - RESERVED EVENT RECTANGLE FLOATIE - - - - - - */
+/* - - -  NONE-RESERVED RECTANGLE FLOATIE - - - */
+.none-reserved {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--cinema-whiteish);
+}
+.none-reserved p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.none-reserved p a {
+  color: var(--lighterblue);
+  font-weight: bold;
+  margin-top: 18px;
+  display: inline;
+}
+.none-reserved p a:hover {
+  color: var(--cinema-pink);
+}
+/* - - -  /NONE-RESERVED RECTANGLE FLOATIE - - - */
+
+/* - - -  - - - RESERVED EVENTs RECTANGLE FLOATIE - - - - - - */
 .reserved {
   margin: 20px 0;
   padding: 20px;
   border-radius: 10px;
   background-color: var(--cinema-whiteish);
+
+  /* Shadow. OPTIONAL */
+  /* box-shadow: offset-x offset-y   blur-radius spread-radius   color inset; */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
 .details {
@@ -97,7 +112,6 @@ input:not([readonly]) {
 }
 
 /* <!-- ROW 1 --> */
-
 .time-place {
   display: flex;
   justify-content: space-between;
@@ -111,12 +125,12 @@ input:not([readonly]) {
   display: block;
   font-weight: 650;
   font-size: 1.5rem;
-  line-height: 1.6; /* Helps with multi-line alignment */
+  line-height: 1.6;
   margin-bottom: 4px;
 }
 .age {
   display: inline-block;
-  margin-bottom: 4px;
+  /* margin-bottom: 100px; */
   background-color: var(--dark-teal);
   color: white;
   padding: 0 6px;
@@ -131,8 +145,20 @@ input:not([readonly]) {
   gap: 8px;
   color: var(--base-color);
 }
+/* - - - - - - /RESERVED EVENTs RECTANGLE FLOATIE  - - - - - - */
 
-/* LINK MUOKKA/PERUUTA LINKBUTTONS */
+/* ---------  ALL LINKS AND BUTTONS SETTINGS--------- */
+
+/* - - - BUTTONS additions/overrides from global - - - */
+#edit-btn,
+#save-btn {
+  width: 50%;
+}
+#deleteaccount-btn {
+  padding: 0.85em 1.15em;
+}
+
+/* links MUOKKA varaus / PERUUTA varaus  */
 .change {
   display: flex;
   flex-direction: row;
@@ -142,39 +168,152 @@ input:not([readonly]) {
 .change .button {
   flex: 1 1 200px;
 }
-
 .cancel {
-  background-color: var(--cinema-pinkish);
+  /*link*/
+  background-color: var(--cinema-danger);
+  color: black;
 }
 
-/* - - - - - - /RESERVED EVENT RECTANGLE FLOATIE  - - - - - - */
-
-/* - - - FOR SCREENS SMALLER THEN 800px - - - */
-@media (max-width: 800px) {
-  .wrapper {
-    flex-direction: column-reverse;
-  }
-
-  .profile,
-  .reservations {
-    width: 100%;
-    min-width: 100%;
-    flex: 1 1 auto;
-  }
-
-  .profile {
-    /* Optional: Remove relative positioning or adjust height if needed */
-    height: auto;
-  }
+/* //////logout link & delete button */
+.account-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: auto;
+  gap: 10px;
 }
+.account-actions .logout {
+  flex: 1 1 200px;
+  padding: 0.85em 1.5em;
+  margin: 0;
+}
+.deleteaccount {
+  background-color: var(--cinema-danger);
+  color: black;
+  /* text-transform: uppercase; */
+}
+
+/* ---------  /ALL LINKS AND BUTTONS SETTINGS--------- */
+
+/* - ACTIONS underform - */
+h3 {
+  text-transform: uppercase;
+  font-family: Poppins, serif;
+  font: 2rem;
+  font-weight: 525;
+  text-align: left;
+}
+.actions {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 10px;
+}
+/* - /ACTIONS underform checkboxes - */
+
+/* THE CHECKBOX STYLING ИСПРАВТЬ НАХХХХХХХХ */
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Выравнивание всего блока влево */
+  gap: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.checkbox-group input[type="checkbox"] {
+  /* Базовые настройки из твоего запроса */
+  appearance: none; /* Скрываем дефолтный уродский чекбокс */
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  background-color: #eee;
+  border: 2px solid var(--lightblue);
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+  flex-shrink: 0; /* Чтобы его не сплющило */
+  margin: 0;
+}
+
+/* Эффект при наведении */
+.checkbox-group input[type="checkbox"]:hover {
+  border-color: var(--blue);
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 150, 255, 0.2);
+}
+
+/* Состояние, когда галочка поставлена (Checked) */
+.checkbox-group input[type="checkbox"]:checked {
+  background-color: var(--blue);
+  border-color: var(--blue);
+}
+
+/* Рисуем саму галочку через псевдоэлемент */
+.checkbox-group input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 11px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+  display: block; /* Показываем галочку только когда checked */
+}
+
+/* СТИЛИ ДЛЯ ТЕКСТА (LABEL) */
+.checkbox-group label {
+  /* СБРОС ТВОИХ СТАРЫХ СТИЛЕЙ (120px width и 50px height) */
+  width: auto;
+  height: auto;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  /* Твои новые стили */
+  color: var(--cinema-whiteish);
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+  display: inline-block;
+  transition: var(--transition);
+}
+
+.checkbox-group label:hover {
+  color: #fff;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+/* Чтобы при нажатии на текст тоже срабатывал переход чекбокса */
+.checkbox-group:hover input[type="checkbox"] {
+  border-color: var(--blue);
+}
+
+/* /THE CHECKBOX STYLING */
 
 /* - - - - - - FORM - - - - - - */
 form {
   width: min(400px, 100%);
-  margin: auto;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  /* margin-left: 10px; */
   gap: 10px;
+}
+
+form h1 {
+  text-align: left;
+  margin-bottom: 10px;
 }
 
 form > div {
@@ -226,3 +365,27 @@ form input::placeholder {
   color: var(--cinema-pink);
 }
 /* - - - - - - /FORM - - - - - - */
+
+/* - - - FOR SCREENS SMALLER THEN 800px - - - */
+@media (max-width: 800px) {
+  .wrapper {
+    flex-direction: column-reverse;
+  }
+
+  .profile,
+  .reservations {
+    width: 100%;
+    min-width: 100%;
+    flex: 1 1 auto;
+  }
+
+  .profile {
+    /* Optional: Remove relative positioning or adjust height if needed */
+    height: auto;
+    padding-left: 20px;
+  }
+
+  form {
+    margin: auto;
+  }
+}
