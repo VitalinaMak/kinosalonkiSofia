@@ -87,6 +87,12 @@
             if (isset($_GET['sort'])) {
                 $params['sort'] = $_GET['sort'];  //if sorting is used, save it's value to the array
             }
+            if (isset($_GET['type'])) {
+                $params['type'] = $_GET['type'];  //if filer by event type is used, save it's value to the array
+            }
+            if (isset($_GET['agelimit'])) {
+                $params['agelimit'] = $_GET['agelimit'];  //if filer by age limit is used, save it's value to the array
+            }
             $query = http_build_query($params);  //http_build_query automatically builds a query string for URL (sth like 'sort=nimiaz&type=2') 
             if ($query) {
                 $query = $query . "&";  //adds '&' to the end, so it'll only be added to URL if extra params are used
@@ -97,11 +103,28 @@
         <div class="eventFiltering">
             <button class="btn btn-outline-info">Suodata</button>
             <div class="filteringOptions">
-                <p>Event type:</p>
-                <a href="<?php echo ($query ? "?$query" : "?")?>type=1">Elokuvaesitys</a>
-                <a href="<?php echo ($query ? "?$query" : "?")?>type=2">Tapahtumat rajatulla osallistujamäärällä</a>
-                <a href="<?php echo ($query ? "?$query" : "?")?>type=3">Tapahtumat, joissa ei ole osallistujamäärän rajoitusta</a> 
-                <a href="<?php echo ($query ? "?".substr($query, 0, -1) : "")?>" id="removeFilterButton">Poista suodatin</a>
+                <p>Tapahtuman tyyppi:</p>
+                <!-- for every option it creates the copy of array with url-parameters and change type's value to new one (1, 2, or 3 accordingly). Then it builds a new link with new parameters and pass it to <a>-element -->
+                <?php $p = $params; $p['type'] = 1; ?>
+                <a href="?<?php echo http_build_query($p); ?>">Elokuvaesitys</a>
+
+                <?php $p = $params; $p['type'] = 2; ?>
+                <a href="?<?php echo http_build_query($p); ?>">Rajattu osallistujamäärä</a>
+
+                <?php $p = $params; $p['type'] = 3; ?>
+                <a href="?<?php echo http_build_query($p); ?>">Rajaton osallistujamäärä</a>
+
+                <p>Ikärajoitus:</p>
+                <!-- same logic as for type filters -->
+                <?php $p = $params; $p['agelimit'] = "K18"; ?>
+                <a href="?<?php echo http_build_query($p); ?>">K18</a>
+
+                <?php $p = $params; $p['agelimit'] = "S"; ?>
+                <a href="?<?php echo http_build_query($p); ?>">Ilman K18-rajoitusta</a>
+
+                <!-- button to remove all filters -->
+                <?php $p = $params; unset($p['type'], $p['agelimit']); ?>
+                <a href="?<?php echo http_build_query($p); ?>" id="removeFilterButton">Poista suodattimet</a>
             </div>
         </div>
     </div> 
@@ -112,6 +135,7 @@
             $search = '';  //variable for searching
             $order = 'events.event_date ASC';  //variable for sorting data. For default sorts by date starting from earlier events 
             $eventType = '';  //variable for filtering by event type
+            $ageLimitFilter = '';  //variable for filtering by age limit
 
             /* sorting */
             if (isset($_GET['sort'])) {
@@ -151,6 +175,15 @@
                 }
             }
 
+            /* filtering by age limit */
+            if (isset($_GET['agelimit'])) {
+                if ($_GET['agelimit'] == "K18") {
+                    $ageLimitFilter = "events.age_limit = 'k18'";  //only 18+ events
+                } else {
+                    $ageLimitFilter = "events.age_limit != 'k18'";  //all other events
+                }
+            }
+
             /* base sql-query */
             $sql = "
                 SELECT 
@@ -184,10 +217,20 @@
                 if ($eventType !== '') {
                     $sql .= " AND ".$eventType;
                 }
+
+                /* if filtering be age limit, one more extra opion is added */
+                if ($ageLimitFilter != "") {
+                    $sql .= " AND ".$ageLimitFilter;
+                }
+
             } else {
-                /* if no searching is used, check for filtering by event type, and add WHERE */
-                if ($eventType !== '') {
-                    $sql .= "WHERE ".$eventType;
+                /* if no searching is used, check for filtering by event type and age limitations */
+                if (($eventType !== '') && ($ageLimitFilter != "")) {
+                    $sql .= "WHERE ".$eventType." AND ".$ageLimitFilter;    //filter by event type AND age limit
+                } else if (($eventType !== '') && ($ageLimitFilter == "")) {
+                    $sql .= "WHERE ".$eventType;      //filter only by event type
+                } else if (($eventType == '') && ($ageLimitFilter != "")) {
+                    $sql .= " WHERE ".$ageLimitFilter;      //filter only by age limit
                 }
             }
 

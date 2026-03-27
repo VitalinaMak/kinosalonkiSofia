@@ -49,9 +49,16 @@ function disableMaxAmountInput() {
         maxPlacesInput.placeholder = "Ei ole osallistujamäärä rajoitusta.";
         maxPlacesInput.setAttribute("readonly", "");  //make the field uneditable
         maxPlacesInput.removeAttribute("required");  //let it stay empty
-    } else if (selectedEventType != "3" && maxPlacesInput.hasAttribute("readonly")) {
-        maxPlacesInput.removeAttribute("readonly");  //if the user changes type of event to 2 (limited number of visitors), make sure it editable again
-        maxPlacesInput.setAttribute("required", "");  //make the field required again 
+    } else if (selectedEventType == "2") {
+        if (maxPlacesInput.hasAttribute("readonly")) {
+            maxPlacesInput.removeAttribute("readonly");  //if the field had readonly attriburte before, make sure it's editable again
+            maxPlacesInput.setAttribute("required", "");  //make the field required again 
+        }
         maxPlacesInput.placeholder = "Max. osallistujamäärä";
+    } else if (selectedEventType == "1") {
+        if (maxPlacesInput.hasAttribute("readonly")) {
+            maxPlacesInput.removeAttribute("readonly");  //if the user changes type of event to 1 (movie), make it editable again (it not really necessary, since movies always have 24 seats, just in case of some changes)
+        }
+        maxPlacesInput.placeholder = "Max. osallistujamäärä: 24"; //it's not required field and it can be left empty, so it just shows what that field is for and that it already has some value
     }
 }
