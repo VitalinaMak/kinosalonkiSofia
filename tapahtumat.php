@@ -123,7 +123,10 @@
                 <a href="?<?php echo http_build_query($p); ?>">Ilman K18-rajoitusta</a>
 
                 <!-- button to remove all filters -->
-                <?php $p = $params; unset($p['type'], $p['agelimit']); ?>
+                <?php 
+                    $p = $params;  //create a copy of the array with parameters for URL
+                    unset($p['type'], $p['agelimit']);  //remove all filter parameters
+                ?>  
                 <a href="?<?php echo http_build_query($p); ?>" id="removeFilterButton">Poista suodattimet</a>
             </div>
         </div>
