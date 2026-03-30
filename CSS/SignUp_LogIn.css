@@ -82,23 +82,31 @@ form input {
   transition: 150ms ease;
 }
 
+form input::placeholder {
+  color: var(--cinema-red2);
+  transition: color 150ms ease;
+}
+
+/* HOVER */
 form input:hover {
   border-color: var(--cinema-pink);
+}
+form input:hover::placeholder {
+  color: var(--cinema-pink);
 }
 form div:has(input:hover) label {
   background-color: var(--cinema-pink);
 }
-
+/* FOCUS */
 form input:focus {
   outline: none;
   border-color: var(--cinema-red1);
 }
+form input:focus::placeholder {
+  color: var(--cinema-red1);
+}
 form div:has(input:focus) label {
   background-color: var(--cinema-red1);
-}
-
-form input::placeholder {
-  color: var(--cinema-pink);
 }
 
 form button /* overrides */ {

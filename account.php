@@ -35,7 +35,7 @@
             
             <form id="profile" method="post" action="account.php"  enctype="multipart/form-data">
                     
-                <h1> Hei, <?= $name ?></h1>
+                <h1>Tilitietosi</h1>
 
                 <div>
                     <label for="name-input">
@@ -63,8 +63,26 @@
                     <button type="submit" id="save-btn" style="display: none;">Tallenna</button>
                 </div>
 
-                <button class="deleteaccount" type="button" id="deleteaccount-btn">Delete Account</button>
             </form>
+            
+            <h3>Ilmoitusasetukset</h3>
+
+            <div class="actions">
+                <div class="checkboxes">
+                    <input type="checkbox" id="notify-tapahtumat" name="notify_tapahtumat" checked>
+                    <label for="notify-tapahtumat">Lähetä sähköpostia uusista elokuvista</label>
+                </div>
+
+                <div class="checkboxes">
+                    <input type="checkbox" id="notify-reservations" name="notify_reservations" checked>
+                    <label for="notify-reservations">Lähetä varausmuistutuksia</label>
+                </div>
+            </div>
+            
+            <div class="account-actions">
+                <a class="button logout" href="index.php">Kirjaudu ulos</a>
+                <button class="deleteaccount" type="button" id="deleteaccount-btn">Poista tili</button>
+            </div>
 
         </div>
 
@@ -74,60 +92,63 @@
                 
             <div class="reserved">
                 <div class="details">
-                    <p class="r1">
+                    <!-- ROW 1 -->
+                    <p class="time-place">
                         <time class="time">03.02.2023 klo 15:00</time>
                         <data class="place">places 22, 24</data>
                     </p>
-
-                    <p class="eventname r2">
+                    <!-- ROW 2 -->
+                    <p class="eventname">
                         Seniorikino: TOTUUS ON ARMOTON (1963)
                         <data class="age" value="7">K7</data>
                     </p>
-                                 
-                    <p class="icon-adress r3">
+                    <!-- ROW 3 -->
+                    <p class="icon-adress">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1f1f1f">
                             <path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/>
                         </svg> 
                         Kinosalonki Sofia, Reiponkatu 35, Raahe
                     </p>                        
                 </div>
-                <div class="edit">
+                <div class="change">
                     <!-- REDACT THE LINKS TO CORRECT ONES -->
                     <!-- REDACT THE LINKS TO CORRECT ONES -->
                     <!-- REDACT THE LINKS TO CORRECT ONES -->
-                    <a class="button" href="bookEvent.php">Muokka varaus</a>
-                    <a class="button" href="account.php">Peruuta varaus</a>
+                    <a class="button edit" href="bookEvent.php">Muokka varaus</a>
+                    <a class="button cancel" href="account.php">Peruuta varaus</a>
                 </div>
             </div>
                  
             <div class="reserved">
                 <div class="details">
-                    <p class="r1">
+                    <p class="time-place">
                         <time class="time">03.02.2023 klo 15:00</time>
                         <data class="place">places 22, 24</data>
                     </p>
 
-                    <p class="eventname r2">
+                    <p class="eventname">
                         Un fatto di sangue nel comune di Siculiana fra due uomini per causa di una vedova 
                         <data class="age" value="7">K18</data>
                     </p>             
                     
-                    <p class="icon-adress r3">
+                    <p class="icon-adress">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1f1f1f">
                             <path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/>
                         </svg> 
                         Kinosalonki Sofia, Reiponkatu 35, Raahe
                     </p>                        
                 </div>
-                <div class="edit">
+                <div class="change">
                     <!-- REDACT THE LINKS TO CORRECT ONES -->
                     <!-- REDACT THE LINKS TO CORRECT ONES -->
                     <!-- REDACT THE LINKS TO CORRECT ONES -->
-                    <a class="button" href="bookEvent.php">Muokka varaus</a>
-                    <a class="button" href="account.php">Peruuta varaus</a>
+                    <a class="button edit" href="bookEvent.php">Muokka varaus</a>
+                    <a class="button cancel" href="account.php">Peruuta varaus</a>
                 </div>
             </div>
                 
+            <div class="none-reserved">
+                <p>Sinulla ei ole aktiivisia varauksia. <a href="tapahtumat.php">Katso ohjelmisto</a> </p>
             </div>
 
         </div>
