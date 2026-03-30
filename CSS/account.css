@@ -364,6 +364,17 @@ form div:has(input:focus) label {
 form input::placeholder {
   color: var(--cinema-pink);
 }
+
+.activated {
+  /* form inputs in edit-mode */
+  background-color: var(--cinema-whiteish);
+  border-color: var(--blue);
+}
+.activatedLabel {
+  /* form labels in edit-mode */
+  background-color: var(--blue);
+}
+
 /* - - - - - - /FORM - - - - - - */
 
 /* - - - FOR SCREENS SMALLER THEN 800px - - - */

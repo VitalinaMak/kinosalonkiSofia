@@ -89,74 +89,87 @@
         <div class="reservations info">
 
             <h1> Varauksesi </h1>
-                
-            <div class="reserved">
-                <div class="details">
-                    <!-- ROW 1 -->
-                    <p class="time-place">
-                        <time class="time">03.02.2023 klo 15:00</time>
-                        <data class="place">places 22, 24</data>
-                    </p>
-                    <!-- ROW 2 -->
-                    <p class="eventname">
-                        Seniorikino: TOTUUS ON ARMOTON (1963)
-                        <data class="age" value="7">K7</data>
-                    </p>
-                    <!-- ROW 3 -->
-                    <p class="icon-adress">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1f1f1f">
-                            <path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/>
-                        </svg> 
-                        Kinosalonki Sofia, Reiponkatu 35, Raahe
-                    </p>                        
-                </div>
-                <div class="change">
-                    <!-- REDACT THE LINKS TO CORRECT ONES -->
-                    <!-- REDACT THE LINKS TO CORRECT ONES -->
-                    <!-- REDACT THE LINKS TO CORRECT ONES -->
-                    <a class="button edit" href="bookEvent.php">Muokka varaus</a>
-                    <a class="button cancel" href="account.php">Peruuta varaus</a>
-                </div>
-            </div>
-                 
-            <div class="reserved">
-                <div class="details">
-                    <p class="time-place">
-                        <time class="time">03.02.2023 klo 15:00</time>
-                        <data class="place">places 22, 24</data>
-                    </p>
 
-                    <p class="eventname">
-                        Un fatto di sangue nel comune di Siculiana fra due uomini per causa di una vedova 
-                        <data class="age" value="7">K18</data>
-                    </p>             
-                    
-                    <p class="icon-adress">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1f1f1f">
-                            <path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/>
-                        </svg> 
-                        Kinosalonki Sofia, Reiponkatu 35, Raahe
-                    </p>                        
-                </div>
-                <div class="change">
-                    <!-- REDACT THE LINKS TO CORRECT ONES -->
-                    <!-- REDACT THE LINKS TO CORRECT ONES -->
-                    <!-- REDACT THE LINKS TO CORRECT ONES -->
-                    <a class="button edit" href="bookEvent.php">Muokka varaus</a>
-                    <a class="button cancel" href="account.php">Peruuta varaus</a>
-                </div>
-            </div>
-                
-            <div class="none-reserved">
-                <p>Sinulla ei ole aktiivisia varauksia. <a href="tapahtumat.php">Katso ohjelmisto</a> </p>
-            </div>
+            <?php
+                /* retrieve all bookings made for user's id from the database */
+                $sql = "
+                    SELECT 
+                        events.event_name, 
+                        events.event_type, 
+                        DATE_FORMAT(events.event_date, '%d.%m.%Y') AS event_formatted_date, 
+                        HOUR(events.event_time) AS event_hour, 
+                        DATE_FORMAT(events.event_time, '%i') AS event_minute, 
+                        events.event_image, 
+                        events.description, 
+                        events.age_limit, 
+                        events.location, 
+                        bookings.user_id, 
+                        bookings.event_id, 
+                        GROUP_CONCAT(bookings.seat_number) AS seats 
+                    FROM events, bookings 
+                    WHERE events.id = bookings.event_id AND bookings.user_id = ? 
+                    GROUP BY event_id;
+                ";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("s", $userID);
+                $stmt->execute();
+
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    $places = "";  //variable for the string with all reserved seats
+                    $ageLimit = "";
+                    while ($row = $result->fetch_assoc()) {
+                        /* assign value to $places only for the 1st type of event */
+                        if ($row['event_type'] == 1) {
+                            $places = "Paikat ".$row['seats'];
+                        }
+                        if ($row['age_limit'] != "Ei luokiteltu") {
+                            $ageLimit = $row['age_limit'];  //if the event has age limitetion, assign it to variable; otherwise leave it empty
+                        }
+                        echo <<<HTML
+                        <div class="reserved">
+                            <div class="details">
+                                <!-- ROW 1 -->
+                                <p class="time-place">
+                                    <time class="time">{$row['event_formatted_date']} klo {$row['event_hour']}.{$row['event_minute']}</time>
+                                    <data class="place">{$places}</data>
+                                </p>
+                                <!-- ROW 2 -->
+                                <p class="eventname">
+                                    {$row['event_name']}
+                                    <data class="age" value="{$row['age_limit']}">{$ageLimit}</data>
+                                </p>
+                                <!-- ROW 3 -->
+                                <p class="icon-adress">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1f1f1f">
+                                        <path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/>
+                                    </svg> 
+                                    {$row['location']}
+                                </p>                        
+                            </div>
+                            <div class="change">
+                                <!-- REDACT THE LINKS TO CORRECT ONES -->
+                                <!-- REDACT THE LINKS TO CORRECT ONES -->
+                                <!-- REDACT THE LINKS TO CORRECT ONES -->
+                                <a class="button edit" href="bookEvent.php">Muokka varaus</a>
+                                <a class="button cancel" href="account.php">Peruuta varaus</a>
+                            </div>
+                        </div>
+                        HTML;
+                    }
+                } else {
+                    echo <<<HTML
+                        <div class="none-reserved">
+                            <p>Sinulla ei ole aktiivisia varauksia. <a href="tapahtumat.php">Katso ohjelmisto</a> </p>
+                        </div>
+                    HTML;
+                }
+            ?>
 
         </div>
 
     </div>
-
-
-
 
 
 </main>   
