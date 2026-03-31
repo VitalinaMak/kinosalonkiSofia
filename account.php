@@ -25,6 +25,7 @@
     $name = $user['username'];
     $email = $user['email'];
 ?>
+
 <!-- - - - H T M L - - - -->
 <main class="account_page">
     
@@ -33,7 +34,7 @@
 
         <div class="profile info">
             
-            <form id="profile" method="post" action="account.php"  enctype="multipart/form-data">
+            <form id="profile" method="post" action="changeInfo.php"  enctype="multipart/form-data">
                     
                 <h1>Tilitietosi</h1>
 
@@ -64,6 +65,13 @@
                 </div>
 
             </form>
+            <?php
+            /* show the mesage if update was successful */         
+                if (isset($_SESSION['success_message'])) {
+                    echo '<p class="success-msg">'.$_SESSION['success_message'].'</p>';
+                    unset($_SESSION['success_message']);  // remove it so it only shows once
+                }
+            ?>
             
             <h3>Ilmoitusasetukset</h3>
 
@@ -152,7 +160,7 @@
                                 <!-- REDACT THE LINKS TO CORRECT ONES -->
                                 <!-- REDACT THE LINKS TO CORRECT ONES -->
                                 <!-- REDACT THE LINKS TO CORRECT ONES -->
-                                <a class="button edit" href="bookEvent.php">Muokka varaus</a>
+                                <a class="button edit" href="bookEvent.php">Muokkaa varaus</a>
                                 <a class="button cancel" href="account.php">Peruuta varaus</a>
                             </div>
                         </div>

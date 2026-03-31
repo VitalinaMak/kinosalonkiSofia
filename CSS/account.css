@@ -375,6 +375,14 @@ form input::placeholder {
   background-color: var(--blue);
 }
 
+/* message on updete success */
+.success-msg {
+  text-align: left;
+  margin: 0px;
+  color: var(--green-teal);
+  font-weight: bold;
+}
+
 /* - - - - - - /FORM - - - - - - */
 
 /* - - - FOR SCREENS SMALLER THEN 800px - - - */
