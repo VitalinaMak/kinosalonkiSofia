@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- link to bootstrap for using CSS features (it is required for buttons design) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <!-- CSS GLOBAL -->
     <link rel="stylesheet" href="CSS/global.css">
@@ -19,11 +19,11 @@
 </head>
 <body>
     <header> 
-        <div class="otsikko">
+        <div class="logo-ksofia">
             <a href="index.php" class="logo-link">
                 <img src="kuvat/logot/logo_black.png" alt="logo" class="logo">
             </a>
-            <h2>Kinosalonki Sofia</h2>
+            <h2 class="kinosalonkisofia">Kinosalonki Sofia</h2>
         </div>
         <?= !isset($_SESSION['user_id']) ? "<a href='login.php' class='button'>Kirjaudu sisään</a>" : "<a href='account.php' class='button'>Oma tili</a>" ?>
 
@@ -32,15 +32,15 @@
         <nav class="temporaryNavigation">
             <button class="navButton">List of pages</button>
             <div class="linksToPages">
-                <a href="addEvent.php">addEvent</a>
-                <a href="bookEvent.php">bookEvent</a>
-                <a href="editEvent.php">editEvent</a>
-                <a href="http://localhost/kinosalonkisofia/editEvent.php?id=8">editTHEevent</a>
-                <a href="index.php">index</a>
-                <a href="login.php">login</a>
-                <a href="signup.php">signup</a>
-                <a href="account.php">ACCOUNT</a>
-                <a href="tapahtumat.php">Tapahtumat</a>
+                <a href="addEvent.php" target="_blank" rel="noopener noreferrer">addEvent</a>
+                <a href="bookEvent.php" target="_blank" rel="noopener noreferrer">bookEvent</a>
+                <a href="editEvent.php" target="_blank" rel="noopener noreferrer">editEvent</a>
+                <a href="http://localhost/kinosalonkisofia/editEvent.php?id=8" target="_blank" rel="noopener noreferrer">editTHEevent</a>
+                <a href="index.php" target="_blank" rel="noopener noreferrer">index</a>
+                <a href="login.php" target="_blank" rel="noopener noreferrer">login</a>
+                <a href="signup.php" target="_blank" rel="noopener noreferrer">signup</a>
+                <a href="account.php" target="_blank" rel="noopener noreferrer">ACCOUNT</a>
+                <a href="tapahtumat.php" target="_blank" rel="noopener noreferrer">Tapahtumat</a>
             </div>
         </nav> 
             

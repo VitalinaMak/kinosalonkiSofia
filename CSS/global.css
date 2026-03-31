@@ -4,14 +4,15 @@
 :root {
   /* main palette */
   --head-foot: #1d1d1cff;
+  --head-foot-tr: rgba(29, 29, 28, 0.4);
   --base-color: #34342e;
   --base-color-inactive: #3f3f3d;
+
   --darkblue: #384a50;
   --blue: #4fa1a1;
   --lighterblue: rgb(116, 186, 186);
   --lightblue: #a6d1d1;
-  /* --orange: #e78a1f; taken as event2 */
-  /* --beige: rgb(246, 243, 215); ugly */
+
   --pinkish: #fdf2f2;
 
   /* blue curtains */
@@ -32,7 +33,7 @@
   --cinema-whiteish: #f8f7f3ff;
   --cinema-whiteish-tr: rgba(248, 247, 243, 0.804);
   --cinema-whiteish-trtr: rgba(248, 247, 243, 0.4);
-  /* --cinema-grey: #b7c2cbff; */
+  --cinema-grey: #b7c2cbff;
 
   /* self-explanatory */
   --border-radius: 10px;
@@ -40,11 +41,54 @@
   --form-label-width: 50px;
 }
 
+/* - - - GLOBAL form BUTTON SETTINGS - - - */
+button {
+  padding: 0.85em 4em;
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+  background-color: var(--darkblue);
+  color: var(--cinema-whiteish);
+  transition: var(--transition);
+}
+
+/* - - - /GLOBAL BUTTON SETTINGS - - - */
+button:hover,
+.button:hover,
+.button-danger:hover {
+  cursor: pointer;
+  background-color: var(--cinema-pink);
+}
+/* - - - GLOBAL LINK-AS-BUTTON SETTINGS - - - */
+.button {
+  padding: 0.5em 1em;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  color: var(--cinema-whiteish);
+  background-color: var(--darkblue);
+  transition: var(--transition);
+}
+.button-danger {
+  padding: 0.5em 4em;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  transition: var(--transition);
+  background-color: var(--cinema-danger);
+  color: black;
+}
+/* - - - /GLOBAL LINK-AS-BUTTON SETTINGS - - - */
+
 /* some default values to override any browser settings - START */
 html {
   max-width: 100%;
   height: 100%;
   margin: 0;
+  font-size: 16px; /* Now 1em everywhere = 16px */
+  -webkit-text-size-adjust: 100%; /* Prevents font scaling jumps on mobile */
 }
 
 body {
@@ -76,14 +120,36 @@ main {
   /* box-sizing: border-box; */
   background-color: var(--cinema-whiteish);
 }
-
-h1 {
-  text-transform: uppercase;
-  font-family: Poppins, serif;
-  font: 2rem;
-  font-weight: 525;
+main a {
+  display: block;
+  margin: auto;
 }
 
+/* HEADINGS SIZED CUSTOM (defauld's too small) */
+h1,
+h2,
+h3 {
+  text-transform: uppercase;
+  font-family: Poppins, serif;
+  font-weight: 600; /* Slightly bolder for Poppins */
+  line-height: 1.2; /* Standard heading spacing */
+
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.75rem;
+}
+/* /HEADINGS SIZED CUSTOM (defauld's too small) */
+
+/* HEADER FOOTER */
 header {
   display: flex;
   flex-flow: row;
@@ -92,24 +158,29 @@ header {
   color: white;
   height: min-content;
 }
+h2.kinosalonkisofia {
+  text-transform: none;
+  font-weight: 525; /* Slightly bolder for Poppins */
+  margin: 0;
+}
 header a {
   align-self: center;
   margin-right: 7px;
 }
 
-.otsikko img {
+.logo-ksofia img {
   padding: 0px 10px;
   height: 50px;
 }
 
-.otsikko {
+.logo-ksofia {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
 }
-.otsikko img,
-.otsikko h2 {
+.logo-ksofia img,
+.logo-ksofia h2 {
   align-self: center;
   margin: 0px;
   align-self: center;
@@ -134,11 +205,7 @@ footer p {
   margin-top: 5px;
   margin-bottom: 4px;
 }
-
-main a {
-  display: block;
-  margin: auto;
-}
+/* /HEADER FOOTER */
 
 /* LINKS TO PAGES IN HEADER - START. Will be deleted later */
 /* Dropdown Button */
@@ -184,42 +251,15 @@ main a {
 }
 /* LINKS TO PAGES IN HEADER - END */
 
-/* a.button {
-  padding: 1px 6px;
-  border: 1px outset buttonborder;
-  border-radius: 3px;
-  color: buttontext;
-  background-color: buttonface;
-  text-decoration: none;
-} */
-
 /*----------------------------------------------------------------------------*/
 
-/* - - - GLOBAL form BUTTON SETTINGS - - - */
-button {
-  padding: 0.85em 4em;
-  border: none;
-  border-radius: 10px;
-  font-weight: 500;
-  background-color: var(--darkblue);
-  color: var(--cinema-whiteish);
-  transition: var(--transition);
+/* @media (max-width: 500px) {
+  h2.kinosalonkisofia {
+    display: none;
+  }
+} */
+@container (max-width: 560px) {
+  h2.kinosalonkisofia {
+    display: none;
+  }
 }
-/* - - - /GLOBAL BUTTON SETTINGS - - - */
-button:hover,
-.button:hover {
-  cursor: pointer;
-  background-color: var(--cinema-pink);
-}
-/* - - - GLOBAL LINK-AS-BUTTON SETTINGS - - - */
-.button {
-  padding: 0.5em 1em;
-  font-weight: 500;
-  text-decoration: none;
-  border: none;
-  border-radius: 10px;
-  color: var(--cinema-whiteish);
-  background-color: var(--darkblue);
-  transition: var(--transition);
-}
-/* - - - /GLOBAL LINK-AS-BUTTON SETTINGS - - - */
