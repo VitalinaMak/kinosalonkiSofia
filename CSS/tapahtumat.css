@@ -14,14 +14,15 @@
   height: 300px;
   padding: 5% 0;
   gap: 30px;
+  overflow: visible;
+  position: relative;
+  z-index: 10; /* Keeps the header area above the list */
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* The "Brought Forward" Shadow 
-     Syntax: horizontal vertical blur color */
 }
-div.top h1 {
+.top h1 {
   text-align: center;
   margin: 0;
   color: var(--cinema-whiteish);
@@ -70,6 +71,10 @@ div.top h1 {
   height: 48px;
   width: 300px;
 }
+.eventListActions input:focus {
+  outline: none;
+  /* box-shadow: 0 0 5px var(--base-color); */
+}
 
 button.filterButton,
 button.sortButton {
@@ -84,93 +89,125 @@ button.sortButton {
   transition: var(--transition);
 }
 
-/* - - - /SEARCH BAR - - - take from the .top some */
+/* - - - /SEARCH BAR - - - */
 
-/* in the .top */
+/* - TOGGLES, DROPDOWNS AND BUTTONS in search bar - */
+
 .searchAndSort {
   display: flex;
   flex-flow: row nowrap;
 }
-
-/* dropdown for the sorting button */
+/* containers for buttons */
 .eventSorting,
 .eventFiltering {
   position: relative;
   display: inline-block;
 }
-/* the same size for all of the options in sorting + remove rounded borders on the left side */
-.eventSorting a {
-  width: 140px;
-  border-bottom-left-radius: 0px;
-  border-top-left-radius: 0px;
-}
-/* the same size for all of the options in filtering */
-.eventFiltering a {
-  width: 170px;
-}
 
-/* dropdown content (hidden by default) */
+/* dropdown floaties */
 .sortingOptions,
 .filteringOptions {
   display: none;
   position: absolute;
-  box-sizing: border-box;
-  /* min-width: 140px; */
-  z-index: 1;
-  margin: 0px;
+  top: 100%;
+  z-index: 998;
+  left: 0;
+
+  background-color: var(--cinema-whiteish);
+  border: 1px solid var(--cinema-grey);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+
+  width: max-content;
+  min-width: 180px;
+  text-shadow: none;
 }
-/* dropdown block in filtering */
-.filteringOptions {
-  right: 0%;
-  width: 200px;
-  background-color: #ffffff;
-  /* padding: 5px; */
-  border: rgb(13, 202, 240) solid 1px;
-}
-.filteringOptions p {
-  vertical-align: middle;
-  margin: 0px;
-  margin-bottom: 4px;
-}
-/* buttons inside dropdown */
+
+/* default dropdowns */
 .sortingOptions a,
 .filteringOptions a {
-  background-color: #ffffff;
-  color: #384a50;
-  border: rgb(13, 202, 240) solid 1px;
-  border-collapse: collapse;
-  padding: 7px 10px;
-  margin: 0px;
-  text-decoration: none;
   display: block;
-}
-.filteringOptions a {
+  padding: 5px 10px;
   margin-bottom: 4px;
-  border-radius: 3px;
+
+  color: var(--base-color); /* sets border-color too! for some reason */
+  /* In CSS, if you define a border-style (like solid) and a border-width 
+  but not a border-color, the browser defaults the border color 
+  to the current color of the text. */
+  background-color: var(--cinema-whiteish);
+  border: 2px solid;
+  border-radius: 10px;
+
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all var(--transition);
 }
-/* different padding for filering menu */
-.filteringOptions a {
-  padding: 5px 7px;
-}
-/* Show the dropdown menu on hover */
+
+/* - - - specific colors hovers - - - */
 .eventSorting:hover .sortingOptions,
 .eventFiltering:hover .filteringOptions {
   display: block;
 }
+
 .sortingOptions a:hover,
 .filteringOptions a:hover {
-  background-color: rgb(13, 202, 240);
-  color: black;
+  background-color: var(--base-color);
+  color: white;
+  border-color: var(--base-color);
+}
+
+/* 1. The Master Rule: This handles ALL events and age limits at once */
+.filteringOptions a.event1,
+.filteringOptions a.event2,
+.filteringOptions a.event3,
+.filteringOptions a.age-18,
+.filteringOptions a.age-none {
+  /* We use a temporary local variable '--type-color' */
+  border-color: var(--type-color);
+  color: var(--type-color);
+}
+
+.filteringOptions a[class*="event"]:hover,
+.filteringOptions a[class*="age-"]:hover {
+  background-color: var(--type-color);
+  color: white;
+}
+
+/* 2. The Assignments: Just tell each class which color it owns */
+.event1 {
+  --type-color: var(--event1);
+}
+.event2 {
+  --type-color: var(--event2);
+}
+.event3 {
+  --type-color: var(--event3);
+}
+.age-18,
+.age-none {
+  --type-color: var(--dark-teal);
 }
 
 #removeFilterButton {
-  border-color: #dc3545;
+  margin-top: 12px;
+  margin-bottom: 0;
+  color: var(--cinema-pink);
+  border-color: var(--cinema-pink);
 }
 #removeFilterButton:hover {
-  background-color: #dc3545;
+  background-color: var(--cinema-pink);
   color: #ffffff;
 }
-/* /in the .top */
+
+/* 6. TYPOGRAPHY CLEANUP */
+.filteringOptions p {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  color: var(--base-color);
+  font-weight: 600;
+}
+/* - TOGGLES, DROPDOWNS AND BUTTONS in search bar - */
 
 /* - - - - - - EVENTS LIST  - - - - - - */
 /* a list of events on the page Tapahtumat */
@@ -199,13 +236,12 @@ button.sortButton {
 
 /* event field (contains information about event and edit/delete -tools for admin) */
 .event {
-  width: 99%;
+  width: 100%;
   min-height: 180px;
   display: flex;
   flex-flow: row nowrap;
   align-content: space-around;
   align-items: stretch;
-  margin: auto;
   gap: 2px;
 }
 /* div with all information about event */
@@ -283,8 +319,5 @@ button.sortButton {
 
 /* - - - - - - /ADMIN TOOLS - - - - - - */
 
-@container (max-width: 560px) {
-  div.top h1 {
-    font-size: 2.5rem;
-  }
+@media (max-width: 500px) {
 }

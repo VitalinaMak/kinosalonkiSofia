@@ -147,6 +147,9 @@ h2 {
 h3 {
   font-size: 1.75rem;
 }
+h4 {
+  margin: 0;
+}
 /* /HEADINGS SIZED CUSTOM (defauld's too small) */
 
 /* HEADER FOOTER */
@@ -157,6 +160,7 @@ header {
   background-color: var(--head-foot);
   color: white;
   height: min-content;
+  container-type: inline-size;
 }
 h2.kinosalonkisofia {
   text-transform: none;
