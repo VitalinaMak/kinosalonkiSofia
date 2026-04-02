@@ -1,166 +1,247 @@
-.eventList .eventInfo {
-  background-color: var(--lightblue);
-  color: var(--darkblue);
-}
+.top {
+  /* The first value is the color ON TOP, the second is the image BEHIND it */
+  background-image:
+    linear-gradient(var(--head-foot-tr), var(--head-foot-tr)),
+    url("../kuvat/shtory_red.jpg");
+  /* background-image: url("../kuvat/shtory_red.jpg"); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  object-fit: cover;
+  overflow: hidden;
 
-.adminTools a {
+  height: 300px;
+  padding: 5% 0;
+  gap: 30px;
+  overflow: visible;
+  position: relative;
+  z-index: 10; /* Keeps the header area above the list */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.top h1 {
+  text-align: center;
+  margin: 0;
   color: var(--cinema-whiteish);
-  transition: var(--transition);
-}
-.adminTools > :first-child,
-.adminTools > :first-child:focus {
-  background-color: var(--darkblue);
-}
-.adminTools > :last-child,
-.adminTools > :last-child:focus {
-  background-color: var(--base-color);
-}
-.adminTools > :first-child:hover {
-  background-color: var(--orange);
-}
-.adminTools > :last-child:hover {
-  background-color: var(--cinema-pink);
+  font-size: 4rem;
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.4),
+    0px 0px 20px rgba(0, 0, 0, 0.5);
 }
 
-.eventList h3 {
-  color: var(--base-color);
-}
-/* a list of actions for events on the page Tapahtumat */
+/* - - - SEARCH BAR aka a list of actions for events on the page Tapahtumat */
 .eventListActions {
-  width: 100%;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
-  padding-left: 6px;
-  padding-right: 6px;
+  justify-content: center;
+  align-items: center;
+
+  height: fit-content;
+  width: fit-content;
+  border-radius: 40px;
+  padding: 0 5px;
+  background-color: var(--cinema-whiteish);
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.4),
+    0px 0px 20px rgba(0, 0, 0, 0.5);
 }
 .eventListActions form {
   display: flex;
   flex-flow: row nowrap;
 }
-/* submit-button for search field. Now it's not in use */
-.eventListActions form button {
-  border-bottom-left-radius: 0px;
-  border-top-left-radius: 0px;
+.eventListActions label {
+  border: none;
+  background-color: var(--cinema-whiteish);
+  /* height: 100%; */
+  display: inline-block;
+  height: 48px;
+  width: 48px;
+  padding: 10px;
+  border-radius: 40px;
 }
 .eventListActions input {
+  border: none;
+  background-color: var(--cinema-whiteish);
   height: 100%;
   display: inline-block;
+  padding: 0 5px;
+  height: 48px;
+  width: 300px;
 }
-.eventListActions button {
-  background-color: #ffffff2f;
+.eventListActions input:focus {
+  outline: none;
+  /* box-shadow: 0 0 5px var(--base-color); */
 }
+
+button.filterButton,
+button.sortButton {
+  border: none;
+  border-radius: 0;
+  background-color: var(--cinema-whiteish);
+
+  height: 48px;
+  width: 48px;
+  padding: 10px;
+  border-radius: 40px;
+  transition: var(--transition);
+}
+
+/* - - - /SEARCH BAR - - - */
+
+/* - TOGGLES, DROPDOWNS AND BUTTONS in search bar - */
 
 .searchAndSort {
   display: flex;
   flex-flow: row nowrap;
 }
-
-/* dropdown for the sorting button */
+/* containers for buttons */
 .eventSorting,
 .eventFiltering {
   position: relative;
   display: inline-block;
 }
-/* the same size for all of the options in sorting + remove rounded borders on the left side */
-.eventSorting a,
-.eventSorting button {
-  width: 140px;
-  border-bottom-left-radius: 0px;
-  border-top-left-radius: 0px;
-}
-/* the same size for all of the options in filtering */
-.eventFiltering a,
-.eventFiltering button {
-  width: 170px;
-}
-/* when the first button is hovered, it's borders are no longer rounded so it looks the same way as the others buttons in a list */
-.eventSorting:hover button,
-.eventFiltering:hover button {
-  border-radius: 0%;
-  background-color: #ffffffb3;
-}
-/* dropdown content (hidden by default) */
+
+/* dropdown floaties */
 .sortingOptions,
 .filteringOptions {
   display: none;
   position: absolute;
-  box-sizing: border-box;
-  min-width: 140px;
-  z-index: 1;
-  margin: 0px;
+  top: 100%;
+  z-index: 998;
+  left: 0;
+
+  background-color: var(--cinema-whiteish);
+  border: 1px solid var(--cinema-grey);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+
+  width: max-content;
+  min-width: 180px;
+  text-shadow: none;
 }
-/* dropdown block in filtering */
-.filteringOptions {
-  right: 0%;
-  width: 200px;
-  background-color: #ffffff;
-  padding: 5px;
-  border: rgb(13, 202, 240) solid 1px;
-}
-.filteringOptions p {
-  vertical-align: middle;
-  margin: 0px;
-  margin-bottom: 4px;
-}
-/* buttons inside dropdown */
+
+/* default dropdowns */
 .sortingOptions a,
 .filteringOptions a {
-  background-color: #ffffff;
-  color: #384a50;
-  border: rgb(13, 202, 240) solid 1px;
-  border-collapse: collapse;
-  padding: 7px 10px;
-  margin: 0px;
-  text-decoration: none;
   display: block;
-}
-.filteringOptions a {
+  padding: 5px 10px;
   margin-bottom: 4px;
-  border-radius: 3px;
+
+  color: var(--base-color); /* sets border-color too! for some reason */
+  /* In CSS, if you define a border-style (like solid) and a border-width 
+  but not a border-color, the browser defaults the border color 
+  to the current color of the text. */
+  background-color: var(--cinema-whiteish);
+  border: 2px solid;
+  border-radius: 10px;
+
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all var(--transition);
 }
-/* different padding for filering menu */
-.filteringOptions a {
-  padding: 5px 7px;
-}
-/* Show the dropdown menu on hover */
+
+/* - - - specific colors hovers - - - */
 .eventSorting:hover .sortingOptions,
 .eventFiltering:hover .filteringOptions {
   display: block;
 }
+
 .sortingOptions a:hover,
 .filteringOptions a:hover {
-  background-color: rgb(13, 202, 240);
-  color: black;
+  background-color: var(--base-color);
+  color: white;
+  border-color: var(--base-color);
+}
+
+/* 1. The Master Rule: This handles ALL events and age limits at once */
+.filteringOptions a.event1,
+.filteringOptions a.event2,
+.filteringOptions a.event3,
+.filteringOptions a.age-18,
+.filteringOptions a.age-none {
+  /* We use a temporary local variable '--type-color' */
+  border-color: var(--type-color);
+  color: var(--type-color);
+}
+
+.filteringOptions a[class*="event"]:hover,
+.filteringOptions a[class*="age-"]:hover {
+  background-color: var(--type-color);
+  color: white;
+}
+
+/* 2. The Assignments: Just tell each class which color it owns */
+.event1 {
+  --type-color: var(--event1);
+}
+.event2 {
+  --type-color: var(--event2);
+}
+.event3 {
+  --type-color: var(--event3);
+}
+.age-18,
+.age-none {
+  --type-color: var(--dark-teal);
 }
 
 #removeFilterButton {
-  border-color: #dc3545;
+  margin-top: 12px;
+  margin-bottom: 0;
+  color: var(--cinema-pink);
+  border-color: var(--cinema-pink);
 }
 #removeFilterButton:hover {
-  background-color: #dc3545;
+  background-color: var(--cinema-pink);
   color: #ffffff;
 }
 
+/* 6. TYPOGRAPHY CLEANUP */
+.filteringOptions p {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  color: var(--base-color);
+  font-weight: 600;
+}
+/* - TOGGLES, DROPDOWNS AND BUTTONS in search bar - */
+
+/* - - - - - - EVENTS LIST  - - - - - - */
 /* a list of events on the page Tapahtumat */
 .eventList {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  position: relative;
+  margin: 0;
+  padding: 20px;
   gap: 10px;
   max-width: 100%;
-  justify-content: center;
-  margin-top: 13px;
-  margin-bottom: 13px;
+  z-index: 1; /* Ensures it stays on top */
 }
+
+.eventList .eventInfo {
+  background-color: var(--cinema-grey);
+  color: var(--darkblue);
+}
+.eventList h3 {
+  color: var(--base-color);
+}
+.eventInfo {
+  border-radius: 10px;
+}
+
 /* event field (contains information about event and edit/delete -tools for admin) */
 .event {
-  width: 99%;
+  width: 100%;
   min-height: 180px;
   display: flex;
   flex-flow: row nowrap;
   align-content: space-around;
   align-items: stretch;
-  margin: auto;
   gap: 2px;
 }
 /* div with all information about event */
@@ -199,18 +280,44 @@
   cursor: pointer;
   background-color: var(--lighterblue);
 }
-/* div with links to edit and delete event (it's visible only for admin) */
+/* - - - - - - /EVENTS LIST  - - - - - - */
+
+/* - - - - - - ADMIN TOOLS - - - - - - */
+/* div with links to edit and delete event*/
 .adminTools {
   display: flex;
   flex-direction: column;
   min-width: 50px;
-  /* height: 100%; */
-  gap: 2px;
+  /* gap: 5px; */
 }
 .adminTools a {
   flex: 1;
   text-decoration: none;
   text-align: center;
-  /*   height: 45%; */
   width: 100%;
+  border-radius: 10px;
+}
+
+.adminTools a {
+  color: var(--cinema-whiteish);
+  transition: var(--transition);
+}
+.adminTools > :first-child,
+.adminTools > :first-child:focus {
+  background-color: var(--darkblue);
+}
+.adminTools > :last-child,
+.adminTools > :last-child:focus {
+  background-color: var(--base-color);
+}
+.adminTools > :first-child:hover {
+  background-color: var(--orange);
+}
+.adminTools > :last-child:hover {
+  background-color: var(--cinema-pink);
+}
+
+/* - - - - - - /ADMIN TOOLS - - - - - - */
+
+@media (max-width: 500px) {
 }

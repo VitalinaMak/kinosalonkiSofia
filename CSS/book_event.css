@@ -2,6 +2,23 @@ main {
   padding: 10px;
 }
 
+.eventDetails {
+  /* - donottouch - */
+  min-width: 50%;
+  flex-shrink: 0;
+  background-color: var(--cinema-whiteish-tr);
+  /* - /donottouch - */
+  height: 100%; /* Занимаем всю высоту обертки */
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.moreDetails {
+  flex: 2 1 300px; /* - donottouch - */
+}
+
 /* div for the table and input field */
 .booking {
   display: flex;
@@ -33,8 +50,10 @@ td {
   width: 60px;
   height: 60px;
   /* This "masks" the cell into the shape of your seat */
-  mask: url("../UI_icons/chair_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg") no-repeat center;
-  -webkit-mask: url("../UI_icons/chair_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg") no-repeat center;
+  mask: url("../UI_icons/chair_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg")
+    no-repeat center;
+  -webkit-mask: url("../UI_icons/chair_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg")
+    no-repeat center;
   background-color: #2ecc71; /* Default: Free (Green) */
   cursor: pointer;
 }

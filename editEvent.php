@@ -8,7 +8,11 @@
     <div class="wrapper">
     
         <form action="editEvent.php" method="post"  enctype="multipart/form-data" class="editEvent">
-            <h1> Edit event</h1>
+
+            <div class="title-link">
+                <h1> Edit event</h1>
+                <a href="tapahtumat.php" class="button-danger">Delete</a>
+            </div>
             <?php
                 if ($_SERVER['REQUEST_METHOD'] !== 'POST'):
                     $ehto = (int)$_GET['id'];  //get id from the URL

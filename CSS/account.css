@@ -202,9 +202,11 @@ h3 {
   font: 2rem;
   font-weight: 525;
   text-align: left;
+  margin-top: 30px;
+  margin-bottom: 0;
 }
 .actions {
-  padding: 20px 0;
+  /* padding: 20px 0; */
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -219,7 +221,6 @@ h3 {
   align-items: center;
   justify-content: flex-start; /* Выравнивание всего блока влево */
   gap: 15px;
-  margin-bottom: 15px;
   width: 100%;
 }
 
@@ -227,8 +228,8 @@ h3 {
   /* Базовые настройки из твоего запроса */
   appearance: none; /* Скрываем дефолтный уродский чекбокс */
   -webkit-appearance: none;
-  width: 22px;
-  height: 22px;
+  width: 100px;
+  height: 100px;
   background-color: #eee;
   border: 2px solid var(--lightblue);
   border-radius: 4px;
