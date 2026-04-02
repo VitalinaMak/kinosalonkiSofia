@@ -32,7 +32,7 @@
     0px 0px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* - - - SEARCH BAR aka a list of actions for events on the page Tapahtumat */
+/* ______SEARCH BAR aka a list of actions for events on the page Tapahtumat */
 .eventListActions {
   display: flex;
   flex-flow: row wrap;
@@ -89,9 +89,9 @@ button.sortButton {
   transition: var(--transition);
 }
 
-/* - - - /SEARCH BAR - - - */
+/* ______/SEARCH BAR ______*/
 
-/* - TOGGLES, DROPDOWNS AND BUTTONS in search bar - */
+/* __TOGGLES, DROPDOWNS AND BUTTONS in search bar __*/
 
 .searchAndSort {
   display: flex;
@@ -144,7 +144,7 @@ button.sortButton {
   transition: all var(--transition);
 }
 
-/* - - - specific colors hovers - - - */
+/* ______specific colors hovers ______*/
 .eventSorting:hover .sortingOptions,
 .eventFiltering:hover .filteringOptions {
   display: block;
@@ -174,7 +174,7 @@ button.sortButton {
   color: white;
 }
 
-/* 2. The Assignments: Just tell each class which color it owns */
+/* 2. The Assignments: telling each class which color it owns */
 .event1 {
   --type-color: var(--event1);
 }
@@ -207,9 +207,9 @@ button.sortButton {
   color: var(--base-color);
   font-weight: 600;
 }
-/* - TOGGLES, DROPDOWNS AND BUTTONS in search bar - */
+/* __TOGGLES, DROPDOWNS AND BUTTONS in search bar __*/
 
-/* - - - - - - EVENTS LIST  - - - - - - */
+/* ____________EVENTS LIST  ____________*/
 /* a list of events on the page Tapahtumat */
 .eventList {
   display: flex;
@@ -234,6 +234,65 @@ button.sortButton {
   border-radius: 10px;
 }
 
+/* ONE EVENT'S DIV */
+.eventInfo {
+  flex-grow: 1;
+  display: grid;
+  /* Define 3 columns: 125px for image, the rest split 3/4 and 1/4 */
+  grid-template-columns: 125px 3fr 1fr;
+  grid-template-areas:
+    "header header date"
+    "image description description";
+  padding: 10px;
+  gap: 10px; /* Adds consistent spacing between elements */
+  transition: var(--transition);
+  align-items: start; /* Keeps headers at the top */
+}
+
+/* Handle layout when NO image is present */
+.eventInfo:not(:has(img)) {
+  /* Change columns to just the 3/4 and 1/4 split */
+  grid-template-columns: 3fr 1fr;
+  grid-template-areas:
+    "header date"
+    "description description";
+}
+
+.eventInfo .event_header {
+  grid-area: header;
+  margin: 0;
+}
+
+.eventInfo .event_date {
+  grid-area: date;
+  text-align: right; /* Aligns date to the right edge */
+  margin: 0;
+}
+
+.eventInfo img {
+  grid-area: image;
+  width: 125px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+  /* Removed display: inline-block to prevent baseline issues */
+}
+
+.eventInfo p {
+  grid-area: description;
+  margin: 10px 0 0 0;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.eventInfo:hover {
+  cursor: pointer;
+  background-color: var(--lighterblue);
+}
+/* /ONE EVENT'S DIV */
+/* ____________/EVENTS LIST  ____________*/
+
+/* ____________ADMIN TOOLS ____________*/
 /* event field (contains information about event and edit/delete -tools for admin) */
 .event {
   width: 100%;
@@ -244,45 +303,6 @@ button.sortButton {
   align-items: stretch;
   gap: 2px;
 }
-/* div with all information about event */
-.eventInfo {
-  flex-grow: 1;
-  /* max-width: 95%; */
-  display: grid;
-  grid-template-areas:
-    "header header date"
-    "image description description";
-  grid-template-columns: auto 1fr;
-  padding: 10px;
-  transition: var(--transition);
-}
-.eventInfo .event_header {
-  grid-area: header;
-}
-.eventInfo .event_date {
-  grid-area: date;
-}
-.eventInfo img {
-  display: inline-block;
-  grid-area: image;
-  width: 125px;
-  padding: 5px;
-  margin: auto;
-  align-self: center;
-}
-.eventInfo p {
-  grid-area: description;
-  margin-bottom: 0px;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-.eventInfo:hover {
-  cursor: pointer;
-  background-color: var(--lighterblue);
-}
-/* - - - - - - /EVENTS LIST  - - - - - - */
-
-/* - - - - - - ADMIN TOOLS - - - - - - */
 /* div with links to edit and delete event*/
 .adminTools {
   display: flex;
@@ -302,22 +322,59 @@ button.sortButton {
   color: var(--cinema-whiteish);
   transition: var(--transition);
 }
+
 .adminTools > :first-child,
 .adminTools > :first-child:focus {
   background-color: var(--darkblue);
+}
+.adminTools > :first-child:hover {
+  background-color: var(--orange);
 }
 .adminTools > :last-child,
 .adminTools > :last-child:focus {
   background-color: var(--base-color);
 }
-.adminTools > :first-child:hover {
-  background-color: var(--orange);
-}
 .adminTools > :last-child:hover {
   background-color: var(--cinema-pink);
 }
 
-/* - - - - - - /ADMIN TOOLS - - - - - - */
+/* ____________/ADMIN TOOLS ____________*/
 
 @media (max-width: 500px) {
+  /* dropdown floaties */
+  .sortingOptions,
+  .filteringOptions {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+  }
+  /* ___ONE EVENT'S DIV___ */
+  .eventInfo {
+    grid-template-columns: 1fr; /* Stack all elements in a single column */
+    grid-template-areas:
+      "header"
+      "date"
+      "image"
+      "description";
+  }
+
+  /* Handle layout when NO image is present */
+  .eventInfo:not(:has(img)) {
+    /* Change columns to just the 3/4 and 1/4 split */
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "date"
+      "description";
+  }
+
+  .eventInfo .event_date {
+    text-align: left; /* Align date to the left on mobile */
+  }
+
+  .eventInfo img {
+    width: 100%; /* Make image take full width on mobile */
+    height: auto;
+  }
 }

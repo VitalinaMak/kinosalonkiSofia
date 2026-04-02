@@ -272,15 +272,22 @@
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
 
-                    $kuvaPath = empty($row["event_image"]) ? "noImage.png" : $row["event_image"];  //if the event doesn't have image, use the default image
+                    // $kuvaPath = empty($row["event_image"]) ? "noImage.png" : $row["event_image"];  //if the event doesn't have image, use the default image
+                    $kuvaPath = !empty($row["event_image"]) ? $row["event_image"] : null;
                     $placesNumber = !(is_null($row['max_visitors'])) ? "Paikkoja jäljellä: ".($row['max_visitors'] - $row['booked_places']) : "Osallistujien määrä: ".$row['booked_places'];  //amount of seats left (for 1st and 2nd types of event), calculated from the max. amount of seats (stated in the table) and amount of bookings made for the event. For the 3rd type of event (max. amount of seats = 0 by default) show amount of participants
                     $ageLimit = ($row['age_limit']=="Ei luokiteltu") ? "" : "(".$row['age_limit'].")";  //age limit. If it's defined, it appears in parenthesis after the name of the event
+
+                    // Build the image tag only if path exists
+                    $imageHtml = "";
+                    if ($kuvaPath) {
+                        $imageHtml = "<img src='kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>";
+                    }
                     
                     echo "<div class='event' onclick='window.location.href=\""."bookEvent.php?id=".$row['id']."\"'>
                             <div class='eventInfo'>
                                 <h3 class='event_header'>{$row['event_name']} {$ageLimit}</h3>
                                 <h3 class='event_date'>{$row['event_formatted_date']} klo {$row['event_hour']}.{$row['event_minute']}</h3>
-                                <img class='".($kuvaPath == "noImage.png" ? "noImage" : "")."' src='kuvat/tapahtumaKuvat/$kuvaPath'  alt='{$row['event_name']}'/>
+                                {$imageHtml}
                                 <p>{$row['description']}<br>{$placesNumber}.</p>
                             </div>"
                             . ($isAdmin   /* if the user is admin, add div with links for editing and deleting. Else just close the div */
