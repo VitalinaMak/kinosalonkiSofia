@@ -1,5 +1,33 @@
 "use strict";
 
+const delAccButton = document.getElementById("deleteaccount-btn");
+/* delAccButton.addEventListener("click", function() {
+  alert("Haluatko varmasti poistaa tilisi? Tätä toimintoa ei voi peruuttaa");
+}) */
+$( function() {
+  $( "#confirm-dialog" ).dialog({
+    autoOpen: false,  //prevent opening on the page load
+    resizable: false,
+    height: "auto",
+    width: 400,
+    modal: true,  //this means a user cannot click the background page
+    buttons: {
+      "Kyllä": function() {
+        $( this ).dialog( "close" );
+        $("#delete-form").submit();  // submit the hidden form to delete the account
+      },
+      Peruuta: function() {
+        $( this ).dialog( "close" );
+      }
+    }
+  });
+
+  // Open dialog when button is clicked
+  $("#deleteaccount-btn").on("click", function() {
+    $("#confirm-dialog").dialog("open");
+  });
+} );
+
 //turned out it's integrated in html, so there's no real need in this function
 /* const passwordInput = document.getElementById("oldPassword-input");
 passwordInput.addEventListener("click", function() {

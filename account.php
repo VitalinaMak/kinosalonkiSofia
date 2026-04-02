@@ -7,6 +7,14 @@
         exit();
     }
 
+    /* logout handling */
+    if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+        session_unset();  // remove all session variables
+        session_destroy();  //destroy the session
+        header("Location: index.php");
+        exit();
+    }
+
     $userID = ($_SESSION['user_id']);  // registered user's id
 
     $pageTitle = "Account";
@@ -34,9 +42,6 @@
         $id = (int) $_GET['id'];
         $stmt->bind_param("i", $id);
         if ($stmt->execute()) {
-            /* $query = $_GET;
-            unset($query['id']);  //remove id from the URL */
-
             header("Location: account.php");  //redirect to the same page
             exit();
         }
@@ -121,9 +126,19 @@
             </div>
             
             <div class="account-actions">
-                <a class="button logout" href="index.php">Kirjaudu ulos</a>
+                <a class="button logout" href="account.php?action=logout">Kirjaudu ulos</a>
                 <button class="deleteaccount" type="button" id="deleteaccount-btn">Poista tili</button>
             </div>
+
+            <!-- dialog for account deleting -->
+            <div id="confirm-dialog" title="Poista tili" style="display:none;">
+                <p>Haluatko varmasti poistaa tilisi? Tätä toimintoa ei voi peruuttaa.</p>
+            </div>
+
+            <!-- hidden form for account deleting (will be submitted only after the user presses "Kyllä" in the dialog window) -->
+            <form id="delete-form" method="POST" action="deleteAccount.php" style="display:none;">
+                <input type="hidden" name="delete_account" value="1">
+            </form>
 
         </div>
 
