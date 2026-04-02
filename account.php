@@ -15,7 +15,7 @@
     include 'include/header.php'; 
 
     /* retrieve all information about the user from the database */
-    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?;");
     $stmt->bind_param("s", $userID);
     $stmt->execute();
     
@@ -24,6 +24,23 @@
 
     $name = $user['username'];
     $email = $user['email'];
+
+    /* cancel reservation */
+    if (isset($_GET['id'])) {
+        $stmt = $conn->prepare("DELETE FROM bookings WHERE id = ?;");
+        if (!$stmt) {
+            die("Prepare failed: " . $conn->error);
+        }
+        $id = (int) $_GET['id'];
+        $stmt->bind_param("i", $id);
+        if ($stmt->execute()) {
+            /* $query = $_GET;
+            unset($query['id']);  //remove id from the URL */
+
+            header("Location: account.php");  //redirect to the same page
+            exit();
+        }
+    }
 ?>
 
 <!-- - - - H T M L - - - -->
@@ -85,7 +102,7 @@
             /* show the mesage if update was successful */         
                 if (isset($_SESSION['success_message'])) {
                     echo '<p class="success-msg">'.$_SESSION['success_message'].'</p>';
-                    unset($_SESSION['success_message']);  // remove it so it only shows once
+                    unset($_SESSION['success_message']);  // remove it from session so it only appears once
                 }
             ?>
             
@@ -121,36 +138,50 @@
                         events.event_name, 
                         events.event_type, 
                         DATE_FORMAT(events.event_date, '%d.%m.%Y') AS event_formatted_date, 
-                        HOUR(events.event_time) AS event_hour, 
+                        HOUR(events.event_time) AS event_hour,
                         DATE_FORMAT(events.event_time, '%i') AS event_minute, 
                         events.event_image, 
                         events.description, 
                         events.age_limit, 
-                        events.location, 
-                        bookings.user_id, 
+                        events.location,
                         bookings.event_id, 
-                        GROUP_CONCAT(bookings.seat_number) AS seats 
-                    FROM events, bookings 
-                    WHERE events.id = bookings.event_id AND bookings.user_id = ? 
-                    GROUP BY event_id;
+                        bookings.id,
+                        GROUP_CONCAT(bookings.seat_number) AS seats,
+                        (
+                            SELECT COUNT(*)
+                            FROM bookings AS b2 
+                            WHERE b2.event_id = events.id AND b2.user_id = ?
+                        ) AS total
+                    FROM events
+                    JOIN bookings ON events.id = bookings.event_id
+                    WHERE bookings.user_id = ? 
+                    GROUP BY bookings.event_id
+                    ORDER BY events.event_date, events.event_time;
                 ";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("s", $userID);
+                $stmt->bind_param("ss", $userID, $userID);
                 $stmt->execute();
 
                 $result = $stmt->get_result();
+                $seatList ="";  //list of seat numbers
+                $total = "";  //total amount of booked seats for the event
 
                 if ($result->num_rows > 0) {
-                    $places = "";  //variable for the string with all reserved seats
-                    $ageLimit = "";
                     while ($row = $result->fetch_assoc()) {
+                        $places = "";  //variable for the string with all reserved seats
+                        $total = $row['total'];  
+                        $ageLimit = "";
+                        
                         /* assign value to $places only for the 1st type of event */
                         if ($row['event_type'] == 1) {
                             $places = "Paikat ".$row['seats'];
+                            $seatList = str_replace(',', '', $row['seats']);  //remove commas from the list of booked seats, so it can be passed to the url later
                         }
+
                         if ($row['age_limit'] != "Ei luokiteltu") {
                             $ageLimit = $row['age_limit'];  //if the event has age limitetion, assign it to variable; otherwise leave it empty
                         }
+
                         echo <<<HTML
                         <div class="reserved">
                             <div class="details">
@@ -173,11 +204,8 @@
                                 </p>                        
                             </div>
                             <div class="change">
-                                <!-- REDACT THE LINKS TO CORRECT ONES -->
-                                <!-- REDACT THE LINKS TO CORRECT ONES -->
-                                <!-- REDACT THE LINKS TO CORRECT ONES -->
-                                <a class="button edit" href="bookEvent.php">Muokkaa varaus</a>
-                                <a class="button cancel" href="account.php">Peruuta varaus</a>
+                                <a class="button edit" href="bookEvent.php?id={$row['event_id']}seats={$seatList}&total={$total}">Muokkaa varaus</a>
+                                <a class="button cancel" href="account.php?id={$row['id']}">Peruuta varaus</a>
                             </div>
                         </div>
                         HTML;

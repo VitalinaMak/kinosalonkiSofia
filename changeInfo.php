@@ -45,7 +45,7 @@
             $newPassRepeat = $_POST['newPasswordRepeat'];
             
            if ($newPass != $newPassRepeat) {
-                die ('Uusi salasanat eivät täsmää!');
+                die ('Salasanat eivät täsmää!');
             }
 
             /* check if the old password is valid */

@@ -1,6 +1,6 @@
 "use strict";
 
-//turned out it integrated in html, so there's no real need in this function
+//turned out it's integrated in html, so there's no real need in this function
 /* const passwordInput = document.getElementById("oldPassword-input");
 passwordInput.addEventListener("click", function() {
   if (this.getAttribute('type') == 'password') {
@@ -48,4 +48,5 @@ function changePasswordForm() {
   for (let i = 0; i < passwordReset.length; i++) {
     passwordReset[i].style.display = "flex";
   }
+  toggleEdit();  //make input fields editable from the moment they appear
 }
