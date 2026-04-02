@@ -19,7 +19,7 @@
         /* verify password and if everything is OK, save user's id into session and go to the page with events */
         if ($user && password_verify($password, $user->password_hash)) {
             $_SESSION['user_id'] = $user->id;
-            header("Location: tapahtumat.php");
+            header("Location: account.php");
             exit();
         } else {
             $error .= 'Käyttäjätunnus tai salasana on virheellinen';
