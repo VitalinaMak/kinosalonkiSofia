@@ -1,3 +1,7 @@
+main {
+  background-color: white;
+}
+
 .top {
   /* The first value is the color ON TOP, the second is the image BEHIND it */
   background-image:
@@ -43,7 +47,7 @@
   width: fit-content;
   border-radius: 40px;
   padding: 0 5px;
-  background-color: var(--cinema-whiteish);
+  background-color: white;
   text-shadow:
     2px 2px 4px rgba(0, 0, 0, 0.4),
     0px 0px 20px rgba(0, 0, 0, 0.5);
@@ -54,7 +58,7 @@
 }
 .eventListActions label {
   border: none;
-  background-color: var(--cinema-whiteish);
+  background-color: white;
   /* height: 100%; */
   display: inline-block;
   height: 48px;
@@ -64,23 +68,23 @@
 }
 .eventListActions input {
   border: none;
-  background-color: var(--cinema-whiteish);
+  background-color: white;
   height: 100%;
   display: inline-block;
   padding: 0 5px;
   height: 48px;
-  width: 300px;
+  /* width: 300px; */
+  min-width: 150px;
 }
 .eventListActions input:focus {
   outline: none;
-  /* box-shadow: 0 0 5px var(--base-color); */
 }
 
 button.filterButton,
 button.sortButton {
   border: none;
   border-radius: 0;
-  background-color: var(--cinema-whiteish);
+  background-color: white;
 
   height: 48px;
   width: 48px;
@@ -93,10 +97,11 @@ button.sortButton {
 
 /* __TOGGLES, DROPDOWNS AND BUTTONS in search bar __*/
 
-.searchAndSort {
+.search {
   display: flex;
   flex-flow: row nowrap;
 }
+
 /* containers for buttons */
 .eventSorting,
 .eventFiltering {
@@ -113,7 +118,7 @@ button.sortButton {
   z-index: 998;
   left: 0;
 
-  background-color: var(--cinema-whiteish);
+  background-color: white;
   border: 1px solid var(--cinema-grey);
   border-radius: 10px;
   padding: 10px;
@@ -135,7 +140,7 @@ button.sortButton {
   /* In CSS, if you define a border-style (like solid) and a border-width 
   but not a border-color, the browser defaults the border color 
   to the current color of the text. */
-  background-color: var(--cinema-whiteish);
+  background-color: white;
   border: 2px solid;
   border-radius: 10px;
 
@@ -223,6 +228,23 @@ button.sortButton {
   z-index: 1; /* Ensures it stays on top */
 }
 
+/* This creates the gradient LAYER that sits OVER the images */
+.eventList::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px; /* Matches the top padding height */
+
+  /* Gradient: Solid white at the very top, fading to transparent at the 60px mark */
+  background: linear-gradient(to bottom, white 0%, rgba(255, 255, 255, 0) 100%);
+
+  /* CRITICAL PROPERTIES */
+  z-index: 5; /* Higher than the event cards/images to stay on top */
+  pointer-events: none; /* Allows you to still click the events underneath the gradient */
+}
+
 .eventList .eventInfo {
   background-color: var(--cinema-grey);
   color: var(--darkblue);
@@ -260,13 +282,16 @@ button.sortButton {
 
 .eventInfo .event_header {
   grid-area: header;
-  margin: 0;
+  margin-right: 5px;
 }
 
 .eventInfo .event_date {
   grid-area: date;
   text-align: right; /* Aligns date to the right edge */
   margin: 0;
+  text-wrap: nowrap;
+  /* text-decoration: underline; */
+  /* text-decoration-thickness: 3.5px; */
 }
 
 .eventInfo img {
@@ -275,12 +300,13 @@ button.sortButton {
   height: auto;
   object-fit: cover;
   border-radius: 5px;
+  margin-top: 10px;
   /* Removed display: inline-block to prevent baseline issues */
 }
 
 .eventInfo p {
   grid-area: description;
-  margin: 10px 0 0 0;
+  margin-top: 10px;
   overflow-wrap: break-word;
   hyphens: auto;
 }
@@ -308,7 +334,6 @@ button.sortButton {
   display: flex;
   flex-direction: column;
   min-width: 50px;
-  /* gap: 5px; */
 }
 .adminTools a {
   flex: 1;
@@ -319,7 +344,7 @@ button.sortButton {
 }
 
 .adminTools a {
-  color: var(--cinema-whiteish);
+  color: white;
   transition: var(--transition);
 }
 
@@ -340,7 +365,7 @@ button.sortButton {
 
 /* ____________/ADMIN TOOLS ____________*/
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   /* dropdown floaties */
   .sortingOptions,
   .filteringOptions {
@@ -370,11 +395,29 @@ button.sortButton {
   }
 
   .eventInfo .event_date {
-    text-align: left; /* Align date to the left on mobile */
+    text-align: left;
   }
 
   .eventInfo img {
-    width: 100%; /* Make image take full width on mobile */
+    width: 100%;
     height: auto;
+  }
+}
+
+@media (max-width: 490px) {
+  .top h1 {
+    font-size: 3rem; /* Significantly smaller than the default 4rem */
+    /* line-height: 1.1; */
+    word-wrap: break-word; /* Ensures long Finnish words don't break the layout */
+    width: fit-content;
+  }
+  .eventListActions {
+    border-radius: 10px;
+    margin: 0 10px;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+  }
+  .eventList {
+    padding: 10px;
   }
 }

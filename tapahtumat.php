@@ -57,7 +57,7 @@
         <h1>Tapahtumat</h1>
         <!-- line with all of the actions for the list -->
         <div class="eventListActions">
-            <div class="searchAndSort">
+            <div class="search">
                 <!-- search field. When the info is sent, it passes it in URL -->
                 <form action="" method="GET"> 
                     <label for="user-search" class="lupka">
@@ -72,20 +72,6 @@
                     <?php endforeach; ?>
                 </form>
 
-                <!-- button for sorting events. Contains a dropdown menu with sorting options -->
-                <div class="eventSorting">  
-                    <button class="sortButton"> 
-                        <!-- Järjestää -->
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M120-240v-80h240v80H120Zm0-200v-80h480v80H120Zm0-200v-80h720v80H120Z"/></svg>
-                    </button>
-                    <div class="sortingOptions">
-                        <h4>Järjestä tapahtumat:</h4>
-                        <a href="?sort=nimiaz&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');};?>">Tapahtuman nimi (A-Z)</a>
-                        <a href="?sort=nimiza&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; ?>">Tapahtuman nimi (Z-A)</a>
-                        <a href="?sort=pvmnouseva&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; ?>">Päivämäärä (nouseva)</a>  <!-- this one is used by default -->
-                        <a href="?sort=pvmlaskeva&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; ?>">Päivämäärä (laskeva)</a>
-                    </div>
-                </div>
             </div>
 
             <!-- handling search and sort parameters (if they already exist) in the url for filtering -->
@@ -108,40 +94,56 @@
                     $query = $query . "&";  //adds '&' to the end, so it'll only be added to URL if extra params are used
                 }
             ?>
-        
-            <!-- button for filtering events. Contains a dropdown menu with filtering options -->
-            <div class="eventFiltering">
-                <button class="filterButton">
-                    <!-- Suodata -->
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/></svg>
-                </button>
-                <div class="filteringOptions">
-                    <h4>Suodata tapahtumat</h4>
-                    <p>Tapahtuman tyyppi:</p>
-                    <!-- for every option it creates the copy of array with url-parameters and change type's value to new one (1, 2, or 3 accordingly). Then it builds a new link with new parameters and pass it to <a>-element -->
-                    <?php $p = $params; $p['type'] = 1; ?>
-                    <a class="event1" href="?<?php echo http_build_query($p); ?>">Elokuvaesitys</a>
-        
-                    <?php $p = $params; $p['type'] = 2; ?>
-                    <a class="event2"  href="?<?php echo http_build_query($p); ?>">Rajattu osallistujamäärä</a>
-        
-                    <?php $p = $params; $p['type'] = 3; ?>
-                    <a class="event3" href="?<?php echo http_build_query($p); ?>">Rajaton osallistujamäärä</a>
-        
-                    <p>Ikärajoitus:</p>
-                    <!-- same logic as for type filters -->
-                    <?php $p = $params; $p['agelimit'] = "K18"; ?>
-                    <a class="age-18" href="?<?php echo http_build_query($p); ?>">K18</a>
-        
-                    <?php $p = $params; $p['agelimit'] = "S"; ?>
-                    <a class="age-none" href="?<?php echo http_build_query($p); ?>">Ilman K18-rajoitusta</a>
-        
-                    <!-- button to remove all filters -->
-                    <?php 
-                        $p = $params;  //create a copy of the array with parameters for URL
-                        unset($p['type'], $p['agelimit']);  //remove all filter parameters
-                    ?>  
-                    <a href="?<?php echo http_build_query($p); ?>" id="removeFilterButton">Poista suodattimet</a>
+
+            <div class="sort-filter">
+                <!-- button for sorting events. Contains a dropdown menu with sorting options -->
+                <div class="eventSorting">  
+                    <button class="sortButton"> 
+                        <!-- Järjestää -->
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M120-240v-80h240v80H120Zm0-200v-80h480v80H120Zm0-200v-80h720v80H120Z"/></svg>
+                    </button>
+                    <div class="sortingOptions">
+                        <h4>Järjestä tapahtumat:</h4>
+                        <a href="?sort=nimiaz&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');};?>">Tapahtuman nimi (A-Z)</a>
+                        <a href="?sort=nimiza&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; ?>">Tapahtuman nimi (Z-A)</a>
+                        <a href="?sort=pvmnouseva&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; ?>">Päivämäärä (nouseva)</a>  <!-- this one is used by default -->
+                        <a href="?sort=pvmlaskeva&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; ?>">Päivämäärä (laskeva)</a>
+                    </div>
+                </div>
+                <!-- button for filtering events. Contains a dropdown menu with filtering options -->
+                <div class="eventFiltering">
+                    <button class="filterButton">
+                        <!-- Suodata -->
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/></svg>
+                    </button>
+                    <div class="filteringOptions">
+                        <h4>Suodata tapahtumat</h4>
+                        <p>Tapahtuman tyyppi:</p>
+                        <!-- for every option it creates the copy of array with url-parameters and change type's value to new one (1, 2, or 3 accordingly). Then it builds a new link with new parameters and pass it to <a>-element -->
+                        <?php $p = $params; $p['type'] = 1; ?>
+                        <a class="event1" href="?<?php echo http_build_query($p); ?>">Elokuvaesitys</a>
+            
+                        <?php $p = $params; $p['type'] = 2; ?>
+                        <a class="event2"  href="?<?php echo http_build_query($p); ?>">Rajattu osallistujamäärä</a>
+            
+                        <?php $p = $params; $p['type'] = 3; ?>
+                        <a class="event3" href="?<?php echo http_build_query($p); ?>">Rajaton osallistujamäärä</a>
+            
+                        <p>Ikärajoitus:</p>
+                        <!-- same logic as for type filters -->
+                        <?php $p = $params; $p['agelimit'] = "K18"; ?>
+                        <a class="age-18" href="?<?php echo http_build_query($p); ?>">K18</a>
+            
+                        <?php $p = $params; $p['agelimit'] = "S"; ?>
+                        <a class="age-none" href="?<?php echo http_build_query($p); ?>">Ilman K18-rajoitusta</a>
+            
+                        <!-- button to remove all filters -->
+                        <?php 
+                            $p = $params;  //create a copy of the array with parameters for URL
+                            unset($p['type'], $p['agelimit']);  //remove all filter parameters
+                        ?>  
+                        <a href="?<?php echo http_build_query($p); ?>" id="removeFilterButton">Poista suodattimet</a>
+                    </div>
                 </div>
             </div>
         </div> 
