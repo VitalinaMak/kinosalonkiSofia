@@ -65,7 +65,9 @@
                 - 
             2. if the event type is 1 (movie), show the table with seats, if the event type is 2 (limited amount of places), show the amount of places left, if the event type is 3 (unlimited amount of places), show the total number of participants
             -->
-        <img src="kuvat/tapahtumaKuvat/<?= $event['event_image'] ?>" alt="Event Image">  <!-- event's image -->
+            <?php if (!empty($event["event_image"])): ?>    
+                <img src="kuvat/tapahtumaKuvat/<?= $event['event_image'] ?>" alt="Event Image">  <!-- event's image (if it exists) -->
+            <?php endif ?>
             <p><?= $event['description'] ?></p>  <!-- Here add all the details about the event - image, decription etc. onclick on place it checks if you're logged in, and if not - sends you to SIGN UP page! -->
 
             <div class="booking">
@@ -118,7 +120,7 @@
                         <input type="hidden" id="checkLogin" name="checkLogin" value="<?php echo ($user) ? 1 : 0; ?>">  <!-- an input to check if the user logged in -->
                         <input type="hidden" id="selectedSeatsInput" name="seats">  <!-- an input to store the ID's of selected seats -->
                         <input type="hidden" id="typeOfEvent" name="typeOfEvent" value="<?=$eventType?>">  <!-- an input to store event's type -->
-                        <input type="submit" name="submit" value="Vahvista varaus">
+                        <input type="submit" name="submit" class="button" value="Vahvista varaus">
                     </form>
 
                     <p id="message"></p>
