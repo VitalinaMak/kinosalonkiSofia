@@ -104,10 +104,11 @@
                     </button>
                     <div class="sortingOptions">
                         <h4>Järjestä tapahtumat:</h4>
-                        <a href="?sort=nimiaz&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');};?>">Tapahtuman nimi (A-Z)</a>
-                        <a href="?sort=nimiza&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; ?>">Tapahtuman nimi (Z-A)</a>
-                        <a href="?sort=pvmnouseva&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; ?>">Päivämäärä (nouseva)</a>  <!-- this one is used by default -->
-                        <a href="?sort=pvmlaskeva&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; ?>">Päivämäärä (laskeva)</a>
+                        <!-- save the rest of the parameters in url and add sorting -->
+                        <a href="?sort=nimiaz&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; if (isset($_GET['agelimit'])) if (isset($_GET['agelimit'])) {echo '&agelimit='.urlencode($_GET['agelimit'] ?? '');};?>">Tapahtuman nimi (A-Z)</a>
+                        <a href="?sort=nimiza&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; if (isset($_GET['agelimit'])) if (isset($_GET['agelimit'])) {echo '&agelimit='.urlencode($_GET['agelimit'] ?? '');};?>">Tapahtuman nimi (Z-A)</a>
+                        <a href="?sort=pvmnouseva&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; if (isset($_GET['agelimit'])) if (isset($_GET['agelimit'])) {echo '&agelimit='.urlencode($_GET['agelimit'] ?? '');};?>">Päivämäärä (nouseva)</a>  <!-- this one is used by default -->
+                        <a href="?sort=pvmlaskeva&search=<?php echo urlencode($_GET['search'] ?? ''); if (isset($_GET['type'])) {echo '&type='.urlencode($_GET['type'] ?? '');}; if (isset($_GET['agelimit'])) if (isset($_GET['agelimit'])) {echo '&agelimit='.urlencode($_GET['agelimit'] ?? '');};?>">Päivämäärä (laskeva)</a>
                     </div>
                 </div>
                 <!-- button for filtering events. Contains a dropdown menu with filtering options -->
@@ -150,9 +151,10 @@
 
     </div>
 
-
+    
     <!-- div for the list of events -->
     <div class="eventList">
+        <a class="button addEvent" href="addEvent.php">Lisää tapahtuma</a>
         <?php
             $search = '';  //variable for searching
             $order = 'events.event_date ASC';  //variable for sorting data. For default sorts by date starting from earlier events 
@@ -274,6 +276,16 @@
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
 
+                    /* change the color of the background depending on the event type */
+                    $bgColor = "";
+                    if ($row['event_type'] == "1") {
+                        $typeForColor = "event1";
+                    } else if ($row['event_type'] == "2") {
+                        $typeForColor = "event2";
+                    } else {
+                        $typeForColor = "event3";
+                    }
+
                     // $kuvaPath = empty($row["event_image"]) ? "noImage.png" : $row["event_image"];  //if the event doesn't have image, use the default image
                     $kuvaPath = !empty($row["event_image"]) ? $row["event_image"] : null;
                     $placesNumber = !(is_null($row['max_visitors'])) ? "Paikkoja jäljellä: ".($row['max_visitors'] - $row['booked_places']) : "Osallistujien määrä: ".$row['booked_places'];  //amount of seats left (for 1st and 2nd types of event), calculated from the max. amount of seats (stated in the table) and amount of bookings made for the event. For the 3rd type of event (max. amount of seats = 0 by default) show amount of participants
@@ -285,7 +297,7 @@
                         $imageHtml = "<img src='kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>";
                     }
                     
-                    echo "<div class='event' onclick='window.location.href=\""."bookEvent.php?id=".$row['id']."\"'>
+                    echo "<div class='event {$typeForColor}' onclick='window.location.href=\""."bookEvent.php?id=".$row['id']."\"'>
                             <div class='eventInfo'>
                                 <h3 class='event_header'>{$row['event_name']} {$ageLimit}</h3>
                                 <h3 class='event_date'>{$row['event_formatted_date']} klo {$row['event_hour']}.{$row['event_minute']}</h3>

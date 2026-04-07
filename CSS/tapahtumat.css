@@ -4,9 +4,7 @@ main {
 
 .top {
   /* The first value is the color ON TOP, the second is the image BEHIND it */
-  background-image:
-    linear-gradient(var(--head-foot-tr), var(--head-foot-tr)),
-    url("../kuvat/shtory_red.jpg");
+  background-image: linear-gradient(var(--head-foot-tr), var(--head-foot-tr)), url("../kuvat/shtory_red.jpg");
   /* background-image: url("../kuvat/shtory_red.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
@@ -194,6 +192,16 @@ button.sortButton {
   --type-color: var(--dark-teal);
 }
 
+.event1:hover {
+  --type-color: var(--event1Hover);
+}
+.event2:hover {
+  --type-color: var(--event2Hover);
+}
+.event3:hover {
+  --type-color: var(--event3Hover);
+}
+
 #removeFilterButton {
   margin-top: 12px;
   margin-bottom: 0;
@@ -245,10 +253,10 @@ button.sortButton {
   pointer-events: none; /* Allows you to still click the events underneath the gradient */
 }
 
-.eventList .eventInfo {
+/* .eventList .eventInfo {
   background-color: var(--cinema-grey);
   color: var(--darkblue);
-}
+} */
 .eventList h3 {
   color: var(--base-color);
 }
@@ -313,7 +321,7 @@ button.sortButton {
 
 .eventInfo:hover {
   cursor: pointer;
-  background-color: var(--lighterblue);
+  /*   background-color: var(--lighterblue); */
 }
 /* /ONE EVENT'S DIV */
 /* ____________/EVENTS LIST  ____________*/
@@ -328,7 +336,13 @@ button.sortButton {
   align-content: space-around;
   align-items: stretch;
   gap: 2px;
+  background-color: var(--type-color);
+  transition: var(--transition);
 }
+.event:hover {
+  background-color: var(--type-color);
+}
+
 /* div with links to edit and delete event*/
 .adminTools {
   display: flex;

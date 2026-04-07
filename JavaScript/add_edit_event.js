@@ -4,6 +4,15 @@ const preview = document.getElementById("preview");  // image preview
 let selectedEventType;  // variable to store selected type of event (before form submition)
 const maxPlacesInput = document.getElementById("maxplaces-input");  //input of max. amount of visitors
 
+/* const passwordInput = document.getElementById("password-input");
+passwordInput.addEventListener("click", function() {
+  if (this.getAttribute('type') == 'password') {
+    this.setAttribute('type', 'text');
+  } else {
+    this.setAttribute('type', 'password');    
+  }
+})  */
+
 //show preview when image is uploaded
 fileInput.addEventListener("change", function () {
 
