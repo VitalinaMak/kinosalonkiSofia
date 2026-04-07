@@ -1,3 +1,7 @@
+main {
+  background-color: white;
+}
+
 .top {
   /* The first value is the color ON TOP, the second is the image BEHIND it */
   background-image:
@@ -32,7 +36,7 @@
     0px 0px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* - - - SEARCH BAR aka a list of actions for events on the page Tapahtumat */
+/* ______SEARCH BAR aka a list of actions for events on the page Tapahtumat */
 .eventListActions {
   display: flex;
   flex-flow: row wrap;
@@ -43,7 +47,7 @@
   width: fit-content;
   border-radius: 40px;
   padding: 0 5px;
-  background-color: var(--cinema-whiteish);
+  background-color: white;
   text-shadow:
     2px 2px 4px rgba(0, 0, 0, 0.4),
     0px 0px 20px rgba(0, 0, 0, 0.5);
@@ -54,7 +58,7 @@
 }
 .eventListActions label {
   border: none;
-  background-color: var(--cinema-whiteish);
+  background-color: white;
   /* height: 100%; */
   display: inline-block;
   height: 48px;
@@ -64,23 +68,23 @@
 }
 .eventListActions input {
   border: none;
-  background-color: var(--cinema-whiteish);
+  background-color: white;
   height: 100%;
   display: inline-block;
   padding: 0 5px;
   height: 48px;
-  width: 300px;
+  /* width: 300px; */
+  min-width: 150px;
 }
 .eventListActions input:focus {
   outline: none;
-  /* box-shadow: 0 0 5px var(--base-color); */
 }
 
 button.filterButton,
 button.sortButton {
   border: none;
   border-radius: 0;
-  background-color: var(--cinema-whiteish);
+  background-color: white;
 
   height: 48px;
   width: 48px;
@@ -89,14 +93,15 @@ button.sortButton {
   transition: var(--transition);
 }
 
-/* - - - /SEARCH BAR - - - */
+/* ______/SEARCH BAR ______*/
 
-/* - TOGGLES, DROPDOWNS AND BUTTONS in search bar - */
+/* __TOGGLES, DROPDOWNS AND BUTTONS in search bar __*/
 
-.searchAndSort {
+.search {
   display: flex;
   flex-flow: row nowrap;
 }
+
 /* containers for buttons */
 .eventSorting,
 .eventFiltering {
@@ -113,7 +118,7 @@ button.sortButton {
   z-index: 998;
   left: 0;
 
-  background-color: var(--cinema-whiteish);
+  background-color: white;
   border: 1px solid var(--cinema-grey);
   border-radius: 10px;
   padding: 10px;
@@ -135,7 +140,7 @@ button.sortButton {
   /* In CSS, if you define a border-style (like solid) and a border-width 
   but not a border-color, the browser defaults the border color 
   to the current color of the text. */
-  background-color: var(--cinema-whiteish);
+  background-color: white;
   border: 2px solid;
   border-radius: 10px;
 
@@ -144,7 +149,7 @@ button.sortButton {
   transition: all var(--transition);
 }
 
-/* - - - specific colors hovers - - - */
+/* ______specific colors hovers ______*/
 .eventSorting:hover .sortingOptions,
 .eventFiltering:hover .filteringOptions {
   display: block;
@@ -174,7 +179,7 @@ button.sortButton {
   color: white;
 }
 
-/* 2. The Assignments: Just tell each class which color it owns */
+/* 2. The Assignments: telling each class which color it owns */
 .event1 {
   --type-color: var(--event1);
 }
@@ -207,9 +212,9 @@ button.sortButton {
   color: var(--base-color);
   font-weight: 600;
 }
-/* - TOGGLES, DROPDOWNS AND BUTTONS in search bar - */
+/* __TOGGLES, DROPDOWNS AND BUTTONS in search bar __*/
 
-/* - - - - - - EVENTS LIST  - - - - - - */
+/* ____________EVENTS LIST  ____________*/
 /* a list of events on the page Tapahtumat */
 .eventList {
   display: flex;
@@ -223,6 +228,23 @@ button.sortButton {
   z-index: 1; /* Ensures it stays on top */
 }
 
+/* This creates the gradient LAYER that sits OVER the images */
+.eventList::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px; /* Matches the top padding height */
+
+  /* Gradient: Solid white at the very top, fading to transparent at the 60px mark */
+  background: linear-gradient(to bottom, white 0%, rgba(255, 255, 255, 0) 100%);
+
+  /* CRITICAL PROPERTIES */
+  z-index: 5; /* Higher than the event cards/images to stay on top */
+  pointer-events: none; /* Allows you to still click the events underneath the gradient */
+}
+
 .eventList .eventInfo {
   background-color: var(--cinema-grey);
   color: var(--darkblue);
@@ -234,6 +256,69 @@ button.sortButton {
   border-radius: 10px;
 }
 
+/* ONE EVENT'S DIV */
+.eventInfo {
+  flex-grow: 1;
+  display: grid;
+  /* Define 3 columns: 125px for image, the rest split 3/4 and 1/4 */
+  grid-template-columns: 125px 3fr 1fr;
+  grid-template-areas:
+    "header header date"
+    "image description description";
+  padding: 10px;
+  gap: 10px; /* Adds consistent spacing between elements */
+  transition: var(--transition);
+  align-items: start; /* Keeps headers at the top */
+}
+
+/* Handle layout when NO image is present */
+.eventInfo:not(:has(img)) {
+  /* Change columns to just the 3/4 and 1/4 split */
+  grid-template-columns: 3fr 1fr;
+  grid-template-areas:
+    "header date"
+    "description description";
+}
+
+.eventInfo .event_header {
+  grid-area: header;
+  margin-right: 5px;
+}
+
+.eventInfo .event_date {
+  grid-area: date;
+  text-align: right; /* Aligns date to the right edge */
+  margin: 0;
+  text-wrap: nowrap;
+  /* text-decoration: underline; */
+  /* text-decoration-thickness: 3.5px; */
+}
+
+.eventInfo img {
+  grid-area: image;
+  width: 125px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-top: 10px;
+  /* Removed display: inline-block to prevent baseline issues */
+}
+
+.eventInfo p {
+  grid-area: description;
+  margin-top: 10px;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.eventInfo:hover {
+  cursor: pointer;
+  background-color: var(--lighterblue);
+}
+/* /ONE EVENT'S DIV */
+/* ____________/EVENTS LIST  ____________*/
+
+/* ____________ADMIN TOOLS ____________*/
 /* event field (contains information about event and edit/delete -tools for admin) */
 .event {
   width: 100%;
@@ -244,51 +329,11 @@ button.sortButton {
   align-items: stretch;
   gap: 2px;
 }
-/* div with all information about event */
-.eventInfo {
-  flex-grow: 1;
-  /* max-width: 95%; */
-  display: grid;
-  grid-template-areas:
-    "header header date"
-    "image description description";
-  grid-template-columns: auto 1fr;
-  padding: 10px;
-  transition: var(--transition);
-}
-.eventInfo .event_header {
-  grid-area: header;
-}
-.eventInfo .event_date {
-  grid-area: date;
-}
-.eventInfo img {
-  display: inline-block;
-  grid-area: image;
-  width: 125px;
-  padding: 5px;
-  margin: auto;
-  align-self: center;
-}
-.eventInfo p {
-  grid-area: description;
-  margin-bottom: 0px;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-.eventInfo:hover {
-  cursor: pointer;
-  background-color: var(--lighterblue);
-}
-/* - - - - - - /EVENTS LIST  - - - - - - */
-
-/* - - - - - - ADMIN TOOLS - - - - - - */
 /* div with links to edit and delete event*/
 .adminTools {
   display: flex;
   flex-direction: column;
   min-width: 50px;
-  /* gap: 5px; */
 }
 .adminTools a {
   flex: 1;
@@ -299,25 +344,80 @@ button.sortButton {
 }
 
 .adminTools a {
-  color: var(--cinema-whiteish);
+  color: white;
   transition: var(--transition);
 }
+
 .adminTools > :first-child,
 .adminTools > :first-child:focus {
   background-color: var(--darkblue);
+}
+.adminTools > :first-child:hover {
+  background-color: var(--orange);
 }
 .adminTools > :last-child,
 .adminTools > :last-child:focus {
   background-color: var(--base-color);
 }
-.adminTools > :first-child:hover {
-  background-color: var(--orange);
-}
 .adminTools > :last-child:hover {
   background-color: var(--cinema-pink);
 }
 
-/* - - - - - - /ADMIN TOOLS - - - - - - */
+/* ____________/ADMIN TOOLS ____________*/
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
+  /* dropdown floaties */
+  .sortingOptions,
+  .filteringOptions {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+  }
+  /* ___ONE EVENT'S DIV___ */
+  .eventInfo {
+    grid-template-columns: 1fr; /* Stack all elements in a single column */
+    grid-template-areas:
+      "header"
+      "date"
+      "image"
+      "description";
+  }
+
+  /* Handle layout when NO image is present */
+  .eventInfo:not(:has(img)) {
+    /* Change columns to just the 3/4 and 1/4 split */
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "date"
+      "description";
+  }
+
+  .eventInfo .event_date {
+    text-align: left;
+  }
+
+  .eventInfo img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 490px) {
+  .top h1 {
+    font-size: 3rem; /* Significantly smaller than the default 4rem */
+    /* line-height: 1.1; */
+    word-wrap: break-word; /* Ensures long Finnish words don't break the layout */
+    width: fit-content;
+  }
+  .eventListActions {
+    border-radius: 10px;
+    margin: 0 10px;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+  }
+  .eventList {
+    padding: 10px;
+  }
 }
