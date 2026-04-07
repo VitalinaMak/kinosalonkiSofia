@@ -21,9 +21,13 @@
 
   --green-teal: rgb(35, 99, 66);
 
-  --event1: rgb(132, 200, 107);
+  --event1: rgb(116, 186, 186);
   --event2: #e78a1f;
-  --event3: rgb(116, 186, 186);
+  --event3: rgb(132, 200, 107);
+
+  --event1Hover: rgb(111, 154, 96);
+  --event2Hover: #c37823;
+  --event3Hover: rgb(107, 152, 152);
 
   /* cinema_seats.jpg */
   --cinema-red1: #7e1605ff;
