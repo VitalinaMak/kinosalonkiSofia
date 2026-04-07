@@ -2,8 +2,20 @@
     $pageTitle = "EditEvent";
     $extraCSS = "CSS/add_edit_event.css";
     $extraJS = "JavaScript/add_edit_event.js";
-    include 'include/header.php'; 
+    include 'include/header.php';
+    
+    /* delete event (it has to be placed before any output) */
+    if (isset($_GET['delete']) && isset($_GET['id'])) {
+        $stmt = $conn->prepare("DELETE FROM events WHERE id = ?;");
+        $id = (int) $_GET['id'];
+        $stmt->bind_param("i", $id);
+        if ($stmt->execute()) {
+            header("Location: tapahtumat.php");  //redirect to the page tapahtumat
+            exit();
+        }
+    }
 ?>
+
 <main class="editEvent_page">
     <div class="wrapper">
     
@@ -11,7 +23,11 @@
 
             <div class="title-link">
                 <h1> Edit event</h1>
-                <a href="tapahtumat.php" class="button-danger">Delete</a>
+                <a href="editEvent.php?id=<?php echo $_GET['id']; ?>&delete=true"
+                    class="button-danger"
+                    onclick="return confirm('Are you sure you want to delete this event?');">
+                    Poista
+                </a>
             </div>
             <?php
                 if ($_SERVER['REQUEST_METHOD'] !== 'POST'):
