@@ -99,7 +99,7 @@
                 <div class="form-buttons">
                     <button type="button" id="edit-btn" onclick="toggleEdit()">Muokkaa</button>
                     <button type="submit" id="save-btn" style="display: none;">Tallenna</button>
-                    <button type="button" id="edit-btn" onclick="changePasswordForm()">Vaihda salasana</button>
+                    <button type="button" id="pswrd-btn" onclick="changePasswordForm()">Vaihda salasana</button>
                 </div>
 
             </form>

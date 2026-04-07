@@ -1,6 +1,5 @@
 /* равный размерб поширеб посередине columns */
 main {
-  /* min-height: 100%; */
   background-image: url("../kuvat/shtukaturka.jpg");
 
   background-size: cover;
@@ -12,8 +11,8 @@ main {
 .wrapper {
   box-sizing: border-box;
   background-color: var(--cinema-whiteish-trtr);
-  /* min-height: 100%; */
   width: 100%;
+  height: 100%;
 
   border: var(--cinema-whiteish) solid 4px;
   box-shadow: inset 0 0 50px 20px var(--cinema-whiteish);
@@ -45,7 +44,7 @@ form {
   flex-direction: column;
   flex-wrap: wrap; /* Allows wrapping on small screens (mobile friendly) */
   gap: 10px; /* Space between column 1 and column 2 */
-  align-items: stretch;
+  /* align-items: stretch; */
   margin: auto;
 }
 
@@ -116,17 +115,6 @@ select:focus,
   transition: var(--transition);
 }
 
-/* IF THE REQUIRED FIELS IS EMPTY
-i think it's very badly supported in browsers */
-
-/* input:user-invalid,
-textarea:user-invalid,
-select:user-invalid,
-.fileInputField:user-invalid {
-  border: 2px solid var(--cinema-pink);
-  background-color: var(--pinkish);
-} */
-
 /* - Specific overrides - */
 input[type="file"] {
   min-height: fit-content;
@@ -151,37 +139,50 @@ form button /* overrides */ {
   margin: 20px 0;
 }
 
-.button {
-  width: fit-content;
-  background-image: url();
-  /* margin: 0; HOW ON LEFT */
+/* - - - div for image input - - - */
+.fileInputField {
+  display: flex;
+  flex-direction: column;
+  height: auto; /* OVERRIDE: Allow container to grow */
+  min-height: 50px; /* Ensure it looks like a normal input when empty */
+  padding: 0; /* We will handle padding on children for better control */
+  overflow: visible; /* Ensure image isn't cut off */
 }
-
 .label-text {
   text-decoration: underline;
   text-decoration-thickness: 2.1px;
 }
-/* - - - div for image input - - - */
-.fileInputField {
-  display: block;
-  height: max-content;
-  padding: 0px;
-}
 .fileInputField img {
-  display: block;
-  height: 220px;
-  width: auto;
-  margin-top: 16px;
-  padding-top: 0px;
-}
-.fileInputField label {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+
   padding: 16px;
+  gap: 10px;
+  overflow: hidden; /* Contains the children inside the border */
+  box-sizing: border-box;
+  width: 300px;
+  height: auto;
+}
+
+.fileInputField .button {
+  width: fit-content;
+  background-image: url();
+  margin: 0 16px 16px 16px;
+}
+
+.fileInputField label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px; /* Move padding here */
+  width: 100%;
+  box-sizing: border-box;
 }
 .fileInputField label:hover {
   cursor: pointer;
 }
-/* make reedonly input look unclickable */
+
+/* make readonly input look unclickable */
 input[readonly] {
   border: var(--base-color-inactive);
 }
@@ -192,6 +193,7 @@ input[readonly]:hover {
 input[readonly]:focus {
   border: 3px solid var(--base-color);
 }
+
 /* - - - end div for image input - - - */
 
 /* PHONE */

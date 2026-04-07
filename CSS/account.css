@@ -152,7 +152,12 @@ input:not([readonly]) {
 /* - - - BUTTONS additions/overrides from global - - - */
 #edit-btn,
 #save-btn {
-  width: 50%;
+  width: 45%;
+  margin: 10px 5px 0 0;
+}
+#pswrd-btn {
+  width: 100%;
+  margin-top: 10px;
 }
 #deleteaccount-btn {
   padding: 0.85em 1.15em;

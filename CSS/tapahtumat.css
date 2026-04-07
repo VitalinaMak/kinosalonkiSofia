@@ -23,7 +23,10 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  border-radius: 0 0 20px 20px;
 }
+
 .top h1 {
   text-align: center;
   margin: 0;
@@ -236,6 +239,7 @@ button.sortButton {
   z-index: 1; /* Ensures it stays on top */
 }
 
+<<<<<<< Updated upstream
 /* This creates the gradient LAYER that sits OVER the images */
 .eventList::before {
   content: "";
@@ -254,6 +258,9 @@ button.sortButton {
 }
 
 /* .eventList .eventInfo {
+=======
+.eventList .eventInfo {
+>>>>>>> Stashed changes
   background-color: var(--cinema-grey);
   color: var(--darkblue);
 } */
