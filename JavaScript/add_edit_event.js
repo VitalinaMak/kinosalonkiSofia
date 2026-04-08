@@ -78,14 +78,5 @@ function disableMaxAmountInput() {
       maxPlacesInput.removeAttribute("readonly"); //if the field had readonly attriburte before, make sure it's editable again
       maxPlacesInput.setAttribute("required", ""); //make the field required again
     }
-<<<<<<< Updated upstream
-=======
-    maxPlacesInput.placeholder = "Max. osallistujamäärä";
-  } else if (selectedEventType == "1") {
-    if (maxPlacesInput.hasAttribute("readonly")) {
-      maxPlacesInput.removeAttribute("readonly"); //if the user changes type of event to 1 (movie), make it editable again (it not really necessary, since movies always have 24 seats, just in case of some changes)
-    }
-    maxPlacesInput.placeholder = "Max. osallistujamäärä: 24"; //it's not required field and it can be left empty, so it just shows what that field is for and that it already has some value
   }
->>>>>>> Stashed changes
 }

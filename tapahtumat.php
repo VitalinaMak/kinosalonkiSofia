@@ -279,11 +279,11 @@
                     /* change the color of the background depending on the event type */
                     $bgColor = "";
                     if ($row['event_type'] == "1") {
-                        $typeForColor = "event1";
+                        $typeForColor = "event1body";
                     } else if ($row['event_type'] == "2") {
-                        $typeForColor = "event2";
+                        $typeForColor = "event2body";
                     } else {
-                        $typeForColor = "event3";
+                        $typeForColor = "event3body";
                     }
 
                     // $kuvaPath = empty($row["event_image"]) ? "noImage.png" : $row["event_image"];  //if the event doesn't have image, use the default image

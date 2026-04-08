@@ -4,7 +4,9 @@ main {
 
 .top {
   /* The first value is the color ON TOP, the second is the image BEHIND it */
-  background-image: linear-gradient(var(--head-foot-tr), var(--head-foot-tr)), url("../kuvat/shtory_red.jpg");
+  background-image:
+    linear-gradient(var(--head-foot-tr), var(--head-foot-tr)),
+    url("../kuvat/shtory_red.jpg");
   /* background-image: url("../kuvat/shtory_red.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
@@ -180,28 +182,46 @@ button.sortButton {
   color: white;
 }
 
-/* 2. The Assignments: telling each class which color it owns */
+/* default filters */
 .event1 {
-  --type-color: var(--event1);
+  --type-color: var(--event1Filter);
 }
 .event2 {
-  --type-color: var(--event2);
+  --type-color: var(--event2Filter);
 }
 .event3 {
-  --type-color: var(--event3);
+  --type-color: var(--event3Filter);
 }
 .age-18,
 .age-none {
   --type-color: var(--dark-teal);
 }
-
 .event1:hover {
-  --type-color: var(--event1Hover);
+  --type-color: var(--event1Filter);
 }
 .event2:hover {
-  --type-color: var(--event2Hover);
+  --type-color: var(--event2Filter);
 }
 .event3:hover {
+  --type-color: var(--event3Filter);
+}
+/* events list body */
+.event1body {
+  --type-color: var(--event1);
+}
+.event2body {
+  --type-color: var(--event2);
+}
+.event3body {
+  --type-color: var(--event3);
+}
+.event1body:hover {
+  --type-color: var(--event1Hover);
+}
+.event2body:hover {
+  --type-color: var(--event2Hover);
+}
+.event3body:hover {
   --type-color: var(--event3Hover);
 }
 
@@ -227,6 +247,7 @@ button.sortButton {
 
 /* ____________EVENTS LIST  ____________*/
 /* a list of events on the page Tapahtumat */
+
 .eventList {
   display: flex;
   flex-direction: column;
@@ -239,31 +260,6 @@ button.sortButton {
   z-index: 1; /* Ensures it stays on top */
 }
 
-<<<<<<< Updated upstream
-/* This creates the gradient LAYER that sits OVER the images */
-.eventList::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px; /* Matches the top padding height */
-
-  /* Gradient: Solid white at the very top, fading to transparent at the 60px mark */
-  background: linear-gradient(to bottom, white 0%, rgba(255, 255, 255, 0) 100%);
-
-  /* CRITICAL PROPERTIES */
-  z-index: 5; /* Higher than the event cards/images to stay on top */
-  pointer-events: none; /* Allows you to still click the events underneath the gradient */
-}
-
-/* .eventList .eventInfo {
-=======
-.eventList .eventInfo {
->>>>>>> Stashed changes
-  background-color: var(--cinema-grey);
-  color: var(--darkblue);
-} */
 .eventList h3 {
   color: var(--base-color);
 }
@@ -275,6 +271,7 @@ button.sortButton {
 .eventInfo {
   flex-grow: 1;
   display: grid;
+  background-color: var(--type-color);
   /* Define 3 columns: 125px for image, the rest split 3/4 and 1/4 */
   grid-template-columns: 125px 3fr 1fr;
   grid-template-areas:
@@ -285,7 +282,9 @@ button.sortButton {
   transition: var(--transition);
   align-items: start; /* Keeps headers at the top */
 }
-
+.eventInfo:hover {
+  background-color: var(--type-color);
+}
 /* Handle layout when NO image is present */
 .eventInfo:not(:has(img)) {
   /* Change columns to just the 3/4 and 1/4 split */
@@ -343,11 +342,6 @@ button.sortButton {
   align-content: space-around;
   align-items: stretch;
   gap: 2px;
-  background-color: var(--type-color);
-  transition: var(--transition);
-}
-.event:hover {
-  background-color: var(--type-color);
 }
 
 /* div with links to edit and delete event*/
@@ -427,8 +421,7 @@ button.sortButton {
 
 @media (max-width: 490px) {
   .top h1 {
-    font-size: 3rem; /* Significantly smaller than the default 4rem */
-    /* line-height: 1.1; */
+    font-size: 3rem;
     word-wrap: break-word; /* Ensures long Finnish words don't break the layout */
     width: fit-content;
   }

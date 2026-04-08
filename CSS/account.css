@@ -415,8 +415,4 @@ form input::placeholder {
     height: auto;
     padding-left: 20px;
   }
-
-  form {
-    margin: auto;
-  }
 }

@@ -18,16 +18,23 @@
   /* blue curtains */
   --dark-teal: #1a424eff;
   --teal: #40778bff;
-
   --green-teal: rgb(35, 99, 66);
 
-  --event1: rgb(116, 186, 186);
-  --event2: #e78a1f;
-  --event3: rgb(132, 200, 107);
+  /* blednye DEFALT*/
+  /* --event2: #ffd6a5; */
+  --event1: #f8b3ba;
+  --event2: rgb(166, 225, 225);
+  --event3: #aadcbd;
+  /* yarkie HOVER*/
+  /* --event2Hover: #f3b76c; */
+  --event1Hover: #ed969e;
+  --event2Hover: rgb(117, 203, 203);
+  --event3Hover: rgb(139, 182, 123);
 
-  --event1Hover: rgb(111, 154, 96);
-  --event2Hover: #c37823;
-  --event3Hover: rgb(107, 152, 152);
+  /* FILTERS */
+  --event1Filter: #d5636f;
+  --event2Filter: rgb(67, 181, 181);
+  --event3Filter: rgb(99, 159, 78);
 
   /* cinema_seats.jpg */
   --cinema-red1: #7e1605ff;
