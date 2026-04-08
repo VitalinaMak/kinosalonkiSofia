@@ -8,28 +8,6 @@
         $isAdmin = true;
     }
 
-    /* delete event (one more thing that has to be placed before any output) */
-    if (isset($_GET['id'])) {
-        $stmt = $conn->prepare("DELETE FROM events WHERE id = ?;");
-        $id = (int) $_GET['id'];
-        $stmt->bind_param("i", $id);
-        if ($stmt->execute()) {
-            $query = $_GET;
-            unset($query['id']);  //remove id from the URL
-
-            $queryString = http_build_query($query);  //save the rest of the URL (sorting, filtering, searching if applied) and build a new URL from it
-
-            $url = "tapahtumat.php";
-
-            if (!empty($queryString)) {
-                $url .= "?" . $queryString;
-            }
-
-            header("Location: $url");  //redirect to the same page
-            exit();
-        }
-    }
-
     $pageTitle = "Tapahtumat";
     $extraCSS = "CSS/tapahtumat.css";
     $extraJS = "JavaScript/tapahtumat.js";

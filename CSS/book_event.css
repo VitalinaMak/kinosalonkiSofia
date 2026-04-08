@@ -9,7 +9,7 @@ main {
   background-color: var(--cinema-whiteish-tr);
   /* - /donottouch - */
   height: 100%; /* Занимаем всю высоту обертки */
-  padding-left: 30px;
+  /* padding-left: 30px; */
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -50,10 +50,8 @@ td {
   width: 60px;
   height: 60px;
   /* This "masks" the cell into the shape of your seat */
-  mask: url("../UI_icons/chair_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg")
-    no-repeat center;
-  -webkit-mask: url("../UI_icons/chair_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg")
-    no-repeat center;
+  mask: url("../UI_icons/chair_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg") no-repeat center;
+  -webkit-mask: url("../UI_icons/chair_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg") no-repeat center;
   background-color: #2ecc71; /* Default: Free (Green) */
   cursor: pointer;
 }
@@ -85,12 +83,18 @@ td.selected {
 .backToEvents {
   display: none;
   text-decoration: none;
-  /* copied from buttons in global */
-  padding: 0.85em 4em;
+  max-width: 50%;
+  /* copied from buttons in global (maybe we can just add class button to it, but not now, I ran out of places and have to create new movie to test it) */
+  padding: 0.85em 2em; /* the last one changed from 4em to 2em */
   border: none;
   border-radius: 10px;
   font-weight: 500;
   background-color: var(--darkblue);
   color: var(--cinema-whiteish);
   transition: var(--transition);
+}
+
+.backToEvents:hover {
+  cursor: pointer;
+  background-color: var(--cinema-pink);
 }

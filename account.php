@@ -17,6 +17,12 @@
 
     $userID = ($_SESSION['user_id']);  // registered user's id
 
+    /* make the button for account deleting not appear for the admin (functionality is attached to the admin's id and in the case of deletion it can be recreated only in MySQL server) */
+    $deleteAccountBtn = ""; 
+    if ($userID != 1) {
+        $deleteAccountBtn = "<button class='deleteaccount' type='button' id='deleteaccount-btn'>Poista tili</button>";
+    }
+
     $pageTitle = "Account";
     $extraCSS = "CSS/account.css";
     $extraJS = "JavaScript/account.js";
@@ -127,7 +133,7 @@
             
             <div class="account-actions">
                 <a class="button logout" href="account.php?action=logout">Kirjaudu ulos</a>
-                <button class="deleteaccount" type="button" id="deleteaccount-btn">Poista tili</button>
+                <?php echo $deleteAccountBtn ?>
             </div>
 
             <!-- dialog for account deleting -->
@@ -228,7 +234,7 @@
                 } else {
                     echo <<<HTML
                         <div class="none-reserved">
-                            <p>Sinulla ei ole aktiivisia varauksia. <a href="tapahtumat.php">Katso ohjelmisto</a> </p>
+                            <p>Sinulla ei ole aktiivisia varauksia.<br> <a href="tapahtumat.php">Katso ohjelmisto</a> </p>
                         </div>
                     HTML;
                 }
