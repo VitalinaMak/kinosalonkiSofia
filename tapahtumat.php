@@ -132,7 +132,9 @@
     
     <!-- div for the list of events -->
     <div class="eventList">
-        <a class="button addEvent" href="addEvent.php">Lisää tapahtuma</a>
+        <?php if ($isAdmin == true) : ?>
+            <a class="button addEvent" href="addEvent.php">Lisää tapahtuma</a>
+        <?php endif; ?>
         <?php
             $search = '';  //variable for searching
             $order = 'events.event_date ASC';  //variable for sorting data. For default sorts by date starting from earlier events 
@@ -275,7 +277,8 @@
                         $imageHtml = "<img src='kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>";
                     }
                     
-                    echo "<div class='event {$typeForColor}' onclick='window.location.href=\""."bookEvent.php?id=".$row['id']."\"'>
+                    echo "<div class='event {$typeForColor} " . ($isAdmin ? 'is-admin' : '') . "' onclick='window.location.href=\""."bookEvent.php?id=".$row['id']."\"'>
+
                             <div class='eventInfo'>
                                 <h3 class='event_header'>{$row['event_name']} {$ageLimit}</h3>
                                 <h3 class='event_date'>{$row['event_formatted_date']} klo {$row['event_hour']}.{$row['event_minute']}</h3>
@@ -283,13 +286,9 @@
                                 <p>{$row['description']}<br>{$placesNumber}.</p>
                             </div>"
                             . ($isAdmin   /* if the user is admin, add div with links for editing and deleting. Else just close the div */
-                                ? "<div class='adminTools'>  
-                                        <a class='editEvent' href='editEvent.php?id=".$row['id']."'>Edit</a>
-                                        <!--
-                                        <a href='tapahtumat.php?id=".$row['id']."'>Delete</a>
-                                        -->
-                                </div></div>" 
-                                : "</div>");
+                                ? "<a class='button' href='editEvent.php?id=".$row['id']."'>Muokkaa</a>
+                                </div>" 
+                            : "</div>");
                 }
             } else {
                 echo "<p class='nothingFound'>Tapahtumia ei löytynyt :(</p>";
