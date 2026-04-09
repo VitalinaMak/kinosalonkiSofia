@@ -2,6 +2,19 @@ main {
   background-color: white;
 }
 
+*,
+h1,
+h2,
+h3,
+h4 {
+  color: black;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
 .top {
   /* The first value is the color ON TOP, the second is the image BEHIND it */
   background-image:
@@ -54,6 +67,7 @@ main {
   text-shadow:
     2px 2px 4px rgba(0, 0, 0, 0.4),
     0px 0px 20px rgba(0, 0, 0, 0.5);
+  z-index: 11;
 }
 .eventListActions form {
   display: flex;
@@ -70,14 +84,16 @@ main {
   border-radius: 40px;
 }
 .eventListActions input {
+  display: flex;
   border: none;
   background-color: white;
   height: 100%;
   display: inline-block;
   padding: 0 5px;
   height: 48px;
-  /* width: 300px; */
-  min-width: 150px;
+  /* width: 30%; */
+  /* width: 150px; */
+  width: min(400px, 100%); /* width: 100% but max 400px */
 }
 .eventListActions input:focus {
   outline: none;
@@ -274,29 +290,118 @@ button.sortButton {
 }
 
 .eventList h3 {
-  color: var(--base-color);
-}
-.eventInfo {
-  border-radius: 10px;
+  color: black;
 }
 
-/* ONE EVENT'S DIV */
+/* _______________________ONE EVENT'S DIV_________________________ */
 .eventInfo {
   flex-grow: 1;
   display: grid;
+  align-items: start; /* Keeps at the top */
   background-color: var(--type-color);
-  /* Define 3 columns: 125px for image, the rest split 3/4 and 1/4 */
-  grid-template-columns: 200px 3fr 1fr;
-  grid-template-areas:
-    "image header date"
-    "image description description";
+
   padding: 10px;
-  gap: 10px; /* Adds consistent spacing between elements */
+  gap: 10px;
   transition: var(--transition);
-  align-items: start; /* Keeps headers at the top */
+
+  border-radius: 10px;
+  border: 2px double rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.1);
+
+  /* Define 3 columns: 125px for image, the rest split 3/4 and 1/4 */
+  /* grid-template-columns: 1fr 2fr 1fr 1fr;
+  grid-template-areas:
+    "image adress day time"
+    "image header header header"
+    "image description description description"
+    "image places places places"; */
+
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-areas:
+    "image adress day"
+    "image header time"
+    "image description description"
+    "image places places";
 }
 .eventInfo:hover {
+  cursor: pointer;
   background-color: var(--type-color);
+}
+
+/* svg {
+  margin-top: 15px;
+} */
+.eventInfo h4.event_adress {
+  grid-area: adress;
+  text-align: left;
+  /* width: 100%; */
+  width: fit-content;
+}
+
+.eventInfo h4.event_day {
+  grid-area: day;
+  text-align: right;
+  margin: 0;
+  text-wrap: nowrap;
+  /* text-decoration: underline; */
+  /* text-decoration-thickness: 3.5px; */
+}
+.eventInfo h3.event_time {
+  grid-area: time;
+  text-align: right;
+}
+.eventInfo h3.event_time span.klo {
+  font-size: 0.9rem;
+}
+
+.eventInfo h3.event_header {
+  grid-area: header;
+  /* margin-right: 5px; */
+}
+.eventInfo span.event_age {
+  grid-area: header;
+  /* margin-right: 5px; */
+  display: inline-block;
+  /* margin-bottom: 100px; */
+  background-color: var(--dark-teal);
+  color: white;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 1rem;
+  /* vertical-align: middle; */
+  box-sizing: border-box;
+}
+
+.eventInfo p.event_description {
+  grid-area: description;
+  margin: 0;
+  overflow-wrap: break-word;
+  hyphens: auto;
+
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.eventInfo p.places {
+  grid-area: places;
+  text-align: left;
+  /* width: 100%; */
+  background: var(--pinkish-tr);
+  padding: 5px 12px;
+  margin: 0;
+  border-radius: 20px;
+  width: fit-content;
+  /* border: 1px solid var(--orange); */
+}
+.eventInfo img {
+  grid-area: image;
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  border-radius: 5px;
 }
 /* Handle layout when NO image is present */
 .eventInfo:not(:has(img)) {
@@ -304,45 +409,10 @@ button.sortButton {
   grid-template-columns: 3fr 1fr;
   grid-template-areas:
     "header date"
-    "description description";
+    "description description"
+    "places places";
 }
 
-.eventInfo .event_header {
-  grid-area: header;
-  margin-right: 5px;
-}
-
-.eventInfo .event_date {
-  grid-area: date;
-  text-align: right; /* Aligns date to the right edge */
-  margin: 0;
-  text-wrap: nowrap;
-  /* text-decoration: underline; */
-  /* text-decoration-thickness: 3.5px; */
-}
-
-.eventInfo img {
-  grid-area: image;
-  height: 100%;
-  width: auto;
-  object-fit: cover;
-  border-radius: 5px;
-  /* margin-top: 10px; */
-  /* Removed display: inline-block to prevent baseline issues */
-}
-
-.eventInfo p {
-  grid-area: description;
-  margin-top: 10px;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-
-.eventInfo:hover {
-  cursor: pointer;
-  /*   background-color: var(--lighterblue); */
-}
-/* /ONE EVENT'S DIV */
 /* ____________/EVENTS LIST  ____________*/
 
 /* ____________ADMIN TOOLS ____________*/
@@ -384,7 +454,9 @@ button.sortButton {
 
 /* ____________/ADMIN TOOLS ____________*/
 
-@media (max-width: 700px) {
+/* _____________MEDIA___________________ */
+
+@media (max-width: 800px) {
   /* dropdown floaties */
   .sortingOptions,
   .filteringOptions {
@@ -399,22 +471,20 @@ button.sortButton {
     grid-template-columns: 1fr;
   }
   .event .button {
+    /* EDIT EVENT FOR ADMIN */
     width: 100%; /* Fills the 40px grid column */
     height: 50px; /* Fills the height of the event card */
     margin-bottom: 10px;
     writing-mode: horizontal-tb;
     transform: rotate(0deg);
-    /* EDIT EVENT FOR ADMIN */
-    /* Use writing-mode for cleaner layout than transform rotate */
   }
   /* ___ONE EVENT'S DIV___ */
   .eventInfo {
-    grid-template-columns: 1fr; /* Stack all elements in a single column */
+    grid-template-columns: 200px 1fr;
     grid-template-areas:
-      "header"
-      "date"
-      "image"
-      "description";
+      "image date"
+      "image header"
+      "image description";
   }
 
   /* Handle layout when NO image is present */
@@ -438,8 +508,17 @@ button.sortButton {
 }
 
 @media (max-width: 490px) {
+  .top {
+    /* background-image: none; */
+    height: fit-content;
+    border-radius: 0;
+    padding: 10px 0 20px 0;
+    border-radius: 0 0 5px 5px;
+    gap: 5px;
+  }
   .top h1 {
     font-size: 3rem;
+    /* font-size: 3rem; */
     word-wrap: break-word; /* Ensures long Finnish words don't break the layout */
     width: fit-content;
   }
@@ -451,7 +530,7 @@ button.sortButton {
     right: 0;
   }
   .eventListActions {
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 0 10px;
     flex-flow: row nowrap;
     justify-content: flex-start;
