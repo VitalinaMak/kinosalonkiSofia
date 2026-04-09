@@ -44,6 +44,44 @@ document
     disableMaxAmountInput();
   });
 
+/* form handling */
+document.getElementById("addEventForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // stop normal submit
+  
+    const formData = new FormData(this);
+
+    fetch("addEvent_functionality.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            console.log("Event ID:", data.event_id);
+
+            /* send to notification handler */
+            sendNotifications(data.event_id);
+
+            alert("Uusi tapahtuma lisätty onnistuneesti!");
+
+            // redirect after alert
+            window.location.href = "tapahtumat.php";
+        } else {
+          alert("Virhe: " + data.message);
+        }
+    });
+});
+
+function sendNotifications(eventId) {
+    fetch("notifications.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "event_id=" + eventId
+    });
+}
+
 function removeImage() {
   if (document.getElementsByName("current_image")[0]) {
     const currentImage = document.getElementsByName("current_image")[0]; //this element exists only in editEvent
