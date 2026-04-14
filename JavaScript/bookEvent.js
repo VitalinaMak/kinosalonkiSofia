@@ -136,11 +136,6 @@ function validateForm() {
         alert("Valitse vähintään yksi paikka!");
         return false;
     }
-    // if user already booked some seats before, restrict booking more than 2 seats in total (check once again for 2nd and 3rd type of events)
-    /* if (exceedsLimit()) {
-        alert("On mahdollista varata enintään 2 paikkaa. Lisää paikkoja voi varata täyttämällä lomakkeen. Omat varaukset voi muokata oma tili -sivulla.");
-        return false;
-    } */
     return true;
 }
 
