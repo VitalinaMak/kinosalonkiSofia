@@ -11,6 +11,8 @@ input:not([readonly]) {
   cursor: text;
 } */
 
+/* NOTE: CONFIRM DIALOG HAS SOME CSS-STYLING IN account.js ! */
+
 /* - - - /BUTTONS - - - */
 
 .wrapper {

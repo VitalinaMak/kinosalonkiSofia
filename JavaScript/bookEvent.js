@@ -9,7 +9,7 @@ let limitAlertShown = false;  //flag to check if the allert was already shown
 /* function start only when all elements on the page are loaded */
 document.addEventListener("DOMContentLoaded", function () {
     
-    eventType = document.getElementById("typeOfEvent").value;  //get the type of event from the hidden input
+    eventType = Number(document.getElementById("typeOfEvent").value);  //get the type of event from the hidden input
 
     const checkLoginElement = document.getElementById("checkLogin");  //get information about user's logging in
 

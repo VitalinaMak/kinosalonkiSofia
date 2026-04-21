@@ -7,17 +7,19 @@
     if (!isset($_GET['id'])) {
         die("Event ID is missing");
     }
-    $eventID = $_GET['id'];  //id of the event
+    $eventID = (int)$_GET['id'];  //id of the event - cast to int for safety
 
     $user = $_SESSION['user_id'] ?? null;  //user's id
 
     /* retrieve all information about the event from the database */
-    $stmt = $conn->prepare("SELECT * FROM events WHERE id = ?");
-    $stmt->bind_param("s", $eventID);
-    $stmt->execute();
-    
-    $result = $stmt->get_result();
-    $event = $result->fetch_assoc();
+    $stmt = $pdo->prepare("SELECT * FROM events WHERE id = ?");
+    $stmt->execute([$eventID]);
+    $event = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    /* check if event exists, if not redirect */
+    if (!$event) {
+        die("Event not found");
+    }
 
     $ageLimit = ($event['age_limit']=="Ei luokiteltu") ? "" : " (".$event['age_limit'].")";  //if the age limit is defined, it appears in parenthesis after the name of the event
 
@@ -26,9 +28,8 @@
     $eventName = $event['event_name'];  //event's name
 
     /* retrieve information about booked seats for that event */
-    $stmt = $conn->prepare("SELECT user_id, event_id, seat_number FROM bookings WHERE event_id = ?");
-    $stmt->bind_param("s", $eventID);
-    $stmt->execute();
+    /* $stmt = $pdo->prepare("SELECT user_id, event_id, seat_number FROM bookings WHERE event_id = ?");
+    $stmt->execute([$eventID]);
     $result = $stmt->get_result();
 
     $bookings = [];  //an array with numbers of all booked seats
@@ -41,7 +42,23 @@
     if ($row['user_id'] == $user) {
         $userAlreadyBooked += 1;  //if the user's id is found in the table bookings for this event, add 1 to counter
     }
-}
+    } */
+
+    $stmt = $pdo->prepare("SELECT user_id, event_id, seat_number FROM bookings WHERE event_id = ?");
+    $stmt->execute([$eventID]);
+
+    $bookings = [];  //an array with numbers of all booked seats
+    $userAlreadyBooked = 0;  //counter to check if the user has already booked any seats for that event before
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $bookings[] = $row['seat_number'];
+
+        if ($row['user_id'] == $user) {
+            $userAlreadyBooked += 1;  //if the user's id is found in the table bookings for this event, add 1 to counter
+        }
+    }
+
+    $bookedSeatsAmount = count($bookings);  //amount of booked seats
 ?>
 
 <script>
@@ -50,7 +67,7 @@
 </script>
 
 <main class="bookEvent_page">
-    <h1><?= $event['event_name'].$ageLimit ?></h1>
+    <h1><?= htmlspecialchars($event['event_name'].$ageLimit) ?></h1>
 
     <div class="wrapper"> 
 

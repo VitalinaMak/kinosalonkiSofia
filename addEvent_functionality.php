@@ -6,7 +6,7 @@
     $types = "";
 
     /* prepare sql-statement */
-    $stmt = $conn->prepare("INSERT INTO events (event_name, event_type, event_date, event_time, event_image, description, age_limit, location, max_visitors) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO events (event_name, event_type, event_date, event_time, event_image, description, age_limit, location, max_visitors) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
   /*   if ($_SERVER['REQUEST_METHOD'] === 'POST') { */
 
@@ -89,15 +89,11 @@
         foreach ($params as $key => $value) {
             $tmp[$key] = &$params[$key];
         }
-            
-        if (!$stmt->bind_param($types, ...$tmp)) {
-            die("Bind param failed: " . $stmt->error);
-        }
 
         /* if there's no errors with image, execute the statement */
         if ($uploadOk === 1) {
-            if ($stmt->execute()) {
-                $eventId = $stmt->insert_id;  //save id of the added event
+            if ($stmt->execute([$tmp])) {
+                $eventId = $pdo->lastInsertId(); //save id of the added event
                 /* send data to JavaScript */
                 echo json_encode([
                     "status" => "success",

@@ -20,23 +20,23 @@
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // Check if email already exists
-        $checkEmailStmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
-        $checkEmailStmt->bind_param("s", $email);
-        $checkEmailStmt->execute();
-        $checkEmailStmt->store_result();
+        $checkEmailStmt = $pdo->prepare("SELECT email FROM users WHERE email = ?");
+        $checkEmailStmt->execute([$email]);
 
-        if ($checkEmailStmt->num_rows > 0) {
+        /* save the result into variable to check if there any users with the same email */
+        $existingUser = $checkEmailStmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($existingUser) {
             echo "Sähköposti on jo käytössä.";
         } else {
-            // Prepare and bind parameters to sql-query
-            $stmt = $conn->prepare("INSERT INTO users (email, username, password_hash) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $email, $username, $hashedPassword);
+            /* if there's no such email, insert new user */
+            $stmt = $pdo->prepare("INSERT INTO users (email, username, password_hash) VALUES (?, ?, ?);");
 
-            if ($stmt->execute()) {
-                //echo "Account created successfully";
+            if ($stmt->execute([$email, $username, $hashedPassword])) {
                 header("Location: account.php");
+                exit;
             } else {
-                echo "Error: " . $stmt->error;
+                echo "Error creating account.";
             }
         }
 

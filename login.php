@@ -10,11 +10,9 @@
         $password = trim($_POST['password']);
 
         /* get all information about the user with that email from the database */
-        $query = $conn->prepare("SELECT * FROM users WHERE email = ?");
-        $query->bind_param('s', $email);
-        $query->execute();
-        $result = $query->get_result();
-        $user = $result->fetch_object();
+        $query = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $query->execute([$email]);
+        $user = $query->fetch(PDO::FETCH_OBJ);
 
         /* verify password and if everything is OK, save user's id into session and go to the page with events */
         if ($user && password_verify($password, $user->password_hash)) {

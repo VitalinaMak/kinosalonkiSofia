@@ -64,16 +64,24 @@ function toggleEdit() {
 
 /* function to display fields for password eset and remove fields with personal information */
 function changePasswordForm() {
-  const personalInfo = document.getElementsByClassName("personalInfo");
-  const passwordReset = document.getElementsByClassName("passwordReset");
+  const personalInfo = document.getElementsByClassName("personalInfo");  //gets div-elements with inputs and labels inside 
+  const passwordReset = document.getElementsByClassName("passwordReset");  //gets div-elements with inputs and labels inside 
 
-  //hide inputs for personal info
+  //hide and disable inputs for personal info
   for (let i = 0; i < personalInfo.length; i++) {
+    const input = personalInfo[i].querySelector("input");  //get input from the div
     personalInfo[i].style.display = "none";
+    input.required = false;
+    input.disabled = true;
   }
 
-  //reveal inputs for password reset
+  //reveal and enable inputs for password reset
   for (let i = 0; i < passwordReset.length; i++) {
+    const input = passwordReset[i].querySelector("input");  //get input from the div
+    input.disabled = false;
+    input.required = true;
+    input.removeAttribute("readonly");
+    input.classList.add("activated");  //add activated class for styling
     passwordReset[i].style.display = "flex";
   }
   toggleEdit();  //make input fields editable from the moment they appear
