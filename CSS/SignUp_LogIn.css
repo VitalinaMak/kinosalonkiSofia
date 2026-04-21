@@ -1,37 +1,42 @@
-/* CAREFUL WITH CHANGING height: 50px;*/
+/* REFACTORED */
+
+/* ========================================
+   PAGE CONTAINER
+   ======================================== */
 
 main {
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
   background-image: url("../kuvat/cinema_seats.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  object-fit: cover;
-  overflow: hidden;
-
-  margin: 0px;
-  padding: 0px;
-  text-align: center;
 }
 
+/* ========================================
+   FORM WRAPPER
+   ======================================== */
+
 .wrapper {
-  box-sizing: border-box;
   background-color: var(--cinema-whiteish-tr);
   min-height: 60%;
-  width: max(40%, 600px); /* width: 40% wide with with a midwith of 600px */
-
-  border-radius: 20px;
-  box-shadow: inset 0 0 50px 20px var(--cinema-whiteish);
-
+  width: max(40%, 600px);
   margin: auto;
   margin-top: 5%;
-  align-self: center;
-
+  border-radius: 20px;
+  box-shadow: inset 0 0 50px 20px var(--cinema-whiteish);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
+/* ========================================
+   FORM STRUCTURE
+   ======================================== */
 
 form {
   width: min(400px, 100%);
@@ -46,8 +51,8 @@ form {
 form h1 {
   text-transform: uppercase;
   font-family: Poppins, serif;
-  font: 2rem; /* 2 times the initial font size */
-  font-weight: 525; /*repeats later!*/
+  font-size: 2rem;
+  font-weight: 525;
 }
 
 form > div {
@@ -56,25 +61,29 @@ form > div {
   justify-content: center;
 }
 
+/* ========================================
+   FORM INPUTS
+   ======================================== */
+
 form label {
   flex-shrink: 0;
-  height: 50px;
   width: 50px;
+  /* CAREFUL WITH CHANGING height: 50px; */
+  height: 50px;
   background-color: var(--cinema-red2);
-  /* fill: var(--cinema-red2); */
   border-radius: 10px 0 0 10px;
   display: flex;
-  justify-content: center; /*OOO THIS YES*/
+  justify-content: center;
   align-items: center;
 }
 
 form input {
-  box-sizing: border-box; /* for consistent size */
-  flex-grow: 1; /* to have responsive resizing of the element */
-  min-width: 0; /* to have responsive resizing of the element */
+  box-sizing: border-box;
+  flex-grow: 1;
+  min-width: 0;
+  /* CAREFUL WITH CHANGING height: 50px; */
   height: 50px;
   padding: 1em;
-  /* font: inherit; */
   border-radius: 0 10px 10px 0;
   border: 3px solid var(--cinema-red2);
   border-left: none;
@@ -87,17 +96,18 @@ form input::placeholder {
   transition: color 150ms ease;
 }
 
-/* HOVER */
 form input:hover {
   border-color: var(--cinema-pink);
 }
+
 form input:hover::placeholder {
   color: var(--cinema-pink);
 }
+
 form div:has(input:hover) label {
   background-color: var(--cinema-pink);
 }
-/* FOCUS */
+
 form input:focus {
   outline: none;
   border-color: var(--cinema-red1);
@@ -105,20 +115,29 @@ form input:focus {
 form input:focus::placeholder {
   color: var(--cinema-red1);
 }
+
 form div:has(input:focus) label {
   background-color: var(--cinema-red1);
 }
 
-form button /* overrides */ {
+/* ========================================
+   FORM BUTTONS
+   ======================================== */
+
+form button {
   width: 75%;
   margin-top: 10px;
 }
 
+/* ========================================
+   LINKS
+   ======================================== */
+
 p a {
+  display: inline;
   color: var(--cinema-red2);
   font-weight: bold;
   margin-top: 18px;
-  display: inline;
 }
 p a:hover {
   color: var(--cinema-pink);

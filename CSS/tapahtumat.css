@@ -1,3 +1,9 @@
+/* REFACTORED */
+
+/* ========================================
+   PAGE STYLES
+   ======================================== */
+
 main {
   background-color: white;
 }
@@ -15,31 +21,29 @@ h4 {
   font-weight: 500;
 }
 
+/* ========================================
+   TOP HEADER SECTION
+   ======================================== */
+
 .top {
-  /* The first value is the color ON TOP, the second is the image BEHIND it */
+  height: 300px;
+  padding: 5% 0;
+  gap: 30px;
+  position: relative;
+  z-index: 10;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0 0 20px 20px;
   background-image:
     linear-gradient(var(--head-foot-tr), var(--head-foot-tr)),
     url("../kuvat/shtory_red.jpg");
-  /* background-image: url("../kuvat/shtory_red.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-  object-fit: cover;
   overflow: hidden;
-
-  height: 300px;
-  padding: 5% 0;
-  gap: 30px;
-  overflow: visible;
-  position: relative;
-  z-index: 10; /* Keeps the header area above the list */
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  border-radius: 0 0 20px 20px;
 }
 
 .top h1 {
@@ -52,49 +56,50 @@ h4 {
     0px 0px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* ______SEARCH BAR aka a list of actions for events on the page Tapahtumat */
+/* ========================================
+   SEARCH BAR & EVENT ACTIONS
+   ======================================== */
+
 .eventListActions {
+  height: fit-content;
+  width: fit-content;
+  padding: 0 5px;
+  border-radius: 40px;
+  z-index: 11;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-
-  height: fit-content;
-  width: fit-content;
-  border-radius: 40px;
-  padding: 0 5px;
   background-color: white;
   text-shadow:
     2px 2px 4px rgba(0, 0, 0, 0.4),
     0px 0px 20px rgba(0, 0, 0, 0.5);
-  z-index: 11;
 }
+
 .eventListActions form {
   display: flex;
   flex-flow: row nowrap;
 }
+
 .eventListActions label {
-  border: none;
-  background-color: white;
-  /* height: 100%; */
-  display: inline-block;
   height: 48px;
   width: 48px;
   padding: 10px;
   border-radius: 40px;
-}
-.eventListActions input {
-  display: flex;
+  display: inline-block;
   border: none;
   background-color: white;
-  height: 100%;
-  display: inline-block;
-  padding: 0 5px;
-  height: 48px;
-  /* width: 30%; */
-  /* width: 150px; */
-  width: min(400px, 100%); /* width: 100% but max 400px */
 }
+
+.eventListActions input {
+  height: 48px;
+  padding: 0 5px;
+  display: inline-block;
+  border: none;
+  background-color: white;
+  width: min(400px, 100%);
+}
+
 .eventListActions input:focus {
   outline: none;
 }
@@ -106,50 +111,44 @@ h4 {
 
 button.filterButton,
 button.sortButton {
-  border: none;
-  border-radius: 0;
-  background-color: white;
-
   height: 48px;
   width: 48px;
   padding: 10px;
+  border: none;
   border-radius: 40px;
+  background-color: white;
   transition: var(--transition);
 }
 
-/* ______/SEARCH BAR ______*/
-
-/* __TOGGLES, DROPDOWNS AND BUTTONS in search bar __*/
+/* ========================================
+   DROPDOWNS & FILTERS
+   ======================================== */
 
 .search {
   display: flex;
   flex-flow: row nowrap;
 }
 
-/* containers for buttons */
 .eventSorting,
 .eventFiltering {
   position: relative;
   display: inline-block;
 }
 
-/* dropdown floaties */
 .sortingOptions,
 .filteringOptions {
   display: none;
   position: absolute;
   top: 100%;
-  z-index: 998;
   left: 0;
-
-  background-color: white;
-  border: 1px solid var(--cinema-grey);
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-
+  z-index: 998;
   width: max-content;
   min-width: 180px;
+  padding: 10px;
+  border: 1px solid var(--cinema-grey);
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
   text-shadow: none;
 }
 
@@ -159,21 +158,15 @@ button.sortButton {
   display: block;
   padding: 5px 10px;
   margin-bottom: 4px;
-
-  color: var(--base-color); /* sets border-color too! for some reason */
-  /* In CSS, if you define a border-style (like solid) and a border-width 
-  but not a border-color, the browser defaults the border color 
-  to the current color of the text. */
+  color: var(--base-color);
   background-color: white;
   border: 2px solid;
   border-radius: 10px;
-
   white-space: nowrap;
   text-decoration: none;
   transition: all var(--transition);
 }
 
-/* ______specific colors hovers ______*/
 .eventSorting:hover .sortingOptions,
 .eventFiltering:hover .filteringOptions {
   display: block;
@@ -186,13 +179,15 @@ button.sortButton {
   border-color: var(--base-color);
 }
 
-/* 1. The Master Rule: This handles ALL events and age limits at once */
+/* ========================================
+   FILTER COLOR VARIANTS
+   ======================================== */
+
 .filteringOptions a.event1,
 .filteringOptions a.event2,
 .filteringOptions a.event3,
 .filteringOptions a.age-18,
 .filteringOptions a.age-none {
-  /* We use a temporary local variable '--type-color' */
   border-color: var(--type-color);
   color: var(--type-color);
 }
@@ -203,45 +198,55 @@ button.sortButton {
   color: white;
 }
 
-/* default filters */
 .event1 {
   --type-color: var(--event1Filter);
 }
+
 .event2 {
   --type-color: var(--event2Filter);
 }
+
 .event3 {
   --type-color: var(--event3Filter);
 }
+
 .age-18,
 .age-none {
   --type-color: var(--dark-teal);
 }
+
 .event1:hover {
   --type-color: var(--event1Filter);
 }
+
 .event2:hover {
   --type-color: var(--event2Filter);
 }
+
 .event3:hover {
   --type-color: var(--event3Filter);
 }
-/* events list body */
+
 .event1body {
   --type-color: var(--event1);
 }
+
 .event2body {
   --type-color: var(--event2);
 }
+
 .event3body {
   --type-color: var(--event3);
 }
+
 .event1body:hover {
   --type-color: var(--event1Hover);
 }
+
 .event2body:hover {
   --type-color: var(--event2Hover);
 }
+
 .event3body:hover {
   --type-color: var(--event3Hover);
 }
@@ -252,22 +257,22 @@ button.sortButton {
   color: var(--cinema-pink);
   border-color: var(--cinema-pink);
 }
+
 #removeFilterButton:hover {
   background-color: var(--cinema-pink);
   color: #ffffff;
 }
 
-/* 6. TYPOGRAPHY CLEANUP */
 .filteringOptions p {
   margin: 0 0 8px 0;
   font-size: 1rem;
   color: var(--base-color);
   font-weight: 600;
 }
-/* __TOGGLES, DROPDOWNS AND BUTTONS in search bar __*/
 
-/* ____________EVENTS LIST  ____________*/
-/* a list of events on the page Tapahtumat */
+/* ========================================
+   EVENT LIST CONTAINER
+   ======================================== */
 
 .eventList {
   display: flex;
@@ -278,7 +283,7 @@ button.sortButton {
   padding: 20px;
   gap: 10px;
   max-width: 100%;
-  z-index: 1; /* Ensures it stays on top */
+  z-index: 1;
 }
 
 .eventList .button {
@@ -289,33 +294,21 @@ button.sortButton {
   font-weight: 600;
 }
 
-.eventList h3 {
-  color: black;
-}
+/* ========================================
+   EVENT CARD STYLING
+   ======================================== */
 
-/* _______________________ONE EVENT'S DIV_________________________ */
 .eventInfo {
   flex-grow: 1;
-  display: grid;
-  align-items: start; /* Keeps at the top */
-  background-color: var(--type-color);
-
   padding: 10px;
   gap: 10px;
-  transition: var(--transition);
-
+  display: grid;
+  align-items: end;
+  background-color: var(--type-color);
   border-radius: 10px;
   border: 2px double rgba(0, 0, 0, 0.1);
   box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.1);
-
-  /* Define 3 columns: 125px for image, the rest split 3/4 and 1/4 */
-  /* grid-template-columns: 1fr 2fr 1fr 1fr;
-  grid-template-areas:
-    "image adress day time"
-    "image header header header"
-    "image description description description"
-    "image places places places"; */
-
+  transition: var(--transition);
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-areas:
     "image adress day"
@@ -323,52 +316,51 @@ button.sortButton {
     "image description description"
     "image places places";
 }
+
 .eventInfo:hover {
   cursor: pointer;
   background-color: var(--type-color);
 }
 
-/* svg {
-  margin-top: 15px;
-} */
 .eventInfo h4.event_adress {
   grid-area: adress;
-  text-align: left;
-  /* width: 100%; */
   width: fit-content;
+  text-align: left;
+}
+
+.eventInfo h4.event_adress svg {
+  grid-area: adress;
+  align-self: end;
 }
 
 .eventInfo h4.event_day {
   grid-area: day;
-  text-align: right;
   margin: 0;
+  text-align: right;
   text-wrap: nowrap;
-  /* text-decoration: underline; */
-  /* text-decoration-thickness: 3.5px; */
 }
+
 .eventInfo h3.event_time {
   grid-area: time;
   text-align: right;
 }
+
 .eventInfo h3.event_time span.klo {
   font-size: 0.9rem;
 }
 
 .eventInfo h3.event_header {
   grid-area: header;
-  /* margin-right: 5px; */
 }
+
 .eventInfo span.event_age {
   grid-area: header;
-  /* margin-right: 5px; */
   display: inline-block;
-  /* margin-bottom: 100px; */
   background-color: var(--dark-teal);
   color: white;
   padding: 0 6px;
   border-radius: 4px;
   font-size: 1rem;
-  /* vertical-align: middle; */
   box-sizing: border-box;
 }
 
@@ -377,7 +369,6 @@ button.sortButton {
   margin: 0;
   overflow-wrap: break-word;
   hyphens: auto;
-
   display: -webkit-box;
   line-clamp: 3;
   -webkit-line-clamp: 3;
@@ -385,40 +376,39 @@ button.sortButton {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .eventInfo p.places {
   grid-area: places;
-  text-align: left;
-  /* width: 100%; */
-  background: var(--pinkish-tr);
-  padding: 5px 12px;
   margin: 0;
-  border-radius: 20px;
+  padding: 5px 12px;
   width: fit-content;
-  /* border: 1px solid var(--orange); */
+  text-align: left;
+  border-radius: 20px;
+  background: var(--pinkish-tr);
 }
+
 .eventInfo img {
   grid-area: image;
-  height: 100%;
   width: auto;
+  height: 100%;
   object-fit: cover;
   border-radius: 5px;
 }
-/* Handle layout when NO image is present */
+
 .eventInfo:not(:has(img)) {
-  /* Change columns to just the 3/4 and 1/4 split */
   grid-template-columns: 3fr 1fr;
   grid-template-areas:
-    "header date"
+    "adress day"
+    "header time"
     "description description"
     "places places";
 }
 
-/* ____________/EVENTS LIST  ____________*/
+/* ========================================
+   ADMIN TOOLS
+   ======================================== */
 
-/* ____________ADMIN TOOLS ____________*/
 .event {
-  /* event rectangle (contains information about event and edit/delete -tools for admin) */
-  /* Default state: No admin, eventInfo takes 100% width */
   display: grid;
   grid-auto-flow: row;
   grid-template-columns: 1fr;
@@ -426,38 +416,35 @@ button.sortButton {
   box-sizing: border-box;
   width: 100%;
 }
-/* Admin state: Two columns (Main content + 40px for Muokkaa) */
+
 .event.is-admin {
   grid-template-columns: 1fr 50px;
 }
 
-/* Ensure eventInfo always fills its assigned grid area */
 .eventInfo {
   width: 100%;
 }
 
 .event .button {
   display: block;
-  width: 100%; /* Fills the 40px grid column */
-  height: 100%; /* Fills the height of the event card */
+  width: 100%;
+  height: 100%;
+  padding: 0;
   box-sizing: border-box;
-  /* EDIT EVENT FOR ADMIN */
-  /* Use writing-mode for cleaner layout than transform rotate */
+  align-self: center;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  padding: 0;
-  align-self: center;
   text-align: center;
   text-decoration: none;
-  line-height: 50px; /* Match this to grid column px (grid-template-columns: 1fr 50px;) */
+  line-height: 50px;
 }
 
-/* ____________/ADMIN TOOLS ____________*/
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
 
-/* _____________MEDIA___________________ */
-
+/* TABLET */
 @media (max-width: 800px) {
-  /* dropdown floaties */
   .sortingOptions,
   .filteringOptions {
     display: none;
@@ -466,19 +453,19 @@ button.sortButton {
     right: 0;
     left: auto;
   }
+
   .event.is-admin {
-    /* grid-template-columns: 1fr 50px; */
     grid-template-columns: 1fr;
   }
+
   .event .button {
-    /* EDIT EVENT FOR ADMIN */
-    width: 100%; /* Fills the 40px grid column */
-    height: 50px; /* Fills the height of the event card */
+    width: 100%;
+    height: 50px;
     margin-bottom: 10px;
     writing-mode: horizontal-tb;
     transform: rotate(0deg);
   }
-  /* ___ONE EVENT'S DIV___ */
+
   .eventInfo {
     grid-template-columns: 200px 1fr;
     grid-template-areas:
@@ -487,9 +474,7 @@ button.sortButton {
       "image description";
   }
 
-  /* Handle layout when NO image is present */
   .eventInfo:not(:has(img)) {
-    /* Change columns to just the 3/4 and 1/4 split */
     grid-template-columns: 1fr;
     grid-template-areas:
       "header"
@@ -507,21 +492,21 @@ button.sortButton {
   }
 }
 
+/* PHONE */
 @media (max-width: 490px) {
   .top {
-    /* background-image: none; */
     height: fit-content;
-    border-radius: 0;
     padding: 10px 0 20px 0;
     border-radius: 0 0 5px 5px;
     gap: 5px;
   }
+
   .top h1 {
     font-size: 3rem;
-    /* font-size: 3rem; */
-    word-wrap: break-word; /* Ensures long Finnish words don't break the layout */
+    word-wrap: break-word;
     width: fit-content;
   }
+
   .sortingOptions,
   .filteringOptions {
     display: none;
@@ -529,13 +514,28 @@ button.sortButton {
     top: 100%;
     right: 0;
   }
+
   .eventListActions {
     border-radius: 5px;
     margin: 0 10px;
     flex-flow: row nowrap;
     justify-content: flex-start;
   }
+
   .eventList {
     padding: 10px;
+  }
+
+  .eventInfo {
+    grid-template-columns: 1fr 1fr;
+    justify-items: left;
+    grid-auto-rows: auto;
+    grid-template-areas:
+      "image image"
+      "adress adress"
+      "header header"
+      "day time"
+      "description description"
+      "places places";
   }
 }

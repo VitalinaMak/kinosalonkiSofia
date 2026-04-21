@@ -1,73 +1,60 @@
-/* Toggle buttons through JS */
-/* input[readonly] {
-  background-color: #f0f0f0; 
-  border-color: #ccc;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-input:not([readonly]) {
-  background-color: var(--cinema-whiteish);
-  border-color: var(--blue);
-  cursor: text;
-} */
+/* REFACTORED */
 
+<<<<<<< Updated upstream
 /* NOTE: CONFIRM DIALOG HAS SOME CSS-STYLING IN account.js ! */
 
 /* - - - /BUTTONS - - - */
+=======
+/* ========================================
+   ACCOUNT PAGE LAYOUT
+   ======================================== */
+>>>>>>> Stashed changes
 
 .wrapper {
-  box-sizing: border-box;
   width: 100%;
   height: 100%;
-
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   text-align: center;
-
   display: flex;
   flex-flow: row wrap;
   align-items: stretch;
-
   background-image: url("../kuvat/shtory.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  object-fit: cover;
   overflow: hidden;
 }
 
-/* - - - - - - FLOATIES - - - - - - */
 .info {
-  /* - donottouch - */
-  box-sizing: border-box;
   flex: 1 1 300px;
   padding: 20px;
-  /* - /donottouch - */
 }
 
 .profile {
-  /* - donottouch - */
   min-width: 30%;
   flex-shrink: 0;
-  background-color: var(--cinema-whiteish-tr);
-  /* - /donottouch - */
-  height: 100%; /* Занимаем всю высоту обертки */
+  height: 100%;
   padding-left: 30px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  background-color: var(--cinema-whiteish-tr);
 }
 
 .reservations {
-  flex: 2 1 300px; /* - donottouch - */
+  flex: 2 1 300px;
 }
+
 .reservations h1 {
   color: var(--cinema-whiteish);
   margin: 0;
 }
-/* - - - - - - /FLOATIES - - - - - - */
 
-/* - - -  NONE-RESERVED RECTANGLE FLOATIE - - - */
+/* ========================================
+   BOOKING CARDS
+   ======================================== */
+
 .none-reserved {
   margin: 20px 0;
   padding: 20px;
@@ -87,17 +74,12 @@ input:not([readonly]) {
 .none-reserved p a:hover {
   color: var(--cinema-pink);
 }
-/* - - -  /NONE-RESERVED RECTANGLE FLOATIE - - - */
 
-/* - - -  - - - RESERVED EVENTs RECTANGLE FLOATIE - - - - - - */
 .reserved {
   margin: 20px 0;
   padding: 20px;
   border-radius: 10px;
   background-color: var(--cinema-whiteish);
-
-  /* Shadow. OPTIONAL */
-  /* box-shadow: offset-x offset-y   blur-radius spread-radius   color inset; */
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
@@ -109,11 +91,9 @@ input:not([readonly]) {
 }
 
 .details [class]:not(.age) {
-  /* The space (.parent [class]) means “any descendant of .parent that has a class”. */
   margin: 0;
 }
 
-/* <!-- ROW 1 --> */
 .time-place {
   display: flex;
   justify-content: space-between;
@@ -122,7 +102,6 @@ input:not([readonly]) {
   font-size: 1.1rem;
 }
 
-/* <!-- ROW 2 --> */
 .eventname {
   display: block;
   font-weight: 650;
@@ -132,26 +111,23 @@ input:not([readonly]) {
 }
 .age {
   display: inline-block;
-  /* margin-bottom: 100px; */
   background-color: var(--dark-teal);
   color: white;
   padding: 0 6px;
   border-radius: 4px;
   font-size: 1rem;
-  /* vertical-align: middle; */
   box-sizing: border-box;
 }
 
-/* <!-- ROW 3 --> */
 .icon-adress {
   gap: 8px;
   color: var(--base-color);
 }
-/* - - - - - - /RESERVED EVENTs RECTANGLE FLOATIE  - - - - - - */
 
-/* ---------  ALL LINKS AND BUTTONS SETTINGS--------- */
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
 
-/* - - - BUTTONS additions/overrides from global - - - */
 #edit-btn,
 #save-btn {
   width: 45%;
@@ -165,7 +141,6 @@ input:not([readonly]) {
   padding: 0.85em 1.15em;
 }
 
-/* links MUOKKA varaus / PERUUTA varaus  */
 .change {
   display: flex;
   flex-direction: row;
@@ -176,12 +151,10 @@ input:not([readonly]) {
   flex: 1 1 200px;
 }
 .cancel {
-  /*link*/
   background-color: var(--cinema-danger);
   color: black;
 }
 
-/* //////logout link & delete button */
 .account-actions {
   display: flex;
   flex-direction: row;
@@ -197,43 +170,43 @@ input:not([readonly]) {
 .deleteaccount {
   background-color: var(--cinema-danger);
   color: black;
-  /* text-transform: uppercase; */
 }
 
-/* ---------  /ALL LINKS AND BUTTONS SETTINGS--------- */
+/* ========================================
+   SETTINGS SECTION
+   ======================================== */
 
-/* - ACTIONS underform - */
 h3 {
   text-transform: uppercase;
   font-family: Poppins, serif;
-  font: 2rem;
+  font-size: 2rem;
   font-weight: 525;
   text-align: left;
   margin-top: 30px;
   margin-bottom: 0;
 }
+
 .actions {
-  /* padding: 20px 0; */
   display: flex;
   flex-direction: column;
   text-align: left;
   gap: 10px;
 }
-/* - /ACTIONS underform checkboxes - */
 
-/* THE CHECKBOX STYLING ИСПРАВТЬ НАХХХХХХХХ */
+/* ========================================
+   NOTIFICATION CHECKBOXES
+   ======================================== */
 
 .checkbox-group {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Выравнивание всего блока влево */
+  justify-content: flex-start;
   gap: 15px;
   width: 100%;
 }
 
 .checkbox-group input[type="checkbox"] {
-  /* Базовые настройки из твоего запроса */
-  appearance: none; /* Скрываем дефолтный уродский чекбокс */
+  appearance: none;
   -webkit-appearance: none;
   width: 100px;
   height: 100px;
@@ -243,24 +216,21 @@ h3 {
   cursor: pointer;
   position: relative;
   transition: var(--transition);
-  flex-shrink: 0; /* Чтобы его не сплющило */
+  flex-shrink: 0;
   margin: 0;
 }
 
-/* Эффект при наведении */
 .checkbox-group input[type="checkbox"]:hover {
   border-color: var(--blue);
   background-color: #fff;
   box-shadow: 0 0 8px rgba(0, 150, 255, 0.2);
 }
 
-/* Состояние, когда галочка поставлена (Checked) */
 .checkbox-group input[type="checkbox"]:checked {
   background-color: var(--blue);
   border-color: var(--blue);
 }
 
-/* Рисуем саму галочку через псевдоэлемент */
 .checkbox-group input[type="checkbox"]::after {
   content: "";
   position: absolute;
@@ -275,20 +245,16 @@ h3 {
 }
 
 .checkbox-group input[type="checkbox"]:checked::after {
-  display: block; /* Показываем галочку только когда checked */
+  display: block;
 }
 
-/* СТИЛИ ДЛЯ ТЕКСТА (LABEL) */
 .checkbox-group label {
-  /* СБРОС ТВОИХ СТАРЫХ СТИЛЕЙ (120px width и 50px height) */
   width: auto;
   height: auto;
   background: none;
   border: none;
   padding: 0;
   margin: 0;
-
-  /* Твои новые стили */
   color: var(--cinema-whiteish);
   font-size: 1rem;
   cursor: pointer;
@@ -302,20 +268,19 @@ h3 {
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
-/* Чтобы при нажатии на текст тоже срабатывал переход чекбокса */
 .checkbox-group:hover input[type="checkbox"] {
   border-color: var(--blue);
 }
 
-/* /THE CHECKBOX STYLING */
+/* ========================================
+   PROFILE FORM
+   ======================================== */
 
-/* - - - - - - FORM - - - - - - */
 form {
   width: min(400px, 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* margin-left: 10px; */
   gap: 10px;
 }
 
@@ -341,18 +306,17 @@ form label {
 }
 
 form input {
-  box-sizing: border-box; /* for consistent size */
-  flex-grow: 1; /* to have responsive resizing of the element */
-  min-width: 0; /* to have responsive resizing of the element */
+  box-sizing: border-box;
+  flex-grow: 1;
+  min-width: 0;
   height: 50px;
   padding: 1em;
-  /* font: inherit; */
   border-radius: 0 10px 10px 0;
   border: 3px solid var(--lighterblue);
   border-left: none;
   background-color: var(--cinema-whiteish);
   transition: 150ms ease;
-  pointer-events: none; /* prevent any interaction with an element */
+  pointer-events: none;
 }
 
 form input:hover {
@@ -379,27 +343,26 @@ form input::placeholder {
 }
 
 .activated {
-  /* form inputs in edit-mode */
   background-color: var(--cinema-whiteish);
   border-color: var(--blue);
-  pointer-events: auto; /* reactivate pointer events */
+  pointer-events: auto;
 }
+
 .activatedLabel {
-  /* form labels in edit-mode */
   background-color: var(--blue);
 }
 
-/* message on updete success */
 .success-msg {
   text-align: left;
-  margin: 0px;
+  margin: 0;
   color: var(--green-teal);
   font-weight: bold;
 }
 
-/* - - - - - - /FORM - - - - - - */
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
 
-/* - - - FOR SCREENS SMALLER THEN 800px - - - */
 @media (max-width: 800px) {
   .wrapper {
     flex-direction: column-reverse;
@@ -413,7 +376,6 @@ form input::placeholder {
   }
 
   .profile {
-    /* Optional: Remove relative positioning or adjust height if needed */
     height: auto;
     padding-left: 20px;
   }

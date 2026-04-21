@@ -76,10 +76,10 @@
              1.
                 - title + age-restriction
                 - time
-                -description
+                - description
                 - image??
                 - type of event?
-                - 
+
             2. if the event type is 1 (movie), show the table with seats, if the event type is 2 (limited amount of places), show the amount of places left, if the event type is 3 (unlimited amount of places), show the total number of participants
             -->
             <?php if (!empty($event["event_image"])): ?>    
@@ -158,19 +158,19 @@
                     <input type="text" id="name-input" name="name" placeholder="Etunimi ja sukuninmi" required>
                 </div>
                 <div>
-                    <label for="email-input">Sähköposti:</label>
+                    <label for="email-input"></label>
                     <input type="email" id="email-input" name="email" placeholder="Sähköpostiosoite" required> <!-- may do autofill for email and maybe name, but it requires one more sql-query to retrive it from DB... -->
                 </div>
                 <div>
-                    <label for="phone-input">Puhelinnumero</label>
+                    <label for="phone-input"></label>
                     <input type="tel" id="phone-input" name="phone" placeholder="Puhelinnumero" required>
                 </div>
                 <div>
-                    <label for="places-input">Paikkojen määrä</label>
-                    <input type="number" id="places-input" name="places" required>
+                    <label for="places-input"></label>
+                    <input type="number" id="places-input" name="places" placeholder="Paikkojen määrä" required>
                 </div>
                 <div>
-                    <label for="comment-input">Lisähuomautukset</label>
+                    <label for="comment-input"></label>
                     <textarea type="comment" id="comment-input" name="comment" placeholder="Lisähuomautukset"></textarea>
                 </div>
                 <input type="hidden" name="eventName" value="<?php echo htmlspecialchars($eventName); ?>">  <!-- pass the name of event as well -->
