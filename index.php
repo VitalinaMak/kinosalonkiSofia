@@ -28,16 +28,24 @@
               <tbody>
                 <?php
                 /* printing out the date, time and the name of event (test) */
-                  $sql = "SELECT id, HOUR(event_time) AS event_hour, DATE_FORMAT(event_time, '%i') AS event_minute, event_name, location, max_visitors FROM events WHERE event_date = '$date';";  //DATE_FORMAT(event_time, '%i') returns minutes in 2-digits format
-                  $result = $conn->query($sql);
-                  if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {  //$row here is an associative array that contains one row of the table at a time
-                      echo "<tr onclick=\"window.location='bookEvent.php?id=" . $row['id'] . "'\"><td>".$row['event_hour'].":".$row['event_minute']."</td><td style='font-weight: bold'>".$row['event_name']."</td><td>".$row['location']."</td><td>".$row['max_visitors']." paikkaa jäljellä</td></tr>";  //now it gets only max number of places for the event
-                    }
-                  } else {
-                    echo "<p class='nothingFound'>Tapahtumia ei löytynyt</p>";
-                  }
-                ?>
+                  $sql = "SELECT id, EXTRACT(HOUR FROM event_time) AS event_hour, TO_CHAR(event_time, 'MI') AS event_minute, event_name, location, max_visitors FROM events WHERE event_date = '$date';";  //DATE_FORMAT(event_time, '%i') returns minutes in 2-digits format
+                  $result = $pdo->query($sql);
+                  $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+
+                  if (!empty($rows)):
+                    foreach ($rows as $row):
+                  ?>
+                    <tr onclick="window.location='bookEvent.php?id=<?= $row['id'] ?>'">
+                        <td><?= $row['event_hour'] . ":" . $row['event_minute'] ?></td>
+                        <td style="font-weight: bold"><?= htmlspecialchars($row['event_name']) ?></td>
+                        <td><?= htmlspecialchars($row['location']) ?></td>
+                        <td><?= $row['max_visitors'] ?> paikkaa jäljellä</td>
+                    </tr>
+                  <?php
+                    endforeach;
+                    else: ?>
+                    <p class='nothingFound'>Tapahtumia ei löytynyt</p>
+                  <?php endif; ?>
               </tbody>
           </table>
           <a href="tapahtumat.php" class="btn btn-outline-danger">Katso kaikki tapahtumat</a>  

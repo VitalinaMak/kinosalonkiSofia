@@ -15,6 +15,7 @@
         /* picture handling - START */
         $uploadFileName = "";
         $uploadOk = 1;  //status control variable
+        $uploadMessage = "";
         
         if (isset($_FILES["eventPicture"])) {
             
@@ -36,12 +37,12 @@
 
                 if ($check === false) {
                     $uploadOk = 0;
-                    echo "File is not an image.";
+                    $uploadMessage = "File is not an image.";
                 }
 
                 if (file_exists($target_file)) {
                     $uploadOk = 0;
-                    echo "File already exists.";
+                    $uploadMessage = "File already exists.";
                 }
 
                 if ($uploadOk === 1) {
@@ -50,14 +51,14 @@
                         /* echo "<img src='{$target_dir}.{$newFileName}' alt='Uploaded Image'>"; */
                     } else {
                         $uploadOk = 0;
-                        echo "Error uploading file.";
+                        $uploadMessage = "Error uploading file.";
                     }
                 }
             }
         } else {
             // Some other upload error
             $uploadOk = 0;
-            echo "Upload error code: " . $_FILES["eventPicture"]["error"];
+            $uploadMessage = "Upload error code: " . $_FILES["eventPicture"]["error"];
         }
         /* picture handling - END */
 
@@ -84,33 +85,27 @@
             $maxplaces
         ];
 
-        /* convert values of parameters to references */
-        $tmp = [];
-        foreach ($params as $key => $value) {
-            $tmp[$key] = &$params[$key];
-        }
+        $status = "error";
+        $message = "";
+        $eventId = null;
 
         /* if there's no errors with image, execute the statement */
         if ($uploadOk === 1) {
-            if ($stmt->execute([$tmp])) {
+            if ($stmt->execute($params)) {
+                $status = "success";
                 $eventId = $pdo->lastInsertId(); //save id of the added event
-                /* send data to JavaScript */
-                echo json_encode([
-                    "status" => "success",
-                    "event_id" => $eventId
-                ]);
-                /* echo "<p>Uusi tapahtuma lisätty onnistuneesti.</p>";
-                echo "<a href='tapahtumat.php' class='button'>Takaisin tapahtuma-listalle</a>"; */
             } else {
-                /* send error-message to JavaScript */
-                echo json_encode([
-                    "status" => "error",
-                    "message" => $stmt->error
-                ]);
-               /*  echo "<p>Error: " . $stmt->error . "</p>"; */
+                $message = $stmt->errorInfo()[2];
             }
-        } /* else {
-            echo "<p>Tapahtuma ei lisätty, koska kuvaa ei voitu ladata.</p>";
-        } */
+        } else {
+            $message = $uploadMessage;
+        }
+
+        /* send data to JavaScript */
+        echo json_encode([
+            "status" => $status,
+            "event_id" => $eventId,
+            "message" => $message
+        ]);
    /*  } */
 ?>

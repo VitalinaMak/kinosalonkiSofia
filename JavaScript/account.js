@@ -39,7 +39,7 @@ passwordInput.addEventListener("click", function() {
 })  */   
 
 function toggleEdit() {
-  // Находим все инпуты в форме
+  // find all of the inputs in the form
   const inputs = document.querySelectorAll("#profile input");
   const labels = document.querySelectorAll("#profile label");
   const editBtn = document.getElementById("edit-btn");
@@ -66,7 +66,9 @@ function toggleEdit() {
 function changePasswordForm() {
   const personalInfo = document.getElementsByClassName("personalInfo");  //gets div-elements with inputs and labels inside 
   const passwordReset = document.getElementsByClassName("passwordReset");  //gets div-elements with inputs and labels inside 
-
+  const pswrdBtn = document.getElementById("pswrd-btn");  //button for password reset
+  const persInfoBtn = document.getElementById("persInfo-btn");  //button for personal info edit
+  
   //hide and disable inputs for personal info
   for (let i = 0; i < personalInfo.length; i++) {
     const input = personalInfo[i].querySelector("input");  //get input from the div
@@ -85,4 +87,39 @@ function changePasswordForm() {
     passwordReset[i].style.display = "flex";
   }
   toggleEdit();  //make input fields editable from the moment they appear
+
+  /* change button visibility */
+  pswrdBtn.style.display = "none";
+  persInfoBtn.style.display = "inline-block";
+}
+
+function changePersonalInfoForm() {
+  const personalInfo = document.getElementsByClassName("personalInfo");  //gets div-elements with inputs and labels inside 
+  const passwordReset = document.getElementsByClassName("passwordReset");  //gets div-elements with inputs and labels inside 
+  const pswrdBtn = document.getElementById("pswrd-btn");  //button for password reset
+  const persInfoBtn = document.getElementById("persInfo-btn");  //button for personal info edit
+
+  //hide and disable inputs for password reset
+  for (let i = 0; i < passwordReset.length; i++) {
+    const input = passwordReset[i].querySelector("input");  //get input from the div
+    passwordReset[i].style.display = "none";
+    input.required = false;
+    input.disabled = true;
+  }
+
+  //reveal and enable inputs for password reset
+  for (let i = 0; i < personalInfo.length; i++) {
+    const input = personalInfo[i].querySelector("input");  //get input from the div
+    input.disabled = false;
+    input.required = true;
+    input.removeAttribute("readonly");
+    input.classList.add("activated");  //add activated class for styling
+    personalInfo[i].style.display = "flex";
+  }
+  toggleEdit();  //make input fields editable from the moment they appear
+
+  /* change button visibility */
+  pswrdBtn.style.display = "inline-block";
+  persInfoBtn.style.display = "none";
+
 }
