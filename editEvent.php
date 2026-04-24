@@ -6,13 +6,11 @@
     
     /* delete event (it has to be placed before any output) */
     if (isset($_GET['delete']) && isset($_GET['id'])) {
-        $stmt = $conn->prepare("DELETE FROM events WHERE id = ?;");
+        $stmt = $pdo->prepare("DELETE FROM events WHERE id = ?;");
         $id = (int) $_GET['id'];
-        $stmt->bind_param("i", $id);
-        if ($stmt->execute()) {
-            header("Location: tapahtumat.php");  //redirect to the page tapahtumat
-            exit();
-        }
+        $stmt->execute([$id]);
+        header("Location: tapahtumat.php");
+        exit();
     }
 ?>
 
@@ -32,16 +30,14 @@
             <?php
                 if ($_SERVER['REQUEST_METHOD'] !== 'POST'):
                     $ehto = (int)$_GET['id'];  //get id from the URL
-                    $sql = "SELECT * FROM events WHERE id = $ehto";  //search for the event with that id in the DB
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0):
-                        while ($row = $result->fetch_assoc()):
-                        $eventType = $row['event_type']; 
-                        $ageLimit = $row['age_limit']; 
-                        $picture = "noImage.png";
-                        if ($row['event_image'] !== "") {
-                            $picture = $row['event_image'];
-                        } ?>
+                    $stmt = $pdo->prepare("SELECT * FROM events WHERE id = ?");  //retrieve event data from the database to fill the form with it
+                    $stmt->execute([$ehto]);
+
+                    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)):
+                        $eventType = $row['event_type'];
+                        $ageLimit = $row['age_limit'];
+                        $picture = !empty($row['event_image']) ? $row['event_image'] : "noImage.png"; ?>
+
                             <input type="hidden" name="id" value="<?=$row['id'];?>" />  <!-- id (id doesn't have to be changed, it's here only to save it's value) -->
                             <!-- - - - HTML - - - -->
                             <div class="name-age group"> 
@@ -115,7 +111,6 @@
                             <button type="submit">Lähetä</button>
                             
                             <!-- - - - END - - - -->
-                        <?php endwhile ?>
                     <?php endif ?>
                 <?php endif ?>
         </form>
@@ -131,13 +126,7 @@
                 }
                     
                 /* prepared statement to prevent sql injection */
-                $stmt = $conn->prepare("UPDATE events SET event_name=?, event_type=?, event_date=?, event_time=?, event_image=?, description=?, age_limit=?, location=?, max_visitors=? WHERE id=?;");
-            
-                if (!$stmt) {
-                    die("Prepare failed: " . $conn->error);
-                }
-
-                $types = "sissssssii"; // i = int, s = string (must match order!)
+                $stmt = $pdo->prepare("UPDATE events SET event_name=?, event_type=?, event_date=?, event_time=?, event_image=?, description=?, age_limit=?, location=?, max_visitors=? WHERE id=?;");
                 
                 /* picture handling - START */
 
@@ -241,18 +230,14 @@
                     $tmp[$key] = &$params[$key];
                 }
                     
-                if (!$stmt->bind_param($types, ...$tmp)) {
-                    die("Bind param failed: " . $stmt->error);
+                try {
+                    if ($stmt->execute($params)) {
+                        header("Location: tapahtumat.php");
+                        exit();
+                    }
+                } catch (PDOException $e) {
+                    echo "<h1>Error: " . $e->getMessage() . "</h1>";
                 }
-                
-                echo var_dump($stmt);
-
-                if ($stmt->execute()) {
-                    echo "<h1>Success!</h1>";
-                    header("Location: tapahtumat.php");
-                } else {
-                    echo "<h1>Error: " . $stmt->error . "</h1>";
-                } 
             }
         ?>
     </div>

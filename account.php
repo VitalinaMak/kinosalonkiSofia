@@ -41,8 +41,6 @@
     $name = !empty($user['username']) ? htmlspecialchars($user['username']) : '';
     $email = !empty($user['email']) ? htmlspecialchars($user['email']) : '';
 
-    var_dump($user); // This will show what data is in $user array
-
     /* cancel reservation */
     if (isset($_GET['id'])) {
     $stmt = $pdo->prepare("DELETE FROM bookings WHERE id = :id");
@@ -112,6 +110,7 @@
                     <button type="button" id="edit-btn" onclick="toggleEdit()">Muokkaa</button>
                     <button type="submit" id="save-btn" style="display: none;">Tallenna</button>
                     <button type="button" id="pswrd-btn" onclick="changePasswordForm()">Vaihda salasana</button>
+                    <button type="button" id="persInfo-btn" onclick="changePersonalInfoForm()">Muokkaa henkilötietoja</button>
                 </div>
 
             </form>
