@@ -18,6 +18,9 @@
   --lighterblue: rgb(116, 186, 186);
   --lightblue: #a6d1d1;
 
+  --tint-tapahtumat: rgba(253, 215, 63, 0.2);
+  --tint-tapahtumat-2: #669dd55f;
+
   --pinkish: #fdf2f2;
   --pinkish-tr: rgba(253, 242, 242, 0.4);
 
@@ -26,16 +29,20 @@
   --teal: #40778bff;
   --green-teal: rgb(35, 99, 66);
 
-  /* blednye DEFALT*/
-  /* --event2: #ffd6a5; */
-  --event1: #f8b3ba;
+  /* blednye ORIGINAL*/
+  /* --event1: #f8b3ba;
   --event2: rgb(166, 225, 225);
-  --event3: #aadcbd;
+  --event3: #fdd83fff; */
+
+  /*__ UPDATE to blednye  __*/
+  --event1: rgba(175, 194, 201, 0.7);
+  --event2: rgba(245, 216, 166, 0.6);
+  --event3: rgba(182, 164, 141, 0.7);
+
   /* yarkie HOVER*/
-  /* --event2Hover: #f3b76c; */
-  --event1Hover: #ed969e;
-  --event2Hover: rgb(117, 203, 203);
-  --event3Hover: rgb(139, 182, 123);
+  --event1Hover: rgba(175, 194, 201);
+  --event2Hover: rgba(245, 216, 166);
+  --event3Hover: rgba(182, 164, 141);
 
   /* FILTERS */
   --event1Filter: #d5636f;

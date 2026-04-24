@@ -8,13 +8,13 @@ main {
   background-color: white;
 }
 
-*,
+/* *,
 h1,
 h2,
 h3,
 h4 {
   color: black;
-}
+} */
 
 h4 {
   font-size: 1.25rem;
@@ -36,9 +36,11 @@ h4 {
   flex-direction: column;
   align-items: center;
   border-radius: 0 0 20px 20px;
+
   background-image:
-    linear-gradient(var(--head-foot-tr), var(--head-foot-tr)),
-    url("../kuvat/shtory_red.jpg");
+    linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+    url("../kuvat/wallpaper.svg");
+
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -50,10 +52,12 @@ h4 {
   text-align: center;
   margin: 0;
   color: var(--cinema-whiteish);
+  /* color: var(--head-foot); */
   font-size: 4rem;
+  /* text-shadow: 0px 0px 5px rgb(97, 82, 62); */
   text-shadow:
-    2px 2px 4px rgba(0, 0, 0, 0.4),
-    0px 0px 20px rgba(0, 0, 0, 0.5);
+    3px 3px 0px rgba(245, 216, 166, 1),
+    6px 6px 0px rgba(168, 146, 119, 1);
 }
 
 /* ========================================
@@ -71,9 +75,7 @@ h4 {
   justify-content: center;
   align-items: center;
   background-color: white;
-  text-shadow:
-    2px 2px 4px rgba(0, 0, 0, 0.4),
-    0px 0px 20px rgba(0, 0, 0, 0.5);
+  /* text-shadow: 0px 0px 11px rgba(62, 140, 243, 0.311); */
 }
 
 .eventListActions form {
