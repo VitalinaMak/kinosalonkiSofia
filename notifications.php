@@ -5,10 +5,9 @@
     $eventId = $_POST['event_id'] ?? null;
 
     /* get information about new event */
-    $stmt = $conn->prepare("SELECT event_name, DATE_FORMAT(events.event_date, '%d.%m.%Y') AS event_formatted_date, HOUR(events.event_time) AS event_hour, DATE_FORMAT(events.event_time, '%i') AS event_minute, description, age_limit, location FROM events WHERE id = ?;");
-    $stmt->bind_param("s", $eventId);
-    $stmt->execute();
-    $event = $result->fetch_assoc();
+    $stmt = $pdo->prepare("SELECT event_name, DATE_FORMAT(events.event_date, '%d.%m.%Y') AS event_formatted_date, HOUR(events.event_time) AS event_hour, DATE_FORMAT(events.event_time, '%i') AS event_minute, description, age_limit, location FROM events WHERE id = ?;");
+    $stmt->execute([$eventId]);
+    $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
     /* DRAFT FOR TESTING. Content of email needs polishing */
     $header = "<h3>Uusi tapahtuma: {$event['event_name']} ({$event['age_limit']})</h3>";
@@ -22,18 +21,18 @@
     $status = "pending";  //status of the email
 
     /* prepare statement for insertion users in a queue */
-    $sql = $conn->prepare("INSERT INTO email_queue (email, subject, message, status) VALUES (?, ?, ?, ?)");
+    $sql = $pdo->prepare("INSERT INTO email_queue (email, subject, message, status) VALUES (?, ?, ?, ?)");
     
-    if($stmt = $conn->prepare($sql)) {
+    if($stmt = $pdo->prepare($sql)) {
         // Bind parameters
-        $stmt->bind_param("ssss", $header, $messageContent, $userId, $status);
+        $stmt->execute([$header, $messageContent, $userId, $status]);
 
         /* retrieve subscribed users from the table */
         $query = "SELECT id FROM users WHERE new_events = 1;";
-        $recipients = $conn->query($sql);
+        $recipients = $pdo->query($query);
 
-        if ($recipients->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        if ($recipients->rowCount() > 0) {
+            while ($row = $recipients->fetch(PDO::FETCH_ASSOC)) {
                 $userId = $row['id'];
                 $stmt->execute();
             }

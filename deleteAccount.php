@@ -5,14 +5,12 @@
         $userID = ($_SESSION['user_id']);  //current user's id
 
         /* prepared query to remove the user from the database */
-        $stmt = $conn->prepare("DELETE FROM users WHERE id = ?;");
+        $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?;");
         if (!$stmt) {
-            die("Prepare failed: " . $conn->error);
+            die("Prepare failed: " . $pdo->errorInfo()[2]);
         }
 
-        $stmt->bind_param("i", $userID);
-
-        if ($stmt->execute()) {
+        if ($stmt->execute([$userID])) {
 
             /* clear the memory and destroy current session */
             session_unset();
