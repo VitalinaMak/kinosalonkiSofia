@@ -242,6 +242,10 @@
                             <p>Sinulla ei ole aktiivisia varauksia.<br> <a href="tapahtumat.php">Katso ohjelmisto</a> </p>
                         </div>
                     HTML;
+                } else {
+                    echo <<<HTML
+                        <a class="button"href="tapahtumat.php">Lisää tapahtumia</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
+                    HTML;
                 }
             ?>
 

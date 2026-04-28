@@ -91,6 +91,16 @@ h4 {
   background-color: white;
 }
 
+/* somehow it aligns the image inside the label :O (it was suggested by AI) */
+.lupka svg {
+  width: 100%;
+  height: 100%;
+}
+
+.lupka:hover {
+  cursor: pointer;
+}
+
 .eventListActions input {
   height: 48px;
   padding: 0 5px;
