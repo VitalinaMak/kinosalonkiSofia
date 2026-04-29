@@ -16,7 +16,7 @@
     $stmt->execute([$eventID]);
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    /* check if event exists, if not redirect */
+    /* check if event exists */
     if (!$event) {
         die("Event not found");
     }
@@ -27,34 +27,35 @@
     $maxVisitors = $event['max_visitors'];  //max. amount of visitors for that event
     $eventName = $event['event_name'];  //event's name
 
-    /* retrieve information about booked seats for that event */
-    /* $stmt = $pdo->prepare("SELECT user_id, event_id, seat_number FROM bookings WHERE event_id = ?");
-    $stmt->execute([$eventID]);
-    $result = $stmt->get_result();
-
-    $bookings = [];  //an array with numbers of all booked seats
-    $bookedSeatsAmount = count($bookings);  //amount of booked seats
-    $userAlreadyBooked = 0;  //counter to check if the user has already booked any seats for that event before
-
-    while ($row = $result->fetch_assoc()) {
-    $bookings[] = $row['seat_number']; 
-
-    if ($row['user_id'] == $user) {
-        $userAlreadyBooked += 1;  //if the user's id is found in the table bookings for this event, add 1 to counter
-    }
-    } */
-
     $stmt = $pdo->prepare("SELECT user_id, event_id, seat_number FROM bookings WHERE event_id = ?");
     $stmt->execute([$eventID]);
 
-    $bookings = [];  //an array with numbers of all booked seats
+    $bookings = [];  //an array with numbers of all booked seats by others
     $userAlreadyBooked = 0;  //counter to check if the user has already booked any seats for that event before
+    $editMode = false; //if the user came from the account.php, turn on the edit mode; otherwise, it stays false
+    $seats = "";
+    $usersSeats = [];  //an array with numbers of user's current seats
 
+    /* check if the URL contains information about amount of bookings for that user (it might be passed from the account.php if the user clicked on change button) */
+    if (isset($_GET['total'])) {
+        $editMode = true;  //turn on the edit mode
+        /* $userAlreadyBooked = (int)$_GET['total']; */
+
+    } 
+    /* also check if there any seats booked (only for event type 1) and assign it to a string variable */
+    if (isset($_GET['seats'])) {
+        $editMode = true;  //turn on the edit mode
+        $seats = ($_GET['seats']);
+    }
+    /* retrieve from the database all booked seat numbers */
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $bookings[] = $row['seat_number'];
-
         if ($row['user_id'] == $user) {
-            $userAlreadyBooked += 1;  //if the user's id is found in the table bookings for this event, add 1 to counter
+            if (str_contains($seats, $row['seat_number'])) {  //if the user came from the account.php and has already booked some seats, mark those seats as user's seats (to show them as selected in the seating chart)
+                $usersSeats[] = $row['seat_number'];
+            }
+            $userAlreadyBooked += 1;
+        } else {
+            $bookings[] = $row['seat_number'];
         }
     }
 
@@ -62,8 +63,12 @@
 ?>
 
 <script>
+    const editMode = <?= json_encode($editMode) ?>;  //send the edit mode marker to JavaScript
     const bookedSeats = <?= json_encode($bookings) ?>;  //send the array with booked seats to JavaScript
     let userAlreadyBooked = Number(<?= json_encode($userAlreadyBooked) ?>);  //send to JS amount of bookings user already did for this event
+    const usersSeats = <?= json_encode($usersSeats) ?>;  // //send the array with user's seats to JavaScript
+    console.log("usersSeats: ",usersSeats);
+    console.log("bookedSeats: ", bookedSeats);
 </script>
 
 <main class="bookEvent_page">
@@ -93,36 +98,36 @@
                     <table><tbody>
                         <caption> näytto </caption>
                         <tr>
-                            <td id="1" <?= in_array(1, $bookings) ? "class='booked'" : "";?> onclick="selection('1')"></td>
-                            <td id="2" <?= in_array(2, $bookings) ? "class='booked'" : "";?> onclick="selection('2')"></td>
-                            <td id="3" <?= in_array(3, $bookings) ? "class='booked'" : "";?> onclick="selection('3')"></td>
-                            <td id="4" <?= in_array(4, $bookings) ? "class='booked'" : "";?> onclick="selection('4')"></td>
-                            <td id="5" <?= in_array(5, $bookings) ? "class='booked'" : "";?> onclick="selection('5')"></td>
-                            <td id="6" <?= in_array(6, $bookings) ? "class='booked'" : "";?> onclick="selection('6')"></td>
+                            <td id="1" <?= in_array(1, $usersSeats) ? "class='selected'" : (in_array(1, $bookings) ? "class='booked'" : "");?> onclick="selection('1')"></td>
+                            <td id="2" <?= in_array(2, $usersSeats) ? "class='selected'" : (in_array(2, $bookings) ? "class='booked'" : "");?> onclick="selection('2')"></td>
+                            <td id="3" <?= in_array(3, $usersSeats) ? "class='selected'" : (in_array(3, $bookings) ? "class='booked'" : "");?> onclick="selection('3')"></td>
+                            <td id="4" <?= in_array(4, $usersSeats) ? "class='selected'" : (in_array(4, $bookings) ? "class='booked'" : "");?> onclick="selection('4')"></td>
+                            <td id="5" <?= in_array(5, $usersSeats) ? "class='selected'" : (in_array(5, $bookings) ? "class='booked'" : "");?> onclick="selection('5')"></td>
+                            <td id="6" <?= in_array(6, $usersSeats) ? "class='selected'" : (in_array(6, $bookings) ? "class='booked'" : "");?> onclick="selection('6')"></td>
                         </tr>
                         <tr>
-                            <td id="7" <?= in_array(7, $bookings) ? "class='booked'" : "";?> onclick="selection('7')"></td>
-                            <td id="8" <?= in_array(8, $bookings) ? "class='booked'" : "";?> onclick="selection('8')"></td>
-                            <td id="9" <?= in_array(9, $bookings) ? "class='booked'" : "";?> onclick="selection('9')"></td>
-                            <td id="10" <?= in_array(10, $bookings) ? "class='booked'" : "";?> onclick="selection('10')"></td>
-                            <td id="11" <?= in_array(11, $bookings) ? "class='booked'" : "";?> onclick="selection('11')"></td>
-                            <td id="12" <?= in_array(12, $bookings) ? "class='booked'" : "";?> onclick="selection('12')"></td>
+                            <td id="7" <?= in_array(7, $usersSeats) ? "class='selected'" : (in_array(7, $bookings) ? "class='booked'" : "");?> onclick="selection('7')"></td>
+                            <td id="8" <?= in_array(8, $usersSeats) ? "class='selected'" : (in_array(8, $bookings) ? "class='booked'" : "");?> onclick="selection('8')"></td>
+                            <td id="9" <?= in_array(9, $usersSeats) ? "class='selected'" : (in_array(9, $bookings) ? "class='booked'" : "");?> onclick="selection('9')"></td>
+                            <td id="10" <?= in_array(10, $usersSeats) ? "class='selected'" : (in_array(10, $bookings) ? "class='booked'" : "");?> onclick="selection('10')"></td>
+                            <td id="11" <?= in_array(11, $usersSeats) ? "class='selected'" : (in_array(11, $bookings) ? "class='booked'" : "");?> onclick="selection('11')"></td>
+                            <td id="12" <?= in_array(12, $usersSeats) ? "class='selected'" : (in_array(12, $bookings) ? "class='booked'" : "");?> onclick="selection('12')"></td>
                         </tr>
                         <tr>
-                            <td id="13" <?= in_array(13, $bookings) ? "class='booked'" : "";?> onclick="selection('13')"></td>
-                            <td id="14" <?= in_array(14, $bookings) ? "class='booked'" : "";?> onclick="selection('14')"></td>
-                            <td id="15" <?= in_array(15, $bookings) ? "class='booked'" : "";?> onclick="selection('15')"></td>
-                            <td id="16" <?= in_array(16, $bookings) ? "class='booked'" : "";?> onclick="selection('16')"></td>
-                            <td id="17" <?= in_array(17, $bookings) ? "class='booked'" : "";?> onclick="selection('17')"></td>
-                            <td id="18" <?= in_array(18, $bookings) ? "class='booked'" : "";?> onclick="selection('18')"></td>
+                            <td id="13" <?= in_array(13, $usersSeats) ? "class='selected'" : (in_array(13, $bookings) ? "class='booked'" : "");?> onclick="selection('13')"></td>
+                            <td id="14" <?= in_array(14, $usersSeats) ? "class='selected'" : (in_array(14, $bookings) ? "class='booked'" : "");?> onclick="selection('14')"></td>
+                            <td id="15" <?= in_array(15, $usersSeats) ? "class='selected'" : (in_array(15, $bookings) ? "class='booked'" : "");?> onclick="selection('15')"></td>
+                            <td id="16" <?= in_array(16, $usersSeats) ? "class='selected'" : (in_array(16, $bookings) ? "class='booked'" : "");?> onclick="selection('16')"></td>
+                            <td id="17" <?= in_array(17, $usersSeats) ? "class='selected'" : (in_array(17, $bookings) ? "class='booked'" : "");?> onclick="selection('17')"></td>
+                            <td id="18" <?= in_array(18, $usersSeats) ? "class='selected'" : (in_array(18, $bookings) ? "class='booked'" : "");?> onclick="selection('18')"></td>
                         </tr>
                         <tr>
-                            <td id="19" <?= in_array(19, $bookings) ? "class='booked'" : "";?> onclick="selection('19')"></td>
-                            <td id="20" <?= in_array(20, $bookings) ? "class='booked'" : "";?> onclick="selection('20')"></td>
-                            <td id="21" <?= in_array(21, $bookings) ? "class='booked'" : "";?> onclick="selection('21')"></td>
-                            <td id="22" <?= in_array(22, $bookings) ? "class='booked'" : "";?> onclick="selection('22')"></td>
-                            <td id="23" <?= in_array(23, $bookings) ? "class='booked'" : "";?> onclick="selection('23')"></td>
-                            <td id="24" <?= in_array(24, $bookings) ? "class='booked'" : "";?> onclick="selection('24')"></td>
+                            <td id="19" <?= in_array(19, $usersSeats) ? "class='selected'" : (in_array(19, $bookings) ? "class='booked'" : "");?> onclick="selection('19')"></td>
+                            <td id="20" <?= in_array(20, $usersSeats) ? "class='selected'" : (in_array(20, $bookings) ? "class='booked'" : "");?> onclick="selection('20')"></td>
+                            <td id="21" <?= in_array(21, $usersSeats) ? "class='selected'" : (in_array(21, $bookings) ? "class='booked'" : "");?> onclick="selection('21')"></td>
+                            <td id="22" <?= in_array(22, $usersSeats) ? "class='selected'" : (in_array(22, $bookings) ? "class='booked'" : "");?> onclick="selection('22')"></td>
+                            <td id="23" <?= in_array(23, $usersSeats) ? "class='selected'" : (in_array(23, $bookings) ? "class='booked'" : "");?> onclick="selection('23')"></td>
+                            <td id="24" <?= in_array(24, $usersSeats) ? "class='selected'" : (in_array(24, $bookings) ? "class='booked'" : "");?> onclick="selection('24')"></td>
                         </tr>
                     </tbody></table>
                 <?php elseif ($eventType == '2'): ?>

@@ -171,7 +171,7 @@
                         events.age_limit, 
                         events.location,
                         bookings.event_id, 
-                        bookings.id,
+                        MIN(bookings.id) AS booking_id,
                         STRING_AGG(bookings.seat_number::text, ',') AS seats,
                         (
                             SELECT COUNT(*)
@@ -181,7 +181,7 @@
                     FROM events
                     JOIN bookings ON events.id = bookings.event_id
                     WHERE bookings.user_id = :user_id
-                    GROUP BY events.id, bookings.event_id, bookings.id
+                    GROUP BY events.id, bookings.event_id
                     ORDER BY events.event_date, events.event_time;
                 ";
                 $stmt = $pdo->prepare($sql);
@@ -230,8 +230,8 @@
                             </p>                        
                         </div>
                         <div class="change">
-                            <a class="button edit" href="bookEvent.php?id={$row['event_id']}seats={$seatList}&total={$total}">Muokkaa varaus</a>
-                            <a class="button cancel" href="account.php?id={$row['id']}">Peruuta varaus</a>
+                            <a class="button edit" href="bookEvent.php?id={$row['event_id']}&seats={$seatList}&total={$total}">Muokkaa varaus</a>
+                            <a class="button cancel" href="account.php?id={$row['booking_id']}">Peruuta varaus</a>
                         </div>
                     </div>
                     HTML;
