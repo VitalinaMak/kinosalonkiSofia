@@ -17,10 +17,22 @@ document.addEventListener("DOMContentLoaded", function () {
         checkLogin = checkLoginElement.value;
     } 
 
+    /* if there's any seats booked by that user, add them to the array with selected seats */
+    if (usersSeats.length >= 1) {
+        for (let i=0; i<usersSeats.length; i++) {
+            selectedSeats[i] = String(usersSeats[i]);
+        }
+    }
+    console.log("selectedSeats after copying from usersSeats: ", selectedSeats);
+
     showBooking = document.getElementById("showSelectedSeats");  //<p>-element that stores message about seats selecting
 
-    if (selectedSeats.length == 0 && eventType == 1) {
-        showBooking.innerText = "Valitse paikat istuinkartasta.";  //default message if no seat is chosen yet
+    if (eventType == 1) {
+        if (selectedSeats.length == 0) {
+            showBooking.innerText = "Valitse paikat istuinkartasta.";  //default message if no seat is chosen yet
+        } else {
+            showBooking.innerText = "Valitut paikat: " + selectedSeats.toString();
+        }
     }
 
     /* prevent too early form submitting */
@@ -44,8 +56,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         e.preventDefault(); //  stops page reload
 
-        const seats = document.getElementById("selectedSeatsInput").value;
+        const seatsString = document.getElementById("selectedSeatsInput").value;
         const eventID = new URLSearchParams(window.location.search).get("id");
+
+        console.log("seatsString: ", seatsString);
 
         /* send data to php */
         fetch("bookEventFunctionality.php?id=" + eventID, {
@@ -54,7 +68,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                seats: seats
+                seats: seatsString,
+                editMode: editMode,
+                usersSeats: usersSeats.join(",")
             })
         })
         /* get respond from php */
@@ -63,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(data);
             document.getElementById("message").innerText = data.message;
             if (data.success) {
-                userAlreadyBooked += selectedSeats.length;  //update the variable with amount of booked seats
+                userAlreadyBooked = selectedSeats.length;  //update the variable with amount of booked seats
                 selectedSeats = [];
                 /* change the information about seats left or total amount of participants (depends on the event type) */
                 const placesLeft = document.getElementById("placesLeft");
@@ -102,7 +118,8 @@ window.selection = function(i) {
     if (selectedSeats.includes(i) && eventType == 1) {
         // if the seat is already selected → unselect. Only for event type 1
         selectedSeats = selectedSeats.filter(id => id !== i);
-        seatID.style.backgroundColor = "";
+        /* seatID.style.backgroundColor = ""; */
+        seatID.classList.remove("selected");
     } else {
            
         // if user already booked some seats before, restrict booking more than 2 seats in total
@@ -117,12 +134,17 @@ window.selection = function(i) {
 
         /* if everything is OK, add seat's id to array and change it's style to selected */
         selectedSeats.push(i);
-        seatID.style.backgroundColor = "black";
+        /* seatID.style.backgroundColor = "black"; */
+        seatID.classList.add("selected");
     }
     console.log(selectedSeats); // debugging. This line can be deleted later
 
     document.getElementById("selectedSeatsInput").value = selectedSeats.join(",");  //sends information about the selected seats to the hidden input for later php-handling
-    showBooking.innerText = "Valitut paikat: " + selectedSeats.toString();  //show the numbers of selected seats on the page
+    if (selectedSeats.length == 0) {
+        showBooking.innerText = "Valitse paikat istuinkartasta.";
+    } else {
+        showBooking.innerText = "Valitut paikat: " + selectedSeats.toString();
+    }
 }
 
 
@@ -141,7 +163,7 @@ function validateForm() {
 
 /* check if the amount of booked places exeeds allowed number */
 function exceedsLimit(newSeatsCount = 0) {
-    return (userAlreadyBooked + selectedSeats.length + newSeatsCount) > 2;
+    return (selectedSeats.length + newSeatsCount) > 2;
 }
 
 /* show the form for booking more seats */
