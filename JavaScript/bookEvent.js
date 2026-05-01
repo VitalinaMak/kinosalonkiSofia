@@ -96,7 +96,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 }
             }
-            document.getElementById("backToEvents").style.display = "block";  // show the button
+            if (data.message == "Varaus päivitetty!") {
+                document.getElementById("backToAccount").style.display = "block";  // show the button to get back to the account page
+                document.getElementById("backToEvents").innerText = "Kaikki tapahtumat";  //change the text of the button for event list
+                document.getElementById("backToEvents").style.display = "block";  // show the button to get to the event list
+            } else {
+                document.getElementById("backToEvents").style.display = "block";  // show only the button to get back to the event list
+            }
         });
     });
 });
