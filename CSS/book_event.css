@@ -86,7 +86,16 @@ td.selected {
   justify-content: center;
 }
 
-.backToEvents {
+.links {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+  max-width: 85%;
+  margin: auto;
+}
+
+.backToEvents,
+.backToAccount {
   display: none;
   text-decoration: none;
   max-width: 50%;
@@ -100,7 +109,8 @@ td.selected {
   transition: var(--transition);
 }
 
-.backToEvents:hover {
+.backToEvents:hover,
+.backToAccount:hover {
   cursor: pointer;
   background-color: var(--cinema-pink);
 }
