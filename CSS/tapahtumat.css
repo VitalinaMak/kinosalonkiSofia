@@ -52,7 +52,6 @@ h4 {
   color: var(--cinema-whiteish);
   /* color: var(--head-foot); */
   font-size: 4rem;
-  /* text-shadow: 0px 0px 5px rgb(97, 82, 62); */
   text-shadow:
     3px 3px 0px rgba(245, 216, 166, 1),
     6px 6px 0px rgba(168, 146, 119, 1);
