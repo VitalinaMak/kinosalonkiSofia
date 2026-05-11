@@ -1,0 +1,305 @@
+/* REFACTORED */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap");
+
+/* ========================================
+   CSS VARIABLES
+   ======================================== */
+
+:root {
+  /* main palette */
+  --head-foot: #1d1d1cff;
+  --head-foot-tr: rgba(29, 29, 28, 0.4);
+  --base-color: #34342e;
+  --base-color-inactive: #3f3f3d;
+
+  --darkblue: #384a50;
+  --blue: #4fa1a1;
+  --lighterblue: rgb(116, 186, 186);
+  --lightblue: #a6d1d1;
+
+  --tint-tapahtumat: rgba(253, 215, 63, 0.2);
+  --tint-tapahtumat-2: #669dd55f;
+
+  --pinkish: #fdf2f2;
+  --pinkish-tr: rgba(253, 242, 242, 0.4);
+
+  /* blue curtains */
+  --dark-teal: #1a424eff;
+  --teal: #40778bff;
+  --green-teal: rgb(35, 99, 66);
+
+  /* blednye ORIGINAL*/
+  /* --event1: #f8b3ba;
+  --event2: rgb(166, 225, 225);
+  --event3: #fdd83fff; */
+
+  /*__ UPDATE to blednye  __*/
+  --event1: rgba(175, 194, 201, 0.7);
+  --event2: rgba(245, 216, 166, 0.6);
+  --event3: rgba(182, 164, 141, 0.7);
+
+  /* yarkie HOVER*/
+  --event1Hover: rgba(175, 194, 201);
+  --event2Hover: rgba(245, 216, 166);
+  --event3Hover: rgba(182, 164, 141);
+
+  /* FILTERS */
+  --event1Filter: #d5636f;
+  --event2Filter: rgb(67, 181, 181);
+  --event3Filter: rgb(99, 159, 78);
+
+  /* cinema_seats.jpg */
+  --cinema-red1: #7e1605ff;
+  --cinema-red2: #a52108ff;
+  --cinema-pink: #dc3545;
+  --cinema-danger: #fe5061;
+  --cinema-brown: #322317ff;
+  /* --cinema-uu: rgb(181, 167, 145); */
+  --cinema-whiteish: #f8f7f3ff;
+  --cinema-whiteish-tr: rgba(248, 247, 243, 0.804);
+  --cinema-whiteish-trtr: rgba(248, 247, 243, 0.4);
+  --cinema-grey: #b7c2cbff;
+
+  /* self-explanatory */
+  --border-radius: 10px;
+  --transition: 200ms ease;
+  --form-label-width: 50px;
+}
+
+/* ========================================
+   GLOBAL BUTTON STYLES
+   ======================================== */
+
+button {
+  padding: 0.85em 4em;
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+  background-color: var(--darkblue);
+  color: var(--cinema-whiteish);
+  transition: var(--transition);
+}
+
+button:hover,
+.button:hover,
+.button-danger:hover {
+  cursor: pointer;
+  background-color: var(--cinema-pink);
+}
+
+/* ========================================
+   GLOBAL LINK-AS-BUTTON STYLES
+   ======================================== */
+
+.button {
+  padding: 0.5em 1em;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  color: var(--cinema-whiteish);
+  background-color: var(--darkblue);
+  transition: var(--transition);
+}
+.button-danger {
+  padding: 0.5em 4em;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  transition: var(--transition);
+  background-color: var(--cinema-danger);
+  color: black;
+}
+
+/* ========================================
+   BROWSER RESET STYLES
+   ======================================== */
+
+html {
+  max-width: 100%;
+  height: 100%;
+  margin: 0;
+  font-size: 16px; /* Now 1em everywhere = 16px */
+  -webkit-text-size-adjust: 100%; /* Prevents font scaling jumps on mobile */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  font-family: Poppins, sans-serif;
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  /* padding по периметру чтоб элементы не были впритык к концам экрана:
+  Top & Bottom: 0, Left & Right: 5px */
+  /* padding: 0 5px; */
+  /* Ensuring the padding doesn't make the page wider than the screen */
+  /* box-sizing: border-box; */
+  background-color: var(--cinema-whiteish);
+}
+main a {
+  display: block;
+  margin: auto;
+}
+
+/* ========================================
+   HEADING STYLES
+   ======================================== */
+
+h1,
+h2,
+h3 {
+  text-transform: uppercase;
+  font-family: Poppins, serif;
+  font-weight: 600; /* Slightly bolder for Poppins */
+  line-height: 1.2; /* Standard heading spacing */
+
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.75rem;
+}
+h4 {
+  margin: 0;
+}
+
+/* ========================================
+   HEADER AND FOOTER
+   ======================================== */
+
+header {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  background-color: var(--head-foot);
+  color: white;
+  height: min-content;
+  container-type: inline-size;
+}
+h2.kinosalonkisofia {
+  text-transform: none;
+  font-weight: 525; /* Slightly bolder for Poppins */
+  margin: 0;
+}
+header a {
+  align-self: center;
+  margin-right: 7px;
+}
+
+.logo-ksofia img {
+  padding: 0px 10px;
+  height: 50px;
+}
+
+.logo-ksofia {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo-ksofia img,
+.logo-ksofia h2 {
+  align-self: center;
+  margin: 0px;
+  align-self: center;
+
+  font-family: MonteCarlo, sans-serif;
+  font-size: 100;
+  vertical-align: auto;
+}
+
+footer {
+  width: 100%;
+  background-color: var(--head-foot);
+  color: white;
+  text-align: center;
+  /* margin-top: auto; */
+  padding: 7px;
+}
+footer a {
+  display: block;
+}
+footer p {
+  margin-top: 5px;
+  margin-bottom: 4px;
+}
+
+/* ========================================
+   NAVIGATION DROPDOWN (Temporary)
+   ======================================== */
+
+.navButton {
+  background-color: #303030;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+/* The container <div> - needed to position the dropdown content */
+.temporaryNavigation {
+  position: relative;
+  display: inline-block;
+}
+/* Dropdown Content (Hidden by Default) */
+.linksToPages {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+/* Links inside the dropdown */
+.linksToPages a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+/* Change color of dropdown links on hover */
+.linksToPages a:hover {
+  background-color: #ddd;
+}
+/* Show the dropdown menu on hover */
+.temporaryNavigation:hover .linksToPages {
+  display: block;
+}
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.linksToPages:hover .navButton {
+  background-color: #3e8e41;
+}
+
+/* ========================================
+   RESPONSIVE CONTAINER QUERY
+   ======================================== */
+
+@container (max-width: 560px) {
+  h2.kinosalonkisofia {
+    display: none;
+  }
+}

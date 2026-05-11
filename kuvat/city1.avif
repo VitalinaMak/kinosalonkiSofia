@@ -1,0 +1,64 @@
+
+.actions {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px; /* space for custom box */
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+}
+
+/* Hide the default checkbox */
+.actions input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Custom checkbox square */
+.checkboxes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border: 2px solid var(--lightblue);
+  border-radius: 4px; /* rounded corners */
+  transition: var(--transition);
+}
+
+/* Hover effect */
+.actions:hover input ~ .checkboxes {
+  background-color: #ddd;
+  border-color: #999;
+}
+
+/* Checked state */
+.actions input:checked ~ .checkboxes {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+/* checkboxes tick */
+.checkboxes:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show tick when checked */
+.actions input:checked ~ .checkboxes:after {
+  display: block;
+}
+
+/* Tick styling */
+.actions .checkboxes:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}

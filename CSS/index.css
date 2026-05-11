@@ -1,0 +1,51 @@
+.upcomingEvents {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.upcomingEvents {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-around;
+  padding: 15px;
+}
+
+.about {
+  width: 100%;
+}
+
+.photos {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 5px;
+}
+.photos img {
+  width: 32%;
+  height: auto;
+}
+
+.about p {
+  padding: 10px;
+}
+/* a list of current events on the main page */
+.eventsToday {
+  margin-bottom: 5px;
+  margin: auto;
+}
+.eventsToday tr {
+  border: solid black 1px;
+  border-radius: 10px;
+}
+.eventsToday tr :hover {
+  cursor: pointer;
+}
+.eventsToday td {
+  padding: 7px;
+}

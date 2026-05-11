@@ -1,0 +1,386 @@
+/* REFACTORED */
+
+/* NOTE: CONFIRM DIALOG HAS SOME CSS-STYLING IN account.js ! */
+
+/* - - - /BUTTONS - - - */
+/* ========================================
+   ACCOUNT PAGE LAYOUT
+   ======================================== */
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  background-image: url("../kuvat/shtory.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+}
+
+.info {
+  flex: 1 1 300px;
+  padding: 20px;
+}
+
+.profile {
+  min-width: 30%;
+  flex-shrink: 0;
+  height: 100%;
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--cinema-whiteish-tr);
+}
+
+.reservations {
+  flex: 2 1 300px;
+}
+
+.reservations h1 {
+  color: var(--cinema-whiteish);
+  margin: 0;
+}
+
+/* ========================================
+   BOOKING CARDS
+   ======================================== */
+
+.none-reserved {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--cinema-whiteish);
+}
+.none-reserved p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.none-reserved p a {
+  color: var(--lighterblue);
+  font-weight: bold;
+  margin-top: 18px;
+  display: inline;
+}
+.none-reserved p a:hover {
+  color: var(--cinema-pink);
+}
+
+.reserved {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--cinema-whiteish);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.details [class]:not(.age) {
+  margin: 0;
+}
+
+.time-place {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.eventname {
+  display: block;
+  font-weight: 650;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+.age {
+  display: inline-block;
+  background-color: var(--dark-teal);
+  color: white;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.icon-adress {
+  gap: 8px;
+  color: var(--base-color);
+}
+
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
+
+#edit-btn,
+#save-btn,
+#persInfo-btn {
+  width: 45%;
+  margin: 10px 5px 0 0;
+  padding: 0.85em 2em;
+}
+#pswrd-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 0.85em 1.5em;
+}
+#deleteaccount-btn {
+  padding: 0.85em 1.15em;
+}
+
+.change {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.change .button {
+  flex: 1 1 200px;
+}
+.cancel {
+  background-color: var(--cinema-danger);
+  color: black;
+}
+
+.account-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: auto;
+  gap: 10px;
+}
+.account-actions .logout {
+  flex: 1 1 200px;
+  padding: 0.85em 1.5em;
+  margin: 0;
+}
+.deleteaccount {
+  background-color: var(--cinema-danger);
+  color: black;
+}
+
+#persInfo-btn {
+  display: none;
+}
+
+/* ========================================
+   SETTINGS SECTION
+   ======================================== */
+
+h3 {
+  text-transform: uppercase;
+  font-family: Poppins, serif;
+  font-size: 2rem;
+  font-weight: 525;
+  text-align: left;
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 10px;
+}
+
+/* ========================================
+   NOTIFICATION CHECKBOXES
+   ======================================== */
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  width: 100%;
+}
+
+.checkbox-group input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100px;
+  height: 100px;
+  background-color: #eee;
+  border: 2px solid var(--lightblue);
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.checkbox-group input[type="checkbox"]:hover {
+  border-color: var(--blue);
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 150, 255, 0.2);
+}
+
+.checkbox-group input[type="checkbox"]:checked {
+  background-color: var(--blue);
+  border-color: var(--blue);
+}
+
+.checkbox-group input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 11px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+  display: block;
+}
+
+.checkbox-group label {
+  width: auto;
+  height: auto;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: var(--cinema-whiteish);
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+  display: inline-block;
+  transition: var(--transition);
+}
+
+.checkbox-group label:hover {
+  color: #fff;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.checkbox-group:hover input[type="checkbox"] {
+  border-color: var(--blue);
+}
+
+/* ========================================
+   PROFILE FORM
+   ======================================== */
+
+form {
+  width: min(400px, 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+form h1 {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+form > div {
+  width: 100%;
+  display: flex;
+}
+
+form label {
+  flex-shrink: 0;
+  height: 50px;
+  width: var(--form-label-width);
+  background-color: var(--lighterblue);
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form input {
+  box-sizing: border-box;
+  flex-grow: 1;
+  min-width: 0;
+  height: 50px;
+  padding: 1em;
+  border-radius: 0 10px 10px 0;
+  border: 3px solid var(--lighterblue);
+  border-left: none;
+  background-color: var(--cinema-whiteish);
+  transition: 150ms ease;
+  pointer-events: none;
+}
+
+form input:hover {
+  border-color: var(--lightblue);
+}
+form div:has(input:hover) label {
+  background-color: var(--lightblue);
+}
+
+form input:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+form div:has(input:focus) label {
+  background-color: var(--blue);
+}
+
+form input::placeholder {
+  color: var(--cinema-pink);
+}
+
+.passwordReset {
+  display: none;
+}
+
+.activated {
+  background-color: var(--cinema-whiteish);
+  border-color: var(--blue);
+  pointer-events: auto;
+}
+
+.activatedLabel {
+  background-color: var(--blue);
+}
+
+.success-msg {
+  text-align: left;
+  margin: 0;
+  color: var(--green-teal);
+  font-weight: bold;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 800px) {
+  .wrapper {
+    flex-direction: column-reverse;
+  }
+
+  .profile,
+  .reservations {
+    width: 100%;
+    min-width: 100%;
+    flex: 1 1 auto;
+  }
+
+  .profile {
+    height: auto;
+    padding-left: 20px;
+  }
+}

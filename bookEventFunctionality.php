@@ -1,0 +1,153 @@
+<?php require_once 'include/configuration.php'; ?>
+
+<?php
+    /* Set JSON response header */
+    header('Content-Type: application/json');
+
+    /* get and validate user id */
+    $user = $_SESSION['user_id'] ?? null;
+    if (!$user) {
+        echo json_encode([      
+            "success" => false,
+            "message" => "Kirjaudu sisään."
+        ]);
+        exit;
+    }
+
+    /* get and validate event id */
+    $eventID = (int)$_GET['id'];  //id of the event - cast to int for safety
+    if ($eventID <= 0) {
+        echo json_encode([      
+            "success" => false,
+            "message" => "Virheellinen tapahtuma."
+        ]);
+        exit;
+    }
+
+    //$totalBooked = $userAlreadyBooked + count($seatsArray);  total amount of booked seats
+
+    /* prevent data handling before form submission */
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        echo json_encode([
+            "success" => false,
+            "message" => "Virheellinen pyyntö."
+        ]);
+        exit;
+    }
+
+    $data = json_decode(file_get_contents("php://input"), true);  //read and decode JSON-input from JavaScript
+
+    /* Validate JSON data */
+    if (!$data || !isset($data['seats']) || !isset($data['editMode']) || !isset($data['usersSeats'])) {
+        echo json_encode([
+            "success" => false,
+            "message" => "Virheellinen data."
+        ]);
+        exit;
+    }
+
+    $seats = array_filter(explode(",", $data['seats']), fn($s) => $s !== "");  //get the numbers of selected seats and remove empty values
+    $usersSeats = array_filter(explode(",", $data['usersSeats']), fn($s) => $s !== "");  //get the numbers of user's previously booked seats and remove empty values
+
+    $selectedCount = count($seats);  //amount of selected seats
+
+    if ($data['editMode'] === false || $data['editMode'] === "false") {
+        /* get how many seats the user already booked (edit mode disabled) */
+        $stmt = $pdo->prepare("SELECT COUNT(*) as count FROM bookings WHERE user_id = ? AND event_id = ?");
+        $stmt->execute([$user, $eventID]);
+        $bookedBefore = (int)$stmt->fetchColumn();  //get only one value from the first column (query returns only the result of counting anyway)
+    } else {
+        $bookedBefore = 0;
+    }
+
+    /* if too much places booked, return an error */
+    if (($bookedBefore + $selectedCount) > 2) {
+        echo json_encode([
+            "success" => false,
+            "message" => "Voit varata enintään 2 paikkaa.".$bookedBefore.$selectedCount,
+        ]);
+        exit;
+    }
+
+    $success = true;  //variable for status check
+
+    $seatsToDelete = [];  //an array for seats that are no longer selected (edit mode)
+
+    if ($data['editMode'] === true || $data['editMode'] === "true") {
+        foreach ($usersSeats as $seat) {
+            if (!in_array($seat, $seats)) {
+                $seatsToDelete[] = $seat;  //add seat to the array if it is not selected anymore
+            }
+        }
+    }
+
+    /* save changes to the database */
+    try {
+        $pdo->beginTransaction();  //start a transaction, so all DB changes are temporary
+
+        /* delete user's previously booked seats, if the are no longer selected */
+        foreach ($seatsToDelete as $seat) {
+            $seat = (int)$seat;
+            
+            $delete = $pdo->prepare("
+                DELETE FROM bookings 
+                WHERE user_id = ? AND event_id = ? AND seat_number = ?
+            ");
+            $delete->execute([$user, $eventID, $seat]);
+        }
+        
+        /* insert new bookings */
+        foreach ($seats as $seat) {
+            $seat = (int)$seat;
+
+            /* check if seat already taken */
+            $check = $pdo->prepare("
+                SELECT COUNT(*) 
+                FROM bookings 
+                WHERE event_id = ? AND seat_number = ?
+            ");
+            $check->execute([$eventID, $seat]);
+
+            if ($data['editMode'] == "true") {
+                /* if edit mode enabled, ignore user's previously booked seats */
+                if (in_array($seat, $usersSeats)) {
+                    continue;  //skip the rest of the loop and move to the next seat
+                }
+            }
+            
+            if ($check->fetchColumn() > 0) {
+                throw new Exception("Seat already booked");  //if the seat is booked, throw exception and immediatly jump to catch
+            }
+
+            /* insert booking */
+            $insert = $pdo->prepare("
+                INSERT INTO bookings (user_id, event_id, seat_number)
+                VALUES (?, ?, ?)
+            ");
+            $insert->execute([$user, $eventID, $seat]);
+        }
+
+        /* if everything is OK, commit changes */
+        $pdo->commit();
+
+        $finalMessage = "Varaus onnistui! Kiitos varauksestasi.";
+
+        if ($data['editMode'] === true || $data['editMode'] === "true") {
+            $finalMessage = "Varaus päivitetty!";
+        }
+
+        echo json_encode([
+            "success" => true,
+            "message" => $finalMessage,
+            "bookedSeatsCount" => $bookedBefore + $selectedCount
+        ]);
+
+    } catch (Exception $e) {
+        $pdo->rollBack();  //cancel all changes
+
+        echo json_encode([
+            "success" => false,
+            "message" => "Paikka on jo varattu tai tapahtui virhe."
+        ]);
+    }
+?>

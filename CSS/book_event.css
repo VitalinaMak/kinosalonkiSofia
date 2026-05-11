@@ -1,0 +1,116 @@
+main {
+  padding: 10px;
+}
+
+.eventDetails {
+  /* - donottouch - */
+  min-width: 50%;
+  flex-shrink: 0;
+  background-color: var(--cinema-whiteish-tr);
+  /* - /donottouch - */
+  height: 100%; /* Занимаем всю высоту обертки */
+  /* padding-left: 30px; */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.eventDetails img {
+  width: 50%;
+  height: auto;
+}
+
+.moreDetails {
+  flex: 2 1 300px; /* - donottouch - */
+}
+
+/* div for the table and input field */
+.booking {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+/* - - - START TABLE / SEATS SETTINGS - - - */
+table {
+  border: 2px solid var(--base-color); /* Outer border */
+  border-collapse: collapse; /* Ensures no double borders */
+  max-width: 360px;
+  min-width: 225px;
+}
+
+caption /* = the näytto */ {
+  caption-side: top; /* Places caption above the table */
+  color: var(--cinema-whiteish);
+  text-align: center;
+  padding: 0;
+  background-color: var(--base-color);
+}
+
+th,
+td {
+  border: none; /* No inner borders */
+}
+
+td {
+  width: 60px;
+  height: 60px;
+  /* This "masks" the cell into the shape of your seat */
+  mask: url("../UI_icons/chair_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg") no-repeat center;
+  -webkit-mask: url("../UI_icons/chair_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg") no-repeat center;
+  background-color: #2ecc71; /* Default: Free (Green) */
+  cursor: pointer;
+}
+
+/* Booked state */
+td.booked {
+  background-color: #e74c3c; /* Red */
+  cursor: not-allowed;
+}
+
+/* Selected state */
+td.selected {
+  background-color: black; /* Blue: #3498db  (temporary changed to black for better visibility) */
+}
+/* - - - END SEATS SETTINGS - - - */
+
+.bookingInfo {
+  flex-grow: 1;
+}
+.bookingInfo p {
+  text-align: center;
+}
+.bookingInfo form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.links {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+  max-width: 85%;
+  margin: auto;
+}
+
+.backToEvents,
+.backToAccount {
+  display: none;
+  text-decoration: none;
+  max-width: 50%;
+  /* copied from buttons in global (maybe we can just add class button to it, but not now, I ran out of places and have to create new movie to test it) */
+  padding: 0.85em 2em; /* the last one changed from 4em to 2em */
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+  background-color: var(--darkblue);
+  color: var(--cinema-whiteish);
+  transition: var(--transition);
+}
+
+.backToEvents:hover,
+.backToAccount:hover {
+  cursor: pointer;
+  background-color: var(--cinema-pink);
+}

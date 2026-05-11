@@ -1,0 +1,144 @@
+/* REFACTORED */
+
+/* ========================================
+   PAGE CONTAINER
+   ======================================== */
+
+main {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+  background-image: url("../kuvat/cinema_seats.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ========================================
+   FORM WRAPPER
+   ======================================== */
+
+.wrapper {
+  background-color: var(--cinema-whiteish-tr);
+  min-height: 60%;
+  width: max(40%, 600px);
+  margin: auto;
+  margin-top: 5%;
+  border-radius: 20px;
+  box-shadow: inset 0 0 50px 20px var(--cinema-whiteish);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========================================
+   FORM STRUCTURE
+   ======================================== */
+
+form {
+  width: min(400px, 100%);
+  margin: auto;
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+form h1 {
+  text-transform: uppercase;
+  font-family: Poppins, serif;
+  font-size: 2rem;
+  font-weight: 525;
+}
+
+form > div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* ========================================
+   FORM INPUTS
+   ======================================== */
+
+form label {
+  flex-shrink: 0;
+  width: 50px;
+  /* CAREFUL WITH CHANGING height: 50px; */
+  height: 50px;
+  background-color: var(--cinema-red2);
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form input {
+  box-sizing: border-box;
+  flex-grow: 1;
+  min-width: 0;
+  /* CAREFUL WITH CHANGING height: 50px; */
+  height: 50px;
+  padding: 1em;
+  border-radius: 0 10px 10px 0;
+  border: 3px solid var(--cinema-red2);
+  border-left: none;
+  background-color: var(--cinema-whiteish);
+  transition: 150ms ease;
+}
+
+form input::placeholder {
+  color: var(--cinema-red2);
+  transition: color 150ms ease;
+}
+
+form input:hover {
+  border-color: var(--cinema-pink);
+}
+
+form input:hover::placeholder {
+  color: var(--cinema-pink);
+}
+
+form div:has(input:hover) label {
+  background-color: var(--cinema-pink);
+}
+
+form input:focus {
+  outline: none;
+  border-color: var(--cinema-red1);
+}
+form input:focus::placeholder {
+  color: var(--cinema-red1);
+}
+
+form div:has(input:focus) label {
+  background-color: var(--cinema-red1);
+}
+
+/* ========================================
+   FORM BUTTONS
+   ======================================== */
+
+form button {
+  width: 75%;
+  margin-top: 10px;
+}
+
+/* ========================================
+   LINKS
+   ======================================== */
+
+p a {
+  display: inline;
+  color: var(--cinema-red2);
+  font-weight: bold;
+  margin-top: 18px;
+}
+p a:hover {
+  color: var(--cinema-pink);
+}
