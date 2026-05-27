@@ -79,6 +79,14 @@ function sendNotifications(eventId) {
             "Content-Type": "application/x-www-form-urlencoded"
         },
         body: "event_id=" + eventId
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("RAW RESPONSE:");
+        console.log(data);
+    })
+    .catch(error => {
+        console.error("Fetch error:", error);
     });
 }
 
