@@ -37,7 +37,11 @@ h4 {
   align-items: center;
   border-radius: 0 0 20px 20px;
 
-  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("../kuvat/wallpaper.svg");
+  /* background-image:
+    linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+    url("../kuvat/wallpaper.svg"); */
+
+  background-image: url("../kuvat/shtory.jpg");
 
   background-size: cover;
   background-repeat: no-repeat;
@@ -52,9 +56,6 @@ h4 {
   color: var(--cinema-whiteish);
   /* color: var(--head-foot); */
   font-size: 4rem;
-  text-shadow:
-    3px 3px 0px rgba(245, 216, 166, 1),
-    6px 6px 0px rgba(168, 146, 119, 1);
 }
 
 /* ========================================

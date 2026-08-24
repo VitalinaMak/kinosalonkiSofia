@@ -100,12 +100,14 @@
 }
 
 .eventname {
+  /* for TITLE OF THE EVENT and REQUEST */
   display: block;
   font-weight: 650;
   font-size: 1.5rem;
   line-height: 1.6;
   margin-bottom: 4px;
 }
+
 .age {
   display: inline-block;
   background-color: var(--dark-teal);
@@ -119,6 +121,13 @@
 .icon-adress {
   gap: 8px;
   color: var(--base-color);
+}
+
+.icon-adress svg {
+  margin-top: 20px;
+  /* width: 20px;
+  height: 20px; */
+  fill: var(--base-color);
 }
 
 /* ========================================
@@ -274,6 +283,46 @@ h3 {
 
 .checkbox-group:hover input[type="checkbox"] {
   border-color: var(--blue);
+}
+
+/* ========================================
+   ADMIN REQUEST CARDS
+   ======================================== */
+
+.none-requested {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--cinema-whiteish);
+}
+.none-requested p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.none-requested p a {
+  color: var(--lighterblue);
+  font-weight: bold;
+  margin-top: 18px;
+  display: inline;
+}
+.none-requested p a:hover {
+  color: var(--cinema-pink);
+}
+
+.requested {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--cinema-whiteish);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+p.request {
+  display: block;
+  font-weight: 650;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin-bottom: 4px;
 }
 
 /* ========================================
