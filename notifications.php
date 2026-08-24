@@ -1,13 +1,28 @@
 <?php
+    header('Content-Type: application/json');
+
     require_once 'include/configuration.php';
 
     // get event id
     $eventId = $_POST['event_id'] ?? null;
+    if (!$eventId) {
+        error_log("Event ID is missing");
+        exit;
+    }
 
     /* get information about new event */
-    $stmt = $pdo->prepare("SELECT event_name, DATE_FORMAT(events.event_date, '%d.%m.%Y') AS event_formatted_date, HOUR(events.event_time) AS event_hour, DATE_FORMAT(events.event_time, '%i') AS event_minute, description, age_limit, location FROM events WHERE id = ?;");
+    $stmt = $pdo->prepare("SELECT event_name, TO_CHAR(event_date,'DD.MM.YYYY') AS event_formatted_date, EXTRACT(HOUR FROM event_time) AS event_hour, TO_CHAR(event_time,'MI') AS event_minute, description, age_limit, location FROM events WHERE id = ?;");
     $stmt->execute([$eventId]);
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$event) {
+        echo json_encode([
+            'success' => false,
+            'error' => 'Event not found'
+        ]);
+        exit;
+    }
+
+    $notificationCount = 0; //counter for the number of notifications sent
 
     /* DRAFT FOR TESTING. Content of email needs polishing */
     $header = "<h3>Uusi tapahtuma: {$event['event_name']} ({$event['age_limit']})</h3>";
@@ -15,29 +30,41 @@
         <p><strong>Milloin?</strong> {$event['event_formatted_date']} KLO {$event['event_hour']}"."."."{$event['event_minute']}.</p>
         <p><strong>Paikka:</strong> {$event['location']}.</p>
         <p><strong>Kuvaus:</strong> {$event['description']}</p>
-        <a href='bookEvent.php?id={$eventId}'><strong>Varaa paikkaa</strong></p>
+        <a href='bookEvent.php?id={$eventId}'><strong>Varaa paikkaa</strong></a>
     ";
 
-    $status = "pending";  //status of the email
+    $status = "0";  //status of the email, 0 = pending, 1 = sent, 2 = failed. It will be updated later by the script that processes the queue
 
     /* prepare statement for insertion users in a queue */
-    $sql = $pdo->prepare("INSERT INTO email_queue (email, subject, message, status) VALUES (?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO notifications (recipient, event_id, message, status) VALUES (?, ?, ?, ?)");
     
-    if($stmt = $pdo->prepare($sql)) {
-        // Bind parameters
-        $stmt->execute([$header, $messageContent, $userId, $status]);
-
+    if($stmt) {
+        
         /* retrieve subscribed users from the table */
-        $query = "SELECT id FROM users WHERE new_events = 1;";
-        $recipients = $pdo->query($query);
+        $query = "SELECT id FROM users WHERE new_events = TRUE;";
+        $recipients = $pdo->query($query);  //query is used when there's no prepared statements, so here it runs the query immidiately and saves the result set in $recipients
 
         if ($recipients->rowCount() > 0) {
             while ($row = $recipients->fetch(PDO::FETCH_ASSOC)) {
                 $userId = $row['id'];
-                $stmt->execute();
+                $result = $stmt->execute([$userId, $eventId, $messageContent, $status]);
+                $notificationCount++; //increment counter for each notification added to the queue
+                if (!$result) {
+                    error_log("Failed to insert notification: " . implode(", ", $stmt->errorInfo()));
+                }
             }
+        } else {
+            error_log("No subscribed users found");
         }
+
+    } else {
+        error_log("Error preparing statement: " . $pdo->errorInfo()[2]);
     }
+
+    echo json_encode([
+        'success' => true, 
+        'notificationCount' => $notificationCount]);
+
 
     /* process queue with PHPMailer */
     /* $mail = new PHPMailer(true);
@@ -60,7 +87,7 @@
         }
     } */
 
-    // notification logic (from moreBookoings)
+    // notification logic (copied from moreBookings, the real sending happens in sendNotification.php, here is just one of the options)
     /* try {
         $mail->isSMTP();
         $mail->Host = 'smtp.sendgrid.net'; // or Mailgun/SES
