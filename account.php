@@ -160,33 +160,54 @@
 
             <?php
             if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == 1) {
+                $eventID = "";  //initialize the variable for event's id
+                /* display requests for admin */
+                $event_info = $pdo->prepare("SELECT * FROM events WHERE id = ?;");
+                $stmt = $pdo->prepare("SELECT TO_CHAR(created_at, 'DD.MM.YYYY') AS created_at_date, EXTRACT(HOUR FROM created_at) AS created_hour, TO_CHAR(created_at, 'MI') AS created_minutes, user_id, event_id, places_amount, message, status FROM extra_bookings ORDER BY created_at ASC;");  //retrieve information about extra-bookings
+                $stmt->execute();
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $hasRows = true;  //if while-loop is activated, then at least one row exists
+                    $createdAt = $row['created_at_date'];  //date of the request
+                    $createdAtHour = $row['created_hour'];  //hour of the request
+                    $createdAtMinutes = $row['created_minutes'];  //minutes of the request
+                    $userID = $row['user_id'];  //id of the user who made the request
+                    $placesAmount = $row['places_amount'];
+                    $eventID = $row['event_id'];
+                    $event_info->execute([$eventID]);
+                    while ($eventRow = $event_info->fetch(PDO::FETCH_ASSOC)) {
+                        $description = $eventRow['description'];
+                        $eventName = $eventRow['event_name'];
+                        $location = $eventRow['location'];
+                    }
+                }
+
                 echo <<<HTML
                         <!--___TEMPLATE FOR ADMIN'S ASKING FOR MORE PLACES___-->
-                        <h1> Requests </h1>
+                        <h1> Varauspyynnöt </h1>
 
                         <div class="requested">
                             <div class="details-ad">
 
-                                <p class="request"> Запрос на 329 мест</p>
+                                <p class="request"> Varauspyyntö $placesAmount paikasta</p>
 
                                 <div class="eventinfocard">
                                     <p class="eventname-ad">
-                                        Meow-movie 2: Into the windows
+                                        $eventName
                                     </p>    
                                     <p class="time-ad">
-                                           <time class="time">27.4.2026 klo 14.65</time>
+                                            Lähetetty <time>$createdAt $createdAtHour:$createdAtMinutes</time>
                                     </p>
                                     <p class="icon-adress"> <!-- same class as user type  -->
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1f1f1f">
                                             <path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/>
                                         </svg> 
-                                        Адрес пупкина залупкина
+                                        $location
                                     </p>
                                 </div>
                                                                 
                             </div>
                             <div class="change">
-                                <a class="button confirm" href="">Open the request</a>
+                                <a class="button confirm" href="bookEvent.php?id={$eventID}">Avaa pyyntö</a>
                             </div>
 
                         </div>
