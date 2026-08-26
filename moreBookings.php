@@ -1,4 +1,6 @@
 <?php
+    require_once 'include/configuration.php';
+    
     /* include PHPMailer-library to send emails. It's already installled in the project (files composer.json, composer.lock and folder vendor) */
     require 'vendor/autoload.php';
 
@@ -9,6 +11,8 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     /* get all data from the form */
+    $user = $_POST["user_id"];
+    $eventID = $_POST["event_id"];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
@@ -53,6 +57,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         Paikat: $places
         Lisähuomautukset: $comment
         ";
+
+        /* save the message to the database */
+        $insert = $pdo->prepare("
+                INSERT INTO extra_bookings (created_at, user_id, event_id, places_amount, message)
+                VALUES (?, ?, ?, ?, ?)
+            ");
+        $insert->execute([date('Y-m-d H:i:s'), $user, $eventID, $places, $comment]);
 
         // Send email
         /* $mail->send(); */  // currently disabled due to the missing app password

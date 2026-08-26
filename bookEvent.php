@@ -163,6 +163,8 @@
 
                 <h2>Täytä lomake</h2>
 
+                <input type="hidden" id="user_id-input" name="user_id" value="<?php echo htmlspecialchars($user); ?>">  <!-- pass the user's id to the form -->
+                <input type="hidden" id="event_id-input" name="event_id" value="<?php echo htmlspecialchars($eventID); ?>">  <!-- pass the event's id to the form -->
                 <div>
                     <label for="name-input"></label>
                     <input type="text" id="name-input" name="name" placeholder="Etunimi ja sukuninmi" required>
