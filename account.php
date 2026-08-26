@@ -41,6 +41,9 @@
     $name = !empty($user['username']) ? htmlspecialchars($user['username']) : '';
     $email = !empty($user['email']) ? htmlspecialchars($user['email']) : '';
 
+    $hasRows = false;  //check if there's any output
+
+
     /* cancel reservation */
     if (isset($_GET['id'])) {
     $stmt = $pdo->prepare("DELETE FROM bookings WHERE id = :id");
@@ -155,98 +158,180 @@
 
         <div class="reservations info">
 
-            <h1> Varauksesi </h1>
-
             <?php
-                /* retrieve all bookings made for user's id from the database */
-                $sql = "
-                    SELECT 
-                        events.event_name, 
-                        events.event_type, 
-                        TO_CHAR(events.event_date, 'DD.MM.YYYY') AS event_formatted_date,
-                        EXTRACT(HOUR FROM events.event_time) AS event_hour,
-                        TO_CHAR(events.event_time, 'MI') AS event_minute,
-                        events.event_image, 
-                        events.description, 
-                        events.age_limit, 
-                        events.location,
-                        bookings.event_id, 
-                        MIN(bookings.id) AS booking_id,
-                        STRING_AGG(bookings.seat_number::text, ',') AS seats,
-                        (
-                            SELECT COUNT(*)
-                            FROM bookings AS b2 
-                            WHERE b2.event_id = events.id AND b2.user_id = :user_id
-                        ) AS total
-                    FROM events
-                    JOIN bookings ON events.id = bookings.event_id
-                    WHERE bookings.user_id = :user_id
-                    GROUP BY events.id, bookings.event_id
-                    ORDER BY events.event_date, events.event_time;
-                ";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute(['user_id' => $userID]);
+            if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == 1) {
 
-                $hasRows = false;  //check if there's any output
+                echo <<<HTML
+                        <!--___TEMPLATE FOR ADMIN'S ASKING FOR MORE PLACES___-->
+                        <h1> Varauspyynnöt </h1>
+                        HTML;
 
-                $seatList ="";  //list of seat numbers
-                $total = "";  //total amount of booked seats for the event
-                
+                $eventID = "";  //initialize the variable for event's id
+                /* display requests for admin */
+                $event_info = $pdo->prepare("SELECT * FROM events WHERE id = ?;");
+                $stmt = $pdo->prepare("SELECT TO_CHAR(created_at, 'DD.MM.YYYY') AS created_at_date, EXTRACT(HOUR FROM created_at) AS created_hour, TO_CHAR(created_at, 'MI') AS created_minutes, user_id, event_id, places_amount, message, status FROM extra_bookings ORDER BY created_at ASC;");  //retrieve information about extra-bookings
+                $stmt->execute();
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $hasRows = true;  //if while-loop is activated, then at least one row exists
-                    $places = "";  //variable for the string with all reserved seats
-                    $total = $row['total'];  
-                    $ageLimit = "";
-                    
-                    /* assign value to $places only for the 1st type of event */
-                    if ($row['event_type'] == 1) {
-                        $places = "Paikat ".$row['seats'];
-                        $seatList = str_replace(',', '', $row['seats']);  //remove commas from the list of booked seats, so it can be passed to the url later
+                    $createdAt = $row['created_at_date'];  //date of the request
+                    $createdAtHour = $row['created_hour'];  //hour of the request
+                    $createdAtMinutes = $row['created_minutes'];  //minutes of the request
+                    $userID = $row['user_id'];  //id of the user who made the request
+                    $placesAmount = $row['places_amount'];
+                    $eventID = $row['event_id'];
+                    $event_info->execute([$eventID]);
+                    while ($eventRow = $event_info->fetch(PDO::FETCH_ASSOC)) {
+                        $description = $eventRow['description'];
+                        $eventName = $eventRow['event_name'];
+                        $location = $eventRow['location'];
                     }
 
-                    if ($row['age_limit'] != "Ei luokiteltu") {
-                        $ageLimit = $row['age_limit'];  //if the event has age limitetion, assign it to variable; otherwise leave it empty
-                    }
+                    echo <<<HTML
+                        <div class="requested">
+                                <div class="details-ad">
 
-                    echo <<<HTML
-                    <div class="reserved">
-                        <div class="details">
-                            <!-- ROW 1 -->
-                            <p class="time-place">
-                                <time class="time">{$row['event_formatted_date']} klo {$row['event_hour']}.{$row['event_minute']}</time>
-                                <data class="place">{$places}</data>
-                            </p>
-                            <!-- ROW 2 -->
-                            <p class="eventname">
-                                {$row['event_name']}
-                                <data class="age" value="{$row['age_limit']}">{$ageLimit}</data>
-                            </p>
-                            <!-- ROW 3 -->
-                            <p class="icon-adress">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1f1f1f">
-                                    <path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/>
-                                </svg> 
-                                {$row['location']}
-                            </p>                        
-                        </div>
-                        <div class="change">
-                            <a class="button edit" href="bookEvent.php?id={$row['event_id']}&seats={$seatList}&total={$total}">Muokkaa varaus</a>
-                            <a class="button cancel" href="account.php?id={$row['booking_id']}">Peruuta varaus</a>
-                        </div>
-                    </div>
-                    HTML;
-                } 
-                if (!$hasRows) {
-                    echo <<<HTML
-                        <div class="none-reserved">
-                            <p>Sinulla ei ole aktiivisia varauksia.<br> <a href="tapahtumat.php">Katso ohjelmisto</a> </p>
-                        </div>
-                    HTML;
-                } else {
-                    echo <<<HTML
-                        <a class="button"href="tapahtumat.php">Lisää tapahtumia</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
-                    HTML;
+                                    <p class="request"> Varauspyyntö $placesAmount paikasta</p>
+
+                                    <div class="eventinfocard">
+                                        <p class="eventname-ad">
+                                            $eventName
+                                        </p>    
+                                        <p class="time-ad">
+                                                Lähetetty <time>$createdAt $createdAtHour:$createdAtMinutes</time>
+                                        </p>
+                                        <p class="icon-adress"> <!-- same class as user type  -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1f1f1f">
+                                                <path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/>
+                                            </svg> 
+                                            $location
+                                        </p>
+                                    </div>
+                                                                    
+                                </div>
+                                <div class="change">
+                                    <a class="button confirm" href="bookEvent.php?id={$eventID}">Avaa pyyntö</a>
+                                </div>
+
+                            </div>
+                        <!--___TEMPLATE FOR ADMIN'S ASKING FOR MORE PLACES___-->
+                        HTML;
                 }
+
+                        if (!$hasRows) {
+                            echo <<<HTML
+                                <div class="none-requested">
+                                    <p>Чувапчичи у тебя запросов нет.<br> <a href="tapahtumat.php">Kaikki tapahtumat</a> </p>
+                                </div>
+                            HTML;
+                        } else {
+                            echo <<<HTML
+                                <a class="button"href="tapahtumat.php">Kaikki tapahtumat</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
+                            HTML;
+                        }
+
+                    } else {
+                        /* retrieve all bookings made for user's id from the database */
+                        $sql = "
+                            SELECT 
+                                events.event_name, 
+                                events.event_type, 
+                                TO_CHAR(events.event_date, 'DD.MM.YYYY') AS event_formatted_date,
+                                EXTRACT(HOUR FROM events.event_time) AS event_hour,
+                                TO_CHAR(events.event_time, 'MI') AS event_minute,
+                                events.event_image, 
+                                events.description, 
+                                events.age_limit, 
+                                events.location,
+                                bookings.event_id, 
+                                MIN(bookings.id) AS booking_id,
+                                STRING_AGG(bookings.seat_number::text, ',') AS seats,
+                                (
+                                    SELECT COUNT(*)
+                                    FROM bookings AS b2 
+                                    WHERE b2.event_id = events.id AND b2.user_id = :user_id
+                                ) AS total
+                            FROM events
+                            JOIN bookings ON events.id = bookings.event_id
+                            WHERE bookings.user_id = :user_id
+                            GROUP BY events.id, bookings.event_id
+                            ORDER BY events.event_date, events.event_time;
+                        ";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute(['user_id' => $userID]);
+
+                       
+
+                        $seatList ="";  //list of seat numbers
+                        $total = "";  //total amount of booked seats for the event
+
+                        echo "<h1>Varauksesi</h1>";
+                        
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            $hasRows = true;  //if while-loop is activated, then at least one row exists
+                            $places = "";  //variable for the string with all reserved seats
+                            $total = $row['total'];  
+                            $ageLimit = "";
+                            
+                            /* assign value to $places only for the 1st type of event */
+                            if ($row['event_type'] == 1) {
+                                $places = "Paikat ".$row['seats'];
+                                $seatList = str_replace(',', '', $row['seats']);  //remove commas from the list of booked seats, so it can be passed to the url later
+                            }
+
+                            if ($row['age_limit'] != "Ei luokiteltu") {
+                                $ageLimit = $row['age_limit'];  //if the event has age limitetion, assign it to variable; otherwise leave it empty
+                            }
+
+                        
+                            echo <<<HTML
+                            <!--___TEMPLATE FOR USER'S RESERVED EVENTS___-->
+                            
+                            <div class="reserved">
+                                <div class="details">
+                                    <!-- ROW 1 -->
+                                    <p class="time-place">
+                                        <time class="time">{$row['event_formatted_date']} klo {$row['event_hour']}.{$row['event_minute']}</time>
+                                        <data class="place">{$places}</data>
+                                    </p>
+                                    <!-- ROW 2 -->
+                                    <p class="eventname">
+                                        {$row['event_name']}
+                                        <data class="age" value="{$row['age_limit']}">{$ageLimit}</data>
+                                    </p>
+                                    <!-- ROW 3 -->
+                                    <p class="icon-adress">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1f1f1f">
+                                            <path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/>
+                                        </svg> 
+                                        {$row['location']}
+                                    </p>                        
+                                </div>
+                                <div class="change">
+                                    <a class="button edit" href="bookEvent.php?id={$row['event_id']}&seats={$seatList}&total={$total}">Muokkaa varaus</a>
+                                    <a class="button cancel" href="account.php?id={$row['booking_id']}">Peruuta varaus</a>
+                                </div>
+
+                            </div>
+                            <!--___TEMPLATE FOR USER'S RESERVED EVENTS___-->
+                            HTML;
+
+                            
+                        } 
+
+                        if (!$hasRows) {
+                            echo <<<HTML
+                                <div class="none-reserved">
+                                    <p>Sinulla ei ole aktiivisia varauksia.<br> <a href="tapahtumat.php">Katso ohjelmisto</a> </p>
+                                </div>
+                            HTML;
+                        } else {
+                            echo <<<HTML
+                                <a class="button"href="tapahtumat.php">Kaikki tapahtumat</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
+                            HTML;
+                        }
+                }
+                
+
             ?>
 
         </div>

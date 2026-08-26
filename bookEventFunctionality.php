@@ -85,7 +85,7 @@
     try {
         $pdo->beginTransaction();  //start a transaction, so all DB changes are temporary
 
-        /* delete user's previously booked seats, if the are no longer selected */
+        /* delete user's previously booked seats, if they are no longer selected */
         foreach ($seatsToDelete as $seat) {
             $seat = (int)$seat;
             
