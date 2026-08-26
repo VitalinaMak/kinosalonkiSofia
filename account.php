@@ -160,6 +160,12 @@
 
             <?php
             if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == 1) {
+
+                echo <<<HTML
+                        <!--___TEMPLATE FOR ADMIN'S ASKING FOR MORE PLACES___-->
+                        <h1> Varauspyynnöt </h1>
+                        HTML;
+
                 $eventID = "";  //initialize the variable for event's id
                 /* display requests for admin */
                 $event_info = $pdo->prepare("SELECT * FROM events WHERE id = ?;");
@@ -179,40 +185,37 @@
                         $eventName = $eventRow['event_name'];
                         $location = $eventRow['location'];
                     }
-                }
 
-                echo <<<HTML
-                        <!--___TEMPLATE FOR ADMIN'S ASKING FOR MORE PLACES___-->
-                        <h1> Varauspyynnöt </h1>
-
+                    echo <<<HTML
                         <div class="requested">
-                            <div class="details-ad">
+                                <div class="details-ad">
 
-                                <p class="request"> Varauspyyntö $placesAmount paikasta</p>
+                                    <p class="request"> Varauspyyntö $placesAmount paikasta</p>
 
-                                <div class="eventinfocard">
-                                    <p class="eventname-ad">
-                                        $eventName
-                                    </p>    
-                                    <p class="time-ad">
-                                            Lähetetty <time>$createdAt $createdAtHour:$createdAtMinutes</time>
-                                    </p>
-                                    <p class="icon-adress"> <!-- same class as user type  -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1f1f1f">
-                                            <path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/>
-                                        </svg> 
-                                        $location
-                                    </p>
+                                    <div class="eventinfocard">
+                                        <p class="eventname-ad">
+                                            $eventName
+                                        </p>    
+                                        <p class="time-ad">
+                                                Lähetetty <time>$createdAt $createdAtHour:$createdAtMinutes</time>
+                                        </p>
+                                        <p class="icon-adress"> <!-- same class as user type  -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#1f1f1f">
+                                                <path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/>
+                                            </svg> 
+                                            $location
+                                        </p>
+                                    </div>
+                                                                    
                                 </div>
-                                                                
-                            </div>
-                            <div class="change">
-                                <a class="button confirm" href="bookEvent.php?id={$eventID}">Avaa pyyntö</a>
-                            </div>
+                                <div class="change">
+                                    <a class="button confirm" href="bookEvent.php?id={$eventID}">Avaa pyyntö</a>
+                                </div>
 
-                        </div>
+                            </div>
                         <!--___TEMPLATE FOR ADMIN'S ASKING FOR MORE PLACES___-->
                         HTML;
+                }
 
                         if (!$hasRows) {
                             echo <<<HTML
