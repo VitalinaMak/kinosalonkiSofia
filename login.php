@@ -50,6 +50,11 @@
                 <input type="password" id="password-input" name="password" placeholder="Salasana" value="testi2" required>
             </div>
 
+            <div>
+                <input type="checkbox" id="checkbox" onclick="passwordToggle()"></input>
+                <p>Show Password</p>
+            </div>
+
             <button type="submit" class="">Submit</button>
             
             <p>Don't have an account? <a href="signup.php">Sign up</a> </p>
