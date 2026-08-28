@@ -10,7 +10,7 @@
 
     $pageTitle = "Tapahtumat";
     $extraCSS = "CSS/tapahtumat.css";
-    $extraJS = "JavaScript/tapahtumat.js";
+    $extraJS = $baseUrl . "/JavaScript/tapahtumat.js";
     include 'include/header.php'; 
 ?>
 

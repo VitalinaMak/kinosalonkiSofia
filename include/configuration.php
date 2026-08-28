@@ -3,6 +3,8 @@
         session_start();  //start the session. Don't write anithing above it, it has to be the first line in php-code
     }
 
+    $baseUrl = '/kinosalonkiSofia';
+
     /* connection to the database (from now on we use PostgreSQL instead of mySQL, so the syntax is a little different) */
     //$host = "db.wergmxmgcnhnkxejgsdy.supabase.co";
     $host = "aws-0-eu-west-1.pooler.supabase.com";

@@ -1,7 +1,7 @@
 <?php 
     $pageTitle = "BookEvent";
     $extraCSS = "CSS/book_event.css";
-    $extraJS = "JavaScript/bookEvent.js";
+    $extraJS = $baseUrl . "/JavaScript/bookEvent.js";
     include 'include/header.php'; 
 
     if (!isset($_GET['id'])) {

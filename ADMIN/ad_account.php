@@ -3,7 +3,7 @@
 
     /* if the user is not registered, redirect to the login page */
     if (!isset($_SESSION['user_id'])) {
-        header("Location: ../login.php");
+        header("Location: $baseUrl/login.php");
         exit();
     }
 
@@ -11,7 +11,7 @@
     if (isset($_GET['action']) && $_GET['action'] === 'logout') {
         session_unset();  // remove all session variables
         session_destroy();  //destroy the session
-        header("Location: ../index.php");
+        header("Location: $baseUrl/index.php");
         exit();
     }
 
@@ -21,13 +21,13 @@
     $deleteAccountBtn = ""; 
     /* if the user is not the admin, redirect to the user account page */
     if ($userID != 1) {
-       header("Location: ../us_account.php");
+       header("Location: {$baseUrl}/USER/account.php");
        exit();
     }
 
     $pageTitle = "Ad_account";
-    $extraCSS = "../CSS/account.css";
-    $extraJS = "../JavaScript/account.js";
+    $extraCSS = $baseUrl . "/CSS/account.css";
+    $extraJS = $baseUrl . "/JavaScript/account.js";
 
 
     /* retrieve all information about the user from the database */
@@ -165,7 +165,7 @@
                                                                         
                                     </div>
                                     <div class="change">
-                                        <a class="button confirm" href="bookEvent.php?id={$eventID}">Avaa pyyntö</a>
+                                        <a class="button confirm" href="{$baseUrl}/bookEvent.php?id={$eventID}">Avaa pyyntö</a>
                                     </div>
 
                                 </div>
@@ -176,12 +176,12 @@
                     if (!$hasRows) {
                         echo <<<HTML
                             <div class="none-requested">
-                                <p>Чувапчичи у тебя запросов нет.<br> <a href="tapahtumat.php">Kaikki tapahtumat</a> </p>
+                                <p>Чувапчичи у тебя запросов нет.<br> <a href="{$baseUrl}/tapahtumat.php">Kaikki tapahtumat</a> </p>
                             </div>
                         HTML;
                     } else {
                         echo <<<HTML
-                            <a class="button"href="tapahtumat.php">Kaikki tapahtumat</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
+                            <a class="button"href="{$baseUrl}/tapahtumat.php">Kaikki tapahtumat</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
                         HTML;
                     }
 

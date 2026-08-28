@@ -26,8 +26,8 @@
     $deleteAccountBtn = "<button class='deleteaccount' type='button' id='deleteaccount-btn'>Poista tili</button>";
 
     $pageTitle = "Us_account";
-    $extraCSS = "../CSS/account.css";
-    $extraJS = "../JavaScript/account.js";
+    $extraCSS = $baseUrl . "/CSS/account.css";
+    $extraJS = $baseUrl . "/JavaScript/account.js";
 
     /* retrieve all information about the user from the database */
     $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?;");
@@ -141,7 +141,7 @@
             </div>
             
             <div class="account-actions">
-                <a class="button logout" href="account.php?action=logout">Kirjaudu ulos</a>
+                <a class="button logout" href=<?= $baseUrl ?>/USER/account.php?action=logout>Kirjaudu ulos</a>
                 <?php echo $deleteAccountBtn ?>
             </div>
 
@@ -235,8 +235,8 @@
                         </p>                        
                     </div>
                     <div class="change">
-                        <a class="button edit" href="bookEvent.php?id={$row['event_id']}&seats={$seatList}&total={$total}">Muokkaa varaus</a>
-                        <a class="button cancel" href="account.php?id={$row['booking_id']}">Peruuta varaus</a>
+                        <a class="button edit" href="{$baseUrl}/bookEvent.php?id={$row['event_id']}&seats={$seatList}&total={$total}">Muokkaa varaus</a>
+                        <a class="button cancel" href="{$baseUrl}/USER/account.php?id={$row['booking_id']}">Peruuta varaus</a>
                     </div>
 
                 </div>
@@ -249,12 +249,12 @@
             if (!$hasRows) {
                 echo <<<HTML
                     <div class="none-reserved">
-                        <p>Sinulla ei ole aktiivisia varauksia.<br> <a href="tapahtumat.php">Katso ohjelmisto</a> </p>
+                        <p>Sinulla ei ole aktiivisia varauksia.<br> <a href="{$baseUrl}/tapahtumat.php">Katso ohjelmisto</a> </p>
                     </div>
                 HTML;
             } else {
                 echo <<<HTML
-                    <a class="button"href="tapahtumat.php">Kaikki tapahtumat</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
+                    <a class="button" href="{$baseUrl}/tapahtumat.php">Kaikki tapahtumat</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
                 HTML;
             }
         
