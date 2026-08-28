@@ -1,7 +1,7 @@
 <?php 
     $pageTitle = "EditEvent";
     $extraCSS = "CSS/add_edit_event.css";
-    $extraJS = "JavaScript/add_edit_event.js";
+    $extraJS = $baseUrl . "/JavaScript/add_edit_event.js";
     include 'include/header.php';
     
     /* delete event (it has to be placed before any output) */

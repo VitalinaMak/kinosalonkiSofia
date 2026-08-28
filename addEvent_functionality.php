@@ -1,5 +1,5 @@
 <?php 
-    $extraJS = "JavaScript/add_edit_event.js";
+    $extraJS = $baseUrl . "/JavaScript/add_edit_event.js";
     require_once 'include/configuration.php';
     
     $params = [];
