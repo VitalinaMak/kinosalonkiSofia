@@ -1,11 +1,16 @@
 <?php
-    include '../include/header.php';
+    include '../include/configuration.php';
 
     /* if the user is not registered, redirect to the login page */
     if (!isset($_SESSION['user_id'])) {
         header("Location: $baseUrl/login.php");
         exit();
     }
+
+    $extraCSS = $baseUrl . "/CSS/account.css";
+    $extraJS = $baseUrl . "/JavaScript/account.js";
+
+    include '../include/header.php';
 
     /* logout handling */
     if (isset($_GET['action']) && $_GET['action'] === 'logout') {
@@ -26,8 +31,7 @@
     }
 
     $pageTitle = "Ad_account";
-    $extraCSS = $baseUrl . "/CSS/account.css";
-    $extraJS = $baseUrl . "/JavaScript/account.js";
+    
 
 
     /* retrieve all information about the user from the database */

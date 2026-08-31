@@ -44,7 +44,7 @@
     }
 
     $pageTitle = "SignUp";
-    $extraCSS = "CSS/SignUp_LogIn.css";
+    $extraCSS = $baseUrl . "CSS/SignUp_LogIn.css";
     include 'include/header.php'; 
 ?>
 <main class="signup_page">
@@ -86,7 +86,7 @@
             
             <button type="submit" class="">Submit</button>
 
-            <p>Aready have an account? <a href="login.php">Log in</a> </p>
+            <p>Aready have an account? <a href="<?= $baseUrl ?>/login.php">Log in</a> </p>
         </form>
 
         <?php if ($error): ?>

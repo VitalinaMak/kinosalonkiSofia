@@ -3,6 +3,7 @@
     require_once 'include/configuration.php';  //connection to database and session start
 
     $error = '';  //variable for error display
+    $accountType = ''; //variable for account type display
 
     /* form handling */
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -17,7 +18,12 @@
         /* verify password and if everything is OK, save user's id into session and go to the page with events */
         if ($user && password_verify($password, $user->password_hash)) {
             $_SESSION['user_id'] = $user->id;
-            header("Location: account.php");
+            if ($user->id == 1) {
+                $accountType = $baseUrl . '/ADMIN/ad_account.php';  // if the registered person is admin, save the link to admin accoint page
+            } else {
+                $accountType = $baseUrl . '/USER/account.php';  // otherwise, save the link to regular account page
+            }
+            header("Location: " . $accountType);
             exit();
         } else {
             $error .= 'Käyttäjätunnus tai salasana on virheellinen';
@@ -25,7 +31,7 @@
     }
 
     $pageTitle = "Login";
-    $extraCSS = "CSS/SignUp_LogIn.css";
+    $extraCSS = $baseUrl . "CSS/SignUp_LogIn.css";
     include 'include/header.php'; //connection to header. It has to be after form handling, otherwise header("Location: tapahtumat.php") won't work
 ?>
 
@@ -57,7 +63,7 @@
 
             <button type="submit" class="">Submit</button>
             
-            <p>Don't have an account? <a href="signup.php">Sign up</a> </p>
+            <p>Don't have an account? <a href="<?= $baseUrl ?>/signup.php">Sign up</a> </p>
         </form>
 
         <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && $error != ""): ?>
