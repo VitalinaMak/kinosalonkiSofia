@@ -1,15 +1,15 @@
 <?php 
     $pageTitle = "EditEvent";
-    $extraCSS = "CSS/add_edit_event.css";
-    $extraJS = $baseUrl . "/JavaScript/add_edit_event.js";
-    include 'include/header.php';
+    $extraCSS = "/kinosalonkiSofia/CSS/add_edit_event.css";
+    $extraJS = "/kinosalonkiSofia/JavaScript/add_edit_event.js";
+    include '../include/header.php';
     
     /* delete event (it has to be placed before any output) */
     if (isset($_GET['delete']) && isset($_GET['id'])) {
         $stmt = $pdo->prepare("DELETE FROM events WHERE id = ?;");
         $id = (int) $_GET['id'];
         $stmt->execute([$id]);
-        header("Location: tapahtumat.php");
+        header("Location: $baseUrl/ADMIN/ad_tapahtumat.php");
         exit();
     }
 ?>
@@ -73,8 +73,8 @@
                                     <input type="hidden" name="current_image" value="<?= htmlspecialchars($row['event_image']); ?>">  <!-- ..so here is another input (basicaly it keeps track of what the user currently sees) -->
                                     <input type="hidden" name="original_image" value="<?= htmlspecialchars($row['event_image']); ?>"> <!-- and one more hidden input to store the original image from the database -->
                                     <input type="hidden" name="remove_image" value="0">  <!-- a flag that signals if the user clicked “remove image”  -->
-                                    <?= "<img id='preview' src='kuvat/tapahtumaKuvat/".$picture."' alt='Uploaded Image'>"; ?>
-                                    <a class="button" href="javascript:void(0)" onclick="removeImage()"> Poistaa kuvaa</a>  <!-- a link to remove the picture -->
+                                    <img id="preview" src="<?= $baseUrl ?>/kuvat/tapahtumaKuvat/<?= htmlspecialchars($picture) ?>" alt="Uploaded Image">
+                                    <a id="remove-button" class="button" href="javascript:void(0)" onclick="removeImage()"> Poistaa kuvaa</a>  <!-- a link to remove the picture -->
                                 </label>
                             </div>
 
@@ -130,7 +130,7 @@
                 
                 /* picture handling - START */
 
-                $uploadFolder = "kuvat/tapahtumaKuvat/";
+                $uploadFolder = __DIR__ . "/../kuvat/tapahtumaKuvat/";
                 $allowedTypes = ['jpg','jpeg','png','gif','webp'];
 
                 $currentImage = isset($_POST['current_image']) ? basename($_POST['current_image']) : "";  //the value of the previous image from the hidden input. If it's empty, leave it empty, othervise save the name of the file
@@ -232,7 +232,7 @@
                     
                 try {
                     if ($stmt->execute($params)) {
-                        header("Location: tapahtumat.php");
+                        header("Location: $baseUrl/ADMIN/ad_tapahtumat.php");
                         exit();
                     }
                 } catch (PDOException $e) {
@@ -243,5 +243,5 @@
     </div>
 
 </main>
-<?php include 'include/footer.php'; ?>
+<?php include '../include/footer.php'; ?>
 

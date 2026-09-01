@@ -1,8 +1,8 @@
 <?php 
     $pageTitle = "AddEvent";
-    $extraCSS = "CSS/add_edit_event.css";
-    $extraJS = $baseUrl . "/JavaScript/add_edit_event.js";
-    include 'include/header.php';
+    $extraCSS = "/kinosalonkiSofia/CSS/add_edit_event.css";
+    $extraJS = "/kinosalonkiSofia/JavaScript/add_edit_event.js";
+    include '../include/header.php';
 
     /* ini_set('display_errors', 1);
     error_reporting(E_ALL); */
@@ -88,5 +88,5 @@
 
 </main>
 
-<?php include 'include/footer.php'; ?>
+<?php include '../include/footer.php'; ?>
 

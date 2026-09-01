@@ -180,12 +180,12 @@
                     if (!$hasRows) {
                         echo <<<HTML
                             <div class="none-requested">
-                                <p>Чувапчичи у тебя запросов нет.<br> <a href="{$baseUrl}/tapahtumat.php">Kaikki tapahtumat</a> </p>
+                                <p>Чувапчичи у тебя запросов нет.<br> <a href="{$baseUrl}/ADMIN/ad_tapahtumat.php">Kaikki tapahtumat</a> </p>
                             </div>
                         HTML;
                     } else {
                         echo <<<HTML
-                            <a class="button"href="{$baseUrl}/tapahtumat.php">Kaikki tapahtumat</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
+                            <a class="button"href="{$baseUrl}/ADMIN/ad_tapahtumat.php">Kaikki tapahtumat</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
                         HTML;
                     }
 
