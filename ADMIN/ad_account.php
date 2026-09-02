@@ -31,7 +31,8 @@
     }
 
     $pageTitle = "Ad_account";
-    
+    $extraCSS = $baseUrl . "/ADMIN/ad_account.css";
+    $extraJS = $baseUrl . "/JavaScript/account.js";
 
 
     /* retrieve all information about the user from the database */
