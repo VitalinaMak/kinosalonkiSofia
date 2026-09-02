@@ -1,17 +1,17 @@
 <?php 
 
-    require_once 'include/configuration.php';  //connection to database and session start
+    require_once '../include/configuration.php';  //connection to database and session start
 
-    /* check if the user is admin */
-    $isAdmin = false;
+    /* if the user is admin, redirect to the admin's tapahtumat page */
     if (isset($_SESSION['user_id']) && $_SESSION['user_id']==1) {  //admin's account shouldn't be deleted, so it's id always remains 1
-        $isAdmin = true;
+        header("Location: $baseUrl/ADMIN/tapahtumat.php");
+        exit();
     }
 
     $pageTitle = "Tapahtumat";
-    $extraCSS = "CSS/tapahtumat.css";
-    $extraJS = $baseUrl . "/JavaScript/tapahtumat.js";
-    include 'include/header.php'; 
+    $extraCSS = "/kinosalonkiSofia/CSS/tapahtumat.css";
+    $extraJS = $baseUrl . "/kinosalonkiSofia/JavaScript/tapahtumat.js";
+    include '../include/header.php'; 
 ?>
 
 <?php
@@ -25,7 +25,7 @@
             $params['type'] = $_GET['type'];  //if filtering by event type is used, save it's value to the array
         }
         $query = http_build_query($params);  //http-query with all used parameters
-        header("Location: tapahtumat.php" . ($query ? "?$query" : ""));  //if query is not empty, add it to the URL and reload the page
+        header("Location: $baseUrl/USER/tapahtumat.php" . ($query ? "?$query" : ""));  //if query is not empty, add it to the URL and reload the page
     }
 ?>
 
@@ -132,9 +132,6 @@
     
     <!-- div for the list of events -->
     <div class="eventList">
-        <?php if ($isAdmin == true) : ?>
-            <a class="button addEvent" href="addEvent.php">Lisää tapahtuma</a>
-        <?php endif; ?>
         <?php
             $search = '';  //variable for searching
             $order = 'events.event_date ASC';  //variable for sorting data. For default sorts by date starting from earlier events 
@@ -271,10 +268,10 @@
                 // Build the image tag only if path exists
                 $imageHtml = "";
                 if ($kuvaPath) {
-                    $imageHtml = "<img src='kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>";
+                    $imageHtml = "<img src='$baseUrl/kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>";
                 }
                 
-                echo "<div class='event {$typeForColor} " . ($isAdmin ? 'is-admin' : '') . "' onclick='window.location.href=\""."bookEvent.php?id=".$row['id']."\"'>
+                echo "<div class='event {$typeForColor}' onclick='window.location.href=\""."{$baseUrl}/bookEvent.php?id=".$row['id']."\"'>
 
                         <div class='eventInfo'>
                             <h3 class='event_header'>{$row['event_name']} <span class='event_age'>{$ageLimit}</span></h3>
@@ -286,11 +283,8 @@
                                 {$row['location']}</h4>
                             <p class='event_description'>{$row['description']}</p>
                             <p class='places'>{$placesNumber}</p>
-                        </div>"
-                        . ($isAdmin   /* if the user is admin, add div with links for editing and deleting. Else just close the div */
-                            ? "<a class='button' href='editEvent.php?id=".$row['id']."'>Muokkaa</a>
-                            </div>" 
-                        : "</div>");
+                        </div>
+                    </div>";
             }
             
             if (!$hasRows) {
@@ -302,5 +296,4 @@
     </div>
 </main>
     
-<?php include 'include/footer.php'; ?>
-
+<?php include '../include/footer.php'; ?>

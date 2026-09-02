@@ -190,7 +190,7 @@
                 
             </form>
 
-            <a id="backToEvents2" href="tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
+            <a id="backToEvents2" href="{$baseUrl}/USER/tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
 
             </div>
             
@@ -202,4 +202,4 @@
 
 </main>  
 
-<?php include 'include/footer.php'; ?>
+<?php include '../include/footer.php'; ?>

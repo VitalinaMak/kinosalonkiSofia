@@ -55,7 +55,7 @@
 
         <div class="profile info">
             
-            <form id="profile" method="post" action="changeInfo.php"  enctype="multipart/form-data">
+            <form id="profile" method="post" action="ad_changeInfo.php"  enctype="multipart/form-data">
                     
                 <h1>Tilitietosi</h1>
                 <!-- inputs for personal information (email and username) -->
