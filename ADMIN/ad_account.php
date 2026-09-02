@@ -100,6 +100,7 @@
                 </div>
 
             </form>
+            
             <?php
             /* show the mesage if update was successful */         
                 if (isset($_SESSION['success_message'])) {
@@ -108,10 +109,25 @@
                 }
             ?>
 
+            <h3>Ilmoitusasetukset</h3>
+
+            <div class="actions">
+                <div class="checkboxes">
+                    <input type="checkbox" id="notify-tapahtumat" name="notify_tapahtumat" checked>
+                    <label for="notify-tapahtumat">Lähetä sähköpostia uusista elokuvista</label>
+                </div>
+
+                <div class="checkboxes">
+                    <input type="checkbox" id="notify-reservations" name="notify_reservations" checked>
+                    <label for="notify-reservations">Lähetä varausmuistutuksia</label>
+                </div>
+            </div>
+
             <div class="account-actions">
                 <a class="button logout" href="ad_account.php?action=logout">Kirjaudu ulos</a>
                 <?php echo $deleteAccountBtn ?>
             </div>
+            
 
             <div class="reservations info">
 
