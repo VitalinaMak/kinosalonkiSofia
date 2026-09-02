@@ -1,8 +1,8 @@
 <?php 
+    include 'include/header.php'; 
     $pageTitle = "BookEvent";
     $extraCSS = "CSS/book_event.css";
     $extraJS = $baseUrl . "/JavaScript/bookEvent.js";
-    include 'include/header.php'; 
 
     if (!isset($_GET['id'])) {
         die("Event ID is missing");
@@ -10,6 +10,7 @@
     $eventID = (int)$_GET['id'];  //id of the event - cast to int for safety
 
     $user = $_SESSION['user_id'] ?? null;  //user's id
+    $accountUrl = $user === 1 ? 'ADMIN/ad_account.php' : ($user ? 'USER/account.php' : 'login.php');
 
     /* retrieve all information about the event from the database */
     $stmt = $pdo->prepare("SELECT * FROM events WHERE id = ?");
@@ -149,7 +150,7 @@
 
                     <!-- buttons with links to tapahtumat.php and account.php. If the edit-mode is on, both of them are displayed and the text of the second button is changed to "Kaikki tapahtumat", otherwise only the button for tapahtumat.php -->
                     <div class="links">
-                        <a id="backToAccount" href="account.php" class="backToAccount">Takaisin tilisivulle</a>
+                        <a id="backToAccount" href="<?= $baseUrl ?>/<?= $accountUrl ?>" class="backToAccount">Takaisin tilisivulle</a>
                         <a id="backToEvents" href="tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
                     </div>
                 </div>

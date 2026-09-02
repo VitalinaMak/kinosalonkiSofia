@@ -12,7 +12,7 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <!-- CSS GLOBAL -->
-    <link rel="stylesheet" href="../CSS/global.css">
+    <link rel="stylesheet" href="<?= $baseUrl ?>/CSS/global.css">
     <!-- CSS variable for php -->
     <?php if (isset($extraCSS)): ?>
         <link rel="stylesheet" href="<?php echo $extraCSS; ?>">
