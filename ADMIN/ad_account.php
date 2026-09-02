@@ -1,11 +1,16 @@
 <?php
-    include '../include/header.php';
+    include '../include/configuration.php';
 
     /* if the user is not registered, redirect to the login page */
     if (!isset($_SESSION['user_id'])) {
         header("Location: $baseUrl/login.php");
         exit();
     }
+
+    $extraCSS = $baseUrl . "/CSS/account.css";
+    $extraJS = $baseUrl . "/JavaScript/account.js";
+
+    include '../include/header.php';
 
     /* logout handling */
     if (isset($_GET['action']) && $_GET['action'] === 'logout') {
@@ -176,12 +181,12 @@
                     if (!$hasRows) {
                         echo <<<HTML
                             <div class="none-requested">
-                                <p>Чувапчичи у тебя запросов нет.<br> <a href="{$baseUrl}/tapahtumat.php">Kaikki tapahtumat</a> </p>
+                                <p>Чувапчичи у тебя запросов нет.<br> <a href="{$baseUrl}/ADMIN/ad_tapahtumat.php">Kaikki tapahtumat</a> </p>
                             </div>
                         HTML;
                     } else {
                         echo <<<HTML
-                            <a class="button"href="{$baseUrl}/tapahtumat.php">Kaikki tapahtumat</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
+                            <a class="button"href="{$baseUrl}/ADMIN/ad_tapahtumat.php">Kaikki tapahtumat</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
                         HTML;
                     }
 

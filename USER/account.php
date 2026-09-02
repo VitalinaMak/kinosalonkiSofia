@@ -1,11 +1,16 @@
 <?php
-    include '../include/header.php';  //connection to database and session start
+    include '../include/configuration.php';
 
     /* if the user is not registered, redirect to the login page */
     if (!isset($_SESSION['user_id'])) {
         header("Location: ../login.php");
         exit();
     }
+
+    $extraCSS = $baseUrl . "/CSS/account.css";
+    $extraJS = $baseUrl . "/JavaScript/account.js";
+
+    include '../include/header.php';  //connection to database and session start
 
     /* logout handling */
     if (isset($_GET['action']) && $_GET['action'] === 'logout') {
@@ -26,8 +31,6 @@
     $deleteAccountBtn = "<button class='deleteaccount' type='button' id='deleteaccount-btn'>Poista tili</button>";
 
     $pageTitle = "Us_account";
-    $extraCSS = $baseUrl . "/CSS/account.css";
-    $extraJS = $baseUrl . "/JavaScript/account.js";
 
     /* retrieve all information about the user from the database */
     $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?;");

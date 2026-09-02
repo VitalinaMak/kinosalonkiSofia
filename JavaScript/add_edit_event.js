@@ -45,31 +45,40 @@ document
   });
 
 /* form handling */
-document.getElementById("addEventForm").addEventListener("submit", function(e) {
-    e.preventDefault(); // stop normal submit
-  
-    const formData = new FormData(this);
+document.addEventListener("DOMContentLoaded", function () {  //function works only when the DOM is ready
+    const form = document.getElementById("addEventForm");
+    if (!form) return;
 
-    fetch("addEvent_functionality.php", {
-        method: "POST",
-        body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();  // stop normal submit
+
+        const formData = new FormData(this);
+
+      fetch("/kinosalonkiSofia/ADMIN/addEvent_functionality.php", {
+          method: "POST",
+          body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
         if (data.status === "success") {
-            console.log("Event ID:", data.event_id);
+          console.log("Event ID:", data.event_id);
 
-            /* send to notification handler */
-            sendNotifications(data.event_id);
+          /* send to notification handler */
+          sendNotifications(data.event_id);
 
-            alert("Uusi tapahtuma lisätty onnistuneesti!");
+          alert("Uusi tapahtuma lisätty onnistuneesti!");
 
-            // redirect after alert
-            window.location.href = "tapahtumat.php";
+          // redirect after alert
+          window.location.href = "/kinosalonkiSofia/ADMIN/ad_tapahtumat.php";
         } else {
           alert("Virhe: " + data.message);
         }
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Palvelinvirhe");
     });
+  });
 });
 
 function sendNotifications(eventId) {
@@ -91,6 +100,7 @@ function sendNotifications(eventId) {
 }
 
 function removeImage() {
+  console.log("REMOVE IMAGE WORKS");
   if (document.getElementsByName("current_image")[0]) {
     const currentImage = document.getElementsByName("current_image")[0]; //this element exists only in editEvent
   }
@@ -107,7 +117,6 @@ function removeImage() {
   console.log("the link is pressed");
 
   //   DANGER
-  removeFlag = document.getElementsByName("remove_image")[0];
   if (removeFlag) removeFlag.value = "1";
   // DANGER
 }
