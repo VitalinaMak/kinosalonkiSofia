@@ -18,6 +18,10 @@
         <link rel="stylesheet" href="<?php echo $extraCSS; ?>">
     <?php endif; ?>
 
+    <?php if (isset($ADextraCSS)): ?>
+        <link rel="stylesheet" href="<?php echo $ADextraCSS; ?>">
+    <?php endif; ?>
+
 </head>
 <body>
     <header> 

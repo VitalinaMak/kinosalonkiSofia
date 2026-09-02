@@ -8,6 +8,7 @@
     }
 
     $extraCSS = $baseUrl . "/CSS/account.css";
+    $ADextraCSS = $baseUrl . "/ADMIN/ad_account.css";
     $extraJS = $baseUrl . "/JavaScript/account.js";
 
     include '../include/header.php';
@@ -30,10 +31,6 @@
        exit();
     }
 
-    $pageTitle = "Ad_account";
-    $extraCSS = $baseUrl . "/ADMIN/ad_account.css";
-    $extraJS = $baseUrl . "/JavaScript/account.js";
-
 
     /* retrieve all information about the user from the database */
     $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?;");
@@ -52,7 +49,6 @@
 <main class="ad_account_page">
     
     <div class="wrapper">
-
 
         <div class="profile info">
             
