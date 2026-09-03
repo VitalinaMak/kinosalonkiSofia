@@ -3,6 +3,7 @@
 /* NOTE: CONFIRM DIALOG HAS SOME CSS-STYLING IN account.js ! */
 
 /* - - - /BUTTONS - - - */
+
 /* ========================================
    ACCOUNT PAGE LAYOUT
    ======================================== */
@@ -23,10 +24,9 @@
   overflow: hidden;
 }
 
-.info {
+/* .info {
   flex: 1 1 300px;
-  padding: 20px;
-}
+} */
 
 .profile {
   min-width: 30%;
@@ -41,6 +41,7 @@
 
 .reservations {
   flex: 2 1 300px;
+  padding: 20px;
 }
 
 .reservations h1 {
@@ -100,7 +101,6 @@
 }
 
 .eventname {
-  /* for TITLE OF THE EVENT and REQUEST */
   display: block;
   font-weight: 650;
   font-size: 1.5rem;
@@ -125,8 +125,6 @@
 
 .icon-adress svg {
   margin-top: 20px;
-  /* width: 20px;
-  height: 20px; */
   fill: var(--base-color);
 }
 
@@ -207,123 +205,8 @@ h3 {
 }
 
 /* ========================================
-   NOTIFICATION CHECKBOXES
+   NOTIFICATION CHECKBOXES - DELETED -
    ======================================== */
-
-.checkbox-group {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 15px;
-  width: 100%;
-}
-
-.checkbox-group input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100px;
-  height: 100px;
-  background-color: #eee;
-  border: 2px solid var(--lightblue);
-  border-radius: 4px;
-  cursor: pointer;
-  position: relative;
-  transition: var(--transition);
-  flex-shrink: 0;
-  margin: 0;
-}
-
-.checkbox-group input[type="checkbox"]:hover {
-  border-color: var(--blue);
-  background-color: #fff;
-  box-shadow: 0 0 8px rgba(0, 150, 255, 0.2);
-}
-
-.checkbox-group input[type="checkbox"]:checked {
-  background-color: var(--blue);
-  border-color: var(--blue);
-}
-
-.checkbox-group input[type="checkbox"]::after {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 6px;
-  top: 2px;
-  width: 6px;
-  height: 11px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  transform: rotate(45deg);
-}
-
-.checkbox-group input[type="checkbox"]:checked::after {
-  display: block;
-}
-
-.checkbox-group label {
-  width: auto;
-  height: auto;
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  color: var(--cinema-whiteish);
-  font-size: 1rem;
-  cursor: pointer;
-  text-align: left;
-  display: inline-block;
-  transition: var(--transition);
-}
-
-.checkbox-group label:hover {
-  color: #fff;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-}
-
-.checkbox-group:hover input[type="checkbox"] {
-  border-color: var(--blue);
-}
-
-/* ========================================
-   ADMIN REQUEST CARDS
-   ======================================== */
-
-.none-requested {
-  margin: 20px 0;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: var(--cinema-whiteish);
-}
-.none-requested p {
-  margin: 0;
-  font-size: 1.2rem;
-}
-.none-requested p a {
-  color: var(--lighterblue);
-  font-weight: bold;
-  margin-top: 18px;
-  display: inline;
-}
-.none-requested p a:hover {
-  color: var(--cinema-pink);
-}
-
-.requested {
-  margin: 20px 0;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: var(--cinema-whiteish);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
-}
-
-p.request {
-  display: block;
-  font-weight: 650;
-  font-size: 1.5rem;
-  line-height: 1.6;
-  margin-bottom: 4px;
-}
 
 /* ========================================
    PROFILE FORM
@@ -416,7 +299,7 @@ form input::placeholder {
    RESPONSIVE DESIGN
    ======================================== */
 
-@media (max-width: 800px) {
+/* @media (max-width: 800px) {
   .wrapper {
     flex-direction: column-reverse;
   }
@@ -432,4 +315,4 @@ form input::placeholder {
     height: auto;
     padding-left: 20px;
   }
-}
+} */

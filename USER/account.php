@@ -121,6 +121,7 @@
                 </div>
 
             </form>
+            
             <?php
             /* show the mesage if update was successful */         
                 if (isset($_SESSION['success_message'])) {
@@ -195,6 +196,8 @@
             $seatList ="";  //list of seat numbers
             $total = "";  //total amount of booked seats for the event
 
+            echo "<div class='reservations info'>";
+                
             echo "<h1>Varauksesi</h1>";
             
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -212,7 +215,8 @@
                 if ($row['age_limit'] != "Ei luokiteltu") {
                     $ageLimit = $row['age_limit'];  //if the event has age limitetion, assign it to variable; otherwise leave it empty
                 }
-
+                
+                
             
                 echo <<<HTML
                 <!--___TEMPLATE FOR USER'S RESERVED EVENTS___-->
@@ -243,7 +247,9 @@
                     </div>
 
                 </div>
-                <!--___TEMPLATE FOR USER'S RESERVED EVENTS___-->
+
+                </div>
+                
                 HTML;
 
                 

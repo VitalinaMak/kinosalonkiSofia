@@ -10,7 +10,7 @@
    ADMIN REQUEST CARDS
    ======================================== */
 
-.none-requested {
+/* .none-requested {
   margin: 20px 0;
   padding: 20px;
   border-radius: 10px;
@@ -37,6 +37,8 @@
   background-color: var(--cinema-whiteish);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 }
+
+
 
 p.request {
   display: block;
@@ -82,7 +84,7 @@ p.request {
 .requested .icon-adress svg {
   flex-shrink: 0;
   margin-top: 0;
-}
+} */
 
 /* ========================================
    PROFILE FORM - in user css
@@ -92,7 +94,7 @@ p.request {
    RESPONSIVE DESIGN
    ======================================== */
 
-@media (max-width: 800px) {
+/* @media (max-width: 800px) {
   .wrapper {
     flex-direction: column-reverse;
   }
@@ -124,4 +126,4 @@ p.request {
     grid-column: auto;
     grid-row: auto;
   }
-}
+} */
