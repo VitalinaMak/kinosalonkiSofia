@@ -38,16 +38,15 @@
         <nav class="temporaryNavigation">
             <button class="navButton">List of pages</button>
             <div class="linksToPages">
-                <a href="<?= $baseUrl ?>/addEvent.php" target="_blank" rel="noopener noreferrer">addEvent</a>
+                <a href="<?= $baseUrl ?>/ADMIN/addEvent.php" target="_blank" rel="noopener noreferrer">addEvent</a>
                 <a href="<?= $baseUrl ?>/bookEvent.php" target="_blank" rel="noopener noreferrer">bookEvent</a>
-                <a href="<?= $baseUrl ?>/editEvent.php" target="_blank" rel="noopener noreferrer">editEvent</a>
-                <a href="<?= $baseUrl ?>/editEvent.php?id=8" target="_blank" rel="noopener noreferrer">editTHEevent</a>
+                <a href="<?= $baseUrl ?>/ADMIN/editEvent.php?id=8" target="_blank" rel="noopener noreferrer">editTHEevent</a>
                 <a href="<?= $baseUrl ?>/index.php" target="_blank" rel="noopener noreferrer">index</a>
                 <a href="<?= $baseUrl ?>/login.php" target="_blank" rel="noopener noreferrer">login</a>
                 <a href="<?= $baseUrl ?>/signup.php" target="_blank" rel="noopener noreferrer">signup</a>
                 <a href="<?= $baseUrl ?>/USER/account.php" target="_blank" rel="noopener noreferrer">USER_ACCOUNT</a>
                 <a href="<?= $baseUrl ?>/ADMIN/ad_account.php" target="_blank" rel="noopener noreferrer">ADMIN_ACCOUNT</a>
-                <a href="<?= $baseUrl ?>/tapahtumat.php" target="_blank" rel="noopener noreferrer">Tapahtumat</a>
+                <a href="<?= $baseUrl ?>/USER/tapahtumat.php" target="_blank" rel="noopener noreferrer">Tapahtumat</a>
             </div>
         </nav> 
             

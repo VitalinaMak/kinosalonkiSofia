@@ -1,5 +1,4 @@
 <?php 
-    include 'include/header.php'; 
     $pageTitle = "BookEvent";
     $extraCSS = "/kinosalonkiSofia/CSS/book_event.css";
     $extraJS = "/kinosalonkiSofia/JavaScript/bookEvent.js";
@@ -51,13 +50,19 @@
     }
     /* retrieve from the database all booked seat numbers */
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        if ($row['user_id'] == $user) {
+        /* if ($row['user_id'] == $user) {
             if (str_contains($seats, $row['seat_number'])) {  //if the user came from the account.php and has already booked some seats, mark those seats as user's seats (to show them as selected in the seating chart)
                 $usersSeats[] = $row['seat_number'];
             }
             $userAlreadyBooked += 1;
         } else {
             $bookings[] = $row['seat_number'];
+        } */
+        if ($row['user_id'] == $user) {  //
+            $usersSeats[] = (int)$row['seat_number'];
+            $userAlreadyBooked++;
+        } else {
+            $bookings[] = (int)$row['seat_number'];
         }
     }
 
@@ -204,4 +209,4 @@
 
 </main>  
 
-<?php include '../include/footer.php'; ?>
+<?php include 'include/footer.php'; ?>

@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
     
 /* handle seat's selection */
-window.selection = function(i) {
+function selection(i) {
 
     const seatID = document.getElementById(i);  //get the id of the selected seat
 
