@@ -271,7 +271,7 @@
                     $imageHtml = "<img src='$baseUrl/kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>";
                 }
                 
-                echo "<div class='event {$typeForColor}' onclick='window.location.href=\""."{$baseUrl}/bookEvent.php?id=".$row['id']."\"'>
+                echo "<div class='event {$typeForColor}' onclick='window.location.href=\""."{$baseUrl}/USER/bookEvent.php?id=".$row['id']."\"'>
 
                         <div class='eventInfo'>
                             <h3 class='event_header'>{$row['event_name']} <span class='event_age'>{$ageLimit}</span></h3>

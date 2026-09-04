@@ -1,4 +1,4 @@
-<?php require_once 'include/configuration.php'; ?>
+<?php require_once '../include/configuration.php'; ?>
 
 <?php
     /* Set JSON response header */
