@@ -2,7 +2,7 @@
     $pageTitle = "BookEvent";
     $extraCSS = "/kinosalonkiSofia/CSS/book_event.css";
     $extraJS = "/kinosalonkiSofia/JavaScript/bookEvent.js";
-    include 'include/header.php'; 
+    include '../include/header.php'; 
 
     if (!isset($_GET['id'])) {
         die("Event ID is missing");
@@ -95,7 +95,7 @@
             2. if the event type is 1 (movie), show the table with seats, if the event type is 2 (limited amount of places), show the amount of places left, if the event type is 3 (unlimited amount of places), show the total number of participants
             -->
             <?php if (!empty($event["event_image"])): ?>    
-                <img src="kuvat/tapahtumaKuvat/<?= $event['event_image'] ?>" alt="Event Image">  <!-- event's image (if it exists) -->
+                <img src="<?= $baseUrl ?>/kuvat/tapahtumaKuvat/<?= $event['event_image'] ?>" alt="Event Image">  <!-- event's image (if it exists) -->
             <?php endif ?>
             <p><?= $event['description'] ?></p>  <!-- Here add all the details about the event - image, decription etc. onclick on place it checks if you're logged in, and if not - sends you to SIGN UP page! -->
 
@@ -157,12 +157,12 @@
                     <!-- buttons with links to tapahtumat.php and account.php. If the edit-mode is on, both of them are displayed and the text of the second button is changed to "Kaikki tapahtumat", otherwise only the button for tapahtumat.php -->
                     <div class="links">
                         <a id="backToAccount" href="<?= $baseUrl ?>/<?= $accountUrl ?>" class="backToAccount">Takaisin tilisivulle</a>
-                        <a id="backToEvents" href="tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
+                        <a id="backToEvents" href="<?= $baseUrl ?>/USER/tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
                     </div>
                 </div>
             </div>
 
-            <p>Huom! Yhdellä tunnuksella voi varata enintään 2 paikkaa. Mikäli haluat varata useampia paikkoja, olethan yhteydessä yhdistykseen, jonka kautta se on mahdollista.</p>  <!-- paste here phone number or email, idk, on therir webpage they say they don't accept reservations via email, phone or social media -->
+            <p>Huom! Yhdellä tunnuksella voi varata enintään 2 paikkaa. Mikäli haluat varata useampia paikkoja, olethan yhteydessä yhdistykseen, jonka kautta se on mahdollista.</p>  <!-- paste here phone number or email, idk, on their webpage they say they don't accept reservations via email, phone or social media -->
             <button onclick="revealTheForm()">Varaa enemmän paikkoja</button>
 
 
@@ -209,4 +209,4 @@
 
 </main>  
 
-<?php include 'include/footer.php'; ?>
+<?php include '../include/footer.php'; ?>
