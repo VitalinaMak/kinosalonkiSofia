@@ -17,7 +17,8 @@
         $pdo = new PDO(
             "pgsql:host=$host;port=$port;dbname=$db;sslmode=require",
             $user,
-            $pass
+                $pass,
+                [PDO::ATTR_EMULATE_PREPARES => true]
         );
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  //enable exception mode for error handling
     } catch (PDOException $e) {
