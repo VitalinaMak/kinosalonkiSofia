@@ -32,7 +32,7 @@
   min-width: 30%;
   flex-shrink: 0;
   height: 100%;
-  padding-left: 30px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -166,8 +166,12 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: auto;
+  /* margin-top: auto; */
   gap: 10px;
+  position: sticky;
+  left: 0;
+
+  z-index: 1;
 }
 .account-actions .logout {
   flex: 1 1 200px;
