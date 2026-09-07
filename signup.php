@@ -44,7 +44,7 @@
     }
 
     $pageTitle = "SignUp";
-    $extraCSS = $baseUrl . "CSS/SignUp_LogIn.css";
+    $extraCSS = $baseUrl . "/CSS/SignUp_LogIn.css";
     include 'include/header.php'; 
 ?>
 <main class="signup_page">

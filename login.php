@@ -31,7 +31,7 @@
     }
 
     $pageTitle = "Login";
-    $extraCSS = $baseUrl . "CSS/SignUp_LogIn.css";
+    $extraCSS = $baseUrl . "/CSS/SignUp_LogIn.css";
     include 'include/header.php'; //connection to header. It has to be after form handling, otherwise header("Location: tapahtumat.php") won't work
 ?>
 
