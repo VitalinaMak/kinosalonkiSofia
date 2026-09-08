@@ -48,12 +48,12 @@
                                 <div class="dropdown"> <!-- Age limit -->
                                     <label for="ageLimit-input"></label> 
                                     <select id="ageLimit-input" name="ageLimit">
-                                        <option value="Ei luokiteltu" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>Ei luokiteltu</option>
-                                        <option value="S" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>S</option>
-                                        <option value="K7" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K7</option>
-                                        <option value="K12" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K12</option>
-                                        <option value="K16" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K16</option>
-                                        <option value="K18" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K18</option>
+                                        <option value="Ei luokiteltu" <?= $ageLimit == 'Ei luokiteltu' ? 'selected' : '' ?>>Ei luokiteltu</option>
+                                        <option value="S" <?= $ageLimit == 'S' ? 'selected' : '' ?>>S</option>
+                                        <option value="K7" <?= $ageLimit == 'K7' ? 'selected' : '' ?>>K7</option>
+                                        <option value="K12" <?= $ageLimit == 'K12' ? 'selected' : '' ?>>K12</option>
+                                        <option value="K16" <?= $ageLimit == 'K16' ? 'selected' : '' ?>>K16</option>
+                                        <option value="K18" <?= $ageLimit == 'K18' ? 'selected' : '' ?>>K18</option>
                                     </select>
                                 </div>
                             </div>
@@ -82,9 +82,9 @@
                                 <div class="dropdown"> <!-- Type -->
                                     <label for="eventType-input"></label> 
                                     <select id="eventType-input" name="eventType" required>
-                                        <option value="1" <?= $eventType == 'option1' ? 'selected' : '' ?>>Elokuvaesitys</option>
-                                        <option value="2" <?= $eventType == 'option2' ? 'selected' : '' ?>>Tapahtuma, jossa on rajattu osalisujamäärä</option>
-                                        <option value="3" <?= $eventType == 'option3' ? 'selected' : '' ?>>Tapahtuma, jossa on rajaton osalisujamäärä</option>
+                                        <option value="1" <?= $eventType == '1' ? 'selected' : '' ?>>Elokuvaesitys</option>
+                                        <option value="2" <?= $eventType == '2' ? 'selected' : '' ?>>Tapahtuma, jossa on rajattu osalisujamäärä</option>
+                                        <option value="3" <?= $eventType == '3' ? 'selected' : '' ?>>Tapahtuma, jossa on rajaton osalisujamäärä</option>
                                     </select>
                                 </div>
                                 <div> <!-- Place -->
