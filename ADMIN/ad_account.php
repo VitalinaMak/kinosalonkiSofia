@@ -128,7 +128,8 @@
                 <?php echo $deleteAccountBtn ?>
             </div>
             
-
+        </div>
+            
             <div class="reservations info">
 
                 <?php
@@ -205,7 +206,7 @@
                 }
                 ?>
             </div>
-        </div>
+        
 
     </div>
 
