@@ -79,8 +79,8 @@
                 </label>
                 <input type="password" id="repeat-password-input" name="password" placeholder="Toista salasana" required>
             </div> -->
-            <div>
-                <input type="checkbox" id="checkbox" onclick="passwordToggle()"></input>
+            <div class="checkboxContainer">
+                <input class="checkbox" type="checkbox" id="checkbox" onclick="passwordToggle()"></input>
                 <p>Show Password</p>
             </div>
             
