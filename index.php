@@ -48,7 +48,7 @@
                   <?php endif; ?>
               </tbody>
           </table>
-          <a href="tapahtumat.php" class="btn btn-outline-danger">Katso kaikki tapahtumat</a>  
+          <a href="USER/tapahtumat.php" class="btn btn-outline-danger">Katso kaikki tapahtumat</a>  
         </div>   
     </main>
 
