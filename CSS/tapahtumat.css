@@ -47,7 +47,6 @@ h4 {
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-  overflow: hidden;
 }
 
 .top h1 {
@@ -124,6 +123,8 @@ button.sortButton {
   height: 48px;
   width: 48px;
   padding: 10px;
+  position: relative;
+  z-index: 100;
   border: none;
   border-radius: 40px;
   background-color: white;
