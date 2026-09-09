@@ -186,7 +186,7 @@
                 </div>
                 <div>
                     <label for="places-input"></label>
-                    <input type="number" id="places-input" name="places" placeholder="Paikkojen määrä" max=<?= $maxVisitors ?> required>
+                    <input type="number" id="places-input" name="places" placeholder="Paikkojen määrä" max=<?= $maxVisitors - $bookedSeatsAmount ?> required>
                 </div>
                 <div>
                     <label for="comment-input"></label>
