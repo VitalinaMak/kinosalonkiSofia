@@ -261,7 +261,7 @@
                 HTML;
             } else {
                 echo <<<HTML
-                    <a class="button" href="{$baseUrl}/tapahtumat.php">Kaikki tapahtumat</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
+                    <a class="button" href="{$baseUrl}/USER/tapahtumat.php">Kaikki tapahtumat</a> <!-- maybe it can be some other color and/or layout, now it's added to just be at least a little visible (otherwise there's no links for getting back to tapahtumat for users) -->
                 HTML;
             }
         
