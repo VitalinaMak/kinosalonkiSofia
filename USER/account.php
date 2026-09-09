@@ -50,18 +50,23 @@
 
     /* cancel reservation */
     if (isset($_GET['id'])) {
-    $stmt = $pdo->prepare("DELETE FROM bookings WHERE id = :id");
+        $eventId = (int) $_GET['id'];
 
-        if (!$stmt) {
-            die("Prepare failed");
-        }
+        /* select and delete all rows where the event id and user id match */
+        $stmt = $pdo->prepare(
+            "DELETE FROM bookings
+            WHERE event_id = :event_id
+            AND user_id = :user_id"
+        );
 
-        $id = (int) $_GET['id'];
+        $stmt->execute([
+            'event_id' => $eventId,
+            'user_id' => $userID
+        ]);
 
-        if ($stmt->execute(['id' => $id])) {
-            header("Location: account.php");  //redirect to the same page
-            exit();
-        }
+        /* redirect to the same page */
+        header("Location: account.php");
+        exit();
     }
 ?>
 
@@ -243,7 +248,7 @@
                     </div>
                     <div class="change">
                         <a class="button edit" href="{$baseUrl}/bookEvent.php?id={$row['event_id']}&seats={$seatList}&total={$total}">Muokkaa varaus</a>
-                        <a class="button cancel" href="{$baseUrl}/USER/account.php?id={$row['booking_id']}">Peruuta varaus</a>
+                        <a class="button cancel" href="{$baseUrl}/USER/account.php?id={$row['event_id']}">Peruuta varaus</a>
                     </div>
 
                 </div>
