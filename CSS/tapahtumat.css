@@ -8,14 +8,6 @@ main {
   background-color: white;
 }
 
-/* *,
-h1,
-h2,
-h3,
-h4 {
-  color: black;
-} */
-
 h4 {
   font-size: 1.25rem;
   font-weight: 500;
@@ -91,7 +83,7 @@ h4 {
   background-color: white;
 }
 
-/* somehow it aligns the image inside the label :O (it was suggested by AI) */
+/* !!! somehow it aligns the image inside the label :O (it was suggested by AI) */
 .lupka svg {
   width: 100%;
   height: 100%;
@@ -412,41 +404,6 @@ button.sortButton {
     "header time"
     "description description"
     "places places";
-}
-
-/* ========================================
-   ADMIN TOOLS
-   ======================================== */
-
-.event {
-  display: grid;
-  grid-auto-flow: row;
-  grid-template-columns: 1fr;
-  gap: 2px;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.event.is-admin {
-  grid-template-columns: 1fr 50px;
-}
-
-.eventInfo {
-  width: 100%;
-}
-
-.event .button {
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  box-sizing: border-box;
-  align-self: center;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  text-align: center;
-  text-decoration: none;
-  line-height: 50px;
 }
 
 /* ========================================

@@ -138,7 +138,12 @@
                         </tr>
                     </tbody></table>
                 <?php elseif ($eventType == '2'): ?>
-                    <p>Paikkoja jäljellä: <span id="placesLeft"><?=$maxVisitors - $bookedSeatsAmount?></span></p>  <!-- if event type is 2 (limited amount of places), show the amount of places left -->
+                    <?= $seatsLeft = $maxVisitors - $bookedSeatsAmount; ?>     
+                    <script>
+                        const seatsLeft = "<?php echo"$seatsLeft"?>";
+                        console.log(seatsLeft);
+                    </script> 
+                    <p>Paikkoja jäljellä: <span id="placesLeft"><?=$seatsLeft?></span></p>  <!-- if event type is 2 (limited amount of places), show the amount of places left -->
                 <?php else: ?>
                     <p>Ilmoittautuneiden määrä: <span id="bookedCount"><?=$bookedSeatsAmount?></span></p>  <!-- if event type is 3 (unlimited amount of places), show the total number of participants-->
                 <?php endif; ?>
@@ -185,8 +190,8 @@
                     <input type="tel" id="phone-input" name="phone" placeholder="Puhelinnumero" required>
                 </div>
                 <div>
-                    <label for="places-input"></label>
                     <input type="number" id="places-input" name="places" placeholder="Paikkojen määrä" max=<?= $maxVisitors - $bookedSeatsAmount ?> required>
+                    <label for="places-input" class="places-input"></label>
                 </div>
                 <div>
                     <label for="comment-input"></label>
