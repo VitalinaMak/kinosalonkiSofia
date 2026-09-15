@@ -1,6 +1,6 @@
 <?php 
     $pageTitle = "EditEvent";
-    $extraCSS = "/kinosalonkiSofia/CSS/add_edit_event.css";
+    $extraCSS = "/kinosalonkiSofia/ADMIN/add_edit_event.css";
     $extraJS = "/kinosalonkiSofia/JavaScript/add_edit_event.js";
     include '../include/header.php';
     

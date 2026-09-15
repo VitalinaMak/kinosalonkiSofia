@@ -1,7 +1,7 @@
 <?php 
     require_once '../include/configuration.php';
     $pageTitle = "AddEvent";
-    $extraCSS = "/kinosalonkiSofia/CSS/add_edit_event.css";
+    $extraCSS = "/kinosalonkiSofia/ADMIN/add_edit_event.css";
     $extraJS = "/kinosalonkiSofia/JavaScript/add_edit_event.js";
     include '../include/header.php';
 

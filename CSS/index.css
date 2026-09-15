@@ -14,10 +14,14 @@
 }
 
 .about {
+  background-image: url(../kuvat/outsideKinosalonki.jpg);
+  background-size: cover;
+  padding: 50px;
   width: 100%;
+  height: auto;
 }
 
-.photos {
+/* .photos {
   margin-top: 10px;
   margin-bottom: 10px;
   width: 100%;
@@ -29,12 +33,22 @@
 .photos img {
   width: 32%;
   height: auto;
-}
+} */
 
 .about p {
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px; */
   padding: 10px;
+  font-size: 2vw;
 }
-/* a list of current events on the main page */
+
+/* ========================================
+   TODAY'S EVENTS
+   ======================================== */
+
 .eventsToday {
   margin-bottom: 5px;
   margin: auto;

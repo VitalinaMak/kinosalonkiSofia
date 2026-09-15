@@ -187,6 +187,15 @@
   display: none;
 }
 
+.button.white {
+  background-color: var(--cinema-whiteish);
+  color: var(--darkblue);
+}
+/* DOENST FUKIN WÖRK */
+.button.white:hover {
+  background-color: var(--cinema-whiteish);
+  color: var(--darkblue);
+}
 /* ========================================
    SETTINGS SECTION
    ======================================== */
