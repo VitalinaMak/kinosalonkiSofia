@@ -10,6 +10,7 @@
 
     $pageTitle = "Tapahtumat";
     $extraCSS = "/kinosalonkiSofia/CSS/tapahtumat.css";
+    $ADextraCSS = "/kinosalonkiSofia/ADMIN/ad_tapahtumat.css"; // this or $ADextraCSS = $baseUrl . "/ADMIN/ad_tapahtumat.css"; 
     $extraJS = "/kinosalonkiSofia/JavaScript/tapahtumat.js";
     include '../include/header.php'; 
 ?>
