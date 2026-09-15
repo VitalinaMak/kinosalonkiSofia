@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         e.preventDefault(); //  stops page reload
 
-        const seatsString = document.getElementById("selectedSeatsInput").value;
+        const seatsString = document.getElementById("selectedSeatsInput").value;  //places that are selected by the user, stored in a hidden input in bookEvent
         const eventID = new URLSearchParams(window.location.search).get("id");
 
         console.log("seatsString: ", seatsString);

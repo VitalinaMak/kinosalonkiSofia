@@ -36,6 +36,7 @@
     $editMode = false; //if the user came from the account.php, turn on the edit mode; otherwise, it stays false
     $seats = "";
     $usersSeats = [];  //an array with numbers of user's current seats
+    $bookedSeatsAmount = 0;  //counter for the total amount of booked seats
 
     /* check if the URL contains information about amount of bookings for that user (it might be passed from the account.php if the user clicked on change button) */
     if (isset($_GET['total'])) {
@@ -66,7 +67,7 @@
         }
     }
 
-    $bookedSeatsAmount = count($bookings);  //amount of booked seats
+    $bookedSeatsAmount += count($bookings);  //amount of booked seats
 ?>
 
 <script>
@@ -138,6 +139,9 @@
                         </tr>
                     </tbody></table>
                 <?php elseif ($eventType == '2'): ?>
+                    <p>
+                        <?php ?>
+                    </p>
                     <p>Paikkoja jäljellä: <span id="placesLeft"><?=$maxVisitors - $bookedSeatsAmount?></span></p>  <!-- if event type is 2 (limited amount of places), show the amount of places left -->
                 <?php else: ?>
                     <p>Ilmoittautuneiden määrä: <span id="bookedCount"><?=$bookedSeatsAmount?></span></p>  <!-- if event type is 3 (unlimited amount of places), show the total number of participants-->
