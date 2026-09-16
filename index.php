@@ -24,30 +24,17 @@
         $date = date('Y-m-d');   //different date format for using in sql-query
       ?>
       <div class="upcomingEvents">
-          <table class="eventsToday">
-              <tbody>
                 <?php
                 /* printing out the date, time and the name of event (test) */
-                  $sql = "SELECT id, EXTRACT(HOUR FROM event_time) AS event_hour, TO_CHAR(event_time, 'MI') AS event_minute, event_name, location, max_visitors FROM events WHERE event_date = '$date';";  //DATE_FORMAT(event_time, '%i') returns minutes in 2-digits format
-                  $result = $pdo->query($sql);
-                  $rows = $result->fetchAll(PDO::FETCH_ASSOC);
-
-                  if (!empty($rows)):
-                    foreach ($rows as $row):
-                  ?>
-                    <tr onclick="window.location='bookEvent.php?id=<?= $row['id'] ?>'">
-                        <td><?= $row['event_hour'] . ":" . $row['event_minute'] ?></td>
-                        <td style="font-weight: bold"><?= htmlspecialchars($row['event_name']) ?></td>
-                        <td><?= htmlspecialchars($row['location']) ?></td>
-                        <td><?= $row['max_visitors'] ?> paikkaa jäljellä</td>
-                    </tr>
-                  <?php
-                    endforeach;
-                    else: ?>
-                    <p class='nothingFound'>Tapahtumia ei löytynyt</p>
-                  <?php endif; ?>
-              </tbody>
-          </table>
+                  
+                include 'MODULES/events_query.php';  //base query for events (NOTE: it's not completed here!). It uses variables $sql, $params[]
+                
+                $sql .= " WHERE events.event_date = :date GROUP BY events.id ORDER BY events.event_time;";  //end of the query
+                
+                $params[':date'] = $date;
+                
+                include "MODULES/events_display.php";  //display events. It uses variables $sql, $params, $hasRows, $row, $bgColor, $typeForColor, $kuvaPath, $placesNumber, $ageLimit, $imageHtml 
+                ?>
           <a href="USER/tapahtumat.php" class="btn btn-outline-danger">Katso kaikki tapahtumat</a>  
         </div>   
     </main>

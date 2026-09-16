@@ -186,7 +186,7 @@
             }
 
             /* -------FILE 1-------- */
-            include '../MODULES/events_query.php';  //query for events. It uses variables $search, $order, $eventType, and $ageLimitFilter
+            include '../MODULES/events_query.php';  //base query for events (NOTE: it's uncompleted!). It uses variables $sql, $params[]
             /* -------FILE 1 END-------- */
             
             /* WHERE is added only if searching */
@@ -218,10 +218,10 @@
 
             
             
-            $sql .= " GROUP BY events.id ORDER BY $order, events.event_time";
+            $sql .= " GROUP BY events.id ORDER BY $order, events.event_time;";
 
             /* -------FILE 2-------- */
-            include '../MODULES/events_display.php';  //display events. It uses variables $sql, $params, and $types
+            include '../MODULES/events_display.php';  //display events. It uses variables $sql, $params, $hasRows, $row, $bgColor, $typeForColor, $kuvaPath, $placesNumber, $ageLimit, $imageHtml 
             /* -------FILE 2 END-------- */
             
         ?>
