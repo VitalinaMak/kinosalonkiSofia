@@ -160,8 +160,6 @@
                 $search = "%" . trim($_GET['search']) . "%";
             }
 
-            
-
             /* filtering by event type */
             if (isset($_GET['type'])) {
                 switch ($_GET['type']) {

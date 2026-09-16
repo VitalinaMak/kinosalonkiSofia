@@ -1,0 +1,234 @@
+/* ========================================
+   EVENT CARD STYLING
+   ======================================== */
+
+.eventInfo {
+  flex-grow: 1;
+  padding: 10px;
+  gap: 10px;
+  display: grid;
+  align-items: end;
+  background-color: var(--type-color);
+  border-radius: 10px;
+  border: 2px double rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-areas:
+    "image adress day"
+    "image header time"
+    "image description description"
+    "image places places";
+}
+
+.eventInfo:hover {
+  cursor: pointer;
+  background-color: var(--type-color);
+}
+
+.eventInfo h4.event_adress {
+  grid-area: adress;
+  width: fit-content;
+  text-align: left;
+}
+
+.eventInfo h4.event_adress svg {
+  grid-area: adress;
+  align-self: end;
+}
+
+.eventInfo h4.event_day {
+  grid-area: day;
+  margin: 0;
+  text-align: right;
+  text-wrap: nowrap;
+}
+
+.eventInfo h3.event_time {
+  grid-area: time;
+  text-align: right;
+}
+
+.eventInfo h3.event_time span.klo {
+  font-size: 0.9rem;
+}
+
+.eventInfo h3.event_header {
+  grid-area: header;
+}
+
+.eventInfo span.event_age {
+  grid-area: header;
+  display: inline-block;
+  background-color: var(--dark-teal);
+  color: white;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.eventInfo p.event_description {
+  grid-area: description;
+  margin: 0;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.eventInfo p.places {
+  grid-area: places;
+  margin: 0;
+  padding: 5px 12px;
+  width: fit-content;
+  text-align: left;
+  border-radius: 20px;
+  background: var(--pinkish-tr);
+}
+
+.eventInfo img {
+  grid-area: image;
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.eventInfo:not(:has(img)) {
+  grid-template-columns: 3fr 1fr;
+  grid-template-areas:
+    "adress day"
+    "header time"
+    "description description"
+    "places places";
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* TABLET */
+@media (max-width: 800px) {
+  .sortingOptions,
+  .filteringOptions {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
+  }
+
+  .event.is-admin {
+    grid-template-columns: 1fr;
+  }
+
+  .event .button {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+    writing-mode: horizontal-tb;
+    transform: rotate(0deg);
+  }
+
+  .eventInfo {
+    grid-template-columns: 200px 1fr;
+    grid-template-areas:
+      "image date"
+      "image header"
+      "image description";
+  }
+
+  .eventInfo:not(:has(img)) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "date"
+      "description";
+  }
+
+  .eventInfo .event_date {
+    text-align: left;
+  }
+
+  .eventInfo img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* PHONE */
+@media (max-width: 490px) {
+  .top {
+    height: fit-content;
+    padding: 10px 0 20px 0;
+    border-radius: 0 0 5px 5px;
+    gap: 5px;
+  }
+
+  .top h1 {
+    font-size: 3rem;
+    word-wrap: break-word;
+    width: fit-content;
+  }
+
+  .sortingOptions,
+  .filteringOptions {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+  }
+
+  .eventListActions {
+    border-radius: 5px;
+    margin: 0 10px;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+  }
+
+  .eventList {
+    padding: 10px;
+  }
+
+  .eventInfo {
+    grid-template-columns: 1fr 1fr;
+    justify-items: left;
+    grid-auto-rows: auto;
+    grid-template-areas:
+      "image image"
+      "adress adress"
+      "header header"
+      "day time"
+      "description description"
+      "places places";
+  }
+}
+
+/* ========================================
+   EVENT LIST CONTAINER
+   ======================================== */
+
+.eventList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  margin: 0;
+  padding: 20px;
+  gap: 10px;
+  max-width: 100%;
+  z-index: 1;
+}
+
+.eventList .button {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  font-weight: 600;
+}

@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../CSS/events_display.css">
+
 <?php
     $stmt = $pdo->prepare($sql);  //prepare statement
 
@@ -28,10 +30,10 @@
         // Build the image tag only if path exists
         $imageHtml = "";
         if ($kuvaPath) {
-            $imageHtml = "<img src='$baseUrl/kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>";
+            $imageHtml = "<img src='../kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>";
         }
         
-        echo "<div class='event {$typeForColor}' onclick='window.location.href=\""."{$baseUrl}/USER/bookEvent.php?id=".$row['id']."\"'>
+        echo "<div class='event {$typeForColor}' onclick='window.location.href=\""."../USER/bookEvent.php?id=".$row['id']."\"'>
 
                 <div class='eventInfo'>
                     <h3 class='event_header'>{$row['event_name']} <span class='event_age'>{$ageLimit}</span></h3>

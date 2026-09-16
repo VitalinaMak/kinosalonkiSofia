@@ -1,6 +1,6 @@
 <?php
 
-    require_once 'include/configuration.php';  //connection to database and session start
+    require_once '../include/configuration.php';  //connection to database and session start
 
     $error = '';  //variable for error display
     $accountType = ''; //variable for account type display
@@ -19,9 +19,9 @@
         if ($user && password_verify($password, $user->password_hash)) {
             $_SESSION['user_id'] = $user->id;
             if ($user->id == 1) {
-                $accountType = $baseUrl . '/ADMIN/ad_account.php';  // if the registered person is admin, save the link to admin accoint page
+                $accountType = '../ADMIN/ad_account.php';  // if the registered person is admin, save the link to admin accoint page
             } else {
-                $accountType = $baseUrl . '/USER/account.php';  // otherwise, save the link to regular account page
+                $accountType = '../USER/account.php';  // otherwise, save the link to regular account page
             }
             header("Location: " . $accountType);
             exit();
@@ -32,7 +32,7 @@
 
     $pageTitle = "Login";
     $extraCSS = $baseUrl . "/CSS/SignUp_LogIn.css";
-    include 'include/header.php'; //connection to header. It has to be after form handling, otherwise header("Location: tapahtumat.php") won't work
+    include '../include/header.php'; //connection to header. It has to be after form handling, otherwise header("Location: tapahtumat.php") won't work
 ?>
 
 <main class="login_page">
@@ -63,7 +63,7 @@
 
             <button type="submit" class="">Submit</button>
             
-            <p>Don't have an account? <a href="<?= $baseUrl ?>/signup.php">Sign up</a> </p>
+            <p>Don't have an account? <a href="signup.php">Sign up</a> </p>
         </form>
 
         <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && $error != ""): ?>
@@ -72,4 +72,4 @@
 
     </div>    
 </main>
-<?php include 'include/footer.php'; ?>
+<?php include '../include/footer.php'; ?>

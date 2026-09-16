@@ -1,7 +1,7 @@
 <?php
 
-    require_once 'include/configuration.php';  //connection to database and session start
-    $extraJS = "JavaScript/SignUp_LogIn.js";
+    require_once '../include/configuration.php';  //connection to database and session start
+    $extraJS = "../JavaScript/SignUp_LogIn.js";
     $error = '';  //variable for error display
 
     /* form handling */
@@ -33,7 +33,7 @@
             $stmt = $pdo->prepare("INSERT INTO users (email, username, password_hash) VALUES (?, ?, ?);");
 
             if ($stmt->execute([$email, $username, $hashedPassword])) {
-                header("Location: account.php");
+                header("Location: ../account.php");
                 exit;
             } else {
                 echo "Error creating account.";
@@ -44,8 +44,8 @@
     }
 
     $pageTitle = "SignUp";
-    $extraCSS = $baseUrl . "/CSS/SignUp_LogIn.css";
-    include 'include/header.php'; 
+    $extraCSS = "../CSS/SignUp_LogIn.css";
+    include '../include/header.php'; 
 ?>
 <main class="signup_page">
 
@@ -96,5 +96,5 @@
     </div>
 
 </main>   
-<?php include 'include/footer.php'; ?>
+<?php include '../include/footer.php'; ?>
 
