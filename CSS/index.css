@@ -1,92 +1,97 @@
-H2 
-
-/* WE DONT HAVE upcomingEvents class */
-/* .upcomingEvents {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.upcomingEvents {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-around;
-  padding: 15px;
-} */
-
-.about {
-  background-image: url(../kuvat/outsideKinosalonki.jpg);
-  background-size: cover;
-  padding: 50px;
-  width: 100%;
-  height: auto;
-}
-
-/* .photos {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  gap: 5px;
-}
-.photos img {
-  width: 32%;
-  height: auto;
-} */
-
-.about p {
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px; */
-  padding: 10px;
-  font-size: 2vw;
-}
-
 /* ========================================
-   TODAY'S EVENTS
-   ======================================== */
-
-.eventsToday {
-  margin-bottom: 5px;
-  margin: auto;
-}
-.eventsToday tr {
-  border: solid black 1px;
-  border-radius: 10px;
-}
-.eventsToday tr :hover {
-  cursor: pointer;
-}
-.eventsToday td {
-  padding: 7px;
+   GRID SETTINGS
+======================================== */
+.index_page {
+  display: grid;
+  min-height: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(2, minmax(260px, 1fr));
+  grid-template-areas:
+    "historyarea todayarea"
+    "menuarea todayarea";
+  align-items: stretch;
+  /* column-gap: 2em; */
 }
 
-/* ========================================
-   EVENT LIST CONTAINER
-   ======================================== */
+.history,
+.menu,
+.today {
+  min-width: 0;
+  min-height: 0;
+  padding: var(--default-padding);
+}
 
-/* .eventList {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.history,
+.menu {
   position: relative;
-  margin: 0;
-  padding: 20px;
-  gap: 10px;
-  max-width: 100%;
-  z-index: 1;
+  overflow: visible;
+
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+
+  /* box-shadow: inset -35px 0 35px -15px var(--cinema-whiteish); */
+  box-shadow: inset -22px 0px 11px -10px var(--cinema-whiteish);
+  /* 
+  -webkit-box-shadow: inset -22px 0px 11px -10px #000000; 
+box-shadow: inset -22px 0px 11px -10px #000000;
+  */
 }
 
-.eventList .button {
-  width: 100%;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 1.25rem;
-  font-weight: 600;
+.history {
+  background-image: url(../kuvat/KS_outside_sign.jpg);
+}
+
+.menu {
+  background-image: url(../kuvat/ks1.avif);
+}
+
+/* .today { */
+/* background-image: url(../kuvat/wallpaper.jpg); */
+/* } */
+
+/* .history p,
+.menu p {
+  font-size: 2vw;
+  color: var(--cinema-whiteish);
+} */
+
+/* ========================================
+   MEDIA QUERIES
+======================================== */
+
+/* Extra small devices (phones, 600px and down) */
+/* @media only screen and (max-width: 600px) {
+  .example {
+    background: red;
+  }
+} */
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* @media only screen and (min-width: 600px) {
+  .example {
+    background: green;
+  }
+} */
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {
+  .example {
+    background: blue;
+  }
+} */
+
+/* Large devices (laptops/desktops, 992px and up) */
+/* @media only screen and (min-width: 992px) {
+  .example {
+    background: orange;
+  }
+} */
+
+/* Extra large devices (large laptops and desktops, 1200px and up)  - DELETETHIS; IT'S BE DEFAULT*/
+/* @media only screen and (min-width: 1200px) {
+  .example {
+    background: pink;
+  }
 } */
