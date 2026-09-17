@@ -1,9 +1,9 @@
 <?php 
-    require_once '../include/configuration.php';
+    require_once '../INCLUDE/configuration.php';
     $pageTitle = "AddEvent";
     $extraCSS = "/kinosalonkiSofia/ADMIN/add_edit_event.css";
-    $extraJS = "/kinosalonkiSofia/JavaScript/add_edit_event.js";
-    include '../include/header.php';
+    $extraJS = "/kinosalonkiSofia/JAVASCRIPT/add_edit_event.js";
+    include '../INCLUDE/header.php';
 
     /* ini_set('display_errors', 1);
     error_reporting(E_ALL); */
@@ -89,5 +89,5 @@
 
 </main>
 
-<?php include '../include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>
 

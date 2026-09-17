@@ -1,7 +1,7 @@
 <?php 
     $pageTitle = "Index";
     $extraCSS = "../CSS/index.css";
-    include '../include/header.php'; 
+    include '../INCLUDE/header.php'; 
 ?>
 
 
@@ -10,9 +10,9 @@
           <!-- Pictures and "history" here -->
 <!--           
           <div class="photos">
-            <img src="kuvat/interior.jpg" alt="kinosalonki sisällä">
-            <img src="kuvat/building.jpg" alt="piha">
-            <img src="kuvat/posters.webp" alt="kuvat">
+            <img src="KUVAT/interior.jpg" alt="kinosalonki sisällä">
+            <img src="KUVAT/building.jpg" alt="piha">
+            <img src="KUVAT/posters.webp" alt="kuvat">
           </div> -->
           
           <p>Vuonna 1844 Sofia Lybecker perustui köyhille tytöille ja orpolapsille tarkoitettu Lybeckerin tyttökoulu hänen äitinsä perintörahoilla. Koulu toimi aluksi ilman omaa tilaa, mutta vuonna 1859 Sofian sisko Helene Bergbom ja hänen miehensä Carl Gustaf lahjoittivat koululle omistamansa talon nykyiseltä Reiponkadulta. Koulu toimi tässä talossa seuraavat 125 vuotta. Entistä koulurakennusta kutsutaan nykyään Sofian taloksi ja siinä toimii Kinosalonki Sofia. Me jatkamme Sofian talon kasvatustyötä yhteisöpedagogisissa kulttuurihankkeissamme sekä järjestämällä ja tukemalla elokuva- ja mediakasvatusta.</p>    
@@ -40,4 +40,4 @@
         <a href="../USER/tapahtumat.php" class="btn btn-outline-danger">Katso kaikki tapahtumat</a>  
     </main>
 
-<?php include '../include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>

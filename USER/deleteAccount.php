@@ -1,5 +1,5 @@
 <?php
-    require_once 'include/configuration.php';  //connection to database and session start
+    require_once 'INCLUDE/configuration.php';  //connection to database and session start
 
     if (isset($_POST['delete_account'])) {
         $userID = ($_SESSION['user_id']);  //current user's id

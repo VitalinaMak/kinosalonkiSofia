@@ -1,5 +1,5 @@
 <?php
-    include '../include/configuration.php';
+    include '../INCLUDE/configuration.php';
 
     /* if the user is not registered, redirect to the login page */
     if (!isset($_SESSION['user_id'])) {
@@ -9,9 +9,9 @@
 
     $extraCSS = $baseUrl . "/CSS/account.css";
     $ADextraCSS = $baseUrl . "/ADMIN/ad_account.css";
-    $extraJS = $baseUrl . "/JavaScript/account.js";
+    $extraJS = $baseUrl . "/JAVASCRIPT/account.js";
 
-    include '../include/header.php';
+    include '../INCLUDE/header.php';
 
     /* logout handling */
     if (isset($_GET['action']) && $_GET['action'] === 'logout') {
@@ -212,4 +212,4 @@
 
 
 </main>   
-<?php include '../include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>

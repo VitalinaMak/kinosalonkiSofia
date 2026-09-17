@@ -1,6 +1,6 @@
 <?php
 
-    require_once '../include/configuration.php';  //connection to database and session start
+    require_once '../INCLUDE/configuration.php';  //connection to database and session start
 
     $error = '';  //variable for error display
     $accountType = ''; //variable for account type display
@@ -32,7 +32,7 @@
 
     $pageTitle = "Login";
     $extraCSS = $baseUrl . "/CSS/SignUp_LogIn.css";
-    include '../include/header.php'; //connection to header. It has to be after form handling, otherwise header("Location: tapahtumat.php") won't work
+    include '../INCLUDE/header.php'; //connection to header. It has to be after form handling, otherwise header("Location: tapahtumat.php") won't work
 ?>
 
 <main class="login_page">
@@ -72,4 +72,4 @@
 
     </div>    
 </main>
-<?php include '../include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>

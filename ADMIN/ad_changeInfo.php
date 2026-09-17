@@ -1,5 +1,5 @@
 <?php
-    require_once '../include/configuration.php';  //connection to database and session start
+    require_once '../INCLUDE/configuration.php';  //connection to database and session start
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);

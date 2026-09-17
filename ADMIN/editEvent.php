@@ -1,8 +1,8 @@
 <?php 
     $pageTitle = "EditEvent";
     $extraCSS = "/kinosalonkiSofia/ADMIN/add_edit_event.css";
-    $extraJS = "/kinosalonkiSofia/JavaScript/add_edit_event.js";
-    include '../include/header.php';
+    $extraJS = "/kinosalonkiSofia/JAVASCRIPT/add_edit_event.js";
+    include '../INCLUDE/header.php';
     
     /* delete event (it has to be placed before any output) */
     if (isset($_GET['delete']) && isset($_GET['id'])) {
@@ -73,7 +73,7 @@
                                     <input type="hidden" name="current_image" value="<?= htmlspecialchars($row['event_image']); ?>">  <!-- ..so here is another input (basicaly it keeps track of what the user currently sees) -->
                                     <input type="hidden" name="original_image" value="<?= htmlspecialchars($row['event_image']); ?>"> <!-- and one more hidden input to store the original image from the database -->
                                     <input type="hidden" name="remove_image" value="0">  <!-- a flag that signals if the user clicked “remove image”  -->
-                                    <img id="preview" src="<?= $baseUrl ?>/kuvat/tapahtumaKuvat/<?= htmlspecialchars($picture) ?>" alt="Uploaded Image">
+                                    <img id="preview" src="<?= $baseUrl ?>/KUVAT/tapahtumaKuvat/<?= htmlspecialchars($picture) ?>" alt="Uploaded Image">
                                     <a id="remove-button" class="button" href="javascript:void(0)" onclick="removeImage()"> Poistaa kuvaa</a>  <!-- a link to remove the picture -->
                                 </label>
                             </div>
@@ -130,7 +130,7 @@
                 
                 /* picture handling - START */
 
-                $uploadFolder = __DIR__ . "/../kuvat/tapahtumaKuvat/";
+                $uploadFolder = __DIR__ . "/../KUVAT/tapahtumaKuvat/";
                 $allowedTypes = ['jpg','jpeg','png','gif','webp'];
 
                 $currentImage = isset($_POST['current_image']) ? basename($_POST['current_image']) : "";  //the value of the previous image from the hidden input. If it's empty, leave it empty, othervise save the name of the file
@@ -243,5 +243,5 @@
     </div>
 
 </main>
-<?php include '../include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>
 
