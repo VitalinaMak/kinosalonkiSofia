@@ -27,7 +27,7 @@
     <header> 
         <div class="logo-ksofia">
             <a href="../COMMON/index.php" class="logo-link">
-                <img src="../KUVAT/logot/logo_black.png" alt="logo" class="logo">
+                <img src="../IMAGES/logot/logo_black.png" alt="logo" class="logo">
             </a>
             <h2 class="kinosalonkisofia">Kinosalonki Sofia</h2>
         </div>

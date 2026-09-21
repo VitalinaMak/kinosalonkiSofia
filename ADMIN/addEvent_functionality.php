@@ -24,7 +24,7 @@
 
             elseif ($_FILES["eventPicture"]["error"] === UPLOAD_ERR_OK) {
         
-                $target_dir =  __DIR__ . "/../KUVAT/tapahtumaKuvat/";  //defines the folder where the file will be saved
+                $target_dir =  __DIR__ . "/../IMAGES/tapahtumaKuvat/";  //defines the folder where the file will be saved
                 $target_file = basename($_FILES["eventPicture"]["name"]);  //removes any directory path and keeps only the file name
                 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));  //retrieves the file extention (.png/.jpg etc) and converts it to lowercase
 

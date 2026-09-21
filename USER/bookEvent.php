@@ -96,7 +96,7 @@
             2. if the event type is 1 (movie), show the table with seats, if the event type is 2 (limited amount of places), show the amount of places left, if the event type is 3 (unlimited amount of places), show the total number of participants
             -->
             <?php if (!empty($event["event_image"])): ?>    
-                <img src="<?= $baseUrl ?>/KUVAT/tapahtumaKuvat/<?= $event['event_image'] ?>" alt="Event Image">  <!-- event's image (if it exists) -->
+                <img src="<?= $baseUrl ?>/IMAGES/tapahtumaKuvat/<?= $event['event_image'] ?>" alt="Event Image">  <!-- event's image (if it exists) -->
             <?php endif ?>
             <p><?= $event['description'] ?></p>  <!-- Here add all the details about the event - image, decription etc. onclick on place it checks if you're logged in, and if not - sends you to SIGN UP page! -->
 

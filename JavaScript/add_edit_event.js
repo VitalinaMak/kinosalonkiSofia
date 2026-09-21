@@ -109,7 +109,7 @@ function removeImage() {
   fileInput.value = ""; //clear the field for file input
   preview.src = ""; // Clear the source
   preview.style.display = "none"; // Hide the image
-  //   preview.src = "kuvat/tapahtumaKuvat/noImage.png"; //change the image in preview to the default one
+  //   preview.src = "IMAGES/tapahtumaKuvat/noImage.png"; //change the image in preview to the default one
 
   // HIDE the button because there is no longer an image
   if (removeBtn) removeBtn.style.display = "none";

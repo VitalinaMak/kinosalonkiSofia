@@ -270,7 +270,7 @@
                 // Build the image tag only if path exists
                 $imageHtml = "";
                 if ($kuvaPath) {
-                    $imageHtml = "<img src='$baseUrl/KUVAT/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>";
+                    $imageHtml = "<img src='$baseUrl/IMAGES/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>";
                 }
                 
                 echo "<div class='event {$typeForColor} " . 'is-admin' . "' onclick='window.location.href=\""."{$baseUrl}/bookEvent.php?id=".$row['id']."\"'>
