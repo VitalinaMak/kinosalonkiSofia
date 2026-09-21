@@ -3,8 +3,8 @@
     require_once '../INCLUDE/configuration.php';  //connection to database and session start
 
     /* if the user is admin, redirect to the admin's tapahtumat page */
-    if (isset($_SESSION['user_id']) && $_SESSION['user_id']==1) {  //admin's account shouldn't be deleted, so it's id always remains 1
-        header("Location: $baseUrl/ADMIN/ad_tapahtumat.php");
+    if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true) {
+        header("Location: {$baseUrl}/ADMIN/ad_tapahtumat.php");
         exit();
     }
 

@@ -22,15 +22,18 @@
     }
 
     $userID = (int)($_SESSION['user_id']);  // registered user's id
+    $isAdmin = false;
 
     
-    $deleteAccountBtn = ""; 
     /* if the user is not the admin, redirect to the user account page */
-    if ($userID != 1) {
-       header("Location: {$baseUrl}/USER/account.php");
-       exit();
+    if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+        header("Location: {$baseUrl}/USER/account.php");
+        exit();
+    } else {
+        $isAdmin = true; 
     }
-
+        
+    $deleteAccountBtn = ""; 
 
     /* retrieve all information about the user from the database */
     $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?;");
@@ -133,7 +136,7 @@
             <div class="reservations info">
 
                 <?php
-                if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == 1) {
+                if ($isAdmin) {
 
                     echo <<<HTML
                         <!--___TEMPLATE FOR ADMIN'S ASKING FOR MORE PLACES___-->

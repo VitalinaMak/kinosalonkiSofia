@@ -18,6 +18,7 @@
         /* verify password and if everything is OK, save user's id into session and go to the page with events */
         if ($user && password_verify($password, $user->password_hash)) {
             $_SESSION['user_id'] = $user->id;
+            $_SESSION['is_admin'] = ($user->is_admin) ? true : false;  // if the registered person is admin, save it to session variable
             if ($user->id == 1) {
                 $accountType = '../ADMIN/ad_account.php';  // if the registered person is admin, save the link to admin accoint page
             } else {

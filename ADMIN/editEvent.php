@@ -12,6 +12,12 @@
         header("Location: $baseUrl/ADMIN/ad_tapahtumat.php");
         exit();
     }
+
+    /* check if the user is admin */
+    if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+        header("Location: {$baseUrl}/COMMON/login.php");
+        exit();
+    }
 ?>
 
 <main class="editEvent_page">
