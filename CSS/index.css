@@ -5,12 +5,11 @@
   display: grid;
   min-height: 100%;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(2, minmax(260px, 1fr));
+  grid-template-rows: auto;
   grid-template-areas:
     "historyarea todayarea"
     "menuarea todayarea";
   align-items: stretch;
-  /* column-gap: 2em; */
 }
 
 .history,
@@ -32,66 +31,43 @@
   background-attachment: fixed;
 
   /* box-shadow: inset -35px 0 35px -15px var(--cinema-whiteish); */
-  box-shadow: inset -22px 0px 11px -10px var(--cinema-whiteish);
-  /* 
-  -webkit-box-shadow: inset -22px 0px 11px -10px #000000; 
-box-shadow: inset -22px 0px 11px -10px #000000;
-  */
+  /* box-shadow: inset -22px 0px 11px -10px var(--cinema-whiteish); */
 }
 
 .history {
-  background-image: url(../kuvat/KS_outside_sign.jpg);
+  background-image: url(../IMAGES/KS_outside_sign.jpg);
 }
 
 .menu {
-  background-image: url(../kuvat/ks1.avif);
+  background-image: url(../IMAGES/ks1.avif);
 }
 
 /* .today { */
 /* background-image: url(../kuvat/wallpaper.jpg); */
 /* } */
 
-/* .history p,
+.history p,
 .menu p {
-  font-size: 2vw;
+  /* font-size: 2vw; */
   color: var(--cinema-whiteish);
-} */
+}
 
 /* ========================================
    MEDIA QUERIES
 ======================================== */
 
-/* Extra small devices (phones, 600px and down) */
-/* @media only screen and (max-width: 600px) {
-  .example {
-    background: red;
-  }
-} */
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-/* @media only screen and (min-width: 600px) {
-  .example {
-    background: green;
-  }
-} */
-
 /* Medium devices (landscape tablets, 768px and up) */
-/* @media only screen and (min-width: 768px) {
-  .example {
-    background: blue;
+@media only screen and (max-width: 768px) {
+  .index_page {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "historyarea"
+      "todayarea"
+      "menuarea";
+    min-height: 100%;
   }
-} */
 
-/* Large devices (laptops/desktops, 992px and up) */
-/* @media only screen and (min-width: 992px) {
-  .example {
-    background: orange;
-  }
-} */
-
-/* Extra large devices (large laptops and desktops, 1200px and up)  - DELETETHIS; IT'S BE DEFAULT*/
-/* @media only screen and (min-width: 1200px) {
-  .example {
-    background: pink;
-  }
-} */
+  /* .today {
+    box-shadow: 0px 0px 11px 11px var(--cinema-whiteish);
+  } */
+}
