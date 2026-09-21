@@ -1,8 +1,8 @@
 <?php
-    require_once '../include/configuration.php';
+    require_once '../INCLUDE/configuration.php';
     
     /* include PHPMailer-library to send emails. It's already installled in the project (files composer.json, composer.lock and folder vendor) */
-    require '../vendor/autoload.php';
+    require '../VENDOR/autoload.php';
 
     /* PHPMailer classes */
     use PHPMailer\PHPMailer\PHPMailer;

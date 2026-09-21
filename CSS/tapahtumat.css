@@ -31,9 +31,9 @@ h4 {
 
   /* background-image:
     linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-    url("../kuvat/wallpaper.svg"); */
+    url("../KUVAT/wallpaper.svg"); */
 
-  background-image: url("../kuvat/shtory.jpg");
+  background-image: url("../KUVAT/shtory.jpg");
 
   background-size: cover;
   background-repeat: no-repeat;

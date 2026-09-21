@@ -1,7 +1,7 @@
 <?php
     header('Content-Type: application/json');
 
-    require_once 'include/configuration.php';
+    require_once 'INCLUDE/configuration.php';
 
     // get event id
     $eventId = $_POST['event_id'] ?? null;

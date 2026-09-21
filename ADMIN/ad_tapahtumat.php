@@ -1,6 +1,6 @@
 <?php 
 
-    require_once '../include/configuration.php';  //connection to database and session start
+    require_once '../INCLUDE/configuration.php';  //connection to database and session start
 
     /* check if the user is admin and if not, redirect to tapahtumat-page for users*/
     if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1) {  //admin's account shouldn't be deleted, so it's id always remains 1
@@ -11,8 +11,8 @@
     $pageTitle = "Tapahtumat";
     $extraCSS = "/kinosalonkiSofia/CSS/tapahtumat.css";
     $ADextraCSS = "/kinosalonkiSofia/ADMIN/ad_tapahtumat.css"; // this or $ADextraCSS = $baseUrl . "/ADMIN/ad_tapahtumat.css"; 
-    $extraJS = "/kinosalonkiSofia/JavaScript/tapahtumat.js";
-    include '../include/header.php'; 
+    $extraJS = "/kinosalonkiSofia/JAVASCRIPT/tapahtumat.js";
+    include '../INCLUDE/header.php'; 
 ?>
 
 <?php
@@ -270,7 +270,7 @@
                 // Build the image tag only if path exists
                 $imageHtml = "";
                 if ($kuvaPath) {
-                    $imageHtml = "<img src='$baseUrl/kuvat/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>";
+                    $imageHtml = "<img src='$baseUrl/KUVAT/tapahtumaKuvat/$kuvaPath' alt='{$row['event_name']}'/>";
                 }
                 
                 echo "<div class='event {$typeForColor} " . 'is-admin' . "' onclick='window.location.href=\""."{$baseUrl}/bookEvent.php?id=".$row['id']."\"'>
@@ -300,5 +300,5 @@
     </div>
 </main>
     
-<?php include '../include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>
 

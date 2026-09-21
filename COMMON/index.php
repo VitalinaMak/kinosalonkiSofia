@@ -1,7 +1,7 @@
 <?php 
     $pageTitle = "Index";
     $extraCSS = "../CSS/index.css";
-    include '../include/header.php'; 
+    include '../INCLUDE/header.php'; 
 ?>
 
 
@@ -40,4 +40,4 @@
   
     </main>
 
-<?php include '../include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>

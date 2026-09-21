@@ -1,7 +1,7 @@
 <?php
 
-    require_once '../include/configuration.php';  //connection to database and session start
-    $extraJS = "../JavaScript/SignUp_LogIn.js";
+    require_once '../INCLUDE/configuration.php';  //connection to database and session start
+    $extraJS = "../JAVASCRIPT/SignUp_LogIn.js";
     $error = '';  //variable for error display
 
     /* form handling */
@@ -45,7 +45,7 @@
 
     $pageTitle = "SignUp";
     $extraCSS = "../CSS/SignUp_LogIn.css";
-    include '../include/header.php'; 
+    include '../INCLUDE/header.php'; 
 ?>
 <main class="signup_page">
 
@@ -96,5 +96,5 @@
     </div>
 
 </main>   
-<?php include '../include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>
 
