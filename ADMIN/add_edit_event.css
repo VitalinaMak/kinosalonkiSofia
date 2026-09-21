@@ -121,7 +121,7 @@ textarea,
 select,
 .fileInputField {
   border-radius: var(--input-border-radius);
-  border: var(--input-border-width) solid var(--base-color);
+  border: var(--input-border-width) solid var(--base-color-tr);
   background-color: var(--cinema-whiteish);
   transition: var(--transition);
 }
@@ -252,7 +252,6 @@ input[readonly]:focus {
    RESPONSIVE DESIGN
    ============================================================ */
 
-/* Commented out - adjust breakpoint as needed for mobile layout */
 /* @media (max-width: 1100px) {
   .addEvent_page {
     width: min(600px, 100%);

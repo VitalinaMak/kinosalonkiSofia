@@ -1,4 +1,95 @@
 /* ========================================
+   FILTER COLOR VARIANTS
+   ======================================== */
+
+.filteringOptions a.event1,
+.filteringOptions a.event2,
+.filteringOptions a.event3,
+.filteringOptions a.age-18,
+.filteringOptions a.age-none {
+  border-color: var(--type-color);
+  color: var(--type-color);
+}
+
+.filteringOptions a[class*="event"]:hover,
+.filteringOptions a[class*="age-"]:hover {
+  background-color: var(--type-color);
+  color: white;
+}
+
+.event1 {
+  --type-color: var(--event1Filter);
+}
+
+.event2 {
+  --type-color: var(--event2Filter);
+}
+
+.event3 {
+  --type-color: var(--event3Filter);
+}
+
+.age-18,
+.age-none {
+  --type-color: var(--dark-teal);
+}
+
+.event1:hover {
+  --type-color: var(--event1Filter);
+}
+
+.event2:hover {
+  --type-color: var(--event2Filter);
+}
+
+.event3:hover {
+  --type-color: var(--event3Filter);
+}
+
+.event1body {
+  --type-color: var(--event1);
+}
+
+.event2body {
+  --type-color: var(--event2);
+}
+
+.event3body {
+  --type-color: var(--event3);
+}
+
+.event1body:hover {
+  --type-color: var(--event1Hover);
+}
+
+.event2body:hover {
+  --type-color: var(--event2Hover);
+}
+
+.event3body:hover {
+  --type-color: var(--event3Hover);
+}
+
+#removeFilterButton {
+  margin-top: 12px;
+  margin-bottom: 0;
+  color: var(--cinema-pink);
+  border-color: var(--cinema-pink);
+}
+
+#removeFilterButton:hover {
+  background-color: var(--cinema-pink);
+  color: #ffffff;
+}
+
+.filteringOptions p {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  color: var(--base-color);
+  font-weight: 600;
+}
+
+/* ========================================
    EVENT CARD STYLING
    ======================================== */
 
@@ -192,7 +283,7 @@
   }
 
   .eventList {
-    padding: 10px;
+    padding: var(--default-padding);
   }
 
   .eventInfo {
