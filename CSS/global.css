@@ -63,6 +63,9 @@
   --form-label-width: 50px;
   --default-padding: 10px;
   --default-margin: 10px;
+
+  /* TINT FOR IMAGES */
+  --tint: linear-gradient(90deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45));
 }
 
 /* ========================================

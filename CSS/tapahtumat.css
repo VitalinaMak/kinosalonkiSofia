@@ -181,3 +181,10 @@ button.sortButton {
   color: white;
   border-color: var(--base-color);
 }
+
+/* ========================================
+   ADDITIONAL to events_display.php
+   ======================================== */
+.eventList {
+  padding: 20px;
+}

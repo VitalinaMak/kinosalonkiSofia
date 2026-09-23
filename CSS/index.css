@@ -1,20 +1,31 @@
+/* ACTION LIST:
+  - align the elements "on pictures" to be in the centre vertically
+  - apply black tint to images
+  - 
+*/
+
 /* ========================================
    GRID SETTINGS
 ======================================== */
 .index_page {
+  padding: 1em;
   display: grid;
-  min-height: 100%;
+  min-height: fit-content;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   grid-template-areas:
     "historyarea todayarea"
     "menuarea todayarea";
   align-items: stretch;
+  /* align-self: center; */
+  /* justify-items: center; */
+  /* align-items: center;
+  align-content: center; */
+  gap: 1em;
 }
 
 .history,
-.menu,
-.today {
+.menu {
   min-width: 0;
   min-height: 0;
   padding: var(--default-padding);
@@ -25,49 +36,74 @@
   position: relative;
   overflow: visible;
 
-  background-size: 100% auto;
-  background-repeat: no-repeat;
+  /* flexbox?! */
+  display: flex;
+  flex-direction: column; /* arrange the paragraph and link vertically*/
+  justify-content: center; /*centers them vertically.*/
+  /* /flexbox */
+
+  background-size: 100% auto; /*makes the image as wide as the element while preserving its aspect ratio.*/
+  background-repeat: no-repeat; /*prevents tiling.*/
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: fixed; /* keeps the image fixed while scrolling. This can behave strangely on mobile.*/
+
+  border-radius: 10px;
 
   /* box-shadow: inset -35px 0 35px -15px var(--cinema-whiteish); */
   /* box-shadow: inset -22px 0px 11px -10px var(--cinema-whiteish); */
 }
 
 .history {
-  background-image: url(../IMAGES/KS_outside_sign.jpg);
+  background-image: var(--tint), url(../IMAGES/KS_outside_sign.jpg);
 }
 
 .menu {
-  background-image: url(../IMAGES/ks1.avif);
+  background-image: var(--tint), url(../IMAGES/ks1.avif);
 }
 
-/* .today { */
-/* background-image: url(../kuvat/wallpaper.jpg); */
-/* } */
+.today h2 {
+  padding-bottom: 10px;
+}
 
 .history p,
 .menu p {
-  /* font-size: 2vw; */
   color: var(--cinema-whiteish);
+  /* Viewport is the browser window size. 1vw = 1% of viewport width. If the viewport is 50cm wide, 1vw is 0.5cm. */
+  font-size: 20px;
+  font-weight: 600;
+  text-align: justify;
+}
+
+.history .button,
+.menu .button {
+  /* overriding global.css's rules: */
+  margin: 0 auto;
 }
 
 /* ========================================
    MEDIA QUERIES
 ======================================== */
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .index_page {
     grid-template-columns: 1fr;
+    min-height: fit-content;
+    grid-template-rows: auto;
     grid-template-areas:
       "historyarea"
       "todayarea"
       "menuarea";
-    min-height: 100%;
   }
 
-  /* .today {
-    box-shadow: 0px 0px 11px 11px var(--cinema-whiteish);
-  } */
+  .history,
+  .menu {
+    min-height: 300px;
+    background-size: cover; /**/
+    background-position: center; /*fills the entire panel, but may crop some parts of the image.*/
+    background-attachment: scroll; /*avoids mobile browser issues caused by 'fixed'*/
+  }
+  .history p,
+  .menu p {
+    font-size: 15px;
+  }
 }

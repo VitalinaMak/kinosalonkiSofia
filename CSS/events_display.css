@@ -204,7 +204,7 @@
    ======================================== */
 
 /* TABLET */
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .sortingOptions,
   .filteringOptions {
     display: none;
@@ -282,10 +282,6 @@
     justify-content: flex-start;
   }
 
-  .eventList {
-    padding: var(--default-padding);
-  }
-
   .eventInfo {
     grid-template-columns: 1fr 1fr;
     justify-items: left;
@@ -304,13 +300,19 @@
    EVENT LIST CONTAINER
    ======================================== */
 
+/* .eventList { */
+/* padding: var(--default-padding); */
+/* EXPERIMENTING w BOX-SHADOW */
+/* box-shadow: inset -22px 0px 11px -10px var(--base-color); */
+/* } */
+
 .eventList {
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   margin: 0;
-  padding: 20px;
+  /* padding: 20px; - needed only in tapahtumat.css */
   gap: 10px;
   max-width: 100%;
   z-index: 1;
