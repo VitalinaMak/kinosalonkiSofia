@@ -31,7 +31,7 @@
             </a>
             <h2 class="kinosalonkisofia">Kinosalonki Sofia</h2>
         </div>
-        <?= !isset($_SESSION['user_id']) ? "<a href='../COMMON/login.php' class='button'>Kirjaudu sisään</a>" : ($_SESSION['user_id'] == 1 ? "<a href='{$baseUrl}/ADMIN/ad_account.php' class='button'>Oma tili</a>" : "<a href='{$baseUrl}/USER/account.php' class='button'>Oma tili</a>") ?>
+        <?= !isset($_SESSION['user_id']) ? "<a href='../COMMON/login.php' class='button'>Kirjaudu sisään</a>" : ($_SESSION['is_admin'] === true ? "<a href='{$baseUrl}/ADMIN/ad_account.php' class='button'>Oma tili</a>" : "<a href='{$baseUrl}/USER/account.php' class='button'>Oma tili</a>") ?>
 
         <!-- DELETE THIS LATER; navigation to all our php files, thought might be useful-->
         <!-- OK. I made them into a drop-down list so they wouldn't interfere with the formatting -->

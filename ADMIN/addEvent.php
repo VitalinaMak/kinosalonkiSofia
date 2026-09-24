@@ -5,6 +5,11 @@
     $extraJS = "/kinosalonkiSofia/JAVASCRIPT/add_edit_event.js";
     include '../INCLUDE/header.php';
 
+    if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+        header("Location: {$baseUrl}/COMMON/login.php");
+        exit();
+    }
+
     /* ini_set('display_errors', 1);
     error_reporting(E_ALL); */
 ?>
