@@ -7,7 +7,6 @@
 <main class="index_page"> 
       <div class="about history" style="grid-area: historyarea">
         <p>Vuonna 1844 Sofia Lybecker perustui köyhille tytöille ja orpolapsille tarkoitettu Lybeckerin tyttökoulu hänen äitinsä perintörahoilla. Koulu toimi aluksi ilman omaa tilaa, mutta vuonna 1859 Sofian sisko Helene Bergbom ja hänen miehensä Carl Gustaf lahjoittivat koululle omistamansa talon nykyiseltä Reiponkadulta. Koulu toimi tässä talossa seuraavat 125 vuotta. Entistä koulurakennusta kutsutaan nykyään Sofian taloksi ja siinä toimii Kinosalonki Sofia. Me jatkamme Sofian talon kasvatustyötä yhteisöpedagogisissa kulttuurihankkeissamme sekä järjestämällä ja tukemalla elokuva- ja mediakasvatusta.</p> 
-        <a href="../USER/tapahtumat.php" class="button">Katso kaikki tapahtumat</a>  
       </div>
 
       <div class="about menu" style="grid-area: menuarea">
@@ -34,6 +33,9 @@
           
           include "../MODULES/events_display.php";  //display events. It uses variables $sql, $params, $hasRows, $row, $bgColor, $typeForColor, $kuvaPath, $placesNumber, $ageLimit, $imageHtml 
           ?>
+
+          <a href="../USER/tapahtumat.php" class="button">Katso kaikki tapahtumat</a>  
+          
         </div> 
       </div>
   

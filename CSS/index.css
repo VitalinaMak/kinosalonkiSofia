@@ -7,20 +7,26 @@
 /* ========================================
    GRID SETTINGS
 ======================================== */
+main {
+  background-image: var(--cream-tint), url(../IMAGES/WallpaperOrnament.JPEG);
+  box-shadow: inset 0 0 50px 20px var(--cinema-whiteish);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 .index_page {
-  padding: 1em;
+  padding: 1em 11em;
+
   display: grid;
   min-height: fit-content;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
   grid-template-areas:
-    "historyarea todayarea"
-    "menuarea todayarea";
+    "historyarea historyarea historyarea"
+    "todayarea todayarea menuarea";
   align-items: stretch;
-  /* align-self: center; */
-  /* justify-items: center; */
-  /* align-items: center;
-  align-content: center; */
   gap: 1em;
 }
 
@@ -28,7 +34,7 @@
 .menu {
   min-width: 0;
   min-height: 0;
-  padding: var(--default-padding);
+  padding: 1em 11em;
 }
 
 .history,
@@ -36,11 +42,9 @@
   position: relative;
   overflow: visible;
 
-  /* flexbox?! */
   display: flex;
   flex-direction: column; /* arrange the paragraph and link vertically*/
   justify-content: center; /*centers them vertically.*/
-  /* /flexbox */
 
   background-size: 100% auto; /*makes the image as wide as the element while preserving its aspect ratio.*/
   background-repeat: no-repeat; /*prevents tiling.*/
@@ -48,19 +52,19 @@
   background-attachment: fixed; /* keeps the image fixed while scrolling. This can behave strangely on mobile.*/
 
   border-radius: 10px;
-
-  /* box-shadow: inset -35px 0 35px -15px var(--cinema-whiteish); */
-  /* box-shadow: inset -22px 0px 11px -10px var(--cinema-whiteish); */
 }
 
 .history {
-  background-image: var(--tint), url(../IMAGES/KS_outside_sign.jpg);
+  background-image: var(--black-tint), url(../IMAGES/KS_outside_sign.jpg);
 }
-
 .menu {
-  background-image: var(--tint), url(../IMAGES/ks1.avif);
+  background-image: var(--black-tint), url(../IMAGES/ks1.avif);
 }
 
+/* .today {
+  background-color: var(--cinema-whiteish);
+  border-radius: 10px;
+} */
 .today h2 {
   padding-bottom: 10px;
 }
@@ -81,7 +85,7 @@
 }
 
 /* ========================================
-   MEDIA QUERIES
+            MEDIA QUERIES
 ======================================== */
 
 @media (max-width: 768px) {
