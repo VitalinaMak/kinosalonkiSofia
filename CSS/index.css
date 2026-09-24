@@ -7,14 +7,6 @@
 /* ========================================
    GRID SETTINGS
 ======================================== */
-main {
-  background-image: var(--cream-tint), url(../IMAGES/WallpaperOrnament.JPEG);
-  box-shadow: inset 0 0 50px 20px var(--cinema-whiteish);
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-}
 
 .index_page {
   padding: 1em 11em;
