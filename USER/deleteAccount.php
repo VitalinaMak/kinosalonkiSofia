@@ -16,7 +16,7 @@
             session_unset();
             session_destroy();
 
-            header("Location: index.php");  //redirect to index
+            header("Location: ../COMMON/index.php");  //redirect to index
             exit();
         }
     }
