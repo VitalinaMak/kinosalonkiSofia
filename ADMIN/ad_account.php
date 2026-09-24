@@ -3,7 +3,7 @@
 
     /* if the user is not registered, redirect to the login page */
     if (!isset($_SESSION['user_id'])) {
-        header("Location: $baseUrl/login.php");
+        header("Location: $baseUrl/COMMON/login.php");
         exit();
     }
 
@@ -17,7 +17,7 @@
     if (isset($_GET['action']) && $_GET['action'] === 'logout') {
         session_unset();  // remove all session variables
         session_destroy();  //destroy the session
-        header("Location: $baseUrl/index.php");
+        header("Location: $baseUrl/COMMON/index.php");
         exit();
     }
 
