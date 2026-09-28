@@ -1,5 +1,9 @@
 <?php
     require_once __DIR__ . '/configuration.php';
+
+    /* for developing purposes; delete later */
+    $currentPage = basename($_SERVER['PHP_SELF']); //stores the current PHP File Name
+    require_once __DIR__ . '/../MODULES/date_update.php'; //include the file with the function for updating event dates
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +42,7 @@
         <nav class="temporaryNavigation">
             <button class="navButton">List of pages</button>
             <div class="linksToPages">
+                <?php if ($currentPage === "index.php"): echo '<a href="../COMMON/index.php?update=1" target="_blank" rel="noopener noreferrer">Update dates</a>'; endif; ?>
                 <a href="../ADMIN/addEvent.php" target="_blank" rel="noopener noreferrer">addEvent</a>
                 <a href="../USER/bookEvent.php" target="_blank" rel="noopener noreferrer">bookEvent</a>
                 <a href="../ADMIN/editEvent.php?id=8" target="_blank" rel="noopener noreferrer">editTHEevent</a>
