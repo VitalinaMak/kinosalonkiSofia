@@ -1,8 +1,8 @@
 <?php 
     $pageTitle = "BookEvent";
-    $extraCSS = "CSS/book_event.css";
-    $extraJS = "JavaScript/bookEvent.js";
-    include 'include/header.php'; 
+    $extraCSS = "/kinosalonkiSofia/CSS/book_event.css";
+    $extraJS = "/kinosalonkiSofia/JAVASCRIPT/bookEvent.js";
+    include '../INCLUDE/header.php'; 
 
     if (!isset($_GET['id'])) {
         die("Event ID is missing");
@@ -10,6 +10,7 @@
     $eventID = (int)$_GET['id'];  //id of the event - cast to int for safety
 
     $user = $_SESSION['user_id'] ?? null;  //user's id
+    $accountUrl = $user === 1 ? 'ADMIN/ad_account.php' : ($user ? 'USER/account.php' : 'COMMON/login.php');
 
     /* retrieve all information about the event from the database */
     $stmt = $pdo->prepare("SELECT * FROM events WHERE id = ?");
@@ -35,6 +36,7 @@
     $editMode = false; //if the user came from the account.php, turn on the edit mode; otherwise, it stays false
     $seats = "";
     $usersSeats = [];  //an array with numbers of user's current seats
+    $bookedSeatsAmount = 0;  //counter for the total amount of booked seats
 
     /* check if the URL contains information about amount of bookings for that user (it might be passed from the account.php if the user clicked on change button) */
     if (isset($_GET['total'])) {
@@ -49,17 +51,23 @@
     }
     /* retrieve from the database all booked seat numbers */
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        if ($row['user_id'] == $user) {
+        /* if ($row['user_id'] == $user) {
             if (str_contains($seats, $row['seat_number'])) {  //if the user came from the account.php and has already booked some seats, mark those seats as user's seats (to show them as selected in the seating chart)
                 $usersSeats[] = $row['seat_number'];
             }
             $userAlreadyBooked += 1;
         } else {
             $bookings[] = $row['seat_number'];
+        } */
+        if ($row['user_id'] == $user) {  //
+            $usersSeats[] = (int)$row['seat_number'];
+            $userAlreadyBooked++;
+        } else {
+            $bookings[] = (int)$row['seat_number'];
         }
     }
 
-    $bookedSeatsAmount = count($bookings);  //amount of booked seats
+    $bookedSeatsAmount += count($bookings);  //amount of booked seats
 ?>
 
 <script>
@@ -88,7 +96,7 @@
             2. if the event type is 1 (movie), show the table with seats, if the event type is 2 (limited amount of places), show the amount of places left, if the event type is 3 (unlimited amount of places), show the total number of participants
             -->
             <?php if (!empty($event["event_image"])): ?>    
-                <img src="kuvat/tapahtumaKuvat/<?= $event['event_image'] ?>" alt="Event Image">  <!-- event's image (if it exists) -->
+                <img src="<?= $baseUrl ?>/IMAGES/tapahtumaKuvat/<?= $event['event_image'] ?>" alt="Event Image">  <!-- event's image (if it exists) -->
             <?php endif ?>
             <p><?= $event['description'] ?></p>  <!-- Here add all the details about the event - image, decription etc. onclick on place it checks if you're logged in, and if not - sends you to SIGN UP page! -->
 
@@ -131,7 +139,12 @@
                         </tr>
                     </tbody></table>
                 <?php elseif ($eventType == '2'): ?>
-                    <p>Paikkoja jäljellä: <span id="placesLeft"><?=$maxVisitors - $bookedSeatsAmount?></span></p>  <!-- if event type is 2 (limited amount of places), show the amount of places left -->
+                    <?= $seatsLeft = $maxVisitors - $bookedSeatsAmount; ?>     
+                    <script>
+                        const seatsLeft = "<?php echo"$seatsLeft"?>";
+                        console.log(seatsLeft);
+                    </script> 
+                    <p>Paikkoja jäljellä: <span id="placesLeft"><?=$seatsLeft?></span></p>  <!-- if event type is 2 (limited amount of places), show the amount of places left -->
                 <?php else: ?>
                     <p>Ilmoittautuneiden määrä: <span id="bookedCount"><?=$bookedSeatsAmount?></span></p>  <!-- if event type is 3 (unlimited amount of places), show the total number of participants-->
                 <?php endif; ?>
@@ -149,13 +162,13 @@
 
                     <!-- buttons with links to tapahtumat.php and account.php. If the edit-mode is on, both of them are displayed and the text of the second button is changed to "Kaikki tapahtumat", otherwise only the button for tapahtumat.php -->
                     <div class="links">
-                        <a id="backToAccount" href="account.php" class="backToAccount">Takaisin tilisivulle</a>
-                        <a id="backToEvents" href="tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
+                        <a id="backToAccount" href="<?= $baseUrl ?>/<?= $accountUrl ?>" class="backToAccount">Takaisin tilisivulle</a>
+                        <a id="backToEvents" href="<?= $baseUrl ?>/USER/tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
                     </div>
                 </div>
             </div>
 
-            <p>Huom! Yhdellä tunnuksella voi varata enintään 2 paikkaa. Mikäli haluat varata useampia paikkoja, olethan yhteydessä yhdistykseen, jonka kautta se on mahdollista.</p>  <!-- paste here phone number or email, idk, on therir webpage they say they don't accept reservations via email, phone or social media -->
+            <p>Huom! Yhdellä tunnuksella voi varata enintään 2 paikkaa. Mikäli haluat varata useampia paikkoja, olethan yhteydessä yhdistykseen, jonka kautta se on mahdollista.</p>  <!-- paste here phone number or email, idk, on their webpage they say they don't accept reservations via email, phone or social media -->
             <button onclick="revealTheForm()">Varaa enemmän paikkoja</button>
 
 
@@ -178,8 +191,8 @@
                     <input type="tel" id="phone-input" name="phone" placeholder="Puhelinnumero" required>
                 </div>
                 <div>
-                    <label for="places-input"></label>
-                    <input type="number" id="places-input" name="places" placeholder="Paikkojen määrä" required>
+                    <input type="number" id="places-input" name="places" placeholder="Paikkojen määrä" max=<?= $maxVisitors - $bookedSeatsAmount ?> required>
+                    <label for="places-input" class="places-input"></label>
                 </div>
                 <div>
                     <label for="comment-input"></label>
@@ -190,7 +203,7 @@
                 
             </form>
 
-            <a id="backToEvents2" href="tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
+            <a id="backToEvents2" href="{$baseUrl}/USER/tapahtumat.php" class="backToEvents">Takaisin tapahtuma-sivulle</a>
 
             </div>
             
@@ -202,4 +215,4 @@
 
 </main>  
 
-<?php include 'include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>

@@ -1,0 +1,119 @@
+/* REFACTORED */
+
+/* NOTE: CONFIRM DIALOG HAS SOME CSS-STYLING IN account.js ! */
+
+/* ========================================
+   ADMIN REQUEST CARDS
+   ======================================== */
+
+.none-requested {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--cinema-whiteish);
+}
+.none-requested p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.none-requested p a {
+  color: var(--lighterblue);
+  font-weight: bold;
+  margin-top: 18px;
+  display: inline;
+}
+.none-requested p a:hover {
+  color: var(--cinema-pink);
+}
+
+.requested {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--cinema-whiteish);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+p.request {
+  display: block;
+  font-weight: 650;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.details-ad {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.eventinfocard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.eventname-ad,
+.time-ad,
+.requested .icon-adress {
+  margin: 0;
+}
+
+.eventname-ad {
+  font-size: 1.25rem;
+  font-weight: 650;
+}
+
+.time-ad {
+  font-size: 1rem;
+}
+
+.requested .icon-adress {
+  display: flex;
+  align-items: center;
+}
+
+.requested .icon-adress svg {
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 800px) {
+  .wrapper {
+    flex-direction: column-reverse;
+  }
+
+  .profile {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile {
+    padding-left: 20px;
+  }
+
+  .profile > form,
+  .profile > .success-msg,
+  .profile > .account-actions,
+  .reservations {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .profile > form,
+  .profile > .success-msg,
+  .profile > .account-actions,
+  .reservations {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}

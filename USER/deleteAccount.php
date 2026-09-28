@@ -1,5 +1,5 @@
 <?php
-    require_once 'include/configuration.php';  //connection to database and session start
+    require_once 'INCLUDE/configuration.php';  //connection to database and session start
 
     if (isset($_POST['delete_account'])) {
         $userID = ($_SESSION['user_id']);  //current user's id
@@ -16,7 +16,7 @@
             session_unset();
             session_destroy();
 
-            header("Location: index.php");  //redirect to index
+            header("Location: ../COMMON/index.php");  //redirect to index
             exit();
         }
     }

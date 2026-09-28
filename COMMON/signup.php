@@ -1,7 +1,7 @@
 <?php
 
-    require_once 'include/configuration.php';  //connection to database and session start
-
+    require_once '../INCLUDE/configuration.php';  //connection to database and session start
+    $extraJS = "../JAVASCRIPT/SignUp_LogIn.js";
     $error = '';  //variable for error display
 
     /* form handling */
@@ -33,7 +33,7 @@
             $stmt = $pdo->prepare("INSERT INTO users (email, username, password_hash) VALUES (?, ?, ?);");
 
             if ($stmt->execute([$email, $username, $hashedPassword])) {
-                header("Location: account.php");
+                header("Location: ../account.php");
                 exit;
             } else {
                 echo "Error creating account.";
@@ -44,8 +44,8 @@
     }
 
     $pageTitle = "SignUp";
-    $extraCSS = "CSS/SignUp_LogIn.css";
-    include 'include/header.php'; 
+    $extraCSS = "../CSS/SignUp_LogIn.css";
+    include '../INCLUDE/header.php'; 
 ?>
 <main class="signup_page">
 
@@ -73,20 +73,21 @@
                 </label>
                 <input type="password" id="password-input" name="password" placeholder="Salasana" required>
             </div>
-            <div>
+<!--             <div>
                 <label for="repeat-password-input">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F8F7F3ff"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm296.5-223.5Q560-327 560-360t-23.5-56.5Q513-440 480-440t-56.5 23.5Q400-393 400-360t23.5 56.5Q447-280 480-280t56.5-23.5ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z"/></svg>
                 </label>
-                <input type="password" id="repeat-password-input" name="repeat-password" placeholder="Toista salasana" required>
+                <input type="password" id="repeat-password-input" name="password" placeholder="Toista salasana" required>
+            </div> -->
+            <div class="checkboxContainer">
+                <input class="checkbox" type="checkbox" id="checkbox" onclick="passwordToggle()"></input>
+                <p>Show Password</p>
             </div>
+            
             <button type="submit" class="">Submit</button>
 
-            <p>Aready have an account? <a href="login.php">Log in</a> </p>
+            <p>Aready have an account? <a href="<?= $baseUrl ?>/login.php">Log in</a> </p>
         </form>
-
-        <?php 
-            
-        ?>
 
         <?php if ($error): ?>
             <p style="color:red"><?= htmlspecialchars($error) ?></p>
@@ -95,5 +96,5 @@
     </div>
 
 </main>   
-<?php include 'include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>
 

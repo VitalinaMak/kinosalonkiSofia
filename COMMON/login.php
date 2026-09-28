@@ -1,8 +1,9 @@
 <?php
 
-    require_once 'include/configuration.php';  //connection to database and session start
+    require_once '../INCLUDE/configuration.php';  //connection to database and session start
 
     $error = '';  //variable for error display
+    $accountType = ''; //variable for account type display
 
     /* form handling */
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -17,7 +18,13 @@
         /* verify password and if everything is OK, save user's id into session and go to the page with events */
         if ($user && password_verify($password, $user->password_hash)) {
             $_SESSION['user_id'] = $user->id;
-            header("Location: account.php");
+            $_SESSION['is_admin'] = ($user->is_admin) ? true : false;  // if the registered person is admin, save it to session variable
+            if ($user->id == 1) {
+                $accountType = '../ADMIN/ad_account.php';  // if the registered person is admin, save the link to admin accoint page
+            } else {
+                $accountType = '../USER/account.php';  // otherwise, save the link to regular account page
+            }
+            header("Location: " . $accountType);
             exit();
         } else {
             $error .= 'Käyttäjätunnus tai salasana on virheellinen';
@@ -25,8 +32,8 @@
     }
 
     $pageTitle = "Login";
-    $extraCSS = "CSS/SignUp_LogIn.css";
-    include 'include/header.php'; //connection to header. It has to be after form handling, otherwise header("Location: tapahtumat.php") won't work
+    $extraCSS = $baseUrl . "/CSS/SignUp_LogIn.css";
+    include '../INCLUDE/header.php'; //connection to header. It has to be after form handling, otherwise header("Location: tapahtumat.php") won't work
 ?>
 
 <main class="login_page">
@@ -50,6 +57,11 @@
                 <input type="password" id="password-input" name="password" placeholder="Salasana" value="testi2" required>
             </div>
 
+            <div>
+                <input type="checkbox" id="checkbox" onclick="passwordToggle()"></input>
+                <p>Show Password</p>
+            </div>
+
             <button type="submit" class="">Submit</button>
             
             <p>Don't have an account? <a href="signup.php">Sign up</a> </p>
@@ -61,4 +73,4 @@
 
     </div>    
 </main>
-<?php include 'include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>

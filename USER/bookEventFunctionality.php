@@ -1,4 +1,4 @@
-<?php require_once 'include/configuration.php'; ?>
+<?php require_once '../INCLUDE/configuration.php'; ?>
 
 <?php
     /* Set JSON response header */
@@ -64,7 +64,7 @@
     if (($bookedBefore + $selectedCount) > 2) {
         echo json_encode([
             "success" => false,
-            "message" => "Voit varata enintään 2 paikkaa.".$bookedBefore.$selectedCount,
+            "message" => "Voit varata enintään 2 paikkaa." //.$bookedBefore.$selectedCount,
         ]);
         exit;
     }

@@ -1,5 +1,5 @@
 <?php 
-    require_once 'include/configuration.php';
+    require_once 'INCLUDE/configuration.php';
 
     $emails = $pdo->query("
         SELECT * FROM notifications

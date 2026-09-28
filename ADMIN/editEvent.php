@@ -1,15 +1,21 @@
 <?php 
     $pageTitle = "EditEvent";
-    $extraCSS = "CSS/add_edit_event.css";
-    $extraJS = "JavaScript/add_edit_event.js";
-    include 'include/header.php';
+    $extraCSS = "/kinosalonkiSofia/ADMIN/add_edit_event.css";
+    $extraJS = "/kinosalonkiSofia/JAVASCRIPT/add_edit_event.js";
+    include '../INCLUDE/header.php';
     
     /* delete event (it has to be placed before any output) */
     if (isset($_GET['delete']) && isset($_GET['id'])) {
         $stmt = $pdo->prepare("DELETE FROM events WHERE id = ?;");
         $id = (int) $_GET['id'];
         $stmt->execute([$id]);
-        header("Location: tapahtumat.php");
+        header("Location: $baseUrl/ADMIN/ad_tapahtumat.php");
+        exit();
+    }
+
+    /* check if the user is admin */
+    if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+        header("Location: {$baseUrl}/COMMON/login.php");
         exit();
     }
 ?>
@@ -48,12 +54,12 @@
                                 <div class="dropdown"> <!-- Age limit -->
                                     <label for="ageLimit-input"></label> 
                                     <select id="ageLimit-input" name="ageLimit">
-                                        <option value="Ei luokiteltu" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>Ei luokiteltu</option>
-                                        <option value="S" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>S</option>
-                                        <option value="K7" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K7</option>
-                                        <option value="K12" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K12</option>
-                                        <option value="K16" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K16</option>
-                                        <option value="K18" <?= $ageLimit == 'option3' ? 'selected' : '' ?>>K18</option>
+                                        <option value="Ei luokiteltu" <?= $ageLimit == 'Ei luokiteltu' ? 'selected' : '' ?>>Ei luokiteltu</option>
+                                        <option value="S" <?= $ageLimit == 'S' ? 'selected' : '' ?>>S</option>
+                                        <option value="K7" <?= $ageLimit == 'K7' ? 'selected' : '' ?>>K7</option>
+                                        <option value="K12" <?= $ageLimit == 'K12' ? 'selected' : '' ?>>K12</option>
+                                        <option value="K16" <?= $ageLimit == 'K16' ? 'selected' : '' ?>>K16</option>
+                                        <option value="K18" <?= $ageLimit == 'K18' ? 'selected' : '' ?>>K18</option>
                                     </select>
                                 </div>
                             </div>
@@ -73,8 +79,8 @@
                                     <input type="hidden" name="current_image" value="<?= htmlspecialchars($row['event_image']); ?>">  <!-- ..so here is another input (basicaly it keeps track of what the user currently sees) -->
                                     <input type="hidden" name="original_image" value="<?= htmlspecialchars($row['event_image']); ?>"> <!-- and one more hidden input to store the original image from the database -->
                                     <input type="hidden" name="remove_image" value="0">  <!-- a flag that signals if the user clicked “remove image”  -->
-                                    <?= "<img id='preview' src='kuvat/tapahtumaKuvat/".$picture."' alt='Uploaded Image'>"; ?>
-                                    <a class="button" href="javascript:void(0)" onclick="removeImage()"> Poistaa kuvaa</a>  <!-- a link to remove the picture -->
+                                    <img id="preview" src="<?= $baseUrl ?>/IMAGES/tapahtumaKuvat/<?= htmlspecialchars($picture) ?>" alt="Uploaded Image">
+                                    <a id="remove-button" class="button" href="javascript:void(0)" onclick="removeImage()"> Poistaa kuvaa</a>  <!-- a link to remove the picture -->
                                 </label>
                             </div>
 
@@ -82,9 +88,9 @@
                                 <div class="dropdown"> <!-- Type -->
                                     <label for="eventType-input"></label> 
                                     <select id="eventType-input" name="eventType" required>
-                                        <option value="1" <?= $eventType == 'option1' ? 'selected' : '' ?>>Elokuvaesitys</option>
-                                        <option value="2" <?= $eventType == 'option2' ? 'selected' : '' ?>>Tapahtuma, jossa on rajattu osalisujamäärä</option>
-                                        <option value="3" <?= $eventType == 'option3' ? 'selected' : '' ?>>Tapahtuma, jossa on rajaton osalisujamäärä</option>
+                                        <option value="1" <?= $eventType == '1' ? 'selected' : '' ?>>Elokuvaesitys</option>
+                                        <option value="2" <?= $eventType == '2' ? 'selected' : '' ?>>Tapahtuma, jossa on rajattu osalisujamäärä</option>
+                                        <option value="3" <?= $eventType == '3' ? 'selected' : '' ?>>Tapahtuma, jossa on rajaton osalisujamäärä</option>
                                     </select>
                                 </div>
                                 <div> <!-- Place -->
@@ -130,7 +136,7 @@
                 
                 /* picture handling - START */
 
-                $uploadFolder = "kuvat/tapahtumaKuvat/";
+                $uploadFolder = __DIR__ . "/../IMAGES/tapahtumaKuvat/";
                 $allowedTypes = ['jpg','jpeg','png','gif','webp'];
 
                 $currentImage = isset($_POST['current_image']) ? basename($_POST['current_image']) : "";  //the value of the previous image from the hidden input. If it's empty, leave it empty, othervise save the name of the file
@@ -232,7 +238,7 @@
                     
                 try {
                     if ($stmt->execute($params)) {
-                        header("Location: tapahtumat.php");
+                        header("Location: $baseUrl/ADMIN/ad_tapahtumat.php");
                         exit();
                     }
                 } catch (PDOException $e) {
@@ -243,5 +249,5 @@
     </div>
 
 </main>
-<?php include 'include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>
 

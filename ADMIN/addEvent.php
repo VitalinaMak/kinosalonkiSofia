@@ -1,8 +1,14 @@
 <?php 
+    require_once '../INCLUDE/configuration.php';
     $pageTitle = "AddEvent";
-    $extraCSS = "CSS/add_edit_event.css";
-    $extraJS = "JavaScript/add_edit_event.js";
-    include 'include/header.php';
+    $extraCSS = "/kinosalonkiSofia/ADMIN/add_edit_event.css";
+    $extraJS = "/kinosalonkiSofia/JAVASCRIPT/add_edit_event.js";
+    include '../INCLUDE/header.php';
+
+    if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+        header("Location: {$baseUrl}/COMMON/login.php");
+        exit();
+    }
 
     /* ini_set('display_errors', 1);
     error_reporting(E_ALL); */
@@ -88,5 +94,5 @@
 
 </main>
 
-<?php include 'include/footer.php'; ?>
+<?php include '../INCLUDE/footer.php'; ?>
 
