@@ -18,16 +18,18 @@
                 ':newDate' => $date,
                 ':eventID' => $eventID
             ];
+            $successCounter = 0;
             /* execute the query. On success reload the page, else show error */
             try {
                     if ($stmt_update->execute($params)) {
-                        header("Location: ../COMMON/index.php");
-                        exit();
+                        $successCounter++;  //doesn't really do anything, just some action for if-statement
                     }
                 } catch (PDOException $e) {
                     echo "<h1>Error: " . $e->getMessage() . "</h1>";
                 }
         }
+        header("Location: ../COMMON/index.php");  //reload the page after updating the dates
+        exit();
     }
 
 ?>
