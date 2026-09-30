@@ -12,19 +12,15 @@
 
   <div class="about today" style="grid-area: todayarea">
     <!-- PREVIOUS php: -->
+    <div class="day">
       <?php 
         $date = date('d. F Y');  //gets current date
         echo "<h2> Tapahtumat tänään, $date</h2>";
         $date = date('Y-m-d');   //different date format for using in sql-query
       ?>
-    <div class="day">
-      <!-- 
-        If today then "tapahtuman tänään, DATE", if not then just "DATE"; if the user moved to not-today, a button "go back to today" appears 
-      -->
-
-      <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg></span>
-      <h2>11. Lokakuuta 2026</h2>
-      <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/></svg></span>
+      <!-- <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg></span> -->
+      <!-- <h2>11. Lokakuuta 2026</h2> -->
+      <!-- <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/></svg></span> -->
 
     </div>
     

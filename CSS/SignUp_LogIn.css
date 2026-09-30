@@ -45,7 +45,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: var(--form-gap);
 }
 
 form h1 {
@@ -67,11 +67,11 @@ form > div {
 
 form label {
   flex-shrink: 0;
-  width: 50px;
+  width: var(--form-label-width);
   /* CAREFUL WITH CHANGING height: 50px; */
-  height: 50px;
+  height: var(--input-height);
   background-color: var(--cinema-red2);
-  border-radius: 10px 0 0 10px;
+  border-radius: var(--input-border-radius) 0 0 var(--input-border-radius);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,10 +82,10 @@ form input {
   flex-grow: 1;
   min-width: 0;
   /* CAREFUL WITH CHANGING height: 50px; */
-  height: 50px;
-  padding: 1em;
-  border-radius: 0 10px 10px 0;
-  border: 3px solid var(--cinema-red2);
+  height: var(--input-height);
+  padding: var(--input-padding);
+  border-radius: 0 var(--input-border-radius) var(--input-border-radius) 0;
+  border: var(--input-border-width) solid var(--cinema-red2);
   border-left: none;
   background-color: var(--cinema-whiteish);
   transition: 150ms ease;
@@ -126,7 +126,7 @@ form div:has(input:focus) label {
 
 form button {
   width: 75%;
-  margin-top: 10px;
+  margin-top: var(--default-margin);
 }
 
 /* ========================================
