@@ -10,7 +10,7 @@
     
         $stmt_update = $pdo->prepare("UPDATE events SET event_date = :newDate WHERE id = :eventID");
     
-        $sql = "SELECT id FROM events ORDER BY event_date ASC LIMIT 5;";  //base query for getting id of the 5 evnts with the earliest dates
+        $sql = "SELECT id FROM events ORDER BY event_date ASC LIMIT 4;";  //base query for getting id of the 4 evnts with the earliest dates
         $stmt = $pdo->query($sql);
         for ($i = 0; $row = $stmt->fetch(PDO::FETCH_ASSOC); $i++) {
             $eventID = $row['id'];  //get id of the event
