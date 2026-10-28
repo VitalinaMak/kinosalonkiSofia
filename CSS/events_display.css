@@ -104,12 +104,17 @@
   border: 2px double rgba(0, 0, 0, 0.1);
   box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.1);
   transition: var(--transition);
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-areas:
+  grid-template-columns: 1fr 1fr 1fr;
+  /* grid-template-areas:
     "image adress day"
     "image header time"
     "image description description"
-    "image places places";
+    "image places places"; */
+  grid-template-areas:
+    "image header header"
+    "image day day"
+    "image description description"
+    "image adress places";
 }
 
 .eventInfo:hover {
@@ -131,14 +136,14 @@
 .eventInfo h4.event_day {
   grid-area: day;
   margin: 0;
-  text-align: right;
+  text-align: left;
   text-wrap: nowrap;
 }
 
-.eventInfo h3.event_time {
+/* .eventInfo h3.event_time {
   grid-area: time;
   text-align: right;
-}
+} */
 
 .eventInfo h3.event_time span.klo {
   font-size: 0.9rem;
@@ -193,10 +198,34 @@
 .eventInfo:not(:has(img)) {
   grid-template-columns: 3fr 1fr;
   grid-template-areas:
-    "adress day"
-    "header time"
+    "header header"
+    "day day"
     "description description"
-    "places places";
+    "adress places";
+}
+
+/* ========================================
+   EVENT LIST CONTAINER
+   ======================================== */
+
+.eventList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  margin: 0;
+  /* padding: 20px; - needed only in tapahtumat.css */
+  gap: 10px;
+  max-width: 100%;
+  z-index: 1;
+}
+
+.eventList .button {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 /* ========================================
@@ -229,17 +258,22 @@
   .eventInfo {
     grid-template-columns: 200px 1fr;
     grid-template-areas:
-      "image date"
-      "image header"
-      "image description";
+      "image image"
+      "header header"
+      "day day"
+      "description description"
+      "adress adress"
+      "places places";
   }
 
   .eventInfo:not(:has(img)) {
     grid-template-columns: 1fr;
     grid-template-areas:
       "header"
-      "date"
-      "description";
+      "day"
+      "description"
+      "adress"
+      "places";
   }
 
   .eventInfo .event_date {
@@ -286,42 +320,5 @@
     grid-template-columns: 1fr 1fr;
     justify-items: left;
     grid-auto-rows: auto;
-    grid-template-areas:
-      "image image"
-      "adress adress"
-      "header header"
-      "day time"
-      "description description"
-      "places places";
   }
-}
-
-/* ========================================
-   EVENT LIST CONTAINER
-   ======================================== */
-
-/* .eventList { */
-/* padding: var(--default-padding); */
-/* EXPERIMENTING w BOX-SHADOW */
-/* box-shadow: inset -22px 0px 11px -10px var(--base-color); */
-/* } */
-
-.eventList {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  margin: 0;
-  /* padding: 20px; - needed only in tapahtumat.css */
-  gap: 10px;
-  max-width: 100%;
-  z-index: 1;
-}
-
-.eventList .button {
-  width: 100%;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 1.25rem;
-  font-weight: 600;
 }
