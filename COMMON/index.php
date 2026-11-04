@@ -6,11 +6,12 @@
 
 <main class="index_page"> 
   <div class="about menu" style="grid-area: menuarea">
-    <p>Our menu lalala Rich espresso swirled with velvety steamed milk and a touch of house-made vanilla bean syrup. It tastes like a warm blanket on a chilly morning. Dark, decadent chocolate melted into a double shot of espresso, topped with whipped cream and cocoa dust. </p>    
-    <a href="menu.php" class="button">Go to menu page</a>  
+    <p>Haluaisitko jotain herkullista elokuvan katselun lomaan? <a href="menu.php" class="button"> Tutustu menuumme!</a></p>    
+      
   </div>
 
   <div class="about today" style="grid-area: todayarea">
+    
     <!-- PREVIOUS php: -->
     <div class="day">
       <?php 

@@ -77,6 +77,11 @@
   --wrapper-padding: 20px;
   --wrapper-border-width: 4px;
 
+  /* Text common sizing */
+  --text-small: clamp(0.85rem, 0.8rem + 0.15vw, 0.95rem);
+  --text-body: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --text-heading: clamp(1.25rem, 1.1rem + 0.6vw, 1.75rem);
+
   /* TINT FOR IMAGES */
   --black-tint: linear-gradient(
     90deg,

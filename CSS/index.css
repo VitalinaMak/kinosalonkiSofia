@@ -13,11 +13,12 @@
 
   display: grid;
   min-height: fit-content;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: auto;
   grid-template-areas:
-    "todayarea todayarea menuarea"
-    "historyarea historyarea historyarea";
+    "todayarea"
+    "menuarea"
+    "historyarea";
   align-items: stretch;
   gap: 1em;
 }
@@ -94,7 +95,7 @@
 
   .history,
   .menu {
-    min-height: 300px;
+    min-height: fit-content;
     background-size: cover; /**/
     background-position: center; /*fills the entire panel, but may crop some parts of the image.*/
     background-attachment: scroll; /*avoids mobile browser issues caused by 'fixed'*/
