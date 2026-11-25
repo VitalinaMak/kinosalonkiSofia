@@ -22,6 +22,11 @@
             $typeForColor = "event3body";
         }
 
+        $editButton = "";
+        if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true) {
+            $editButton = "<a class='button' style='grid-template-area: editButton' href='{$baseUrl}/ADMIN/editEvent.php?id={$row['id']}'>Muokkaa</a>";
+        }
+        
         // $kuvaPath = empty($row["event_image"]) ? "noImage.png" : $row["event_image"];  //if the event doesn't have image, use the default image
         $kuvaPath = !empty($row["event_image"]) ? $row["event_image"] : null;
         $placesNumber = !(is_null($row['max_visitors'])) ? "Paikkoja jäljellä: ".($row['max_visitors'] - $row['booked_places']) : "Osallistujien määrä: ".$row['booked_places'];  //amount of seats left (for 1st and 2nd types of event), calculated from the max. amount of seats (stated in the table) and amount of bookings made for the event. For the 3rd type of event (max. amount of seats = 0 by default) show amount of participants
@@ -48,6 +53,7 @@
                     <p class='event_description'>{$row['description']}</p>
                     <p class='places'>{$placesNumber}</p>
                 </div>
+                {$editButton}
             </div>";
     }
     
